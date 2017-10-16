@@ -1,0 +1,56 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+/* istanbul ignore next */require('./ReportItem.less');
+
+var /* istanbul ignore next */_LinkToDownloadableContainer = require('../../../../Shared/LinkToDownloadable/LinkToDownloadableContainer'); /* istanbul ignore next */var _LinkToDownloadableContainer2 = _interopRequireDefault(_LinkToDownloadableContainer);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ReportItem = function (_React$PureComponent) {_inherits(ReportItem, _React$PureComponent);function ReportItem() {var _ref;var _temp, _this, _ret;_classCallCheck(this, ReportItem);for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {args[_key] = arguments[_key];}return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ReportItem.__proto__ || Object.getPrototypeOf(ReportItem)).call.apply(_ref, [this].concat(args))), _this), _this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        deleteReport = function () {/* istanbul ignore next */var _this$props =
+            /* istanbul ignore next */_this.props,deleteReport = _this$props.deleteReport,item = _this$props.item;
+            var data = {
+                attachable_id: item.attachable_id,
+                attachable_type: item.attachable_type,
+                name: item.name };
+
+            deleteReport(item.id, data);
+        }, _temp), _possibleConstructorReturn(_this, _ret);}_createClass(ReportItem, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _props =
+            this.props,item = _props.item,deleteReport = _props.deleteReport,hasImagePreview = _props.hasImagePreview,isEditable = _props.isEditable;
+            var removeButton = isEditable && deleteReport &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-icon-xmark sc-error', onClick: this.deleteReport });
+
+            var content = hasImagePreview ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'img', /* istanbul ignore next */{ src: item.file_url, width: '200' }),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LinkToDownloadableContainer2.default, /* istanbul ignore next */{ href: item.file_url }, item.name)) :
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LinkToDownloadableContainer2.default, /* istanbul ignore next */{ href: item.file_url }, item.name);
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'li', /* istanbul ignore next */{ className: 'import-report-list-item' },
+                    content,
+                    removeButton));
+
+
+        } }]);return ReportItem;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */ReportItem.propTypes = { item: /* istanbul ignore next */_react2.default.PropTypes.shape({ id: /* istanbul ignore next */_react2.default.PropTypes.string, name: /* istanbul ignore next */_react2.default.PropTypes.string, file_url: /* istanbul ignore next */_react2.default.PropTypes.string, attachable_id: /* istanbul ignore next */_react2.default.PropTypes.string, attachable_type: /* istanbul ignore next */_react2.default.PropTypes.string }).isRequired, hasImagePreview: /* istanbul ignore next */_react2.default.PropTypes.bool, deleteReport: /* istanbul ignore next */_react2.default.PropTypes.func, isEditable: /* istanbul ignore next */_react2.default.PropTypes.bool }; /* istanbul ignore next */ReportItem.defaultProps = { isEditable: false, hasImagePreview: false }; /* istanbul ignore next */exports.default = ReportItem;

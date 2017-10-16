@@ -1,0 +1,18 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+LineOfCode;var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function LineOfCode( /* istanbul ignore next */_ref) {/* istanbul ignore next */var lineNumber = _ref.lineNumber,children = _ref.children;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "code-snippet-line-of-code" },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "code-snippet-line-of-code-number" },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"pre", /* istanbul ignore next */null, lineNumber)),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "code-snippet-line-of-code-code" },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"pre", /* istanbul ignore next */null, children))));
+
+
+
+}
+
+LineOfCode.propTypes = {
+    lineNumber: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    children: /* istanbul ignore next */_react2.default.PropTypes.string };

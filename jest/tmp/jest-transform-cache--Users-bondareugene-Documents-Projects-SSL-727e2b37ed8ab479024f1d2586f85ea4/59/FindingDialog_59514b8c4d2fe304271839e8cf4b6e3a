@@ -1,0 +1,178 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.expandedByDefaultSectionsList = exports.sectionsList = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+var /* istanbul ignore next */_deepEqual = require('deep-equal'); /* istanbul ignore next */var _deepEqual2 = _interopRequireDefault(_deepEqual);
+
+var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);
+
+var /* istanbul ignore next */_LoadingModalDialog = require('../Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+var /* istanbul ignore next */_FindingDialogHeader = require('./Components/FindingDialogHeader/FindingDialogHeader'); /* istanbul ignore next */var _FindingDialogHeader2 = _interopRequireDefault(_FindingDialogHeader);
+var /* istanbul ignore next */_FindingDialogFooter = require('./Components/FindingDialogFooter'); /* istanbul ignore next */var _FindingDialogFooter2 = _interopRequireDefault(_FindingDialogFooter);
+var /* istanbul ignore next */_FindingDetails = require('./Components/FindingDetails/FindingDetails'); /* istanbul ignore next */var _FindingDetails2 = _interopRequireDefault(_FindingDetails);
+var /* istanbul ignore next */_FindingForm = require('./Components/FindingForm/FindingForm'); /* istanbul ignore next */var _FindingForm2 = _interopRequireDefault(_FindingForm);
+var /* istanbul ignore next */_FindingAttachmentsDialog = require('../../Modules/TestsDetails/Components/Dialogs/FindingAttachmentsDialog'); /* istanbul ignore next */var _FindingAttachmentsDialog2 = _interopRequireDefault(_FindingAttachmentsDialog);
+var /* istanbul ignore next */_FindingDialogContainer = require('./FindingDialogContainer');
+
+/* istanbul ignore next */require('./FindingDialog.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var sectionsList = /* istanbul ignore next */exports.sectionsList = ['message', 'request', 'response'];
+var expandedByDefaultSectionsList = /* istanbul ignore next */exports.expandedByDefaultSectionsList = ['message']; /* istanbul ignore next */var
+
+FindingDialog = function (_React$Component) {_inherits(FindingDialog, _React$Component);
+    function /* istanbul ignore next */FindingDialog(props) {/* istanbul ignore next */_classCallCheck(this, FindingDialog);var _this = _possibleConstructorReturn(this, (FindingDialog.__proto__ || Object.getPrototypeOf(FindingDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            fields: props.finding };
+
+        /* istanbul ignore next */_this.onChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onChange.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(FindingDialog, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            if (! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.finding, this.props.finding)) {
+                this.setState({
+                    fields: nextProps.finding,
+                    fieldsCache: nextProps.finding });
+
+            }
+            if (! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.classificationFields, this.props.classificationFields)) {
+                this.setState({
+                    fields: /* istanbul ignore next */_extends({}, this.state.fields, nextProps.classificationFields) });
+
+            }
+        } }, { key: 'render', value: function render()
+
+        {
+            var dialogClassName = /* istanbul ignore next */(0, _classnames2.default)('findings-details-popup', {
+                'blured-dialog': this.props.isAttachmentsDialogOpen });
+
+            var attachmentsDialog = this.props.isAttachmentsDialogOpen &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingAttachmentsDialog2.default, /* istanbul ignore next */{
+                name: 'attachmentsDialogConfig',
+                runId: this.props.runId,
+                findingId: this.props.finding.id,
+                closeDialog: this.props.toggleAttachmentsDialog,
+                attachments: this.props.finding.attachments,
+                withBackground: false });
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingModalDialog2.default, /* istanbul ignore next */{
+                        loading: this.props.isLoading || this.props.isSaving,
+                        isOpen: this.props.isDialogOpen,
+                        header: this.getDialogHeader(),
+                        footer: this.getDialogFooter(),
+                        className: dialogClassName },
+
+                    !this.props.isLoading && this.renderContent(),
+                    attachmentsDialog));
+
+
+        } }, { key: 'getDialogFooter', value: function getDialogFooter()
+
+        {/* istanbul ignore next */var _this2 = this;
+            var areFieldsNotChanged = /* istanbul ignore next */(0, _deepEqual2.default)(this.state.fields, this.state.fieldsCache);
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDialogFooter2.default, /* istanbul ignore next */{
+                    onClickCreateFinding: function /* istanbul ignore next */onClickCreateFinding() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.createFinding( /* istanbul ignore next */_this2.state.fields));},
+                    onClickSaveChanges: function /* istanbul ignore next */onClickSaveChanges() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.editFinding( /* istanbul ignore next */_this2.state.fields));},
+                    onClickClose: this.props.closeFindingDialog,
+                    mode: this.props.mode,
+                    isButtonsDisabled: areFieldsNotChanged || this.props.isLoading || this.props.isSaving || this.props.isDeleting }));
+
+
+        } }, { key: 'getDialogHeader', value: function getDialogHeader()
+
+        {
+            if (!this.props.finding) {
+                return null;
+            }
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDialogHeader2.default, /* istanbul ignore next */{
+                    mode: this.props.mode,
+                    canManageFinding: this.props.finding.edit_permission,
+                    findingIds: this.props.findingIds,
+                    onNavigate: this.props.onNavigate,
+                    onEditModeButtonClick: this.props.turnEditMode,
+                    onPublishButtonClick: this.props.changePublishStatus,
+                    onIncludeButtonClick: this.props.changeIncludeStatus,
+                    onEditAttachmentsClick: this.props.toggleAttachmentsDialog,
+                    onDeleteFinding: this.props.onDeleteFinding,
+                    finding: this.props.finding,
+                    isButtonsDisabled: this.props.isLoading || this.props.isSaving || this.props.isDeleting }));
+
+
+        } }, { key: 'renderContent', value: function renderContent()
+
+        {/* istanbul ignore next */var _this3 = this;
+            if (this.props.mode === /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.VIEW) {
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetails2.default, /* istanbul ignore next */{
+                        finding: this.props.finding,
+                        isService: this.context.currentUser.isService,
+                        testCategoryName: this.props.testCategoryName }));
+
+
+            }
+            if (!this.props.findingCategories || !this.props.findingClassifications) {
+                return null;
+            }
+            return (
+                this.state.fields && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingForm2.default, /* istanbul ignore next */{
+                    isEdit: this.props.mode === /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.EDIT,
+                    fields: this.state.fields,
+                    validation: this.props.validation,
+                    onChange: this.onChange,
+                    onFindingCategoryChange: function /* istanbul ignore next */onFindingCategoryChange(key, value) /* istanbul ignore next */{return (/* istanbul ignore next */_this3.props.onFindingCategoryChange(value, /* istanbul ignore next */_extends({},
+                            /* istanbul ignore next */_this3.state.fields, _defineProperty({},
+                            key, value))));},
+
+
+                    findingTypes: this.props.findingTypes,
+                    findingCategories: this.props.findingCategories,
+                    findingClassifications: this.props.findingClassifications }));
+
+
+        } }, { key: 'onChange', value: function onChange(
+
+        key, value) {
+            this.setState(function (currentState) /* istanbul ignore next */{return { fields: /* istanbul ignore next */_extends({}, currentState.fields, _defineProperty({}, key, value)) };});
+        } }]);return FindingDialog;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = FindingDialog;
+
+
+FindingDialog.propTypes = {
+    onNavigate: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    changePublishStatus: /* istanbul ignore next */_react2.default.PropTypes.func,
+    changeIncludeStatus: /* istanbul ignore next */_react2.default.PropTypes.func,
+    createFinding: /* istanbul ignore next */_react2.default.PropTypes.func,
+    editFinding: /* istanbul ignore next */_react2.default.PropTypes.func,
+    turnEditMode: /* istanbul ignore next */_react2.default.PropTypes.func,
+    toggleAttachmentsDialog: /* istanbul ignore next */_react2.default.PropTypes.func,
+    closeFindingDialog: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onFindingCategoryChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onDeleteFinding: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object,
+    mode: /* istanbul ignore next */_react2.default.PropTypes.string,
+    runId: /* istanbul ignore next */_react2.default.PropTypes.string,
+    findingIds: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string),
+    findingClassifications: /* istanbul ignore next */_react2.default.PropTypes.array,
+    findingCategories: /* istanbul ignore next */_react2.default.PropTypes.array,
+    findingTypes: /* istanbul ignore next */_react2.default.PropTypes.array,
+    finding: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        edit_permission: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        attachments: /* istanbul ignore next */_react2.default.PropTypes.array }),
+
+    classificationFields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        classification_class_severity: /* istanbul ignore next */_react2.default.PropTypes.string,
+        score: /* istanbul ignore next */_react2.default.PropTypes.number,
+        finding_classification_id: /* istanbul ignore next */_react2.default.PropTypes.string }).
+    isRequired,
+    testCategoryName: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    isDialogOpen: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isDeleting: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isAttachmentsDialogOpen: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+
+FindingDialog.contextTypes = {
+    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default) };

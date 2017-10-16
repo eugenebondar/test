@@ -1,0 +1,11 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */exports.default =
+
+{
+    value: /* istanbul ignore next */_react.PropTypes.string,
+    test: /* istanbul ignore next */_react.PropTypes.object,
+    expandTrigger: /* istanbul ignore next */_react.PropTypes.func,
+    selectTrigger: /* istanbul ignore next */_react.PropTypes.func,
+    trigger: /* istanbul ignore next */_react.PropTypes.func,
+    expansion: /* istanbul ignore next */_react.PropTypes.bool,
+    selectable: /* istanbul ignore next */_react.PropTypes.bool,
+    isExpand: /* istanbul ignore next */_react.PropTypes.bool };

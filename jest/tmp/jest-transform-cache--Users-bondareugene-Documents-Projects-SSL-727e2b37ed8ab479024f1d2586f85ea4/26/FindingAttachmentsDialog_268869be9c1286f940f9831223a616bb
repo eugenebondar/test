@@ -1,0 +1,60 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_LoadingModalDialog = require('../Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+var /* istanbul ignore next */_LoadingModalDialogWithoutBackground = require('../Elements/LoadingModalDialog/LoadingModalDialogWithoutBackground'); /* istanbul ignore next */var _LoadingModalDialogWithoutBackground2 = _interopRequireDefault(_LoadingModalDialogWithoutBackground);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+FindingAttachmentsDialog = function (_React$PureComponent) {_inherits(FindingAttachmentsDialog, _React$PureComponent);function FindingAttachmentsDialog() {_classCallCheck(this, FindingAttachmentsDialog);return _possibleConstructorReturn(this, (FindingAttachmentsDialog.__proto__ || Object.getPrototypeOf(FindingAttachmentsDialog)).apply(this, arguments));}_createClass(FindingAttachmentsDialog, [{ key: 'getDialogFooter', value: function getDialogFooter()
+
+
+
+
+
+
+
+
+
+
+
+
+        {
+            var isImportButtonDisabled = this.props.isImportButtonDisabled ||
+            this.props.isLoading || this.props.isSaving;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'sc-btn sc-btn-primary-outline', onClick: this.props.onClose },
+                        /* istanbul ignore next */(0, _counterpart2.default)('general.close')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                            className: 'sc-btn sc-btn-primary',
+                            disabled: isImportButtonDisabled,
+                            onClick: this.props.onSubmit },
+
+                        /* istanbul ignore next */(0, _counterpart2.default)(this.props.isOverrideAndImport ?
+                        'dashboard_test_run_element.importAndOverride' :
+                        'general.import'))));
+
+
+
+
+        } }, { key: 'render', value: function render()
+
+        {
+            var Component = this.props.withBackground ? /* istanbul ignore next */_LoadingModalDialog2.default : /* istanbul ignore next */_LoadingModalDialogWithoutBackground2.default;
+            return (
+                /* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */{
+                        loading: this.props.isLoading,
+                        isOpen: /* istanbul ignore next */true,
+                        header: /* istanbul ignore next */(0, _counterpart2.default)('dashboard_test_run_element.editAttachments'),
+                        footer: this.getDialogFooter(),
+                        className: 'finding-attachments-dialog' },
+
+                    !this.props.isLoading &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                        this.props.importForm,
+                        this.props.removeReportConfirmationDialog)));
+
+
+
+
+        } }]);return FindingAttachmentsDialog;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */FindingAttachmentsDialog.propTypes = { onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired, onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired, isOverrideAndImport: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired, isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired, isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired, isImportButtonDisabled: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired, withBackground: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired, importForm: /* istanbul ignore next */_react2.default.PropTypes.node.isRequired, removeReportConfirmationDialog: /* istanbul ignore next */_react2.default.PropTypes.node }; /* istanbul ignore next */exports.default = FindingAttachmentsDialog;

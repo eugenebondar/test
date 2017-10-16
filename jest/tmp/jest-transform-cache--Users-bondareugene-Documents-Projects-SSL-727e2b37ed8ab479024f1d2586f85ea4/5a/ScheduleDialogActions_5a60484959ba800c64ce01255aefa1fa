@@ -1,0 +1,20 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_api = require('../../Models/Tests/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var ScheduleDialogActions = {
+    init: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    submit: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }) };
+
+
+ScheduleDialogActions.submit.listen(function (data, testId) {/* istanbul ignore next */var _this = this;
+    /* istanbul ignore next */_api2.default.updateScheduler(data, testId).
+    then(function (response) /* istanbul ignore next */{return response.json();}).
+    then(function (json) {
+        json.testId = testId;
+        (!json.errors ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(json);
+    });
+}); /* istanbul ignore next */exports.default =
+
+ScheduleDialogActions;

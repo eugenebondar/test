@@ -1,0 +1,33 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};exports.default =
+
+
+
+
+
+
+
+
+
+LoadingHoc; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getClasses = getClasses;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react); /* istanbul ignore next */require('./loadingHoc.less');var /* istanbul ignore next */_classnames2 = require('classnames'); /* istanbul ignore next */var _classnames3 = _interopRequireDefault(_classnames2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;} //todo add there some styles or remove
+/**
+ *
+ * @param {React.Component} [Component]
+ * @returns {React.Component}
+ * @constructor
+ */function LoadingHoc(Component) {function LoadingWrapper( /* istanbul ignore next */_ref) {/* istanbul ignore next */var className = _ref.className,isLoading = _ref.isLoading,props = _objectWithoutProperties(_ref, ['className', 'isLoading']);var modifiedClassName = /* istanbul ignore next */(0, _classnames3.default)(className, getClasses(isLoading));return (/* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */_extends({ className: modifiedClassName }, props)));}LoadingWrapper.propTypes = { className: /* istanbul ignore next */_react2.default.PropTypes.string, isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool };return LoadingWrapper;}function getClasses(isLoading) {/* istanbul ignore next */var _classnames;var prefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';return (/* istanbul ignore next */(0, _classnames3.default)( /* istanbul ignore next */(_classnames = {}, _defineProperty(_classnames, prefix + 'loading-container', true), _defineProperty(_classnames, prefix + 'loading-container--updating', isLoading), _defineProperty(_classnames, prefix + 'loading-container--not-updating', !isLoading), _classnames)));}

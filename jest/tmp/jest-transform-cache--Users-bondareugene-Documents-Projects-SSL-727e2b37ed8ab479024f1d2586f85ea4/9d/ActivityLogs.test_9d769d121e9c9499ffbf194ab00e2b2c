@@ -1,0 +1,57 @@
+/* istanbul ignore next */'use strict';
+
+
+
+
+
+
+jest.mock('uuid', function () /* istanbul ignore next */{return {
+        v4: function /* istanbul ignore next */v4() {
+            return 'some-uid';
+        } };});var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_enzyme = require('enzyme');var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */var _enzymeToJson2 = _interopRequireDefault(_enzymeToJson);var /* istanbul ignore next */_ActivityLogs = require('./ActivityLogs'); /* istanbul ignore next */var _ActivityLogs2 = _interopRequireDefault(_ActivityLogs);var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);var /* istanbul ignore next */_momentTimezone = require('moment-timezone'); /* istanbul ignore next */var _momentTimezone2 = _interopRequireDefault(_momentTimezone);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+describe('ActivityLogs', function () {
+    describe('with initial data for required props', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+            /* istanbul ignore next */_momentTimezone2.default.tz.setDefault('America/Chicago');
+        });
+
+        afterAll(function () {
+            /* istanbul ignore next */_momentTimezone2.default.tz.setDefault();
+        });
+
+        beforeEach(function () {
+            var user = {
+                user_type: 'staff' };
+
+            var context = { currentUser: new /* istanbul ignore next */_User2.default(user) };
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ActivityLogs2.default, /* istanbul ignore next */{ activityLogs: [],
+                totalCount: 0,
+                filter: {},
+                filterOptionsCollection: [],
+                filterOptionsCounts: {},
+                onChangesetModalClose: function /* istanbul ignore next */onChangesetModalClose() /* istanbul ignore next */{return null;},
+                onFiltersChange: function /* istanbul ignore next */onFiltersChange() /* istanbul ignore next */{return null;},
+                onViewChangsetClick: function /* istanbul ignore next */onViewChangsetClick() /* istanbul ignore next */{return null;} }),
+            {
+                context: context,
+                childContextTypes: {
+                    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default),
+                    router: /* istanbul ignore next */_react2.default.PropTypes.object } });
+
+
+        });
+
+        it('matches snapshot  for staff user', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

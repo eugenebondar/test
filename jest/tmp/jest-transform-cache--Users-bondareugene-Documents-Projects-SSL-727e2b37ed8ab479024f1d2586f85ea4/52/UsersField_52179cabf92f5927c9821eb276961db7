@@ -1,0 +1,48 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+UsersField;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_apocReact = require('apoc-react');var /* istanbul ignore next */_MultiselectWithSearch = require('../../../../Shared/Elements/ElementsListWithSearch/MultiselectWithSearch'); /* istanbul ignore next */var _MultiselectWithSearch2 = _interopRequireDefault(_MultiselectWithSearch);var /* istanbul ignore next */_FormField = require('../../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function UsersField( /* istanbul ignore next */_ref)
+
+
+
+
+
+
+
+{/* istanbul ignore next */var fields = _ref.fields,users = _ref.users,getTranslate = _ref.getTranslate,onChange = _ref.onChange,getValidationMessage = _ref.getValidationMessage,isFieldValid = _ref.isFieldValid,isService = _ref.isService;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                label: getTranslate('user_ids'),
+                isRequired: /* istanbul ignore next */true,
+                isValid: isFieldValid('users_array'),
+                validationMessage: getValidationMessage('users_array') },
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_MultiselectWithSearch2.default, /* istanbul ignore next */{ onChange: onChange },
+                users[fields.group_type].filter(function (user) {
+                    return fields.group_type === 'staff' || fields.organization_id === user.organization_id || !isService;
+                }).map(function (user, i) {
+                    return (
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Checkbox, /* istanbul ignore next */{
+                            key: i,
+                            label: user.name,
+                            name: user.id,
+                            checked: fields.user_ids.indexOf(user.id) >= 0 }));
+
+
+                }))));
+
+
+
+}
+
+UsersField.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    isService: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    getTranslate: /* istanbul ignore next */_react2.default.PropTypes.func,
+    isFieldValid: /* istanbul ignore next */_react2.default.PropTypes.func,
+    getValidationMessage: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    users: /* istanbul ignore next */_react2.default.PropTypes.object };

@@ -1,0 +1,128 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+createColumnConfig = createColumnConfig;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_SessionUserStore = require('../../Stores/SessionUser/SessionUserStore'); /* istanbul ignore next */var _SessionUserStore2 = _interopRequireDefault(_SessionUserStore);var /* istanbul ignore next */_SessionUserActions = require('../../Stores/SessionUser/SessionUserActions'); /* istanbul ignore next */var _SessionUserActions2 = _interopRequireDefault(_SessionUserActions);var /* istanbul ignore next */_Table = require('./Components/Table'); /* istanbul ignore next */var _Table2 = _interopRequireDefault(_Table);var /* istanbul ignore next */_BaseComponent2 = require('../BaseComponent'); /* istanbul ignore next */var _BaseComponent3 = _interopRequireDefault(_BaseComponent2); /* istanbul ignore next */require('./TableBoard.less'); /* istanbul ignore next */require('./Popup.less'); /* istanbul ignore next */require('./Label.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * Table Board.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * @module TableBoard
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * @version 1.0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * @requires React
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * @author Yevhen Bondar
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * @copyright (c) 2016 SoftServe.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */function createColumnConfig(colleciton, sortOrder, sortField) {colleciton.forEach(function (column) {if (column.sortable) {column.sortConfig = { value: sortOrder.sort_field === column[sortField], order: sortOrder.sort_order, key: column[sortField] };}
+    });
+
+    return colleciton;
+} /* istanbul ignore next */var
+
+TableBoard = function (_BaseComponent) {_inherits(TableBoard, _BaseComponent);
+    function /* istanbul ignore next */TableBoard(props) {/* istanbul ignore next */_classCallCheck(this, TableBoard);var _this = _possibleConstructorReturn(this, (TableBoard.__proto__ || Object.getPrototypeOf(TableBoard)).call(this,
+        props));
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_SessionUserStore2.default, /* istanbul ignore next */_this._listenSessionStore);
+        /* istanbul ignore next */_this.state = {
+            profileColumnsSettings: null }; /* istanbul ignore next */return _this;
+
+    }_createClass(TableBoard, [{ key: 'componentWillMount', value: function componentWillMount()
+
+        {
+            /* istanbul ignore next */_SessionUserActions2.default.getUserSettings();
+        } }, { key: 'render', value: function render()
+
+        {
+            var titleProps = this.props.title;
+            var title = titleProps && 'undefined' !== typeof titleProps && titleProps !== '' ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */null, titleProps) : null;
+            var table =
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Table2.default, /* istanbul ignore next */{
+                data: this.props.data,
+                isService: this.props.isService,
+                profileColumnsSettings: this.state.profileColumnsSettings,
+                columnConfig: this.props.columnConfig,
+                actionsTrigger: this.props.actionsTrigger,
+                selectTrigger: this.props.selectTrigger,
+                actions: this.props.actions,
+                expansion: this.props.expansion,
+                getExpansionData: this.props.getExpansionData,
+                expandId: this.props.expandId,
+                trigger: this.props.trigger,
+                selectable: this.props.selectable,
+                isAllSelected: this.props.isAllSelected,
+                emptyTableTitle: this.props.emptyTableTitle,
+                updateSortableStatus: this.props.updateSortableStatus });
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: this.props.className },
+                    title,
+                    this.state.profileColumnsSettings ? table : null));
+
+
+        } }, { key: '_listenSessionStore', value: function _listenSessionStore(
+
+        event, data) {
+            switch (event) {
+                case 'userSettings':
+                case 'userSettingsReloaded':
+                    var profileColumnsSettings = [];
+                    if (data && data[this.props.tableName] && data[this.props.tableName].length) {
+                        profileColumnsSettings = data[this.props.tableName];
+                    } else if (this.props.defaultColumnsSettings) {
+                        profileColumnsSettings = this.props.defaultColumnsSettings;
+                    }
+                    this.setState({
+                        profileColumnsSettings: profileColumnsSettings });}
+
+
+        } }]);return TableBoard;}(_BaseComponent3.default); /* istanbul ignore next */exports.default = TableBoard;
+
+
+TableBoard.propTypes = {
+    className: /* istanbul ignore next */_react2.default.PropTypes.string,
+    tableName: /* istanbul ignore next */_react2.default.PropTypes.string,
+    userSettings: /* istanbul ignore next */_react2.default.PropTypes.object,
+    emptyTableTitle: /* istanbul ignore next */_react2.default.PropTypes.string,
+    expandId: /* istanbul ignore next */_react2.default.PropTypes.string,
+    data: /* istanbul ignore next */_react2.default.PropTypes.array,
+    title: /* istanbul ignore next */_react2.default.PropTypes.string,
+    pagination: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    expansion: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    selectable: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isAllSelected: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isService: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    columnConfig: /* istanbul ignore next */_react2.default.PropTypes.array,
+    defaultColumnsSettings: /* istanbul ignore next */_react2.default.PropTypes.array,
+    actions: /* istanbul ignore next */_react2.default.PropTypes.array,
+    actionsTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    selectTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updateSortableStatus: /* istanbul ignore next */_react2.default.PropTypes.func,
+    trigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    getExpansionData: /* istanbul ignore next */_react2.default.PropTypes.func };
+
+
+TableBoard.defaultProps = {
+    className: '',
+    tableName: '',
+    title: '',
+    emptyTableTitle: '',
+    isService: false,
+    expansion: false,
+    selectable: false };

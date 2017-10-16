@@ -1,0 +1,170 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_nodeQsSerialization = require('node-qs-serialization');
+var /* istanbul ignore next */_customFetch = require('./customFetch'); /* istanbul ignore next */var _customFetch2 = _interopRequireDefault(_customFetch);
+
+var /* istanbul ignore next */_browserCookies = require('browser-cookies'); /* istanbul ignore next */var _browserCookies2 = _interopRequireDefault(_browserCookies);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var Api = { /* istanbul ignore next */
+    /**
+                                        * @param {string} url
+                                        * @param {Object} params?
+                                        * @return {Promise.<{}>}
+                                        */
+    get: function get(url) {/* istanbul ignore next */var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var urlWithParams = params ? /* istanbul ignore next */url + '?' + /* istanbul ignore next */(0, _nodeQsSerialization.param)(params) : url;
+        return (/* istanbul ignore next */(0, _customFetch2.default)(urlWithParams, {}));
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} url
+                                   * @param {Object} params?
+                                   * @return {Promise.<Response>}
+                                   */
+    getFull: function getFull(url) {/* istanbul ignore next */var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var urlWithParams = params ? /* istanbul ignore next */url + '?' + /* istanbul ignore next */(0, _nodeQsSerialization.param)(params) : url;
+        return (/* istanbul ignore next */(0, _customFetch2.default)(urlWithParams, {}, { isResponseJson: false }));
+    }, /* istanbul ignore next */
+    openInNewTab: function openInNewTab(url) {/* istanbul ignore next */var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        var urlWithParams = params ? /* istanbul ignore next */url + '?' + /* istanbul ignore next */(0, _nodeQsSerialization.param)(params) : url;
+        window.open(urlWithParams, '_blank');
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} url
+                                   * @param {Object} json
+                                   * @return {Promise.<{}>}
+                                   */
+    post: function post(url, json) {
+        var requestOptions = getJsonRequestOptions({ json: json });
+        return (/* istanbul ignore next */(0, _customFetch2.default)(url, requestOptions, { isResponseJson: false }));
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} url
+                                   * @param {Object} json
+                                   * @return {Promise.<{}>}
+                                   */
+    getWithoutCheck: function getWithoutCheck(url, json) {
+        var requestOptions = getJsonRequestOptions({ json: json });
+        return (/* istanbul ignore next */(0, _customFetch2.default)(url, requestOptions, { isHandlingUnauthorized: false }));
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} url
+                                   * @param {{}} json
+                                   * @return {Promise.<Response>}
+                                   */
+    putWithoutCheck: function putWithoutCheck(url, json) {
+        var requestOptions = getJsonRequestOptions({ json: json, method: 'PUT' });
+        return (/* istanbul ignore next */(0, _customFetch2.default)(url, requestOptions, { isResponseJson: false, isHandlingUnauthorized: false }));
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} url
+                                   * @param {*} data
+                                   * @return {Promise.<Response>}
+                                   */
+    sendFile: function sendFile(url, data) {
+        var requestOptions = getRequestOptions({ body: data });
+        return (/* istanbul ignore next */(0, _customFetch2.default)(url, requestOptions, { isResponseJson: false }));
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} url
+                                   * @param {{}} data
+                                   * @return {Promise.<Response>}
+                                   */
+    sendMultipart: function sendMultipart(url, data) {
+        var formData = dataMapToFormData(data);
+        var requestOptions = getRequestOptions({ body: formData });
+        return (/* istanbul ignore next */(0, _customFetch2.default)(url, requestOptions, { isResponseJson: false }));
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} url
+                                   * @param {{}} data
+                                   * @return {Promise.<Response>}
+                                   */
+    updateMultipart: function updateMultipart(url, data) {
+        var formData = dataMapToFormData(data);
+        var requestOptions = getRequestOptions({ body: formData, method: 'PUT' });
+        return (/* istanbul ignore next */(0, _customFetch2.default)(url, requestOptions, { isResponseJson: false }));
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} url
+                                   * @param {{}} data
+                                   * @return {Promise.<Response>}
+                                   */
+    updateForm: function updateForm(url, data) {
+        var requestOptions = getRequestOptions({ body: data, method: 'PUT' });
+        return (/* istanbul ignore next */(0, _customFetch2.default)(url, requestOptions, { isResponseJson: false }));
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} url
+                                   * @param {{}} json
+                                   * @return {Promise.<Response>}
+                                   */
+    put: function put(url, json) {
+        var requestOptions = getJsonRequestOptions({ json: json, method: 'PUT' });
+        return (/* istanbul ignore next */(0, _customFetch2.default)(url, requestOptions, { isResponseJson: false }));
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} url
+                                   * @param {{}} json
+                                   * @return {Promise.<Response>}
+                                   */
+    delete: function _delete(url, json) {
+        var requestOptions = getJsonRequestOptions({ json: json, method: 'DELETE' });
+        return (/* istanbul ignore next */(0, _customFetch2.default)(url, requestOptions, { isResponseJson: false }));
+    } };
+
+
+/**
+          * @param {*|string} body
+          * @param {string} method
+          * @param {{}} headers
+          * @return {{method: string, body: *, headers: *}}
+          */
+function getRequestOptions( /* istanbul ignore next */_ref) {/* istanbul ignore next */var body = _ref.body,_ref$method = _ref.method,method = _ref$method === undefined ? 'POST' : _ref$method,_ref$headers = _ref.headers,headers = _ref$headers === undefined ? {} : _ref$headers;
+    return {
+        method: method,
+        body: body,
+        headers: Object.assign(headers, {
+            'X-CSRF-TOKEN': getToken() }) };
+
+
+}
+
+/**
+   * @param {{}} json
+   * @param {string} method
+   * @return {{method: string, body: *, headers: *}}
+   */
+function getJsonRequestOptions( /* istanbul ignore next */_ref2) {/* istanbul ignore next */var json = _ref2.json,_ref2$method = _ref2.method,method = _ref2$method === undefined ? 'POST' : _ref2$method;
+    return getRequestOptions({
+        body: JSON.stringify(json),
+        method: method,
+        headers: {
+            'Content-type': 'application/json' } });
+
+
+}
+
+/**
+   * Converts data map to FormData instance
+   * @param {{}} data
+   * @return {FormData|{}} FormData or empty object
+   */
+function dataMapToFormData(data) {
+    var formData = new FormData();
+    var isDataEmpty = true;
+
+    Object.keys(data).forEach(function (key) {
+        var value = data[key];
+        if (value) {
+            isDataEmpty = false;
+            formData.append(key, data[key]);
+        }
+    });
+
+    return isDataEmpty ? {} : formData;
+}
+
+function getToken() {
+    var token = /* istanbul ignore next */_browserCookies2.default.get('XSRF-TOKEN');
+    return token ? token : '';
+} /* istanbul ignore next */exports.default =
+
+Api;

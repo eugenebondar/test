@@ -1,0 +1,68 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.USER_DIALOG_MODE = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _get = function get(object, property, receiver) {if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {var parent = Object.getPrototypeOf(object);if (parent === null) {return undefined;} else {return get(parent, property, receiver);}} else if ("value" in desc) {return desc.value;} else {var getter = desc.get;if (getter === undefined) {return undefined;}return getter.call(receiver);}};var /* istanbul ignore next */_reflux = require('reflux');
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_User = require('../../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);
+
+var /* istanbul ignore next */_UserDialogStore = require('./UserDialogStore'); /* istanbul ignore next */var _UserDialogStore2 = _interopRequireDefault(_UserDialogStore);
+var /* istanbul ignore next */_UserDialogActions = require('./UserDialogActions'); /* istanbul ignore next */var _UserDialogActions2 = _interopRequireDefault(_UserDialogActions);
+
+var /* istanbul ignore next */_UserDialog = require('./UserDialog'); /* istanbul ignore next */var _UserDialog2 = _interopRequireDefault(_UserDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var USER_DIALOG_MODE = /* istanbul ignore next */exports.USER_DIALOG_MODE = {
+    NEW: 'NEW',
+    EDIT: 'EDIT' }; /* istanbul ignore next */var
+
+
+UserDialogContainer = function (_Component) {_inherits(UserDialogContainer, _Component);
+    function /* istanbul ignore next */UserDialogContainer() {/* istanbul ignore next */_classCallCheck(this, UserDialogContainer);var _this = _possibleConstructorReturn(this, (UserDialogContainer.__proto__ || Object.getPrototypeOf(UserDialogContainer)).call(this));
+
+        /* istanbul ignore next */_this.store = /* istanbul ignore next */_UserDialogStore2.default;
+
+        /* istanbul ignore next */_this.onSubmit = /* istanbul ignore next */ /* istanbul ignore next */_this.onSubmit.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(UserDialogContainer, [{ key: 'componentDidMount', value: function componentDidMount()
+
+        {/* istanbul ignore next */var _this2 = this,_USER_DIALOG_MODE$NEW;
+            var initAction = /* istanbul ignore next */(_USER_DIALOG_MODE$NEW = {}, _defineProperty(_USER_DIALOG_MODE$NEW,
+            USER_DIALOG_MODE.NEW, function () /* istanbul ignore next */{return (/* istanbul ignore next */_UserDialogActions2.default.initNew( /* istanbul ignore next */_this2.context.currentUser.isService));}), _defineProperty(_USER_DIALOG_MODE$NEW,
+            USER_DIALOG_MODE.EDIT, function () /* istanbul ignore next */{return (/* istanbul ignore next */_UserDialogActions2.default.initEdit( /* istanbul ignore next */_this2.props.userId, /* istanbul ignore next */_this2.context.currentUser.isService));}), _USER_DIALOG_MODE$NEW)[
+            this.props.mode];
+            initAction();
+        } }, { key: 'componentWillUnmount', value: function componentWillUnmount()
+
+        {
+            /* istanbul ignore next */_get(UserDialogContainer.prototype.__proto__ || Object.getPrototypeOf(UserDialogContainer.prototype), 'componentWillUnmount', this).call(this);
+            /* istanbul ignore next */_UserDialogActions2.default.destroy();
+        } }, { key: 'render', value: function render()
+
+        {
+            var currentUser = this.context.currentUser;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_UserDialog2.default, /* istanbul ignore next */_extends({},
+                this.state, {
+                    isEdit: this.props.mode === USER_DIALOG_MODE.EDIT,
+                    isService: currentUser.isService,
+                    currentUserId: currentUser.id,
+                    onSubmit: this.onSubmit,
+                    onClose: this.props.onClose })));
+
+
+        } }, { key: 'onSubmit', value: function onSubmit(
+
+        fields) {
+            var isService = this.context.currentUser.isService;
+            if (this.props.mode === USER_DIALOG_MODE.NEW) {
+                /* istanbul ignore next */_UserDialogActions2.default.createUser(fields, isService);
+            } else {
+                /* istanbul ignore next */_UserDialogActions2.default.editUser(fields.id, fields, isService);
+            }
+        } }]);return UserDialogContainer;}(_reflux.Component); /* istanbul ignore next */exports.default = UserDialogContainer;
+
+
+UserDialogContainer.propTypes = {
+    mode: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    userId: /* istanbul ignore next */_react2.default.PropTypes.string };
+
+
+UserDialogContainer.contextTypes = {
+    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default).isRequired };

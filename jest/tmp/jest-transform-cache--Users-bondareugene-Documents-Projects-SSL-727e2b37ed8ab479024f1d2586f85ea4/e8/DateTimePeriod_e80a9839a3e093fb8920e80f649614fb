@@ -1,0 +1,118 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+var /* istanbul ignore next */_moment = require('moment'); /* istanbul ignore next */var _moment2 = _interopRequireDefault(_moment);
+
+var /* istanbul ignore next */_DateTimePeriodContainer = require('./DateTimePeriodContainer'); /* istanbul ignore next */var _DateTimePeriodContainer2 = _interopRequireDefault(_DateTimePeriodContainer);
+var /* istanbul ignore next */_DateTimePeriodButton = require('./DateTimePeriodButton'); /* istanbul ignore next */var _DateTimePeriodButton2 = _interopRequireDefault(_DateTimePeriodButton);
+
+/* istanbul ignore next */require('./DateTimePeriod.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+DateTimePeriod = function (_React$Component) {_inherits(DateTimePeriod, _React$Component);
+    function /* istanbul ignore next */DateTimePeriod(props) {/* istanbul ignore next */_classCallCheck(this, DateTimePeriod);var _this = _possibleConstructorReturn(this, (DateTimePeriod.__proto__ || Object.getPrototypeOf(DateTimePeriod)).call(this,
+        props));
+
+        /* istanbul ignore next */_this.maximumEndValue = /* istanbul ignore next */(0, _moment2.default)( /* istanbul ignore next */_this.props.youngestRecord).seconds(0).milliseconds(0);
+        /* istanbul ignore next */_this.minimumStartValue = /* istanbul ignore next */(0, _moment2.default)( /* istanbul ignore next */_this.props.oldestRecord).seconds(0).milliseconds(0);
+
+        /* istanbul ignore next */_this.state = {
+            isOpen: false,
+            isOpening: false,
+            /** @type {Moment} */
+            end: /* istanbul ignore next */_this.maximumEndValue,
+            /** @type {Moment} */
+            start: /* istanbul ignore next */_this.minimumStartValue };
+
+
+        /* istanbul ignore next */_this.onChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onChange.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(DateTimePeriod, [{ key: 'render', value: function render()
+
+        {
+            var wrapperClassName = /* istanbul ignore next */(0, _classnames2.default)('date-time-period-wrapper', {
+                'date-time-period-open': this.state.isOpen,
+                'date-time-period-opening': this.state.isOpening });
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: wrapperClassName },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DateTimePeriodButton2.default, /* istanbul ignore next */{
+                        onClick: /* istanbul ignore next */this.onClickButton.bind(this),
+                        isDisabled: this.props.isDisabled }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DateTimePeriodContainer2.default, /* istanbul ignore next */{
+                        end: this.state.end,
+                        start: this.state.start,
+                        maxEnd: this.maximumEndValue,
+                        minStart: this.minimumStartValue,
+                        onChange: this.onChange })));
+
+
+
+        }
+
+        /**
+           * add/remove CSS classes to open/close DateTImePeriod's content
+           * needs timeout 600ms to change CSS classes to change `overflow-x` from
+           * `hidden` to `visible` after animation would be finished
+           */ }, { key: 'onClickButton', value: function onClickButton()
+        {
+            var newValue = !this.state.isOpen;
+            if (newValue) {
+                this.intervalId = setTimeout( /* istanbul ignore next */this.onEndOfOpening.bind(this), 600);
+                this.setState({ isOpening: newValue });
+            } else {
+                this.setState({
+                    isOpening: newValue,
+                    isOpen: newValue });
+
+            }
+        }
+
+        /**
+           * after DateTimePeriod's content was opened change state to remove `date-time-period-opening`
+           * and add `date-time-period-open` CSS classes
+           */ }, { key: 'onEndOfOpening', value: function onEndOfOpening()
+        {
+            this.setState({
+                isOpening: false,
+                isOpen: true });
+
+            window.clearInterval(this.intervalId);
+        }
+
+        /**
+           * @param {{start: Moment, end: Moment}} value - new value for start and end by date picker
+           */ }, { key: 'onChange', value: function onChange(
+        value) {
+            var givenRangeEqualsToMaximalRange = value.start.diff(this.minimumStartValue) === 0 && value.end.diff(this.maximumEndValue) === 0;
+            if (givenRangeEqualsToMaximalRange) {
+                //no need to filter by max/min values
+                this.props.onChange({ search_by_datetime: null });
+                this.setState({
+                    start: this.minimumStartValue,
+                    end: this.maximumEndValue });
+
+            } else {
+                this.props.onChange({
+                    search_by_datetime: {
+                        start: value.start.toISOString(),
+                        end: value.end.clone().add(1, 'minute').toISOString() // one minute is added to "eat" milliseconds on backend comparisons
+                    } });
+
+                this.setState({
+                    start: value.start,
+                    end: value.end });
+
+            }
+        } }]);return DateTimePeriod;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = DateTimePeriod;
+
+
+DateTimePeriod.defaultProps = {
+    youngestRecord: new Date(0).toISOString(),
+    oldestRecord: new Date(0).toISOString(),
+    isDisabled: false };
+
+
+DateTimePeriod.propTypes = {
+    youngestRecord: /* istanbul ignore next */_react2.default.PropTypes.string,
+    oldestRecord: /* istanbul ignore next */_react2.default.PropTypes.string,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    isDisabled: /* istanbul ignore next */_react2.default.PropTypes.bool };

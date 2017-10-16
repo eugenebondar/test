@@ -1,0 +1,98 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};exports.default =
+
+
+
+
+
+NotificationPreferencesForm;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_apocReact = require('apoc-react'); /* istanbul ignore next */require('./NotificationPreferencesForm.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function NotificationPreferencesForm( /* istanbul ignore next */_ref)
+
+
+{/* istanbul ignore next */var fields = _ref.fields,onChange = _ref.onChange;
+    function onToggleChange(fieldKey, value) {
+        onChange({ notification_setting: /* istanbul ignore next */_extends({},
+            fields, _defineProperty({},
+            fieldKey, value)) });
+
+    }
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-form' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-row notification-preferences-header-row' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-description-cell' },
+                    /* istanbul ignore next */(0, _counterpart2.default)('notificationPreferences.sendNotificationIf')),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-toggle-cell' },
+                    /* istanbul ignore next */(0, _counterpart2.default)('notificationPreferences.companyEmail')),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-toggle-cell' },
+                    /* istanbul ignore next */(0, _counterpart2.default)('notificationPreferences.testsPrimaryContact'))),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-row' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-description-cell' },
+                    /* istanbul ignore next */(0, _counterpart2.default)('notificationPreferences.testIsCreated')),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-toggle-cell' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ToggleButton, /* istanbul ignore next */{
+                        toggleId: 'test_created',
+                        toggleSize: 'xs',
+                        isOn: fields.test_created,
+                        onSwitch: function /* istanbul ignore next */onSwitch(value) /* istanbul ignore next */{return onToggleChange('test_created', value);} })),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-toggle-cell' })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-row' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-description-cell' },
+                    /* istanbul ignore next */(0, _counterpart2.default)('notificationPreferences.testStatusChanges')),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-toggle-cell' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ToggleButton, /* istanbul ignore next */{
+                        toggleId: 'test_changed_state_company',
+                        toggleSize: 'xs',
+                        isOn: fields.test_changed_state_company,
+                        onSwitch: function /* istanbul ignore next */onSwitch(value) /* istanbul ignore next */{return onToggleChange('test_changed_state_company', value);} })),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-toggle-cell' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ToggleButton, /* istanbul ignore next */{
+                        toggleId: 'test_changed_state_primary',
+                        toggleSize: 'xs',
+                        isOn: fields.test_changed_state_primary,
+                        onSwitch: function /* istanbul ignore next */onSwitch(value) /* istanbul ignore next */{return onToggleChange('test_changed_state_primary', value);} }))),
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-row' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-description-cell' },
+                    /* istanbul ignore next */(0, _counterpart2.default)('notificationPreferences.testAssigneeChanges')),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-toggle-cell' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ToggleButton, /* istanbul ignore next */{
+                        toggleId: 'test_assigned_company',
+                        toggleSize: 'xs',
+                        isOn: fields.test_assigned_company,
+                        onSwitch: function /* istanbul ignore next */onSwitch(value) /* istanbul ignore next */{return onToggleChange('test_assigned_company', value);} })),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'notification-preferences-toggle-cell' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ToggleButton, /* istanbul ignore next */{
+                        toggleId: 'test_assigned_primary',
+                        toggleSize: 'xs',
+                        isOn: fields.test_assigned_primary,
+                        onSwitch: function /* istanbul ignore next */onSwitch(value) /* istanbul ignore next */{return onToggleChange('test_assigned_primary', value);} })))));
+
+
+
+
+
+}
+
+NotificationPreferencesForm.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        test_created: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+        test_changed_state_company: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+        test_changed_state_primary: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+        test_assigned_company: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+        test_assigned_primary: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired }).
+    isRequired,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };

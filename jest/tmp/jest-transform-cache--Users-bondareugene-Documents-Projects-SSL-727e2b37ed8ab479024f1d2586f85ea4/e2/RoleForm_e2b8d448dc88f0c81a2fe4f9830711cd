@@ -1,0 +1,220 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_Select = require('../../../../Shared/Elements/Select'); /* istanbul ignore next */var _Select2 = _interopRequireDefault(_Select);
+var /* istanbul ignore next */_Input = require('../../../../Shared/Elements/Input'); /* istanbul ignore next */var _Input2 = _interopRequireDefault(_Input);
+var /* istanbul ignore next */_SearchInput = require('../../../../Shared/Elements/SearchInput/SearchInput'); /* istanbul ignore next */var _SearchInput2 = _interopRequireDefault(_SearchInput);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+RoleForm = function (_React$Component) {_inherits(RoleForm, _React$Component);
+    function /* istanbul ignore next */RoleForm(props) {/* istanbul ignore next */_classCallCheck(this, RoleForm);var _this = _possibleConstructorReturn(this, (RoleForm.__proto__ || Object.getPrototypeOf(RoleForm)).call(this,
+        props));
+
+        /* istanbul ignore next */_this.getValidationError = /* istanbul ignore next */_this.getValidationError.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.getValidationClass = /* istanbul ignore next */_this.getValidationClass.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.changeRoleType = /* istanbul ignore next */_this.changeRoleType.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.updatePermission = /* istanbul ignore next */_this.updatePermission.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.changePermissions = /* istanbul ignore next */_this.changePermissions.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(RoleForm, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _props =
+            this.props,fields = _props.fields,permissionsValues = _props.permissionsValues,permissionsList = _props.permissionsList,updateValue = _props.updateValue,search = _props.search,updateSearch = _props.updateSearch; /* istanbul ignore next */var
+            getTranslate = this.getTranslate,getValidationError = this.getValidationError,getValidationClass = this.getValidationClass;
+            var permissionsSource = fields.role_type !== '' ?
+            permissionsList[fields.role_type] :
+            [];
+            var require = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-error required-star' }, /* istanbul ignore next */'*');
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'roles-dialog' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' + getValidationClass('name') },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                            getTranslate('name'), /* istanbul ignore next */': ',
+                            require),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Input2.default, /* istanbul ignore next */{
+                                id: 'name',
+                                updateValue: updateValue,
+                                value: fields.name }),
+
+                            getValidationError('name'))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                            getTranslate('roleType'), /* istanbul ignore next */': ',
+                            require),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Select2.default, /* istanbul ignore next */{
+                                id: 'role_type',
+                                updateValue: this.changeRoleType,
+                                options: ['customer', 'staff'],
+                                value: fields.role_type }))),
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                            getTranslate('permissions'), /* istanbul ignore next */': ',
+                            require),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SearchInput2.default, /* istanbul ignore next */{ onKeyUp: function /* istanbul ignore next */onKeyUp(e) /* istanbul ignore next */{return updateSearch(e.target.value);},
+                                placeholder: getTranslate('inputPlaceholder') }),
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Multiselect, /* istanbul ignore next */{ onChange: this.changePermissions },
+                                permissionsSource.filter(function (permission) {
+                                    return getTranslate(permission).toLowerCase().includes(search.toLowerCase());
+                                }).map(function (permission, i) {
+                                    return (
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Checkbox, /* istanbul ignore next */{
+                                            key: i,
+                                            label: getTranslate(permission),
+                                            name: permission,
+                                            checked: permissionsValues[permission] }));
+
+
+                                })),
+
+                            getValidationError('permissions')))));
+
+
+
+
+        }
+
+        /**
+           * Check validation and get error for pass key if it needs.
+           * @return {JSX}
+           */ }, { key: 'getValidationError', value: function getValidationError(
+        key) {
+            var validation = this.props.validation;
+            return validation && 'undefined' !== typeof validation[key] ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'validation__error-message sc-error' },
+                validation[key].charAt(0).toUpperCase() + validation[key].substr(1)) :
+
+            null;
+        }
+
+        /**
+           * Check validation and get error class for pass key if it needs.
+           * @return {String} error class
+           */ }, { key: 'getValidationClass', value: function getValidationClass(
+        key) {
+            var validation = this.props.validation;
+            return validation && !!validation[key] ? ' error-input' : '';
+        } }, { key: 'changeRoleType', value: function changeRoleType(
+
+        key, value) {
+            var permissionsList = this.props.permissionsList[value];
+            var permissionsValue = {};
+            var fields = this.props.fields;
+            fields[key] = value;
+            fields.permissions = [];
+            for (var _key in permissionsList) {
+                permissionsValue[_key] = false;
+            }
+            this.props.changeRoleType(fields, permissionsValue);
+        } }, { key: 'changePermissions', value: function changePermissions(
+
+        map) {
+            var permission_ids = [];
+            var permissions = this.props.fields.permissions;
+            Array.from(map, function (item) {
+                if (item[1]) {
+                    permission_ids.push(item[0]);
+                }
+            });
+            var changedPermission = this.findDifferenceBetweenTwoArray(permission_ids, permissions)[0];
+            this.updatePermission(changedPermission, permissions.length < permission_ids.length);
+        } }, { key: 'findDifferenceBetweenTwoArray', value: function findDifferenceBetweenTwoArray(
+
+        a1, a2) {
+            var a = [];
+            var diff = [];
+            for (var i = 0; i < a1.length; i++) {
+                a[a1[i]] = true;
+            }
+            for (var _i = 0; _i < a2.length; _i++) {
+                if (a[a2[_i]]) {
+                    delete a[a2[_i]];
+                } else {
+                    a[a2[_i]] = true;
+                }
+            }
+            for (var k in a) {
+                diff.push(k);
+            }
+            return diff;
+        } }, { key: 'updatePermission', value: function updatePermission(
+
+        key, value) {/* istanbul ignore next */var _props2 =
+            this.props,permissionsValues = _props2.permissionsValues,fields = _props2.fields;
+            var permissions = fields.permissions;
+            permissionsValues[key] = value;
+            if (value) {
+                permissions.push(key);
+                var k = [];
+                switch (key) {
+                    case 'edit_all_tests':
+                        k = ['view_all_tests'];
+                        break;
+                    case 'import_external_runs':
+                        k = ['view_external_runs'];
+                        break;
+                    case 'manage_all_users':
+                        k = ['view_all_users'];
+                        break;
+                    case 'manage_companies':
+                        k = ['view_companies'];
+                        break;
+                    case 'manage_classifications':
+                        k = ['view_classifications', 'view_categories', 'view_classification_groups'];
+                        break;
+                    case 'manage_classification_groups':
+                        k = ['view_classification_groups', 'view_classifications', 'view_categories'];
+                        break;
+                    case 'edit_company_tests':
+                        k = ['view_company_tests'];
+                        break;
+                    case 'manage_company_users':
+                        k = ['view_company_users'];
+                        break;
+                    case 'manage_categories':
+                        k = ['view_categories'];
+                        break;}
+
+                if ('undefined' !== typeof k) {
+                    k.forEach(function (p) {
+                        permissions.indexOf(p) < 0 ? permissions.push(p) : null;
+                        permissionsValues[p] = true;
+                    });
+                }
+            } else {
+                var index = permissions.indexOf(key);
+                permissions.splice(index, 1);
+            }
+            this.props.updatePermission(fields, permissionsValues);
+        }
+
+        /**
+           * Get translation by passed key.
+           * @param {String} [type] passed key.
+           * @return {String} translation.
+           */ }, { key: 'getTranslate', value: function getTranslate(
+        key) {
+            return (/* istanbul ignore next */(0, _counterpart2.default)('roles.' + key));
+        } }]);return RoleForm;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = RoleForm;
+
+
+RoleForm.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    permissionsValues: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    permissionsList: /* istanbul ignore next */_react2.default.PropTypes.object,
+    updateValue: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updatePermission: /* istanbul ignore next */_react2.default.PropTypes.func,
+    changeRoleType: /* istanbul ignore next */_react2.default.PropTypes.func,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object,
+    search: /* istanbul ignore next */_react2.default.PropTypes.string,
+    updateSearch: /* istanbul ignore next */_react2.default.PropTypes.func };

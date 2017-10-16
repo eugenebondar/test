@@ -1,0 +1,112 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_deepEqual = require('deep-equal'); /* istanbul ignore next */var _deepEqual2 = _interopRequireDefault(_deepEqual);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_FormField = require('../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_index = require('../../../Shared/Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_LoadingModalDialog = require('../../../Shared/Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+CategoryDialog = function (_React$Component) {_inherits(CategoryDialog, _React$Component);
+    function /* istanbul ignore next */CategoryDialog(props) {/* istanbul ignore next */_classCallCheck(this, CategoryDialog);var _this = _possibleConstructorReturn(this, (CategoryDialog.__proto__ || Object.getPrototypeOf(CategoryDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            fields: props.fields,
+            fieldsCached: props.fields };
+
+
+        /* istanbul ignore next */_this.onChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onChange.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(CategoryDialog, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            if (! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.fields, this.props.fields)) {
+                this.setState({
+                    fields: nextProps.fields,
+                    fieldsCached: nextProps.fields });
+
+            }
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;
+            var areFieldsNotChanged = /* istanbul ignore next */(0, _deepEqual2.default)(this.state.fields, this.state.fieldsCached);
+            var title = this.props.isEdit ?
+            /* istanbul ignore next */(0, _counterpart2.default)('classificationManager.editCategory') :
+            /* istanbul ignore next */(0, _counterpart2.default)('classificationManager.addCategory');
+            var button = this.props.isEdit ?
+            /* istanbul ignore next */(0, _counterpart2.default)('general.save') :
+            /* istanbul ignore next */(0, _counterpart2.default)('general.add');
+            var dialogFooter =
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                        className: 'cancel-btn sc-btn',
+                        onClick: this.props.onClose },
+
+                    /* istanbul ignore next */(0, _counterpart2.default)('customers.popup.cancel')),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                        disabled: areFieldsNotChanged || this.props.isLoading || this.props.isSaving,
+                        className: 'sc-btn sc-btn-primary',
+                        onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onSubmit( /* istanbul ignore next */_this2.state.fields));} },
+
+                    button));
+
+
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingModalDialog2.default, /* istanbul ignore next */{
+                        isLoading: this.props.isLoading,
+                        isOpen: /* istanbul ignore next */true,
+                        header: title,
+                        footer: dialogFooter },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)('classificationManager.title'),
+                            isValid: /* istanbul ignore next */this.isFieldValid.call(this, 'title'),
+                            isRequired: /* istanbul ignore next */true,
+                            validationMessage: /* istanbul ignore next */this.getValidationMessage.call(this, 'title') },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                            id: 'title',
+                            updateValue: this.onChange,
+                            value: this.state.fields.title }))));
+
+
+
+
+        } }, { key: 'onChange', value: function onChange(
+
+        key, value) {
+            var trimValue = value.length > 70 ? value.substring(0, 70) : value;
+            var newFields = /* istanbul ignore next */_extends({}, this.state.fields, _defineProperty({}, key, trimValue));
+            this.setState({ fields: newFields });
+        } }, { key: 'getValidationMessage', value: function getValidationMessage(
+
+        fieldKey) {
+            if (!this.props.validation) {
+                return undefined;
+            }
+            return this.props.validation[fieldKey];
+        } }, { key: 'isFieldValid', value: function isFieldValid(
+
+        fieldKey) {
+            return !this.getValidationMessage(fieldKey);
+        } }]);return CategoryDialog;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = CategoryDialog;
+
+
+CategoryDialog.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    isEdit: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };
+
+
+CategoryDialog.defaultProps = {
+    fields: {
+        title: '' },
+
+    isEdit: false,
+    isLoading: true,
+    isSaving: false,
+    validation: {} };

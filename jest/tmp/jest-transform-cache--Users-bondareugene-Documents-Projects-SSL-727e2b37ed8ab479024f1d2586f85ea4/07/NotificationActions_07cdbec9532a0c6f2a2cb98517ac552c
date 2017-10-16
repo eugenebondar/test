@@ -1,0 +1,12 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.NotificationActions = exports.NotificationActionsNames = undefined;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var NotificationActionsNames = /* istanbul ignore next */exports.NotificationActionsNames = {
+    CREATE_FORBIDDEN_ACCESS_NOTIFICATION: 'CREATE_FORBIDDEN_ACCESS_NOTIFICATION',
+    CREATE_SESSION_EXPIRATION: 'CREATE_SESSION_EXPIRATION',
+    REMOVE_NOTIFICATION: 'REMOVE_NOTIFICATION',
+    CLEAR_SESSION_EXPIRATION: 'CLEAR_SESSION_EXPIRATION' };
+
+
+Object.freeze(NotificationActionsNames);
+
+var NotificationActions = /* istanbul ignore next */exports.NotificationActions = /* istanbul ignore next */_reflux2.default.createActions(Object.values(NotificationActionsNames));

@@ -1,0 +1,84 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_reactSanfona = require('react-sanfona');
+
+var /* istanbul ignore next */_CollapseSectionWithEdit = require('./CollapseSectionWithEdit'); /* istanbul ignore next */var _CollapseSectionWithEdit2 = _interopRequireDefault(_CollapseSectionWithEdit);
+var /* istanbul ignore next */_AttachmentsField = require('../FindingDetails/AttachmentsField'); /* istanbul ignore next */var _AttachmentsField2 = _interopRequireDefault(_AttachmentsField);
+var /* istanbul ignore next */_CollapseSection = require('../FindingDetails/CollapseSection'); /* istanbul ignore next */var _CollapseSection2 = _interopRequireDefault(_CollapseSection);
+var /* istanbul ignore next */_CodeSnippetsSection = require('../FindingDetails/CodeSnippetsSection'); /* istanbul ignore next */var _CodeSnippetsSection2 = _interopRequireDefault(_CodeSnippetsSection);
+var /* istanbul ignore next */_FindingDialog = require('../../FindingDialog'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ClassificationDetailsSection = function (_React$PureComponent) {_inherits(ClassificationDetailsSection, _React$PureComponent);function ClassificationDetailsSection() {_classCallCheck(this, ClassificationDetailsSection);return _possibleConstructorReturn(this, (ClassificationDetailsSection.__proto__ || Object.getPrototypeOf(ClassificationDetailsSection)).apply(this, arguments));}_createClass(ClassificationDetailsSection, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _props =
+            this.props,fields = _props.fields,onChange = _props.onChange,isEdit = _props.isEdit,validation = _props.validation;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'finding-dialog-collapse-section' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 1 },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: /* istanbul ignore next */(0, _counterpart2.default)('findings.findingDetails'), slug: 1 },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'finding-sub-collapse' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__expand' },
+                                    /* istanbul ignore next */_FindingDialog.sectionsList.filter(function (section) /* istanbul ignore next */{return fields[section] !== undefined;}).
+                                    map(function (section) /* istanbul ignore next */{return (
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSectionWithEdit2.default, /* istanbul ignore next */{
+                                                key: section,
+                                                title: /* istanbul ignore next */(0, _counterpart2.default)( /* istanbul ignore next */'findings.' + section),
+                                                id: section,
+                                                value: fields[section],
+                                                isOpen: /* istanbul ignore next */_FindingDialog.expandedByDefaultSectionsList.includes(section),
+                                                onChange: onChange,
+                                                validation: validation }));}),
+
+
+
+                                    isEdit && fields.code_snippets && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CodeSnippetsSection2.default, /* istanbul ignore next */{ snippets: fields.code_snippets }),
+                                    isEdit && fields.attachments && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_AttachmentsField2.default, /* istanbul ignore next */{
+                                        title: /* istanbul ignore next */(0, _counterpart2.default)('findings.attachments'),
+                                        value: fields.attachments,
+                                        isOpen: false }))))),
+
+
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 0 },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: /* istanbul ignore next */(0, _counterpart2.default)('findings.securityLabsInformation'), slug: 'title' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'finding-sub-collapse' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__expand' },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                        title: /* istanbul ignore next */(0, _counterpart2.default)('findings.description'),
+                                        value: fields.description,
+                                        isOpen: false,
+                                        isRaw: /* istanbul ignore next */true }),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                        title: /* istanbul ignore next */(0, _counterpart2.default)('findings.impact'),
+                                        value: fields.description,
+                                        isOpen: false,
+                                        isRaw: /* istanbul ignore next */true }),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                        title: /* istanbul ignore next */(0, _counterpart2.default)('findings.remediation'),
+                                        value: fields.description,
+                                        isOpen: false,
+                                        isRaw: /* istanbul ignore next */true }),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                        title: /* istanbul ignore next */(0, _counterpart2.default)('findings.references'),
+                                        value: fields.description,
+                                        isOpen: false,
+                                        isRaw: /* istanbul ignore next */true })))))));
+
+
+
+
+
+
+
+        } }]);return ClassificationDetailsSection;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = ClassificationDetailsSection;
+
+
+ClassificationDetailsSection.propTypes = {
+    isEdit: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object };

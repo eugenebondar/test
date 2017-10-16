@@ -1,0 +1,96 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_deepEqual = require('deep-equal'); /* istanbul ignore next */var _deepEqual2 = _interopRequireDefault(_deepEqual);
+
+var /* istanbul ignore next */_LoadingModalDialog = require('../../../Shared/Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+var /* istanbul ignore next */_CustomerAccountFrom = require('./CustomerAccountFrom'); /* istanbul ignore next */var _CustomerAccountFrom2 = _interopRequireDefault(_CustomerAccountFrom);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+CustomerAccountDialog = function (_React$PureComponent) {_inherits(CustomerAccountDialog, _React$PureComponent);
+    function /* istanbul ignore next */CustomerAccountDialog(props) {/* istanbul ignore next */_classCallCheck(this, CustomerAccountDialog);var _this = _possibleConstructorReturn(this, (CustomerAccountDialog.__proto__ || Object.getPrototypeOf(CustomerAccountDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            fields: props.fields };
+
+
+        /* istanbul ignore next */_this.onChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onChange.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(CustomerAccountDialog, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            if (! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.fields, this.props.fields)) {
+                this.setState({
+                    fields: nextProps.fields,
+                    fieldsCache: nextProps.fields });
+
+            }
+        } }, { key: 'render', value: function render()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingModalDialog2.default, /* istanbul ignore next */{
+                        loading: this.props.isLoading || this.props.isSaving,
+                        isOpen: /* istanbul ignore next */true,
+                        header: this.getDialogTitle(),
+                        footer: this.getDialogFooter() },
+
+                    !this.props.isLoading &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CustomerAccountFrom2.default, /* istanbul ignore next */{
+                        fields: this.state.fields,
+                        onChange: this.onChange,
+                        validation: this.props.validation })));
+
+
+
+
+        } }, { key: 'getDialogTitle', value: function getDialogTitle()
+
+        {
+            var translationKey = this.props.isEdit ? 'editCustomerAccount' : 'newCustomerAccount';
+            return (/* istanbul ignore next */(0, _counterpart2.default)( /* istanbul ignore next */'customers.addEditCustomer.' + translationKey));
+        } }, { key: 'getDialogFooter', value: function getDialogFooter()
+
+        {/* istanbul ignore next */var _this2 = this;
+            var areFieldsNotChanged = /* istanbul ignore next */(0, _deepEqual2.default)(this.state.fields, this.state.fieldsCache);
+            var saveButton = this.props.isEdit ? /* istanbul ignore next */(0, _counterpart2.default)('general.save') : /* istanbul ignore next */(0, _counterpart2.default)('general.add');
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'cancel-btn sc-btn', onClick: this.props.onClose },
+                        /* istanbul ignore next */(0, _counterpart2.default)('customers.popup.cancel')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                            className: 'sc-btn sc-btn-primary',
+                            onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onSubmit( /* istanbul ignore next */_this2.state.fields));},
+                            disabled: areFieldsNotChanged || this.props.isLoading || this.props.isSaving },
+
+                        saveButton)));
+
+
+
+        } }, { key: 'onChange', value: function onChange(
+
+        updatedField) {
+            this.setState({
+                fields: /* istanbul ignore next */_extends({}, this.state.fields, updatedField) });
+
+        } }]);return CustomerAccountDialog;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = CustomerAccountDialog;
+
+
+CustomerAccountDialog.propTypes = {
+    isEdit: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        corporation_name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        email: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        phone: /* istanbul ignore next */_react2.default.PropTypes.string,
+        notification_setting: /* istanbul ignore next */_react2.default.PropTypes.shape({
+            test_created: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+            test_changed_state_company: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+            test_changed_state_primary: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+            test_assigned_company: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+            test_assigned_primary: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired }) }),
+
+
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object };

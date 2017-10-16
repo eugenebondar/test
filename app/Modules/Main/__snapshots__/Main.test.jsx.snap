@@ -1,0 +1,7 @@
+exports[`Main with default set of props matches snapshot 1`] = `
+<div
+  className="main">
+  Hello world
+  <div />
+</div>
+`;

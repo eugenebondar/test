@@ -1,0 +1,14 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+AccordionItemSubSection;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react); /* istanbul ignore next */require('./AccordionItemSubSection.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function AccordionItemSubSection( /* istanbul ignore next */_ref) {/* istanbul ignore next */var children = _ref.children,isHidden = _ref.isHidden;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'react-sanfona-subheader-section', style: { display: isHidden ? 'block' : 'none' } },
+            children));
+
+
+}
+
+AccordionItemSubSection.propTypes = {
+    isHidden: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    children: /* istanbul ignore next */_react2.default.PropTypes.node };

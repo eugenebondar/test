@@ -1,0 +1,40 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_api = require('../../../Models/Catalogs/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_api3 = require('../../../Models/Products/api'); /* istanbul ignore next */var _api4 = _interopRequireDefault(_api3);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var CatalogsManagerDialogActions = {
+    initNew: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    initEdit: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    editCatalog: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    addCatalog: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    updateCatalogProducts: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    updateCatalogFields: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    updateProductPrice: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }) };
+
+
+CatalogsManagerDialogActions.initNew.listen(function () {
+    return (/* istanbul ignore next */_api4.default.service.fetchProductsList().
+        then(this.completed, this.failed));
+});
+
+CatalogsManagerDialogActions.initEdit.listen(function (catalogId) {
+    Promise.all([/* istanbul ignore next */_api2.default.service.fetchCatalog(catalogId), /* istanbul ignore next */_api4.default.service.fetchProductsList()]).
+    then(this.completed, this.failed);
+});
+
+CatalogsManagerDialogActions.addCatalog.listen(function (data) {/* istanbul ignore next */var _this = this;
+    return (/* istanbul ignore next */_api2.default.service.createCatalog(data).
+        then(function (json) {
+            (!json.errors ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(json);
+        }));
+});
+
+CatalogsManagerDialogActions.editCatalog.listen(function (id, data) {/* istanbul ignore next */var _this2 = this;
+    return (/* istanbul ignore next */_api2.default.service.editCatalog(id, data).
+        then(function (json) {
+            (!json.errors ? /* istanbul ignore next */_this2.completed : /* istanbul ignore next */_this2.failed)(json);
+        }));
+}); /* istanbul ignore next */exports.default =
+
+CatalogsManagerDialogActions;

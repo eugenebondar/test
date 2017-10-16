@@ -1,0 +1,186 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+
+var /* istanbul ignore next */_User = require('../../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);
+
+var /* istanbul ignore next */_TableTH = require('./Table/TableTH'); /* istanbul ignore next */var _TableTH2 = _interopRequireDefault(_TableTH);
+var /* istanbul ignore next */_TableTR = require('./Table/TableTR'); /* istanbul ignore next */var _TableTR2 = _interopRequireDefault(_TableTR);
+var /* istanbul ignore next */_TableExpandTR = require('./Table/TableExpandTR'); /* istanbul ignore next */var _TableExpandTR2 = _interopRequireDefault(_TableExpandTR);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+Table = function (_React$Component) {_inherits(Table, _React$Component);
+    function /* istanbul ignore next */Table(props) {/* istanbul ignore next */_classCallCheck(this, Table);
+
+        /**
+                                                                                                              *
+                                                                                                              * @type {{currentUser: User}} - currentUser from SessionUserStore
+                                                                                                              */var _this = _possibleConstructorReturn(this, (Table.__proto__ || Object.getPrototypeOf(Table)).call(this, props));
+        /* istanbul ignore next */_this.context = {};
+
+        /* istanbul ignore next */_this.state = {
+            expandId: /* istanbul ignore next */_this.props.expandId,
+            columnConfig: [] };
+
+        /* istanbul ignore next */_this.changeExpandId = /* istanbul ignore next */ /* istanbul ignore next */_this.changeExpandId.bind(_this);
+        /* istanbul ignore next */_this.getNewColumnConfig = /* istanbul ignore next */ /* istanbul ignore next */_this.getNewColumnConfig.bind(_this);
+        /* istanbul ignore next */_this.isColumnVisible = /* istanbul ignore next */ /* istanbul ignore next */_this.isColumnVisible.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(Table, [{ key: 'componentWillMount', value: function componentWillMount()
+
+        {
+            this.getNewColumnConfig();
+        } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            this.getNewColumnConfig(nextProps);
+        } }, { key: 'render', value: function render()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'table', /* istanbul ignore next */{ className: 'test__table__component ssl-table sc-table' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'thead', /* istanbul ignore next */null,
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tr', /* istanbul ignore next */null,
+                            this.renderHeaderCells(),
+                            this.hasActions() ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'th', /* istanbul ignore next */null, /* istanbul ignore next */'Actions') : null)),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tbody', /* istanbul ignore next */null,
+                        this.hasData() ? this.renderDataRows() : this.renderNoDataInfo())));
+
+
+
+        } }, { key: 'hasData', value: function hasData()
+
+        {
+            return this.props.data && this.props.data.length > 0;
+        } }, { key: 'hasActions', value: function hasActions()
+
+        {
+            return this.props.actions && this.props.actions.length > 0;
+        } }, { key: 'renderNoDataInfo', value: function renderNoDataInfo()
+
+        {
+            var extraColSpan = this.hasActions() ? 1 : 0; //add one if there are actions
+            var colSpan = this.state.columnConfig.length + extraColSpan;
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tr', /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */{ className: 'empty-table', colSpan: colSpan },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null, this.props.emptyTableTitle))));
+
+
+
+        } }, { key: 'renderHeaderCells', value: function renderHeaderCells()
+
+        {/* istanbul ignore next */var _this2 = this;
+            return this.state.columnConfig.map(function (item, i) {
+                return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableTH2.default, /* istanbul ignore next */{
+                        key: i,
+                        selectable: /* istanbul ignore next */_this2.props.selectable && i === 0,
+                        selectTrigger: /* istanbul ignore next */_this2.props.selectTrigger,
+                        sortable: item.sortable,
+                        sortConfig: item.sortConfig,
+                        name: item.name,
+                        type: item.type,
+                        source: item.source,
+                        isAllSelected: /* istanbul ignore next */_this2.props.isAllSelected,
+                        updateSortableStatus: /* istanbul ignore next */_this2.props.updateSortableStatus }));
+
+            });
+        } }, { key: 'renderDataRows', value: function renderDataRows()
+
+        {/* istanbul ignore next */var _this3 = this;var
+            currentUser = this.context.currentUser;
+
+            return this.props.data.map(function (item, i) {
+                var isProperlyConfiguredExpandableTable =
+                /* istanbul ignore next */_this3.state.expandId === item.id && /* istanbul ignore next */_this3.props.expansion && /* istanbul ignore next */_this3.props.getExpansionData;
+
+                var tableRow =
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableTR2.default, /* istanbul ignore next */{
+                    key: i,
+                    className: /* istanbul ignore next */(0, _classnames2.default)({
+                        'even': (i + 1) % 2 === 0,
+                        'odd': (i + 1) % 2 === 1 }),
+
+                    test: item,
+                    actions: /* istanbul ignore next */_this3.props.actions,
+                    isService: currentUser.isStaff(),
+                    columnConfig: /* istanbul ignore next */_this3.state.columnConfig,
+                    actionsTrigger: /* istanbul ignore next */_this3.props.actionsTrigger,
+                    expansion: /* istanbul ignore next */_this3.props.expansion,
+                    getExpansionData: /* istanbul ignore next */_this3.props.getExpansionData,
+                    expandId: /* istanbul ignore next */_this3.state.expandId,
+                    changeExpandId: /* istanbul ignore next */_this3.changeExpandId,
+                    trigger: /* istanbul ignore next */_this3.props.trigger,
+                    selectTrigger: /* istanbul ignore next */_this3.props.selectTrigger,
+                    selectable: /* istanbul ignore next */_this3.props.selectable });
+
+                var expandableRow = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableExpandTR2.default, /* istanbul ignore next */{
+                    key: item.id,
+                    id: item.id,
+                    actions: /* istanbul ignore next */_this3.props.actions,
+                    columnConfig: /* istanbul ignore next */_this3.state.columnConfig,
+                    getExpansionData: /* istanbul ignore next */_this3.props.getExpansionData });
+
+                return [
+                tableRow,
+                isProperlyConfiguredExpandableTable ? expandableRow : null];
+
+            });
+        } }, { key: 'changeExpandId', value: function changeExpandId(
+
+        id) {
+            this.setState({ expandId: this.state.expandId === id ? '' : id });
+        } }, { key: 'getNewColumnConfig', value: function getNewColumnConfig()
+
+        {/* istanbul ignore next */var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.props;
+            var newColumnConfig = [];
+            var fields = props.profileColumnsSettings;
+            props.columnConfig.forEach(function (item) {
+                fields.forEach(function (field) {
+                    if (field === item.source) {
+                        newColumnConfig.push(item);
+                    }
+                });
+            });
+            if (!newColumnConfig.length) {
+                newColumnConfig = props.columnConfig.filter(this.isColumnVisible);
+            }
+            this.setState({ columnConfig: newColumnConfig });
+        } }, { key: 'isColumnVisible', value: function isColumnVisible(
+
+        column) {
+            var callback = column.getIsVisibleCallback || this.defaultIsVisibleCallback;
+            return callback(this.context.currentUser)();
+        } }, { key: 'defaultIsVisibleCallback', value: function defaultIsVisibleCallback()
+
+        {
+            return function () /* istanbul ignore next */{return true;};
+        } }]);return Table;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = Table;
+
+
+Table.propTypes = {
+    data: /* istanbul ignore next */_react2.default.PropTypes.array,
+    actions: /* istanbul ignore next */_react2.default.PropTypes.array,
+    actionsTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    trigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    expansion: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    selectable: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isAllSelected: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    selectTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    getExpansionData: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updateSortableStatus: /* istanbul ignore next */_react2.default.PropTypes.func,
+    emptyTableTitle: /* istanbul ignore next */_react2.default.PropTypes.string,
+    expandId: /* istanbul ignore next */_react2.default.PropTypes.string };
+
+
+Table.defaultProps = {
+    className: '',
+    tableName: '',
+    title: '',
+    emptyTableTitle: '',
+    expansion: false,
+    selectable: false };
+
+
+Table.contextTypes = {
+    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default) };

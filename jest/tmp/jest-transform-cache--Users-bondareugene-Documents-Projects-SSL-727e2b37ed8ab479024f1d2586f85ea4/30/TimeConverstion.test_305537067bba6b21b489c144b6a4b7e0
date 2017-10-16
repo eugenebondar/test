@@ -1,0 +1,54 @@
+/* istanbul ignore next */'use strict';describe('TimeConversion', function () {
+
+
+    jest.mock('counterpart', function () /* istanbul ignore next */{return counterPartMock;});var counterPartMock = require('./../__mocks__/counterpart');
+
+    var millisecondsToMinutes = require('./../TimeConversion').millisecondsToMinutes;
+    var millisecondsToPrettyMinutesAndSeconds = require('./../TimeConversion').millisecondsToPrettyMinutesAndSeconds;
+
+    beforeAll(function () {
+    });
+
+    describe(millisecondsToMinutes.name, function () {
+        it('converts to minutes properly', function () {
+            expect(millisecondsToMinutes(1000 * 60)).toEqual(1);
+            expect(millisecondsToMinutes(2000 * 60)).toEqual(2);
+            expect(millisecondsToMinutes(10000 * 60)).toEqual(10);
+            expect(millisecondsToMinutes(100000 * 60)).toEqual(100);
+            expect(millisecondsToMinutes(1000000 * 60)).toEqual(1000);
+            expect(millisecondsToMinutes(12345000 * 60)).toEqual(12345);
+        });
+        it('minutes are floored', function () {
+            expect(millisecondsToMinutes(59999)).toEqual(0);
+            expect(millisecondsToMinutes(35000)).toEqual(0);
+            expect(millisecondsToMinutes(111)).toEqual(0);
+            expect(millisecondsToMinutes(60001)).toEqual(1);
+            expect(millisecondsToMinutes(67500)).toEqual(1);
+            expect(millisecondsToMinutes(69999)).toEqual(1);
+        });
+    });
+
+    describe(millisecondsToPrettyMinutesAndSeconds.name, function () {
+        it('prints time properly using plural nouns', function () {
+            expect(millisecondsToPrettyMinutesAndSeconds(59000)).toEqual('59 utils.time.seconds');
+            expect(millisecondsToPrettyMinutesAndSeconds(59111)).toEqual('59 utils.time.seconds');
+            expect(millisecondsToPrettyMinutesAndSeconds(59333)).toEqual('59 utils.time.seconds');
+            expect(millisecondsToPrettyMinutesAndSeconds(19988)).toEqual('19 utils.time.seconds');
+            expect(millisecondsToPrettyMinutesAndSeconds(2000 * 60 + 3 * 1000)).toEqual('2 utils.time.minutes utils.time.and 3 utils.time.seconds');
+        });
+
+        it('prints time properly using singular nouns', function () {
+            expect(millisecondsToPrettyMinutesAndSeconds(1000)).toEqual('1 utils.time.second');
+            expect(millisecondsToPrettyMinutesAndSeconds(1111)).toEqual('1 utils.time.second');
+            expect(millisecondsToPrettyMinutesAndSeconds(1999)).toEqual('1 utils.time.second');
+            expect(millisecondsToPrettyMinutesAndSeconds(1500)).toEqual('1 utils.time.second');
+            expect(millisecondsToPrettyMinutesAndSeconds(1000 * 60 + 3 * 1000)).toEqual('1 utils.time.minute utils.time.and 3 utils.time.seconds');
+            expect(millisecondsToPrettyMinutesAndSeconds(2000 * 60 + 1 * 1000)).toEqual('2 utils.time.minutes utils.time.and 1 utils.time.second');
+            expect(millisecondsToPrettyMinutesAndSeconds(1000 * 60 + 1 * 1000)).toEqual('1 utils.time.minute utils.time.and 1 utils.time.second');
+        });
+    });
+
+    afterAll(function () {
+        jest.unmock('counterpart');
+    });
+});

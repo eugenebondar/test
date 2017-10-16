@@ -1,0 +1,81 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */var _enzymeToJson2 = _interopRequireDefault(_enzymeToJson);
+var /* istanbul ignore next */_RadiosWithSearch = require('../RadiosWithSearch'); /* istanbul ignore next */var _RadiosWithSearch2 = _interopRequireDefault(_RadiosWithSearch);
+var /* istanbul ignore next */_RadioButton = require('../../Radio/RadioButton'); /* istanbul ignore next */var _RadioButton2 = _interopRequireDefault(_RadioButton);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var itemList = ['a', 'b'];
+
+/**
+                            * @return {ReactWrapper<P, S>}
+                            */
+var getRadiosWithSearch = function getRadiosWithSearch() {
+    return (/* istanbul ignore next */(0, _enzyme.mount)(
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RadiosWithSearch2.default, /* istanbul ignore next */{ onChange: function /* istanbul ignore next */onChange() {
+                } },
+            itemList.map(function (item, i) {
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RadioButton2.default, /* istanbul ignore next */{
+                        key: i,
+                        label: item,
+                        name: item,
+                        onChange: function /* istanbul ignore next */onChange() /* istanbul ignore next */{return null;} }));
+
+
+            }))));
+
+
+};
+
+describe('<RadiosWithSearch />', function () {
+
+    var errorConsole = /* istanbul ignore next */void 0;
+
+    beforeAll(function () {
+        errorConsole = spyOn(console, 'error');
+    });
+
+    afterAll(function () {
+        expect(errorConsole).not.toHaveBeenCalled();
+    });
+
+    it('should match snapshot', function () {
+        var tree = /* istanbul ignore next */(0, _enzymeToJson2.default)(getRadiosWithSearch());
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('should be rendered', function () {
+        var component = getRadiosWithSearch();
+        expect(component).toBeTruthy();
+    });
+
+    describe('check result if SearchInput has', function () {
+        it('empty value', function () {
+            var ElementsListWithSearch = getRadiosWithSearch();
+            ElementsListWithSearch.setState({ searchValue: '' });
+            expect(ElementsListWithSearch.find('.hide').length).toBe(0);
+        });
+
+        it('value which equal to one of checkbox\'s name', function () {
+            var ElementsListWithSearch = getRadiosWithSearch();
+            ElementsListWithSearch.setState({ searchValue: '' });
+            expect(ElementsListWithSearch.find('.hide').length).toBe(0);
+
+            ElementsListWithSearch.setState({ searchValue: 'a' });
+            expect(ElementsListWithSearch.find('.hide').length).toBe(1);
+        });
+
+        it('value which doesn\'t equal to any of checkbox\'s name', function () {
+            var ElementsListWithSearch = getRadiosWithSearch();
+            ElementsListWithSearch.setState({ searchValue: '' });
+            expect(ElementsListWithSearch.find('.hide').length).toBe(0);
+
+            ElementsListWithSearch.setState({ searchValue: 'another name' });
+            expect(ElementsListWithSearch.find('.hide').length).toBe(2);
+        });
+    });
+
+    it('prints no errors from propTypes validation', function () {
+        expect(errorConsole).not.toHaveBeenCalled();
+    });
+});

@@ -1,0 +1,294 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_debounce = require('debounce'); /* istanbul ignore next */var _debounce2 = _interopRequireDefault(_debounce);
+var /* istanbul ignore next */_User = require('./User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);
+var /* istanbul ignore next */_BaseStore2 = require('./../BaseStore'); /* istanbul ignore next */var _BaseStore3 = _interopRequireDefault(_BaseStore2);
+var /* istanbul ignore next */_BrandingStore = require('./../BrandingStore'); /* istanbul ignore next */var _BrandingStore2 = _interopRequireDefault(_BrandingStore);
+var /* istanbul ignore next */_SessionUserActions = require('./SessionUserActions'); /* istanbul ignore next */var _SessionUserActions2 = _interopRequireDefault(_SessionUserActions);
+var /* istanbul ignore next */_NotificationActions = require('./../Notification/NotificationActions');
+
+var /* istanbul ignore next */_api = require('../../Models/Session/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_SessionUserStoreFetchHook = require('./../StoreHooks/SessionUserStoreFetchHook'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+/* istanbul ignore next */(0, _SessionUserStoreFetchHook.initSessionUserFetchStoreHook)();
+
+/**
+                                                                                            * @classdesc Class representing a SessionUser Store.
+                                                                                            * @class
+                                                                                            */ /* istanbul ignore next */var
+SessionUserStore = function (_BaseStore) {_inherits(SessionUserStore, _BaseStore);
+    function /* istanbul ignore next */SessionUserStore() {/* istanbul ignore next */_classCallCheck(this, SessionUserStore);
+
+        // debonce registration must happen before listenToMany is called
+        var _this = _possibleConstructorReturn(this, (SessionUserStore.__proto__ || Object.getPrototypeOf(SessionUserStore)).call(this)); /* istanbul ignore next */_this[/* istanbul ignore next */_SessionUserActions.resetSessionTimeout] = /* istanbul ignore next */(0, _debounce2.default)( /* istanbul ignore next */_this[/* istanbul ignore next */_SessionUserActions.resetSessionTimeout], 500, true);
+        /* istanbul ignore next */_this.listenToMany( /* istanbul ignore next */_SessionUserActions2.default);
+
+        /* istanbul ignore next */_this.currentUser = new /* istanbul ignore next */_User2.default();
+        /* istanbul ignore next */_this.userPermissions = [];
+        /* istanbul ignore next */_this.userSettings = null;
+        /* istanbul ignore next */_this.isUnauthorized = null;
+        /* istanbul ignore next */_this.isService = null;
+        /* istanbul ignore next */_this.sessionTimeoutHandle = null;
+        /* istanbul ignore next */_this.sessionTimeoutDelay = null;
+        /* istanbul ignore next */_this.sessionTimeoutWarningDelay = null; /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * if currentUser is null - Fetch active user's session, if not -  fetch currentUser.
+       * @config {Object} - set currentUser.
+       * @trigger {Object} [currentUser] - current user.
+       * @trigger {Bool} [isService] - isService status.
+       */_createClass(SessionUserStore, [{ key: 'getActiveSession', value: function getActiveSession()
+        {/* istanbul ignore next */var _this2 = this;
+            if (!this.currentUser.isEmpty) {
+                this.trigger('currentUser', this.currentUser);
+            } else {
+                /* istanbul ignore next */_api2.default.getActiveSession().
+                then(function (json) {
+                    if (json && !json.errors) {
+                        /* istanbul ignore next */_this2.userSettings = json.settings;
+                        /* istanbul ignore next */_this2.userPermissions = json.permissions;
+                        /* istanbul ignore next */_this2.currentUser = new /* istanbul ignore next */_User2.default(json);
+                        /* istanbul ignore next */_this2.isUnauthorized = false;
+                        /* istanbul ignore next */_this2.trigger('userSettings', /* istanbul ignore next */_this2.userSettings);
+                        /* istanbul ignore next */_this2.setSessionTimeoutAndNotificationsDelays(json.session_timeout);
+                        /* istanbul ignore next */_SessionUserActions2.default[/* istanbul ignore next */_SessionUserActions.resetSessionTimeout]();
+                        /* istanbul ignore next */_this2.isService = ! /* istanbul ignore next */_this2.currentUser.isEmpty && /* istanbul ignore next */_this2.currentUser.isService;
+                        var branding = ! /* istanbul ignore next */_this2.currentUser.isEmpty ? /* istanbul ignore next */_this2.currentUser.branding : null;
+                        /* istanbul ignore next */_BrandingStore2.default.addBrandingStyles(branding).then(function () {
+                            /* istanbul ignore next */_this2.trigger('currentUser', /* istanbul ignore next */_this2.currentUser);
+                            /* istanbul ignore next */_this2.trigger('isService', /* istanbul ignore next */_this2.isService);
+                            /* istanbul ignore next */_this2.trigger('userPermissions', /* istanbul ignore next */_this2.userPermissions);
+                        });
+                    } else if (json && json.reason === 'enforced_two_factor_auth_not_configured') {
+                        /* istanbul ignore next */_this2.trigger('enforcedTwoFactorAuth', json.errors[0]);
+                    }
+                });
+            }
+        }
+
+        /**
+           * Extends user session simply by making a request to API
+           */ }, { key: _SessionUserActions.extendUserSession, value: function value()
+        {
+            /* istanbul ignore next */_api2.default.getActiveSession();
+        } }, { key: 'updateActiveSession', value: function updateActiveSession()
+
+        {
+            this.currentUser = new /* istanbul ignore next */_User2.default();
+            this.getActiveSession();
+        } }, { key: 'setUnauthorized', value: function setUnauthorized(
+
+        message) {
+            this.deleteBranding();
+            this.userSettings = null;
+            this.currentUser = new /* istanbul ignore next */_User2.default();
+            this.isUnauthorized = true;
+            this.trigger('isUnauthorized', {
+                status: this.isUnauthorized,
+                message: message });
+
+            this.trigger('currentUser', this.currentUser);
+            if (this.sessionTimeoutHandle) {
+                window.clearTimeout(this.sessionTimeoutHandle);
+                /* istanbul ignore next */_NotificationActions.NotificationActions[/* istanbul ignore next */_NotificationActions.NotificationActionsNames.CLEAR_SESSION_EXPIRATION]();
+            }
+        }
+
+        /**
+           * Get current user's user_type and trigger isService status.
+           * @trigger {Bool} [isService] - isService status.
+           */ }, { key: 'getUserType', value: function getUserType()
+        {
+            if (!this.currentUser.isEmpty) {
+                this.trigger('isService', this.currentUser.isService);
+            } else {
+                this.getActiveSession();
+            }
+        } }, { key: 'getUserPermissions', value: function getUserPermissions()
+
+        {
+            if (!this.currentUser.isEmpty) {
+                this.trigger('userPermissions', this.userPermissions);
+            } else {
+                this.getActiveSession();
+            }
+        }
+
+        /**
+           * Remove current session and reload page.
+           */ }, { key: 'signOut', value: function signOut()
+        {/* istanbul ignore next */var _this3 = this;var notAuthorizedMessage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+            /* istanbul ignore next */_api2.default.signOut().then(function () /* istanbul ignore next */{return (/* istanbul ignore next */_this3.setUnauthorized(notAuthorizedMessage));});
+        } }, { key: 'signIn', value: function signIn(
+
+        data) {/* istanbul ignore next */var _this4 = this;
+            /* istanbul ignore next */_api2.default.signIn(data).
+            then(function (response) /* istanbul ignore next */{return response.json();}).
+            then(function (json) {
+                if (json.success) {
+                    /* istanbul ignore next */_this4.isUnauthorized = false;
+                    /* istanbul ignore next */_this4.trigger('isUnauthorized', {
+                        status: /* istanbul ignore next */_this4.isUnauthorized });
+
+                    /* istanbul ignore next */_this4.getActiveSession();
+                } else {
+                    /* istanbul ignore next */_this4.trigger('loginValidation', json);
+                }
+            });
+        } }, { key: _SessionUserActions.resetSessionTimeout, value: function value()
+
+        {/* istanbul ignore next */var _this5 = this;
+            if (!this.currentUser || !this.sessionTimeoutDelay) {
+                return;
+            }
+            if (this.sessionTimeoutHandle) {
+                window.clearTimeout(this.sessionTimeoutHandle);
+            }
+
+            /* istanbul ignore next */_NotificationActions.NotificationActions[/* istanbul ignore next */_NotificationActions.NotificationActionsNames.CREATE_SESSION_EXPIRATION](
+            this.sessionTimeoutWarningDelay,
+            this.sessionTimeoutDelay - this.sessionTimeoutWarningDelay);
+
+            this.sessionTimeoutHandle = setTimeout(function () {
+                /* istanbul ignore next */_SessionUserActions2.default.signOut( /* istanbul ignore next */(0, _counterpart2.default)('login.sessionTimeout'));
+                delete /* istanbul ignore next */_this5.sessionTimeoutHandle;
+            }, this.sessionTimeoutDelay);
+        } }, { key: _SessionUserActions.checkResponseStatus, value: function value(
+
+        response) {
+            if (response.status === 403) {
+                /* istanbul ignore next */_NotificationActions.NotificationActions[/* istanbul ignore next */_NotificationActions.NotificationActionsNames.CREATE_FORBIDDEN_ACCESS_NOTIFICATION]();
+            }
+        } }, { key: 'getUserSettings', value: function getUserSettings()
+
+        {
+            if (this.userSettings) {
+                this.trigger('userSettings', this.userSettings);
+            } else {
+                this.getActiveSession();
+            }
+        } }, { key: 'saveTableConfig', value: function saveTableConfig(
+
+        data) {/* istanbul ignore next */var _this6 = this;
+            /* istanbul ignore next */_api2.default.saveConfig(data).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this6.trigger('tableConfigSaved', true);
+                }
+            }).
+            catch(function (error) {
+            });
+        } }, { key: 'updateAuth', value: function updateAuth(
+
+        data) {/* istanbul ignore next */var _this7 = this;
+            /* istanbul ignore next */_api2.default.updateAuth(data).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    response.json().then(function (json) {
+                        /* istanbul ignore next */_this7.trigger('updatedAuth', json);
+                        /* istanbul ignore next */_this7.getActiveSession();
+                    });
+                } else if (response.status === 400) {
+                    response.json().then(function (json) {
+                        /* istanbul ignore next */_this7.setTopLevelError(json.errors[0]);
+                    });
+                }
+            }).
+            catch(function (error) {
+            });
+        } }, { key: 'configureAuth', value: function configureAuth()
+
+        {/* istanbul ignore next */var _this8 = this;
+            /* istanbul ignore next */_api2.default.configureAuth().
+            then(function (response) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_this8.trigger('configuredAuth', json);
+                });
+            }).
+            catch(function (error) {
+            });
+        } }, { key: 'reloadUserSettings', value: function reloadUserSettings()
+
+        {/* istanbul ignore next */var _this9 = this;
+            this.getActiveSession();
+            /* istanbul ignore next */_api2.default.getActiveSession().
+            then(function (json) {
+                /* istanbul ignore next */_this9.userSettings = json.settings;
+                /* istanbul ignore next */_this9.trigger('userSettingsReloaded', /* istanbul ignore next */_this9.userSettings);
+            });
+        } }, { key: 'resetPassword', value: function resetPassword(
+
+        data) {/* istanbul ignore next */var _this10 = this;
+            /* istanbul ignore next */_api2.default.resetPassword({ user: data }).
+            then(function (response) {
+                if (response.ok || response.status === 400) {
+                    response.json().then(function (json) {
+                        /* istanbul ignore next */_this10.trigger('resetPassword', json);
+                    });
+                } else if (response.status === 422) {
+                    response.json().then(function (json) {
+                        /* istanbul ignore next */_this10.trigger('resetPasswordValidation', json.errors);
+                    });
+                }
+            });
+        } }, { key: 'setTopLevelError', value: function setTopLevelError(
+
+        error) {
+            this.trigger('setTopLevelError', error);
+        } }, { key: 'resetTopLevelError', value: function resetTopLevelError()
+
+        {
+            this.trigger('resetTopLevelError');
+        } }, { key: 'deleteBranding', value: function deleteBranding()
+
+        {
+            var BRANDING_ID = 'branding-style';
+            var BRANDING_STYLES = document.getElementById(BRANDING_ID);
+            var head = document.head || document.getElementsByTagName('head')[0];
+            if (BRANDING_STYLES) {
+                head.removeChild(BRANDING_STYLES);
+            }
+        }
+
+        /**
+           * If response status is 422 - prepare object with errors.
+           * @param {Object} [response] - response.
+           * @param {String} [triggerName] - name of trigger.
+           * @trigger {Object} - object of errors.
+           */ }, { key: 'checkValidation', value: function checkValidation(
+        response, triggerName) {/* istanbul ignore next */var _this11 = this;
+            if (response.status === 422) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_this11.validation = {};
+                    for (var key in json) {
+                        /* istanbul ignore next */_this11.validation[key] = json[key].join(', ');
+                    }
+                    /* istanbul ignore next */_this11.trigger(triggerName, /* istanbul ignore next */_this11.validation);
+                });
+            }
+        }
+
+        /**
+           * @param {Number} [sessionTimeoutDelay}
+           */ }, { key: 'setSessionTimeoutAndNotificationsDelays', value: function setSessionTimeoutAndNotificationsDelays(
+        sessionTimeoutDelay) {
+            if (!sessionTimeoutDelay || sessionTimeoutDelay <= MIN_WARNING_TIME_BEFORE_SESSION_TIMEOUT) {
+                console.error('Session timeout delayed has invalid value');
+                return;
+            }
+
+            this.sessionTimeoutWarningDelay = Math.max(0, sessionTimeoutDelay - PREFERRED_WARNING_TIME_BEFORE_SESSION_TIMEOUT);
+            this.sessionTimeoutDelay = sessionTimeoutDelay;
+        } }]);return SessionUserStore;}(_BaseStore3.default); /* istanbul ignore next */exports.default =
+
+
+new SessionUserStore();
+
+var MESSAGES = {
+    MUST_SIGN_IN: 'You need to sign in or sign up before continuing.',
+    SESSION_TIMEOUT: 'Your session has been expired. Please sign in again.' };
+
+Object.freeze(MESSAGES);
+
+var PREFERRED_WARNING_TIME_BEFORE_SESSION_TIMEOUT = 60000 * 5; // 5 minutes
+var MIN_WARNING_TIME_BEFORE_SESSION_TIMEOUT = 60000; // one minute

@@ -1,0 +1,56 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.labelPositions = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+
+/* istanbul ignore next */require('./RadioButton.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}
+
+var labelPositions = /* istanbul ignore next */exports.labelPositions = {
+    left: 'left',
+    right: 'right' };
+
+
+function RadioButton( /* istanbul ignore next */_ref)
+
+
+
+
+
+
+
+{/* istanbul ignore next */var className = _ref.className,name = _ref.name,labelPosition = _ref.labelPosition,label = _ref.label,disabled = _ref.disabled,_onChange = _ref.onChange,props = _objectWithoutProperties(_ref, ['className', 'name', 'labelPosition', 'label', 'disabled', 'onChange']);
+    var classes = /* istanbul ignore next */(0, _classnames2.default)('radio-button', className, {
+        'radio-button-disabled': disabled });
+
+
+    var radioLabel = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'radio-button-title' }, label);
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: classes },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'radio-button-label' },
+                labelPosition === labelPositions.left && radioLabel,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */_extends({},
+                props, {
+                    type: 'radio',
+                    onChange: function /* istanbul ignore next */onChange( /* istanbul ignore next */_ref2) {/* istanbul ignore next */var target = _ref2.target;
+                        if (target.checked) {
+                            _onChange(name);
+                        }
+                    } })),
+
+                labelPosition === labelPositions.right && radioLabel)));
+
+
+
+} /* istanbul ignore next */exports.default = RadioButton;
+
+RadioButton.propTypes = {
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    label: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    disabled: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    labelPosition: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    className: /* istanbul ignore next */_react2.default.PropTypes.string,
+    name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired };
+
+
+RadioButton.defaultProps = {
+    disabled: false,
+    labelPosition: labelPositions.right };

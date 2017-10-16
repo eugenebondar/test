@@ -1,0 +1,89 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_index = require('./index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('TableBoard', function () {
+    var props = /* istanbul ignore next */void 0,component = /* istanbul ignore next */void 0,data = /* istanbul ignore next */void 0,columnConfig = /* istanbul ignore next */void 0,actions = /* istanbul ignore next */void 0;
+    beforeEach(function () {
+        props = {
+            className: 'className',
+            tableName: 'someName',
+            userSettings: {},
+            emptyTableTitle: '-',
+            expandId: '1',
+            data: [],
+            title: 'title',
+            pagination: false,
+            expansion: false,
+            selectable: false,
+            isAllSelected: false,
+            isService: false,
+            columnConfig: [],
+            actions: [],
+            actionsTrigger: function /* istanbul ignore next */actionsTrigger() {},
+            selectTrigger: function /* istanbul ignore next */selectTrigger() {},
+            updateSortableStatus: function /* istanbul ignore next */updateSortableStatus() {},
+            trigger: function /* istanbul ignore next */trigger() {},
+            getExpansionData: function /* istanbul ignore next */getExpansionData() {} };
+
+        data = [{ 'customer_name': 'Jerde-Williamson' }];
+        columnConfig = [{ 'source': 'customer_name', 'name': 'tableCell.customer', 'width': '10', 'sortable': false, 'type': 'text' }];
+        actions = [{ 'value': 'editTestSettings', 'title': 'Edit Test Settings', 'icon': 'sc-icon-pencil' }];
+    });
+    it('component will be mounted', function () {
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+            data: data,
+            columnConfig: columnConfig,
+            actions: actions,
+            actionsTrigger: props.actionsTrigger,
+            getExpansionData: props.getExpansionData,
+            updateSortableStatus: props.updateSortableStatus }));
+
+        expect(component).toBeTruthy();
+    });
+    it('component will be mounted with defined title', function () {
+        var title = 'title';
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+            title: title,
+            data: data,
+            columnConfig: columnConfig,
+            actions: actions,
+            actionsTrigger: props.actionsTrigger,
+            getExpansionData: props.getExpansionData,
+            updateSortableStatus: props.updateSortableStatus }));
+
+        expect(component).toBeTruthy();
+        component.setState({ profileColumnsSettings: [] });
+        expect(component.find('.test__table__component').length).toBe(1);
+    });
+    it('component listeners work', function () {
+        var event = 'userSettings',
+        eventData = {
+            someName: ['customer_name'] };
+
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+            data: data,
+            tableName: 'someName',
+            columnConfig: columnConfig,
+            actions: actions,
+            actionsTrigger: props.actionsTrigger,
+            getExpansionData: props.getExpansionData,
+            updateSortableStatus: props.updateSortableStatus }));
+
+        component.setState({ profileColumnsSettings: null });
+        var inst = component.instance();
+        inst._listenSessionStore(event);
+        expect(inst.state.profileColumnsSettings).not.toBeNull();
+
+        component.setState({ profileColumnsSettings: null });
+        inst._listenSessionStore(event, eventData);
+        expect(inst.state.profileColumnsSettings).not.toBeNull();
+        expect(inst.state.profileColumnsSettings.length).toEqual(1);
+
+        // check second event
+        event = 'userSettingsReloaded';
+        component.setState({ profileColumnsSettings: null });
+        inst._listenSessionStore(event);
+        expect(inst.state.profileColumnsSettings).not.toBeNull();
+    });
+});

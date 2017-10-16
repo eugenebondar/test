@@ -1,0 +1,10 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var SECOND = 1000;
+var MINUTE = 60 * SECOND;
+
+var SCAN_TABLE_REFRESH_INTERVAL = /* istanbul ignore next */exports.SCAN_TABLE_REFRESH_INTERVAL = 30 * SECOND;
+var TESTS_TABLE_REFRESH_INTERVAL = /* istanbul ignore next */exports.TESTS_TABLE_REFRESH_INTERVAL = 10 * SECOND;
+var SCAN_TABLE_PAGE_ITEMS = /* istanbul ignore next */exports.SCAN_TABLE_PAGE_ITEMS = 30;
+
+var DEFAULT_CACHE_LIFESPAN = /* istanbul ignore next */exports.DEFAULT_CACHE_LIFESPAN = 15 * MINUTE;
+
+var DEFAULT_DEBOUNCED_FILTER_DELAY = /* istanbul ignore next */exports.DEFAULT_DEBOUNCED_FILTER_DELAY = SECOND / 2;

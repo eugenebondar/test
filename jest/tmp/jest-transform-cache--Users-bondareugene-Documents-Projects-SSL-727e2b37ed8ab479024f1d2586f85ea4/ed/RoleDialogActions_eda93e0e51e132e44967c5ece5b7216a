@@ -1,0 +1,60 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_api = require('../../../Models/ServiceUser/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_api3 = require('../../../Models/Roles/api'); /* istanbul ignore next */var _api4 = _interopRequireDefault(_api3);
+var /* istanbul ignore next */_api5 = require('../../../Models/Dictionary/api'); /* istanbul ignore next */var _api6 = _interopRequireDefault(_api5);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var RoleDialogActions = {
+    initNew: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    initEdit: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    createRole: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    editRole: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }) };
+
+
+RoleDialogActions.initNew.listen(function () {
+    var organizationListPromise = fetchOrganizationList();
+    var permissionsListPromises = fetchPermissionsList();
+
+    return Promise.all([organizationListPromise, permissionsListPromises]).
+    then(function ( /* istanbul ignore next */_ref) /* istanbul ignore next */{var _ref2 = _slicedToArray(_ref, 2),organizationsList = _ref2[0],permissionsList = _ref2[1];return { organizationsList: organizationsList, permissionsList: permissionsList };}).
+    then(this.completed, this.failed);
+});
+
+RoleDialogActions.initEdit.listen(function (roleId) {
+    var organizationListPromise = fetchOrganizationList();
+    var permissionsListPromises = fetchPermissionsList();
+    var rolePromise = /* istanbul ignore next */_api4.default.fetchRole(roleId);
+
+    return Promise.all([organizationListPromise, permissionsListPromises, rolePromise]).
+    then(function ( /* istanbul ignore next */_ref3) /* istanbul ignore next */{var _ref4 = _slicedToArray(_ref3, 3),organizationsList = _ref4[0],permissionsList = _ref4[1],role = _ref4[2];return { organizationsList: organizationsList, permissionsList: permissionsList, role: role };}).
+    then(this.completed, this.failed);
+});
+
+RoleDialogActions.createRole.listen(function (data) {/* istanbul ignore next */var _this = this;
+    /* istanbul ignore next */_api4.default.createRole(data).
+    then(function (response) /* istanbul ignore next */{return response.json();}).
+    then(function (json) {
+        (!json.errors ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(json);
+    });
+});
+
+RoleDialogActions.editRole.listen(function (roleId, data) {/* istanbul ignore next */var _this2 = this;
+    /* istanbul ignore next */_api4.default.editRole(roleId, data).
+    then(function (response) /* istanbul ignore next */{return response.json();}).
+    then(function (json) {
+        (!json.errors ? /* istanbul ignore next */_this2.completed : /* istanbul ignore next */_this2.failed)(json);
+    });
+});
+
+function fetchOrganizationList() {
+    return (/* istanbul ignore next */_api2.default.fetchOrganizationsList().
+        then(function (json) /* istanbul ignore next */{return json.organizations;}));
+}
+
+function fetchPermissionsList() {
+    return (/* istanbul ignore next */_api6.default.fetchPermissionsList().
+        then(function (json) /* istanbul ignore next */{return json.permissions;}));
+} /* istanbul ignore next */exports.default =
+
+RoleDialogActions;

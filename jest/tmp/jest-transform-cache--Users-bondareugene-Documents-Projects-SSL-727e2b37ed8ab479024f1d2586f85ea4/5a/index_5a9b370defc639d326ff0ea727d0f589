@@ -1,0 +1,69 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /* istanbul ignore next */require('./index.less');
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ConfirmationDialog = function (_React$Component) {_inherits(ConfirmationDialog, _React$Component);function ConfirmationDialog() {_classCallCheck(this, ConfirmationDialog);return _possibleConstructorReturn(this, (ConfirmationDialog.__proto__ || Object.getPrototypeOf(ConfirmationDialog)).apply(this, arguments));}_createClass(ConfirmationDialog, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _props =
+            this.props,isNoAction = _props.isNoAction,className = _props.className,title = _props.title,isOnProcess = _props.isOnProcess;
+            var dialogClass = /* istanbul ignore next */(0, _classnames2.default)('confirmation-dialog', className);
+            var _dialogFooter = isNoAction ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ onClick: /* istanbul ignore next */this.closeDialog.bind(this), className: 'sc-btn sc-btn-primary' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('general.ok')))) :
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ onClick: /* istanbul ignore next */this.closeDialog.bind(this), className: 'cancel-btn sc-btn' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('general.no'))),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ onClick: /* istanbul ignore next */this.submit.bind(this), className: 'sc-btn sc-btn-primary', disabled: isOnProcess },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('general.yes'))));
+
+
+
+            var Component = this.props.withBackground ? /* istanbul ignore next */_apocReact.ModalWithBackdrop : /* istanbul ignore next */_apocReact.Modal;
+            return (
+                /* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */{
+                        isOpen: /* istanbul ignore next */true,
+                        header: '',
+                        footer: _dialogFooter,
+                        className: dialogClass },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-confirmation-title' }, title)));
+
+
+        } }, { key: 'closeDialog', value: function closeDialog()
+
+        {
+            this.props.cancel(this.props.name);
+        } }, { key: 'submit', value: function submit()
+
+        {
+            this.props.submit(this.props.returnData);
+        } }]);return ConfirmationDialog;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = ConfirmationDialog;
+
+
+ConfirmationDialog.propTypes = {
+    title: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+    /* istanbul ignore next */_react2.default.PropTypes.string,
+    /* istanbul ignore next */_react2.default.PropTypes.number,
+    /* istanbul ignore next */_react2.default.PropTypes.element]),
+
+    name: /* istanbul ignore next */_react2.default.PropTypes.string,
+    className: /* istanbul ignore next */_react2.default.PropTypes.string,
+    cancel: /* istanbul ignore next */_react2.default.PropTypes.func,
+    submit: /* istanbul ignore next */_react2.default.PropTypes.func,
+    isNoAction: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isOnProcess: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    withBackground: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    returnData: /* istanbul ignore next */_react2.default.PropTypes.any };
+
+
+ConfirmationDialog.defaultProps = {
+    isNoAction: false,
+    isOnProcess: false,
+    className: '',
+    withBackground: true };

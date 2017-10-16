@@ -1,0 +1,21 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+CollapseSection;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactSanfona = require('react-sanfona'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function CollapseSection( /* istanbul ignore next */_ref) {/* istanbul ignore next */var title = _ref.title,isOpen = _ref.isOpen,children = _ref.children;
+    var slug = isOpen ? 1 : 0;
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 1 },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: title, slug: slug },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fb-expand-content' },
+                    children))));
+
+
+
+
+}
+
+CollapseSection.propTypes = {
+    title: /* istanbul ignore next */_react2.default.PropTypes.string,
+    isOpen: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    children: /* istanbul ignore next */_react2.default.PropTypes.node };

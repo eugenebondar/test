@@ -1,0 +1,174 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.FINDING_DETAILS_MODE = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _get = function get(object, property, receiver) {if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {var parent = Object.getPrototypeOf(object);if (parent === null) {return undefined;} else {return get(parent, property, receiver);}} else if ("value" in desc) {return desc.value;} else {var getter = desc.get;if (getter === undefined) {return undefined;}return getter.call(receiver);}};exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getFindingDetailsDialogConfigForMode = getFindingDetailsDialogConfigForMode;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);var /* istanbul ignore next */_FindingDialogStore = require('./FindingDialogStore'); /* istanbul ignore next */var _FindingDialogStore2 = _interopRequireDefault(_FindingDialogStore);var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);var /* istanbul ignore next */_FindingDialogActions = require('./FindingDialogActions'); /* istanbul ignore next */var _FindingDialogActions2 = _interopRequireDefault(_FindingDialogActions);var /* istanbul ignore next */_FindingDialogCommunicatorWithRefluxTriggers = require('./FindingDialogCommunicatorWithRefluxTriggers'); /* istanbul ignore next */var _FindingDialogCommunicatorWithRefluxTriggers2 = _interopRequireDefault(_FindingDialogCommunicatorWithRefluxTriggers);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var FINDING_DETAILS_MODE = /* istanbul ignore next */exports.FINDING_DETAILS_MODE = { NEW: 'NEW', EDIT: 'EDIT', VIEW: 'VIEW' };function getFindingDetailsDialogConfigForMode(mode, id) {/* istanbul ignore next */var _FINDING_DETAILS_MODE;
+    return (/* istanbul ignore next */(_FINDING_DETAILS_MODE = {}, _defineProperty(_FINDING_DETAILS_MODE,
+        FINDING_DETAILS_MODE.NEW, {
+            mode: FINDING_DETAILS_MODE.NEW }), _defineProperty(_FINDING_DETAILS_MODE,
+
+        FINDING_DETAILS_MODE.VIEW, {
+            mode: FINDING_DETAILS_MODE.VIEW,
+            findingId: id }), _defineProperty(_FINDING_DETAILS_MODE,
+
+        FINDING_DETAILS_MODE.EDIT, {
+            mode: FINDING_DETAILS_MODE.EDIT,
+            findingId: id }), _FINDING_DETAILS_MODE)[
+
+        mode]);
+} /* istanbul ignore next */var
+
+FindingDialogContainer = function (_Reflux$Component) {_inherits(FindingDialogContainer, _Reflux$Component);
+    function /* istanbul ignore next */FindingDialogContainer(props) {/* istanbul ignore next */_classCallCheck(this, FindingDialogContainer);var _this = _possibleConstructorReturn(this, (FindingDialogContainer.__proto__ || Object.getPrototypeOf(FindingDialogContainer)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = /* istanbul ignore next */_FindingDialogStore.defaultState;
+        /* istanbul ignore next */_this.store = /* istanbul ignore next */_FindingDialogStore2.default;
+
+        /* istanbul ignore next */_this.mapStoreToState( /* istanbul ignore next */_FindingDialogStore2.default, function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var findingCategoriesId = _ref.findingCategoriesId,isFindingCreated = _ref.isFindingCreated,findingId = _ref.findingId,finding = _ref.finding;
+            if (findingCategoriesId) {
+                /* istanbul ignore next */_FindingDialogActions2.default.getFindingClassificationsForCategory(findingCategoriesId);
+            }
+            if (!finding && findingId) {
+                /* istanbul ignore next */_this.getFindingDetails(findingId);
+            }
+            if (isFindingCreated) {
+                /* istanbul ignore next */_this.props.closeFindingDialog();
+            }
+        }); /* istanbul ignore next */return _this;
+    }_createClass(FindingDialogContainer, [{ key: 'componentDidMount', value: function componentDidMount()
+
+        {
+            var initialRequest = this.getInitialRequest();
+            initialRequest();
+        } }, { key: 'componentWillUnmount', value: function componentWillUnmount()
+
+        {
+            /* istanbul ignore next */_get(FindingDialogContainer.prototype.__proto__ || Object.getPrototypeOf(FindingDialogContainer.prototype), 'componentWillUnmount', this).call(this);
+            /* istanbul ignore next */_FindingDialogActions2.default.closeFindingDialog();
+        } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(_ref2)
+
+        {/* istanbul ignore next */var findingIds = _ref2.findingIds;
+            this.onFindingIdsChange(findingIds);
+        } }, { key: 'render', value: function render()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDialogCommunicatorWithRefluxTriggers2.default, /* istanbul ignore next */_extends({},
+                this.props,
+                this.state, {
+                    getFindingDetails: /* istanbul ignore next */this.getFindingDetails.bind(this),
+                    createFinding: /* istanbul ignore next */this.createFinding.bind(this),
+                    editFinding: /* istanbul ignore next */this.editFinding.bind(this),
+                    turnEditMode: /* istanbul ignore next */this.turnEditMode.bind(this),
+                    changePublishStatus: /* istanbul ignore next */this.changePublishStatus.bind(this),
+                    changeIncludeStatus: /* istanbul ignore next */this.changeIncludeStatus.bind(this),
+                    toggleAttachmentsDialog: /* istanbul ignore next */_FindingDialogActions2.default.toggleAttachmentsDialog,
+                    onFindingCategoryChange: /* istanbul ignore next */_FindingDialogActions2.default.findingCategoryChange,
+                    onDeleteFinding: /* istanbul ignore next */this.deleteFinding.bind(this),
+                    onNavigate: /* istanbul ignore next */this.onNavigate.bind(this) })));
+
+
+        } }, { key: 'onNavigate', value: function onNavigate()
+
+        {/* istanbul ignore next */var nextId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.props.findingIds[0];
+            /* istanbul ignore next */_FindingDialogActions2.default.navigate(nextId);
+        } }, { key: 'getInitialRequest', value: function getInitialRequest()
+
+        {/* istanbul ignore next */var _FINDING_DETAILS_MODE2;
+            var isService = this.context.currentUser.isService; /* istanbul ignore next */var _props =
+            this.props,mode = _props.mode,runId = _props.runId,findingId = _props.findingId;
+            return (/* istanbul ignore next */(_FINDING_DETAILS_MODE2 = {}, _defineProperty(_FINDING_DETAILS_MODE2,
+                FINDING_DETAILS_MODE.NEW, function () /* istanbul ignore next */{return (/* istanbul ignore next */_FindingDialogActions2.default.openCreateNewFindingDialog());}), _defineProperty(_FINDING_DETAILS_MODE2,
+                FINDING_DETAILS_MODE.VIEW, function () /* istanbul ignore next */{return (/* istanbul ignore next */_FindingDialogActions2.default.openViewFindingDialog(runId, findingId, isService));}), _defineProperty(_FINDING_DETAILS_MODE2,
+                FINDING_DETAILS_MODE.EDIT, function () /* istanbul ignore next */{return (/* istanbul ignore next */_FindingDialogActions2.default.openEditFindingDialog(runId, findingId, isService));}), _FINDING_DETAILS_MODE2)[
+                mode]);
+        } }, { key: 'onFindingIdsChange', value: function onFindingIdsChange(
+
+        nextFindingIds) {
+            if (nextFindingIds.length === 0) {
+                this.props.closeFindingDialog();
+                return;
+            }
+            if (nextFindingIds !== this.props.findingIds && !nextFindingIds.includes(this.state.finding.id)) {
+                /* istanbul ignore next */_FindingDialogActions2.default.updateFindingId({
+                    nextFindingIds: nextFindingIds,
+                    findingIds: this.props.findingIds,
+                    findingId: this.state.findingId });
+
+
+                var previousFindingIdIndex = this.props.findingIds.indexOf(this.state.finding.id);
+                var newFindingIdIndex = Math.min(previousFindingIdIndex, nextFindingIds.length - 1);
+                this.onNavigate(nextFindingIds[newFindingIdIndex]);
+            }
+        } }, { key: 'getFindingDetails', value: function getFindingDetails()
+
+        {/* istanbul ignore next */var findingId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.state.finding.id;
+            if (this.state.finding) {
+                /* istanbul ignore next */_FindingDialogActions2.default.getFinding(this.props.runId, findingId, this.context.currentUser.isService);
+            }
+        } }, { key: 'createFinding', value: function createFinding(
+
+        finding) {
+            /* istanbul ignore next */_FindingDialogActions2.default.createFinding(this.props.runId, finding);
+        } }, { key: 'editFinding', value: function editFinding(
+
+        finding) {
+            /* istanbul ignore next */_FindingDialogActions2.default.editFinding(this.props.runId, finding.id, finding);
+        } }, { key: 'deleteFinding', value: function deleteFinding()
+
+        {
+            /* istanbul ignore next */_FindingDialogActions2.default.deleteFinding(this.props.runId, this.state.finding.id);
+        } }, { key: 'turnEditMode', value: function turnEditMode()
+
+        {
+            /* istanbul ignore next */_FindingDialogActions2.default.turnEditMode();
+            /* istanbul ignore next */_FindingDialogActions2.default.getFindingClassificationsForCategoryWithoutUpdatindFinding(this.state.finding.finding_classification_category_id);
+            if (!this.state.findingCategories) {
+                /* istanbul ignore next */_FindingDialogActions2.default.getFindingCategories();
+            }
+        }
+        /**
+           * Check finding publish status and change it to the opposite.
+           * Invoke ExternalRuns's action - unPublishSelected or publishSelected
+           */ }, { key: 'changePublishStatus', value: function changePublishStatus()
+        {
+            if (this.state.finding.published) {
+                /* istanbul ignore next */_FindingDialogActions2.default.unPublishFinding(this.props.runId, [this.state.finding.id]);
+            } else {
+                /* istanbul ignore next */_FindingDialogActions2.default.publishFinding(this.props.runId, [this.state.finding.id]);
+            }
+        }
+
+        /**
+           * Check finding include status and change it to the opposite.
+           * Invoke ExternalRuns's action - excludeSelected or includeSelected
+           */ }, { key: 'changeIncludeStatus', value: function changeIncludeStatus()
+        {
+            if (this.state.finding.included) {
+                /* istanbul ignore next */_FindingDialogActions2.default.excludeFinding(this.props.runId, [this.state.finding.id]);
+            } else {
+                /* istanbul ignore next */_FindingDialogActions2.default.includeFinding(this.props.runId, [this.state.finding.id]);
+            }
+        } }]);return FindingDialogContainer;}( /* istanbul ignore next */_reflux2.default.Component); /* istanbul ignore next */exports.default = FindingDialogContainer;
+
+
+FindingDialogContainer.propTypes = {
+    findingTypes: /* istanbul ignore next */_react2.default.PropTypes.array,
+    runId: /* istanbul ignore next */_react2.default.PropTypes.string,
+    findingIds: /* istanbul ignore next */_react2.default.PropTypes.array,
+    closeFindingDialog: /* istanbul ignore next */_react2.default.PropTypes.func };
+
+
+FindingDialogContainer.contextTypes = {
+    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default) };

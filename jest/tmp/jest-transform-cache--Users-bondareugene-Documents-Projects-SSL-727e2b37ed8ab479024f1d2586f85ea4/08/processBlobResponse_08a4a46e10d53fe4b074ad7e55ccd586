@@ -1,0 +1,11 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = processBlobResponse;function processBlobResponse(response) {
+    if (!response.ok) {
+        return null;
+    }
+    return response.blob().then(function (blob) {
+        var url = window.URL.createObjectURL(blob);
+        var contentDispositionHeader = response.headers.get('Content-Disposition');
+        var filename = contentDispositionHeader.match(/filename="(.+)"/)[1];
+        return { url: url, filename: filename };
+    });
+}

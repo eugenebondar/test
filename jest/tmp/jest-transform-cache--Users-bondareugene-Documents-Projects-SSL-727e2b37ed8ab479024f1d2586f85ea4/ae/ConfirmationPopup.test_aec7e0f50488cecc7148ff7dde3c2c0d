@@ -1,0 +1,44 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_index = require('./index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('ConfirmationPopup', function () {
+    var props = /* istanbul ignore next */void 0,component = /* istanbul ignore next */void 0;
+    beforeEach(function () {
+        props = {
+            title: 'title',
+            isNoAction: false,
+            returnData: { test: 'test' } };
+
+    });
+    it('will be mounted', function () {
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ title: props.title }));
+        expect(component).toBeTruthy();
+    });
+    it('will be on non action view', function () {
+        props.isNoAction = true;
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ title: props.title, isNoAction: props.isNoAction }));
+        expect(component.find('button').length).toEqual(1);
+        expect(component.find('button span')).toHaveText( /* istanbul ignore next */(0, _counterpart2.default)('general.ok'));
+    });
+    it('will be on yes-no action view', function () {
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ title: props.title, isNoAction: props.isNoAction }));
+        expect(component.find('button').length).toEqual(2);
+        expect(component.find('.cancel-btn span')).toHaveText( /* istanbul ignore next */(0, _counterpart2.default)('general.no'));
+        expect(component.find('.fd__button span')).toHaveText( /* istanbul ignore next */(0, _counterpart2.default)('general.yes'));
+    });
+    it('will be closed', function () {
+        var cancel = jasmine.createSpy('cancel');
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ title: props.title, isNoAction: props.isNoAction, cancel: cancel }));
+        component.find('.cancel-btn').simulate('click');
+        expect(cancel).toHaveBeenCalledTimes(1);
+    });
+    it('will be confirmed', function () {
+        var confirm = jasmine.createSpy('confirm');
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ title: props.title, isNoAction: props.isNoAction, returnData: props.returnData, confirm: confirm }));
+        component.find('.sc-btn-primary').simulate('click');
+        expect(confirm).toHaveBeenCalledTimes(1);
+        expect(confirm).toHaveBeenCalledWith(props.returnData);
+    });
+});

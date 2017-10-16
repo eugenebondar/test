@@ -1,0 +1,28 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json');
+var /* istanbul ignore next */_CatalogsManagerTable = require('./CatalogsManagerTable'); /* istanbul ignore next */var _CatalogsManagerTable2 = _interopRequireDefault(_CatalogsManagerTable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('CatalogsManager', function () {
+    describe('with default set of props', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CatalogsManagerTable2.default, /* istanbul ignore next */{
+                catalogs: [] }));
+
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

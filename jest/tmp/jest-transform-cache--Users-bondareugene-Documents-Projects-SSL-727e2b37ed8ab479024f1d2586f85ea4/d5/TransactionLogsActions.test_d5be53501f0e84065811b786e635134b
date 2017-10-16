@@ -1,0 +1,100 @@
+/* istanbul ignore next */'use strict'; /* istanbul ignore next */require('./Mocks');
+
+describe('TransactionLogsActions', function () {
+    jest.useFakeTimers();
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
+    var transactionLogsActions = require('./../TransactionLogsActions').default;
+    var transactionLogsApi = /* istanbul ignore next */require('../../../Models/TransactionLogs/api');
+
+    describe('fetchLogs action', function () {
+        beforeEach(function () {
+            transactionLogsApi.getLogs = jest.fn(function () /* istanbul ignore next */{return Promise.resolve(getLogsResponse);});
+            executeGetLogs(filter);
+        });
+        var filter = {
+            page: 1,
+            per: 30 };
+
+
+        var executeGetLogs = function executeGetLogs(filter) {
+            transactionLogsActions.refreshData(filter);
+            transactionLogsActions.refreshData.completed = jest.fn(function () {
+            });
+            transactionLogsActions.refreshData.failed = jest.fn(function () {
+            });
+        };
+
+        var getLogsResponse = 'getLogsResponse';
+
+        it('fetches data from api.getLogs', function () {
+            jest.runAllTimers();
+            expect(transactionLogsApi.getLogs.mock.calls.length).toBe(1);
+        });
+
+        it('successful fetch executes `completed` sub action', function () {
+            return new Promise(function (resolve) {
+                transactionLogsActions.refreshData.completed = function (result) {
+                    expect(result).toBeTruthy();
+                    expect(result).toEqual(getLogsResponse);
+                    resolve();
+                };
+                jest.runAllTimers();
+            });
+        });
+
+        it('not successful fetch executes `failed` sub action', function () {
+            transactionLogsApi.getLogs = jest.fn(function () /* istanbul ignore next */{return Promise.reject();});
+            return new Promise(function (resolve) {
+                transactionLogsActions.refreshData.failed = function () /* istanbul ignore next */{return resolve();};
+                jest.runAllTimers();
+            });
+        });
+    });
+
+    describe('fetchLog action', function () {
+        var id = 'some-id';
+
+        var executeGetLog = function executeGetLog(id) {
+            transactionLogsActions.fetchLog(id);
+            transactionLogsActions.fetchLog.completed = jest.fn(function () {
+            });
+            transactionLogsActions.fetchLog.failed = jest.fn(function () {
+            });
+        };
+
+        var getLogResponse = 'getLogResponse';
+
+        describe('when ends with success', function () {
+            beforeEach(function () {
+                transactionLogsApi.getLog = jest.fn(function () /* istanbul ignore next */{return Promise.resolve(getLogResponse);});
+                executeGetLog(id);
+            });
+
+            it('fetches data from api.getLog', function () {
+                jest.runAllTimers();
+                expect(transactionLogsApi.getLogs.mock.calls.length).toBe(1);
+            });
+
+            it('successful fetch executes `completed` sub action', function () {
+                return new Promise(function (resolve) {
+                    transactionLogsActions.fetchLog.completed = function (result) {
+                        expect(result).toBeTruthy();
+                        expect(result).toEqual(getLogResponse);
+                        resolve();
+                    };
+                    jest.runAllTimers();
+                });
+            });
+
+            it('not successful fetch executes `failed` sub action', function () {
+                transactionLogsApi.getLog = jest.fn(function () /* istanbul ignore next */{return Promise.reject();});
+
+                return new Promise(function (resolve) {
+                    transactionLogsActions.fetchLog.failed = function () /* istanbul ignore next */{return resolve();};
+                    jest.runAllTimers();
+                });
+            });
+        });
+    });
+});

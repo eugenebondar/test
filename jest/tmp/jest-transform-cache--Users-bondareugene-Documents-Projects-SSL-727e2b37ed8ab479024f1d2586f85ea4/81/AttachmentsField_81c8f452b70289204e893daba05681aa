@@ -1,0 +1,33 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+
+AttachmentsField;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactSanfona = require('react-sanfona');var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_fileUtils = require('../../../../Utils/fileUtils');var /* istanbul ignore next */_ReportItem = require('../../../../Modules/TestsDetails/TestRun/TestReports/ReportItem'); /* istanbul ignore next */var _ReportItem2 = _interopRequireDefault(_ReportItem);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function AttachmentsField( /* istanbul ignore next */_ref) {/* istanbul ignore next */var title = _ref.title,value = _ref.value,isOpen = _ref.isOpen;
+    var slug = isOpen ? 1 : 0;
+    var content = value.length ? value.map(function (item, i) {
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ReportItem2.default, /* istanbul ignore next */{ key: i, item: item, hasImagePreview: /* istanbul ignore next */(0, _fileUtils.isImage)(item.file_url) }));
+
+    }) : /* istanbul ignore next */(0, _counterpart2.default)('general.none');
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 1 },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: title, slug: slug },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fb-expand-content' },
+                    content))));
+
+
+
+
+}
+
+AttachmentsField.propTypes = {
+    title: /* istanbul ignore next */_react2.default.PropTypes.string,
+    value: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        name: /* istanbul ignore next */_react2.default.PropTypes.string,
+        file_url: /* istanbul ignore next */_react2.default.PropTypes.string })),
+
+    isOpen: /* istanbul ignore next */_react2.default.PropTypes.bool };

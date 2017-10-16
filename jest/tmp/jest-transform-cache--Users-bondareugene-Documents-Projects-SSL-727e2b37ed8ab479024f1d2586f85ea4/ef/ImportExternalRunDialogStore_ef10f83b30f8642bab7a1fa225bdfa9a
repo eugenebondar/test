@@ -1,0 +1,193 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.defaultState = undefined;var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _defaultFieldsByImpor;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_ImportExternalRunDialogActions = require('./ImportExternalRunDialogActions'); /* istanbul ignore next */var _ImportExternalRunDialogActions2 = _interopRequireDefault(_ImportExternalRunDialogActions);
+
+var /* istanbul ignore next */_ImportForm = require('./ImportForm/ImportForm');
+var /* istanbul ignore next */_ImportHailstorm = require('./ImportForm/ImportHailstorm'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+var defaultFieldsByImportSource = /* istanbul ignore next */(_defaultFieldsByImpor = {}, _defineProperty(_defaultFieldsByImpor,
+/* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.HAILSTORM, {
+    application_id: '',
+    assessment_id: '',
+    assessment_run_id: '' }), _defineProperty(_defaultFieldsByImpor,
+
+/* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.NESSUS, {
+    file: null }), _defineProperty(_defaultFieldsByImpor,
+
+/* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.CHECKMARX, {
+    file: null }), _defaultFieldsByImpor);
+
+
+
+var defaultState = /* istanbul ignore next */exports.defaultState = {
+    isSaving: false,
+    assessmentRuns: null,
+    importSource: /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.HAILSTORM,
+    nessusFields: /* istanbul ignore next */_extends({}, defaultFieldsByImportSource[/* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.NESSUS]),
+    checkmarxFields: /* istanbul ignore next */_extends({}, defaultFieldsByImportSource[/* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.CHECKMARX]),
+    hailstormFields: /* istanbul ignore next */_extends({}, defaultFieldsByImportSource[/* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.HAILSTORM]),
+    validation: null,
+    isAssessmentRunsLoading: false,
+    assessmentRunsErrorMessage: null,
+    hailstormType: /* istanbul ignore next */_ImportHailstorm.FORM_TYPE.MANAGED_RUN }; /* istanbul ignore next */var
+
+
+ImportExternalRunDialogStore = function (_Reflux$Store) {_inherits(ImportExternalRunDialogStore, _Reflux$Store);
+
+    function /* istanbul ignore next */ImportExternalRunDialogStore() {/* istanbul ignore next */_classCallCheck(this, ImportExternalRunDialogStore);var _this = _possibleConstructorReturn(this, (ImportExternalRunDialogStore.__proto__ || Object.getPrototypeOf(ImportExternalRunDialogStore)).call(this));
+
+
+        /* istanbul ignore next */_this.listenables = /* istanbul ignore next */_ImportExternalRunDialogActions2.default;
+
+        /* istanbul ignore next */_this.state = /* istanbul ignore next */_extends({}, defaultState); /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * @listens ImportExternalRunDialogActions.destroy
+       */_createClass(ImportExternalRunDialogStore, [{ key: 'onDestroy', value: function onDestroy()
+        {
+            this.setState(defaultState);
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.changeSource
+           */ }, { key: 'onChangeSource', value: function onChangeSource(
+        importSource) {
+            this.setState({
+                importSource: importSource,
+                nessusFields: /* istanbul ignore next */_extends({}, defaultFieldsByImportSource[/* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.NESSUS]),
+                checkmarxFields: /* istanbul ignore next */_extends({}, defaultFieldsByImportSource[/* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.CHECKMARX]),
+                hailstormFields: /* istanbul ignore next */_extends({}, defaultFieldsByImportSource[/* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.HAILSTORM]),
+                assessmentRuns: null,
+                validation: null });
+
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.changeHailstormType
+           */ }, { key: 'onChangeHailstormType', value: function onChangeHailstormType(
+        value) {
+            this.setState({
+                hailstormType: value });
+
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.importHailstorm
+           */ }, { key: 'onImportHailstorm', value: function onImportHailstorm()
+        {
+            this.setState({
+                isSaving: true,
+                validation: null });
+
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.importHailstorm.completed
+           */ }, { key: 'onImportHailstormCompleted', value: function onImportHailstormCompleted()
+        {
+            this.setState({ isSaving: false });
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.importHailstorm.failed
+           */ }, { key: 'onImportHailstormFailed', value: function onImportHailstormFailed(_ref)
+        {/* istanbul ignore next */var errors = _ref.errors;
+            this.setState({
+                validation: errors.map(getStatusText),
+                isSaving: false });
+
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.importNessus
+           */ }, { key: 'onImportNessus', value: function onImportNessus()
+        {
+            this.setState({
+                isSaving: true,
+                validation: null });
+
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.importNessus.completed
+           */ }, { key: 'onImportNessusCompleted', value: function onImportNessusCompleted()
+        {
+            this.setState({ isSaving: false });
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.importNessus.failed
+           */ }, { key: 'onImportNessusFailed', value: function onImportNessusFailed(_ref2)
+        {/* istanbul ignore next */var errors = _ref2.errors;
+            this.setState({
+                validation: errors,
+                isSaving: false });
+
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.importCheckmarx
+           */ }, { key: 'onImportCheckmarx', value: function onImportCheckmarx()
+        {
+            this.setState({
+                isSaving: true,
+                validation: null });
+
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.importCheckmarx.completed
+           */ }, { key: 'onImportCheckmarxCompleted', value: function onImportCheckmarxCompleted()
+        {
+            this.setState({ isSaving: false });
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.importCheckmarx.failed
+           */ }, { key: 'onImportCheckmarxFailed', value: function onImportCheckmarxFailed(_ref3)
+        {/* istanbul ignore next */var errors = _ref3.errors;
+            this.setState({
+                validation: errors,
+                isSaving: false });
+
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.fetchAssessmentRuns
+           */ }, { key: 'onFetchAssessmentRuns', value: function onFetchAssessmentRuns()
+        {
+            this.setState({
+                isAssessmentRunsLoading: true,
+                assessmentRunsErrorMessage: null });
+
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.fetchAssessmentRuns.completed
+           */ }, { key: 'onFetchAssessmentRunsCompleted', value: function onFetchAssessmentRunsCompleted(_ref4)
+        {/* istanbul ignore next */var assessment_run_ids = _ref4.assessment_run_ids;
+            this.setState({
+                assessmentRuns: assessment_run_ids,
+                isAssessmentRunsLoading: false,
+                assessmentRunsErrorMessage: null });
+
+        }
+
+        /**
+           * @listens ImportExternalRunDialogActions.fetchAssessmentRuns.failed
+           */ }, { key: 'onFetchAssessmentRunsFailed', value: function onFetchAssessmentRunsFailed(_ref5)
+        {/* istanbul ignore next */var errors = _ref5.errors;
+            this.setState({
+                assessmentRuns: [],
+                assessmentRunsErrorMessage: errors.map(getStatusText)[0],
+                isAssessmentRunsLoading: false });
+
+        } }]);return ImportExternalRunDialogStore;}( /* istanbul ignore next */_reflux2.default.Store); /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */_reflux2.default.initStore(ImportExternalRunDialogStore);
+
+function getStatusText(error) {
+    return error.status_text || '';
+}

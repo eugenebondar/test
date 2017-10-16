@@ -1,0 +1,60 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_FormField = require('../../../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_DropdownButton = require('../../../../../Shared/ApocReactDropdown/DropdownButton'); /* istanbul ignore next */var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
+var /* istanbul ignore next */_dropdownWithEmptyOptionHOC = require('../../../../../Shared/ApocReactDropdown/dropdownWithEmptyOptionHOC');
+var /* istanbul ignore next */_DropdownWithScroll = require('../../../../../Shared/ApocReactDropdown/DropdownWithScroll'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var Dropdown = /* istanbul ignore next */(0, _dropdownWithEmptyOptionHOC.dropdownWithEmptyOptionHOC)( /* istanbul ignore next */_DropdownWithScroll.DropdownWithScroll); /* istanbul ignore next */var
+
+DefaultTemplateDialogForm = function (_React$Component) {_inherits(DefaultTemplateDialogForm, _React$Component);function DefaultTemplateDialogForm() {_classCallCheck(this, DefaultTemplateDialogForm);return _possibleConstructorReturn(this, (DefaultTemplateDialogForm.__proto__ || Object.getPrototypeOf(DefaultTemplateDialogForm)).apply(this, arguments));}_createClass(DefaultTemplateDialogForm, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _props =
+            this.props,fields = _props.fields,coverTemplates = _props.coverTemplates,mainTemplates = _props.mainTemplates,onUpdateValue = _props.onUpdateValue;
+            var coverTemplatesDropdown = coverTemplates.length > 0 &&
+            /* istanbul ignore next */_react2.default.createElement(Dropdown, /* istanbul ignore next */{ name: 'cover_id', button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null), onChange: function /* istanbul ignore next */onChange(v) /* istanbul ignore next */{return onUpdateValue('cover_id', v.value);} },
+                coverTemplates.map(function (cover) /* istanbul ignore next */{return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                            label: cover.name,
+                            value: cover.id,
+                            key: cover.id,
+                            selected: cover.id === fields.cover_id }));}));
+
+
+
+            var mainTemplatesDropdown = mainTemplates.length > 0 &&
+            /* istanbul ignore next */_react2.default.createElement(Dropdown, /* istanbul ignore next */{ name: 'main_id', button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null), onChange: function /* istanbul ignore next */onChange(v) /* istanbul ignore next */{return onUpdateValue('main_id', v.value);} },
+                mainTemplates.map(function (template) /* istanbul ignore next */{return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                            label: template.name,
+                            value: template.id,
+                            key: template.id,
+                            selected: template.id === fields.main_id }));}));
+
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'default-template-form' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('customers.defaultTemplate.selectCover') },
+                        coverTemplatesDropdown || /* istanbul ignore next */(0, _counterpart2.default)('customers.defaultTemplate.noCustomerCoverTemplates')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('customers.defaultTemplate.selectTemplate') },
+                        mainTemplatesDropdown || /* istanbul ignore next */(0, _counterpart2.default)('customers.defaultTemplate.noCustomerMainTemplates'))));
+
+
+
+        } }]);return DefaultTemplateDialogForm;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = DefaultTemplateDialogForm;
+
+
+DefaultTemplateDialogForm.propTypes = {
+    onUpdateValue: /* istanbul ignore next */_react2.default.PropTypes.func,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        main_id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        cover_id: /* istanbul ignore next */_react2.default.PropTypes.string }),
+
+    coverTemplates: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string })),
+
+    mainTemplates: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string })) };

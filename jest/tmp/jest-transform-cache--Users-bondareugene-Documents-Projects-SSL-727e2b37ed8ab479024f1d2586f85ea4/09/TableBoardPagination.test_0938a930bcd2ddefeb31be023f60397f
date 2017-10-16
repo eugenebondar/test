@@ -1,0 +1,295 @@
+/* istanbul ignore next */'use strict';var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_TableBoardPagination = require('./../TableBoardPagination'); /* istanbul ignore next */var _TableBoardPagination2 = _interopRequireDefault(_TableBoardPagination);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('TableBoardPagination', function () {
+    describe('with minimal set of props', function () {
+        var pagination = {
+            currentPage: 1,
+            itemsPerPage: 5,
+            totalItems: 5,
+            onChange: function /* istanbul ignore next */onChange() {} };
+
+        it('matches snapshot', function () {
+            var tree = /* istanbul ignore next */(0, _enzymeToJson.mountToJson)( /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: pagination })));
+            expect(tree).toMatchSnapshot();
+        });
+    });
+
+    describe('with `totalItems` 0', function () {
+        var component = /* istanbul ignore next */void 0;
+        var pagination = {
+            currentPage: 1,
+            itemsPerPage: 5,
+            totalItems: 0,
+            onChange: function /* istanbul ignore next */onChange() {} };
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{
+                pagination: pagination }));
+
+
+        });
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)( /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: pagination })))).toMatchSnapshot();
+        });
+        it('doesn\'t render pagination', function () {
+            expect(component.find('.pagination-wrapper').length).toBe(0);
+        });
+        it('doesn\'t render page amount section', function () {
+            expect(component.find('.table-pagination-amount').length).toBe(0);
+        });
+        it('renders correct title', function () {
+            expect(component.find('.table-pagination-title').length).toBe(1);
+            var titleContainer = component.find('.table-pagination-title');
+            expect(titleContainer).toHaveText('0 general.items');
+        });
+    });
+
+    describe('with only 1 page of pagination', function () {
+        var component = /* istanbul ignore next */void 0;
+        var pagination = {
+            currentPage: 1,
+            itemsPerPage: 5,
+            totalItems: 5,
+            onChange: function /* istanbul ignore next */onChange() {} };
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{
+                pagination: pagination }));
+
+
+        });
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)( /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: pagination })))).toMatchSnapshot();
+        });
+        it('doesn\'t render pagination', function () {
+            expect(component.find('.pagination-wrapper').length).toBe(0);
+        });
+        it('renders page amount section with correct text', function () {
+            expect(component.find('.table-pagination-amount').length).toBe(1);
+            var titleContainer = component.find('.table-pagination-amount');
+            expect(titleContainer).toHaveText('page 1 of 1');
+        });
+        it('renders correct title', function () {
+            expect(component.find('.table-pagination-title').length).toBe(1);
+            var titleContainer = component.find('.table-pagination-title');
+            expect(titleContainer).toHaveText('1-5 of 5 general.items');
+        });
+    });
+
+    describe('with more than 1 page of pagination', function () {
+        var component = /* istanbul ignore next */void 0;
+        var pagination = {
+            currentPage: 1,
+            itemsPerPage: 5,
+            totalItems: 10,
+            onChange: function /* istanbul ignore next */onChange() {} };
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{
+                pagination: pagination }));
+
+
+        });
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)( /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: pagination })))).toMatchSnapshot();
+        });
+        it('renders pagination', function () {
+            expect(component.find('.pagination-wrapper').length).toBe(1);
+        });
+        it('renders page amount section with correct text', function () {
+            expect(component.find('.table-pagination-amount').length).toBe(1);
+            var titleContainer = component.find('.table-pagination-amount');
+            expect(titleContainer).toHaveText('page 1 of 2');
+            component.setProps({ pagination: /* istanbul ignore next */_extends({}, pagination, { currentPage: 2 }) });
+            expect(titleContainer).toHaveText('page 2 of 2');
+        });
+        it('renders correct title', function () {
+            expect(component.find('.table-pagination-title').length).toBe(1);
+            var titleContainer = component.find('.table-pagination-title');
+            expect(titleContainer).toHaveText('1-5 of 10 general.items');
+            component.setProps({ pagination: /* istanbul ignore next */_extends({}, pagination, { currentPage: 2 }) });
+            expect(titleContainer).toHaveText('6-10 of 10 general.items');
+        });
+    });
+
+    describe('should correct rounding number of pages', function () {
+        var component = /* istanbul ignore next */void 0;
+        var pagination = {
+            currentPage: 1,
+            itemsPerPage: 5,
+            totalItems: 4,
+            onChange: function /* istanbul ignore next */onChange() {} };
+
+
+        describe('if page amount is 1', function () {
+            beforeEach(function () {
+                component = /* istanbul ignore next */(0, _enzyme.mount)(
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{
+                    pagination: pagination }));
+
+
+            });
+            it('matches snapshot', function () {
+                expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)( /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: pagination })))).toMatchSnapshot();
+            });
+            it('won\'t render pagination', function () {
+                expect(component.find('.pagination-wrapper').length).toBe(0);
+            });
+            it('will render page amount section with correct text ', function () {
+                expect(component.find('.table-pagination-amount').length).toBe(1);
+                var titleContainer = component.find('.table-pagination-amount');
+                expect(titleContainer).toHaveText('page 1 of 1');
+            });
+            it('will render correct title', function () {
+                expect(component.find('.table-pagination-title').length).toBe(1);
+                var titleContainer = component.find('.table-pagination-title');
+                expect(titleContainer).toHaveText('1-4 of 4 general.items');
+            });
+        });
+
+        describe('if page amount is more than 1', function () {
+            var pagination = {
+                currentPage: 1,
+                itemsPerPage: 5,
+                totalItems: 8,
+                onChange: function /* istanbul ignore next */onChange() {} };
+
+            beforeEach(function () {
+                component = /* istanbul ignore next */(0, _enzyme.mount)(
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{
+                    pagination: pagination }));
+
+
+            });
+            it('matches snapshot', function () {
+                expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)( /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: pagination })))).toMatchSnapshot();
+            });
+            it('will render pagination', function () {
+                expect(component.find('.pagination-wrapper').length).toBe(1);
+            });
+            it('will render page amount section with correct text ', function () {
+                expect(component.find('.table-pagination-amount').length).toBe(1);
+                var titleContainer = component.find('.table-pagination-amount');
+                expect(titleContainer).toHaveText('page 1 of 2');
+                component.setProps({ pagination: /* istanbul ignore next */_extends({}, pagination, { currentPage: 2 }) });
+                expect(titleContainer).toHaveText('page 2 of 2');
+            });
+            it('will render correct title', function () {
+                expect(component.find('.table-pagination-title').length).toBe(1);
+                var titleContainer = component.find('.table-pagination-title');
+                expect(titleContainer).toHaveText('1-5 of 8 general.items');
+            });
+            it('will render correct title', function () {
+                expect(component.find('.table-pagination-title').length).toBe(1);
+                var titleContainer = component.find('.table-pagination-title');
+                expect(titleContainer).toHaveText('1-5 of 8 general.items');
+                component.setProps({ pagination: /* istanbul ignore next */_extends({}, pagination, { currentPage: 2 }) });
+                expect(titleContainer).toHaveText('6-8 of 8 general.items');
+            });
+        });
+    });
+
+    describe('correctly set `className`', function () {
+        var component = /* istanbul ignore next */void 0;
+        var pagination = {
+            currentPage: 1,
+            itemsPerPage: 5,
+            totalItems: 10,
+            onChange: function /* istanbul ignore next */onChange() {} };
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{
+                pagination: pagination }));
+
+
+        });
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)( /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: pagination })))).toMatchSnapshot();
+        });
+        it('without passing `className`', function () {
+            var element = component.find('.table-board-pagination');
+            expect(element.length).toBe(1);
+            expect(element).toHaveProp('className', 'table-board-pagination');
+        });
+        it('with passing `className`', function () {
+            var element = component.find('.table-board-pagination');
+            expect(element.length).toBe(1);
+            component.setProps({ className: 'some-extra-class' });
+            expect(element).toHaveClassName('table-board-pagination');
+            expect(element).toHaveClassName('some-extra-class');
+        });
+    });
+
+    describe('correctly render `itemsName`', function () {
+        var component = /* istanbul ignore next */void 0;
+        var pagination = {
+            currentPage: 1,
+            itemsPerPage: 5,
+            totalItems: 0,
+            onChange: function /* istanbul ignore next */onChange() {} };
+
+
+        describe('with default value', function () {
+            beforeEach(function () {
+                component = /* istanbul ignore next */(0, _enzyme.mount)(
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{
+                    pagination: pagination }));
+
+
+            });
+            it('matches snapshot', function () {
+                expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)( /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: pagination })))).toMatchSnapshot();
+            });
+            it('when `totalItems` 0', function () {
+                expect(component.find('.table-pagination-title').length).toBe(1);
+                var titleContainer = component.find('.table-pagination-title');
+                expect(titleContainer).toHaveText('0 general.items');
+            });
+            it('when `totalItems` more than 0', function () {
+                component.setProps({ pagination: /* istanbul ignore next */_extends({}, pagination, { totalItems: 5 }) });
+                expect(component.find('.table-pagination-title').length).toBe(1);
+                var titleContainer = component.find('.table-pagination-title');
+                expect(titleContainer).toHaveText('1-5 of 5 general.items');
+            });
+        });
+
+        describe('with custom value', function () {
+            var pagination = {
+                currentPage: 1,
+                itemsPerPage: 5,
+                totalItems: 0,
+                onChange: function /* istanbul ignore next */onChange() {},
+                itemsName: 'Custom Name' };
+
+            beforeEach(function () {
+                component = /* istanbul ignore next */(0, _enzyme.mount)(
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{
+                    pagination: pagination }));
+
+
+            });
+            it('matches snapshot', function () {
+                expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)( /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: pagination })))).toMatchSnapshot();
+            });
+            it('when `totalItems` 0', function () {
+                expect(component.find('.table-pagination-title').length).toBe(1);
+                var titleContainer = component.find('.table-pagination-title');
+                expect(titleContainer).toHaveText('0 Custom Name');
+            });
+            it('when `totalItems` more than 0', function () {
+                component.setProps({ pagination: /* istanbul ignore next */_extends({}, pagination, { totalItems: 5 }) });
+                expect(component.find('.table-pagination-title').length).toBe(1);
+                var titleContainer = component.find('.table-pagination-title');
+                expect(titleContainer).toHaveText('1-5 of 5 Custom Name');
+            });
+        });
+    });
+
+});

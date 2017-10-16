@@ -1,0 +1,250 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reflux = require('reflux');
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_Actions = require('../../../../Actions');
+var /* istanbul ignore next */_TestDetailsStore = require('../../../../Stores/TestDetailsStore'); /* istanbul ignore next */var _TestDetailsStore2 = _interopRequireDefault(_TestDetailsStore);
+
+var /* istanbul ignore next */_index = require('../../../../Shared/StatusLabel/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_index3 = require('../../../../Shared/ConfirmationDialog/index'); /* istanbul ignore next */var _index4 = _interopRequireDefault(_index3);
+var /* istanbul ignore next */_LoadingModalDialog = require('../../../../Shared/Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+
+var /* istanbul ignore next */_StateItem = require('../../Elements/StateItem'); /* istanbul ignore next */var _StateItem2 = _interopRequireDefault(_StateItem);
+var /* istanbul ignore next */_StateUpdated = require('../../Elements/StateUpdated'); /* istanbul ignore next */var _StateUpdated2 = _interopRequireDefault(_StateUpdated);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * Hardcoded to ensure correct order
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */
+var ORDERED_STATES = [
+'ready_for_testing',
+'queued',
+'waiting_for_info',
+'in_progress',
+'completed',
+'stopping',
+'on_hold']; /* istanbul ignore next */var
+
+
+StatusDialog = function (_Component) {_inherits(StatusDialog, _Component);
+    function /* istanbul ignore next */StatusDialog(props) {/* istanbul ignore next */_classCallCheck(this, StatusDialog);var _this = _possibleConstructorReturn(this, (StatusDialog.__proto__ || Object.getPrototypeOf(StatusDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.mapStoreToState( /* istanbul ignore next */_TestDetailsStore2.default, /* istanbul ignore next */_this.listenTestDetailsStore);
+
+        /* istanbul ignore next */_this.state = {
+            state: /* istanbul ignore next */_this.findValue( /* istanbul ignore next */_this.props.state),
+            isSuccess: false,
+            isDisabled: true,
+            isNeedUpdateCompleted: false,
+            isConfirm: false };
+
+        /* istanbul ignore next */_this.closeDialog = /* istanbul ignore next */_this.closeDialog.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.onClick = /* istanbul ignore next */_this.onClick.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.confirmChangeStatus = /* istanbul ignore next */_this.confirmChangeStatus.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.updateStatus = /* istanbul ignore next */_this.updateStatus.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.showSuccessMessage = /* istanbul ignore next */_this.showSuccessMessage.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.cancel = /* istanbul ignore next */_this.cancel.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.findValue = /* istanbul ignore next */_this.findValue.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.findName = /* istanbul ignore next */_this.findName.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.content = /* istanbul ignore next */ /* istanbul ignore next */_this.content.bind(_this);
+        /* istanbul ignore next */_this.stateList = /* istanbul ignore next */ /* istanbul ignore next */_this.stateList.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(StatusDialog, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _state =
+            this.state,isConfirm = _state.isConfirm,state = _state.state,isSuccess = _state.isSuccess,isDisabled = _state.isDisabled;
+            var dialogFooter = isSuccess ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ onClick: this.closeDialog, className: 'sc-btn sc-btn-primary' },
+                    /* istanbul ignore next */(0, _counterpart2.default)('general.ok'))) :
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'cancel-btn sc-btn', onClick: this.closeDialog },
+                    /* istanbul ignore next */(0, _counterpart2.default)('general.cancel')),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                        disabled: isDisabled,
+                        className: 'sc-btn sc-btn-primary',
+                        onClick: this.confirmChangeStatus },
+
+                    /* istanbul ignore next */(0, _counterpart2.default)('dashboard.state.updateStatus')));
+
+
+
+            var title = /* istanbul ignore next */(0, _counterpart2.default)('dashboard.state.' + (isSuccess ?
+            'changeUpdated' : 'changeStatus'));
+
+
+            return isConfirm ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index4.default, /* istanbul ignore next */{
+                title: /* istanbul ignore next */(0, _counterpart2.default)('dashboard.state.deleteConfirmation'),
+                cancel: this.cancel,
+                submit: this.updateStatus,
+                returnData: state,
+                name: 'confirmation' }) :
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingModalDialog2.default, /* istanbul ignore next */{
+                    loading: this.props.loading,
+                    className: 'status-dialog',
+                    isOpen: /* istanbul ignore next */true,
+                    header: title,
+                    footer: dialogFooter },
+
+                !this.props.loading && this.content());
+
+
+
+        } }, { key: 'content', value: function content()
+
+        {
+            return this.state.isSuccess ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_StateUpdated2.default, /* istanbul ignore next */{ state: this.findName(this.state.state) }) :
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('dashboard.state.text')),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('dashboard.state.currentStatus'), /* istanbul ignore next */':',
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ value: this.props.state }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, this.props.state)),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'ul', /* istanbul ignore next */{ className: 'state-list' }, this.stateList()));
+
+
+        } }, { key: 'stateList', value: function stateList()
+
+        {/* istanbul ignore next */var _this2 = this;
+            return this.getList().map(function (item, i) {
+                var label = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ value: item.value });
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_StateItem2.default, /* istanbul ignore next */{
+                        key: i,
+                        name: /* istanbul ignore next */(0, _counterpart2.default)(item.value, { scope: 'dashboard.state' }),
+                        description: /* istanbul ignore next */(0, _counterpart2.default)(item.value, { scope: 'dashboard.state.description' }),
+                        onClick: /* istanbul ignore next */_this2.onClick,
+                        current: item.value === /* istanbul ignore next */_this2.state.state,
+                        isActive: /* istanbul ignore next */_this2.props.state === item.name,
+                        label: label,
+                        value: item.value }));
+
+
+            });
+        } }, { key: 'closeDialog', value: function closeDialog()
+
+        {
+            this.props.close(this.props.name);
+        }
+
+        /**
+           * Update test run's status.
+           * @param {String} [value] - new status.
+           * @config {Function} - set state state.
+           */ }, { key: 'onClick', value: function onClick(
+        value) {
+            this.setState({
+                state: value,
+                isDisabled: false });
+
+        }
+
+        /**
+           * Checks new status. If status is ready_for_testing - trigger to open confirm popup.
+           * If not open popup with success message.
+           * @config {Function} - set isConfig state.
+           */ }, { key: 'confirmChangeStatus', value: function confirmChangeStatus()
+        {/* istanbul ignore next */var
+            state = this.state.state;
+            if (state && state !== this.props.state) {
+                if (state !== 'ready_for_testing') {
+                    this.updateStatus(state);
+                } else {
+                    this.setState({ isConfirm: true });
+                }
+            }
+        }
+
+        /**
+           * Update test run's status.
+           * Invoke TestDetails's action - updateStatus.
+           * @param {String} [value] - field's key.
+           */ }, { key: 'updateStatus', value: function updateStatus(
+        value) {
+            var state = { isConfirm: false };
+            this.setState(state);
+            /* istanbul ignore next */_Actions.TestDetailsActions.updateStatus(
+            this.props.test_id,
+            { new_state: value },
+            value === 'completed' || this.props.state === 'Completed');
+
+        }
+
+        /**
+           * Show success message.
+           * @config {Function} - set isConfirm state.
+           */ }, { key: 'showSuccessMessage', value: function showSuccessMessage()
+        {
+            this.setState({ isSuccess: true });
+        }
+
+        /**
+           * Hide success message.
+           * @config {Function} - set isConfirm state.
+           */ }, { key: 'cancel', value: function cancel()
+        {
+            this.setState({ isConfirm: false });
+        }
+
+        /**
+           * Looking for a status's value for passed name.
+           * @return {String} - status value.
+           */ }, { key: 'findValue', value: function findValue(
+        name) {
+            var list = this.getList();
+            var index = list.findIndex(function (item) {
+                return item.name === name;
+            });
+            return index < 0 ? null : list[index].value;
+        }
+
+        /**
+           * Looking for a status's name for passed value.
+           * @return {String} - status name.
+           */ }, { key: 'findName', value: function findName(
+        value) {
+            var list = this.getList();
+            var index = list.findIndex(function (item) {
+                return item.value === value;
+            });
+            return index < 0 ? null : list[index].name;
+        }
+
+        /**
+           * Get status list.
+           * @return {[Object]} - status list.
+           */ }, { key: 'getList', value: function getList()
+        {/* istanbul ignore next */var _this3 = this;
+            return ORDERED_STATES.
+            filter(function (s) /* istanbul ignore next */{return (/* istanbul ignore next */_this3.props.transitions.includes(s));}).
+            map(function (s) /* istanbul ignore next */{return { value: s, name: /* istanbul ignore next */(0, _counterpart2.default)(s, { scope: 'dashboard.state' }) };});
+        }
+
+        /**
+           * Listener for TestDetails Store.
+           * @param {Object} [e.event, e.data] - event name and data response.
+           */ }, { key: 'listenTestDetailsStore', value: function listenTestDetailsStore()
+        {/* istanbul ignore next */var e = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { event: '', data: null }; /* istanbul ignore next */var
+            event = e.event,data = e.data;
+            switch (event) {
+                case 'testStatusUpdated':
+                    if (data.status) {
+                        this.showSuccessMessage();
+                    }
+                    break;}
+
+        } }]);return StatusDialog;}(_reflux.Component); /* istanbul ignore next */exports.default = StatusDialog;
+
+
+StatusDialog.propTypes = {
+    test_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    state: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    loading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    close: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    transitions: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired).isRequired };

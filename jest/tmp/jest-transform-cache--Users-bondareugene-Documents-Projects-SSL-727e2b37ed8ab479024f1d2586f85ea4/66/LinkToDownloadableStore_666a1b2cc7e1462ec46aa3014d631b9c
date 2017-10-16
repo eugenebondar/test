@@ -1,0 +1,72 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.defaultState = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_linkToDownloadableActions = require('./linkToDownloadableActions'); /* istanbul ignore next */var _linkToDownloadableActions2 = _interopRequireDefault(_linkToDownloadableActions);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var defaultState = /* istanbul ignore next */exports.defaultState = {
+    perUUID: {} }; /* istanbul ignore next */var
+
+
+LinkToDownloadableStore = function (_Reflux$Store) {_inherits(LinkToDownloadableStore, _Reflux$Store);
+
+    function /* istanbul ignore next */LinkToDownloadableStore() {/* istanbul ignore next */_classCallCheck(this, LinkToDownloadableStore);var _this = _possibleConstructorReturn(this, (LinkToDownloadableStore.__proto__ || Object.getPrototypeOf(LinkToDownloadableStore)).call(this));
+
+
+        /* istanbul ignore next */_this.listenables = /* istanbul ignore next */_linkToDownloadableActions2.default;
+
+        /* istanbul ignore next */_this.state = /* istanbul ignore next */_extends({}, defaultState); /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * @listens LinkToDownloadableActions.init
+       */_createClass(LinkToDownloadableStore, [{ key: 'onInit', value: function onInit(
+        uuid) {
+            this.changePerUUIDState(uuid, { isBeingDownloaded: false });
+        }
+
+        /**
+           * @listens LinkToDownloadableActions.download
+           */ }, { key: 'onDownload', value: function onDownload(
+        uuid) {
+            this.changePerUUIDState(uuid, { isBeingDownloaded: true });
+        }
+
+        /**
+           * @listens LinkToDownloadableActions.download.completed
+           */ }, { key: 'onDownloadCompleted', value: function onDownloadCompleted(
+        uuid) {
+            this.changePerUUIDState(uuid, { isBeingDownloaded: false });
+        }
+
+        /**
+           * @listens LinkToDownloadableActions.download.failed
+           */ }, { key: 'onDownloadFailed', value: function onDownloadFailed(
+        uuid) {
+            this.changePerUUIDState(uuid, { isBeingDownloaded: false });
+        }
+
+        /**
+           * @listens LinkToDownloadableActions.destroy
+           */ }, { key: 'onDestroy', value: function onDestroy(
+        uuid) {
+            var perUUID = /* istanbul ignore next */_extends({}, this.state.perUUID);
+            delete perUUID[uuid];
+            this.setState({ perUUID: perUUID });
+        }
+
+        /**
+           * @private
+           * @param {string} uuid
+           * @param {Boolean} isBeingDownloaded
+           */ }, { key: 'changePerUUIDState', value: function changePerUUIDState(
+        uuid, _ref) {/* istanbul ignore next */var isBeingDownloaded = _ref.isBeingDownloaded;
+            this.setState({
+                perUUID: /* istanbul ignore next */_extends({},
+                this.perUUID, _defineProperty({},
+                uuid, {
+                    isBeingDownloaded: isBeingDownloaded })) });
+
+
+
+        } }]);return LinkToDownloadableStore;}( /* istanbul ignore next */_reflux2.default.Store); /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */_reflux2.default.initStore(LinkToDownloadableStore);

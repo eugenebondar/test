@@ -1,0 +1,40 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_DropdownWithScroll = require('../../../Shared/ApocReactDropdown/DropdownWithScroll');
+var /* istanbul ignore next */_DropdownButton = require('../../../Shared/ApocReactDropdown/DropdownButton'); /* istanbul ignore next */var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
+var /* istanbul ignore next */_FormField = require('../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function EditTestAssigneeForm( /* istanbul ignore next */_ref) {/* istanbul ignore next */var fields = _ref.fields,testAssigneeListOptions = _ref.testAssigneeListOptions,_onChange = _ref.onChange;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                label: /* istanbul ignore next */(0, _counterpart2.default)( /* istanbul ignore next */'assigneeDialog.assignee') },
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownWithScroll.DropdownWithScroll, /* istanbul ignore next */{
+                    button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null),
+                    name: 'assignee',
+                    onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return _onChange({ assignee_id: e.value });} },
+
+                testAssigneeListOptions.map(function (option, i) /* istanbul ignore next */{return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */_extends({},
+                        option, {
+                            key: i,
+                            selected: option.value === fields.assignee_id })));}))));
+
+
+
+
+
+} /* istanbul ignore next */exports.default = EditTestAssigneeForm;
+
+EditTestAssigneeForm.propTypes = {
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    testAssigneeListOptions: /* istanbul ignore next */_react2.default.PropTypes.arrayOf(
+    /* istanbul ignore next */_react2.default.PropTypes.shape({
+        value: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        label: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })).
+
+    isRequired,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        assignee_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }).
+    isRequired };

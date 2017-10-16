@@ -1,0 +1,113 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = undefined;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_index = require('../../../Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_FindingFormField = require('./FindingFormField'); /* istanbul ignore next */var _FindingFormField2 = _interopRequireDefault(_FindingFormField);
+var /* istanbul ignore next */_FieldValue = require('../FindingDetails/FieldValue'); /* istanbul ignore next */var _FieldValue2 = _interopRequireDefault(_FieldValue);
+var /* istanbul ignore next */_FindingDropdown = require('./FindingDropdown'); /* istanbul ignore next */var _FindingDropdown2 = _interopRequireDefault(_FindingDropdown);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function FormFirstColumn( /* istanbul ignore next */_ref)
+
+
+
+
+
+
+
+
+{/* istanbul ignore next */var validation = _ref.validation,_onChange = _ref.onChange,onFindingCategoryChange = _ref.onFindingCategoryChange,fields = _ref.fields,classificationFields = _ref.classificationFields,findingTypes = _ref.findingTypes,findingCategories = _ref.findingCategories,findingClassifications = _ref.findingClassifications;
+    var findingTypesOptions = findingTypes.map(function (type) /* istanbul ignore next */{return { label: type, value: type };});
+    var findingCategoriesOptions = findingCategories.map(function (category) /* istanbul ignore next */{return { label: category.title, value: category.id };});
+    var findingClassificationsOptions = findingClassifications.
+    map(function (classification) /* istanbul ignore next */{return {
+            label: classification.title,
+            value: classification.id };}).
+
+    sort(function (a, b) /* istanbul ignore next */{return a.label.localeCompare(b.label);});
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__column' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.locationFound'),
+                    id: 'location',
+                    validation: validation,
+                    isRequired: /* istanbul ignore next */true },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'location', updateValue: _onChange, value: fields.location })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDropdown2.default, /* istanbul ignore next */{
+                label: /* istanbul ignore next */(0, _counterpart2.default)('findings.category'),
+                fieldName: 'finding_classification_category_id',
+                validation: validation,
+                isRequired: /* istanbul ignore next */true,
+                fields: fields,
+                options: findingCategoriesOptions,
+                onChange: onFindingCategoryChange }),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDropdown2.default, /* istanbul ignore next */{
+                label: /* istanbul ignore next */(0, _counterpart2.default)('findings.classification'),
+                fieldName: 'finding_classification_id',
+                validation: validation,
+                isRequired: /* istanbul ignore next */true,
+                fields: fields,
+                options: findingClassificationsOptions,
+                onChange: function /* istanbul ignore next */onChange(key, value) {
+                    var baseScore = findingClassifications.filter(function (classification) /* istanbul ignore next */{return classification.id === value;})[0].base_score;
+                    _onChange(key, value);
+                    _onChange('score', baseScore);
+                } }),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDropdown2.default, /* istanbul ignore next */{
+                label: /* istanbul ignore next */(0, _counterpart2.default)('findings.type'),
+                fieldName: 'finding_type',
+                validation: validation,
+                isRequired: /* istanbul ignore next */true,
+                fields: fields,
+                options: findingTypesOptions,
+                onChange: _onChange }),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__input clearfix' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.protocol'), /* istanbul ignore next */':'),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fdi-port-fields' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fdi-port-field' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                            id: 'port',
+                            updateValue: _onChange,
+                            value: fields.port })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, /* istanbul ignore next */'/'),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fdi-port-field' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                            id: 'protocol',
+                            updateValue: _onChange,
+                            value: fields.protocol })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, /* istanbul ignore next */'/'),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fdi-port-field' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                            id: 'svc_name',
+                            updateValue: _onChange,
+                            value: fields.svc_name })))),
+
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__input' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.ssuId'), /* istanbul ignore next */':'),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */null),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FieldValue2.default, /* istanbul ignore next */{ value: classificationFields.ssl_id }))));
+
+
+
+} /* istanbul ignore next */exports.default = FormFirstColumn;
+
+FormFirstColumn.propTypes = {
+    findingTypes: /* istanbul ignore next */_react2.default.PropTypes.array,
+    findingCategories: /* istanbul ignore next */_react2.default.PropTypes.array,
+    findingClassifications: /* istanbul ignore next */_react2.default.PropTypes.array,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object,
+    classificationFields: /* istanbul ignore next */_react2.default.PropTypes.object,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onFindingCategoryChange: /* istanbul ignore next */_react2.default.PropTypes.func };

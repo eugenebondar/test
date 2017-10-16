@@ -1,0 +1,121 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_User = require('../../../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);
+
+var /* istanbul ignore next */_ControlButtons = require('./ControlButtons'); /* istanbul ignore next */var _ControlButtons2 = _interopRequireDefault(_ControlButtons);
+var /* istanbul ignore next */_PrevButton = require('./PrevButton'); /* istanbul ignore next */var _PrevButton2 = _interopRequireDefault(_PrevButton);
+var /* istanbul ignore next */_NextButton = require('./NextButton'); /* istanbul ignore next */var _NextButton2 = _interopRequireDefault(_NextButton);
+var /* istanbul ignore next */_FindingDialogContainer = require('../../FindingDialogContainer'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+FindingDialogHeader = function (_React$PureComponent) {_inherits(FindingDialogHeader, _React$PureComponent);function FindingDialogHeader() {_classCallCheck(this, FindingDialogHeader);return _possibleConstructorReturn(this, (FindingDialogHeader.__proto__ || Object.getPrototypeOf(FindingDialogHeader)).apply(this, arguments));}_createClass(FindingDialogHeader, [{ key: 'render', value: function render()
+        {
+            if (!this.props.finding) {
+                return null;
+            }
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__title' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'finding-dialog-navigation-container' },
+                        this.props.mode !== /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.NEW && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_PrevButton2.default, /* istanbul ignore next */{
+                            onClick: /* istanbul ignore next */this.onClickPrev.bind(this),
+                            total: this.props.findingIds.length,
+                            disabled: this.props.isButtonsDisabled }),
+
+                        this.getTitle(),
+                        this.props.mode !== /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.NEW && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_NextButton2.default, /* istanbul ignore next */{
+                            onClick: /* istanbul ignore next */this.onClickNext.bind(this),
+                            total: this.props.findingIds.length,
+                            disabled: this.props.isButtonsDisabled })),
+
+
+                    this.props.canManageFinding &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ControlButtons2.default, /* istanbul ignore next */{
+                        mode: this.props.mode,
+                        isService: this.context.currentUser.isService,
+                        isButtonsDisabled: this.props.isButtonsDisabled,
+                        included: this.props.finding.included,
+                        published: this.props.finding.published,
+                        onPublishButtonClick: this.props.onPublishButtonClick,
+                        onIncludeButtonClick: this.props.onIncludeButtonClick,
+                        onEditModeButtonClick: this.props.onEditModeButtonClick,
+                        onEditAttachmentsClick: this.props.onEditAttachmentsClick,
+                        onDeleteFinding: this.props.onDeleteFinding })));
+
+
+
+
+        } }, { key: 'getTitle', value: function getTitle()
+
+        {/* istanbul ignore next */var _this2 = this,_FINDING_DETAILS_MODE;
+            return (/* istanbul ignore next */(_FINDING_DETAILS_MODE = {}, _defineProperty(_FINDING_DETAILS_MODE,
+                /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.NEW, function () {
+                    return (/* istanbul ignore next */(0, _counterpart2.default)('findings.addFinding'));
+                }), _defineProperty(_FINDING_DETAILS_MODE,
+                /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.EDIT, function () {
+                    return (/* istanbul ignore next */(0, _counterpart2.default)('findings.edit') + ' ' + /* istanbul ignore next */_this2.renderTitleForViewMode());
+                }), _defineProperty(_FINDING_DETAILS_MODE,
+                /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.VIEW, function () {
+                    return (/* istanbul ignore next */_this2.renderTitleForViewMode());
+                }), _FINDING_DETAILS_MODE)[
+                this.props.mode]());
+        }
+
+        /**
+           * Change current tab.
+           * @param {Number} [direction] 1 - to prev, -1 - to next.
+           * @config {Function} set currentTab state.
+           */ }, { key: 'navigate', value: function navigate(
+        direction) {
+            var index = this.getFindingIndex() + direction;
+            var amount = this.props.findingIds.length;
+            if (direction === -1 && index < 0) {
+                index = amount - 1;
+            }
+            if (direction === 1 && index > amount - 1) {
+                index = 0;
+            }
+            this.props.onNavigate(this.props.findingIds[index]);
+        } }, { key: 'onClickPrev', value: function onClickPrev()
+
+        {
+            this.navigate(-1);
+        } }, { key: 'onClickNext', value: function onClickNext()
+
+        {
+            this.navigate(1);
+        } }, { key: 'renderTitleForViewMode', value: function renderTitleForViewMode()
+
+        {
+            var title = /* istanbul ignore next */(0, _counterpart2.default)('findings.finding');
+            var index = this.getFindingIndex();
+            return (/* istanbul ignore next */title + ' ' + (index + 1) + /* istanbul ignore next */(0, _counterpart2.default)('findings.of') + this.props.findingIds.length);
+        } }, { key: 'getFindingIndex', value: function getFindingIndex()
+
+        {/* istanbul ignore next */var _this3 = this;
+            var index = this.props.findingIds.findIndex(function (findingId) {
+                return findingId === /* istanbul ignore next */_this3.props.finding.id;
+            });
+            return index < 0 ? 0 : index;
+        } }]);return FindingDialogHeader;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = FindingDialogHeader;
+
+
+FindingDialogHeader.propTypes = {
+    mode: /* istanbul ignore next */_react2.default.PropTypes.string,
+    findingIds: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string),
+    onNavigate: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onEditModeButtonClick: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onEditAttachmentsClick: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onPublishButtonClick: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onIncludeButtonClick: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onDeleteFinding: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    finding: /* istanbul ignore next */_react2.default.PropTypes.object,
+    isButtonsDisabled: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    canManageFinding: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+
+FindingDialogHeader.contextTypes = {
+    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default) };
+
+
+FindingDialogHeader.defaultProps = {
+    canManageFinding: false };

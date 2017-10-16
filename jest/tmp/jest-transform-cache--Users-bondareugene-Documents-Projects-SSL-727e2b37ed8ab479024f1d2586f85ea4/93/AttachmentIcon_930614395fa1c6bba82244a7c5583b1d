@@ -1,0 +1,41 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+AttachmentIcon;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_apocReact = require('apoc-react');var /* istanbul ignore next */_fileUtils = require('../../../../Utils/fileUtils'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function AttachmentIcon(props) {/* istanbul ignore next */var
+    value = props.value;
+    var noAttachment = '-';
+
+    var AttachmentsList = value.map(function (item, i) {
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'li', /* istanbul ignore next */{ key: i },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'a', /* istanbul ignore next */{ className: 'sc-txt-primary', href: item.file_url,
+                        target: /* istanbul ignore next */(0, _fileUtils.shouldFileOpenInNewWindow)(item.file_url) && '_blank' },
+                    item.name)));
+
+
+
+    });
+
+    var dropDown =
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Popover, /* istanbul ignore next */{
+            placement: 'topLeft',
+            title: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'a', /* istanbul ignore next */{ className: 'sc-icon-files' }) },
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'ul', /* istanbul ignore next */null, AttachmentsList));
+
+
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'td-table-cell-wrap' },
+            value.length > 0 ? dropDown : noAttachment));
+
+
+}
+
+AttachmentIcon.propTypes = {
+    value: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        file_url: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })).
+    isRequired };

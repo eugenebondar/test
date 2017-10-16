@@ -1,0 +1,54 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+
+
+
+
+GroupsTable;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_reactSanfona = require('react-sanfona');var /* istanbul ignore next */_apocReact = require('apoc-react');var /* istanbul ignore next */_index = require('../../../Shared/TableBoard/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);var /* istanbul ignore next */_TableBoardPagination = require('../../../Shared/TableBoardPagination/TableBoardPagination'); /* istanbul ignore next */var _TableBoardPagination2 = _interopRequireDefault(_TableBoardPagination);var /* istanbul ignore next */_UsersList = require('../Elements/UsersList'); /* istanbul ignore next */var _UsersList2 = _interopRequireDefault(_UsersList);var /* istanbul ignore next */_groupsColums = require('./groupsColums');var /* istanbul ignore next */_groupsActions = require('./groupsActions'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function GroupsTable( /* istanbul ignore next */_ref) {/* istanbul ignore next */var data = _ref.data,actionsTrigger = _ref.actionsTrigger,addGroup = _ref.addGroup,isService = _ref.isService,paginationProps = _ref.paginationProps;
+    var columnConfig = isService ? /* istanbul ignore next */_groupsColums.serviceUserGroupsColumns : /* istanbul ignore next */_groupsColums.userGroupsColumns;
+    var actions = /* istanbul ignore next */_groupsActions.userGroupsActions;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'user-groups-page customers-table' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 1 },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: /* istanbul ignore next */(0, _counterpart2.default)('userGroups.title'), slug: 1 },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'users-controls-wrap' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Button, /* istanbul ignore next */{ className: 'sc-btn sc-btn-primary', onClick: addGroup },
+                            /* istanbul ignore next */(0, _counterpart2.default)('userGroups.addUserGroup'))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'tests-expand-content' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: paginationProps },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                className: 'user-table table',
+                                data: data,
+                                columnConfig: columnConfig,
+                                actions: actions,
+                                actionsTrigger: actionsTrigger,
+                                emptyTableTitle: /* istanbul ignore next */(0, _counterpart2.default)('userGroups.noUserGroups'),
+                                expansion: /* istanbul ignore next */true,
+                                getExpansionData: function /* istanbul ignore next */getExpansionData(id) /* istanbul ignore next */{return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_UsersList2.default, /* istanbul ignore next */{ id: id }));} })))))));
+
+
+
+
+
+
+
+}
+
+GroupsTable.propTypes = {
+    data: /* istanbul ignore next */_react2.default.PropTypes.array,
+    actionsTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    isService: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    addGroup: /* istanbul ignore next */_react2.default.PropTypes.func,
+    paginationProps: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        currentPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        itemsPerPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        totalItems: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+        itemsName: /* istanbul ignore next */_react2.default.PropTypes.string }) };

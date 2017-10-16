@@ -1,0 +1,176 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_Table = require('./Table'); /* istanbul ignore next */var _Table2 = _interopRequireDefault(_Table);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('TableBoard', function () {
+    var props = /* istanbul ignore next */void 0,component = /* istanbul ignore next */void 0,state = /* istanbul ignore next */void 0;
+
+    beforeEach(function () {
+        props = {
+            data: [],
+            profileColumnsSettings: [],
+            columnConfig: [],
+            actions: [{ 'value': 'editTestSettings', 'title': 'Edit Test Settings', 'icon': 'sc-icon-pencil' }],
+            actionsTrigger: noop,
+            trigger: noop,
+            checkboxFilter: {},
+            selectFilter: {},
+            searchFilter: {},
+            expansion: true,
+            isService: false,
+            selectable: true,
+            isAllSelected: false,
+            selectTrigger: noop,
+            getExpansionData: noop,
+            updateSortableStatus: noop,
+            emptyTableTitle: '-',
+            expandId: '' };
+
+        state = {
+            profileColumnsSettings: [] };
+
+        props.data = [{ 'customer_name': 'Jerde-Williamson', 'id': '1' }];
+        props.columnConfig = [
+        { 'source': 'customer_name', 'name': 'tableCell.customer', 'width': '10', 'sortable': false, 'type': 'text' },
+        { 'source': 'id', 'name': 'tableCell.id', 'width': '10', 'sortable': false, 'type': 'text' }];
+
+        component = mountComponent();
+    });
+
+    function mountComponent() {
+        return (/* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Table2.default, /* istanbul ignore next */{
+                data: props.data,
+                isService: props.isService,
+                profileColumnsSettings: state.profileColumnsSettings,
+                columnConfig: props.columnConfig,
+                actionsTrigger: props.actionsTrigger,
+                selectTrigger: props.selectTrigger,
+                actions: props.actions,
+                expansion: props.expansion,
+                getExpansionData: props.getExpansionData,
+                expandId: props.expandId,
+                trigger: props.trigger,
+                selectable: props.selectable,
+                isAllSelected: props.isAllSelected,
+                emptyTableTitle: props.emptyTableTitle,
+                updateSortableStatus: props.updateSortableStatus })));
+
+    }
+
+    it('is mounted', function () {
+        expect(component).toBePresent();
+    });
+
+    it('has necessary elements', function () {
+        expect(component.find('.test__table__component')).toBePresent();
+        expect(component.find('.test-actions-wrap')).toBePresent();
+    });
+
+    it('does not render empty table information not present when there are no data', function () {
+        expect(component.find('.empty-table')).not.toBePresent();
+    });
+
+    it('does render empty table information not present when there are data', function () {
+        component.setProps({ data: [] });
+        expect(component.find('.empty-table')).toBePresent();
+    });
+
+    it('component will be mounted without actions column', function () {
+        props.actions = [];
+        component = mountComponent();
+
+    });
+
+    describe('when there are actions', function () {
+        it('has actions', function () {
+            expect(component.props().actions.length).toBeGreaterThan(0);
+        });
+        it('has action column header', function () {
+            var actionColumnSize = 1;
+            expect(component.find('th').length).toEqual(component.props().columnConfig.length + actionColumnSize);
+        });
+        it('has action column row', function () {
+            expect(component.find('.test-actions-wrap')).toBePresent();
+        });
+    });
+
+    describe('when there are no actions', function () {
+        beforeEach(function () {
+            component.setProps({ actions: [] });
+        });
+        it('has no action column header', function () {
+            expect(component.find('th').length).toEqual(component.props().columnConfig.length);
+        });
+        it('has no action column row', function () {
+            expect(component.find('.test-actions-wrap')).not.toBePresent();
+        });
+    });
+
+    describe('when there is data', function () {
+        //data is mounted by default
+        it('has data', function () {
+            expect(component.props().data.length).not.toEqual(0);
+        });
+
+        it('does not render empty table information', function () {
+            expect(component.find('.empty-table')).not.toBePresent();
+        });
+    });
+
+    describe('when there is no data', function () {
+        beforeEach(function () {
+            component.setProps({ data: [] });
+        });
+
+        it('does render empty table information not present when there are no data', function () {
+            expect(component.find('.empty-table')).toBePresent();
+        });
+    });
+
+    it('does not render expanded row on default', function () {
+        expect(component.find('.expand-tr')).not.toBePresent();
+    });
+
+    it('renders expanded row when state.expandId is not falsy', function () {
+        component.setState({
+            expandId: '1' });
+
+        expect(component.find('.expand-tr')).toBePresent();
+    });
+
+    it('component updated data after receving new props', function () {
+        props.expandId = '0';
+        props.expandId = '1';
+        var inst = component.instance();
+        spyOn(inst, 'getNewColumnConfig');
+        component.setProps({ expandId: props.expandId });
+        expect(inst.getNewColumnConfig).toHaveBeenCalledTimes(1);
+        expect(inst.getNewColumnConfig).toHaveBeenCalledWith(inst.props);
+    });
+
+    it('component set user profile columns', function () {
+        var inst = component.instance();
+        expect(inst.state.columnConfig.length).toBe(2);
+        component.setProps({ profileColumnsSettings: ['customer_name'] });
+        spyOn(inst, 'getNewColumnConfig');
+        expect(inst.state.columnConfig.length).toBe(1);
+        expect(inst.state.columnConfig[0]).toBe(props.columnConfig[0]);
+    });
+
+    it('changeExpandId() method changes value of state.expandId', function () {
+        var expandId = /* istanbul ignore next */void 0,inst = /* istanbul ignore next */void 0;
+        props.expandId = '1';
+        inst = component.instance();
+
+        expandId = '1';
+        inst.changeExpandId(expandId);
+        expect(inst.state.expandId).toBe('1');
+
+        expandId = '2';
+        inst.changeExpandId(expandId);
+        expect(inst.state.expandId).toBe('2');
+    });
+});
+
+function noop() {
+}

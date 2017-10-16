@@ -1,0 +1,19 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_api = require('../../../../Models/Catalogs/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var CatalogDetailsActions = {
+    init: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    update: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }) };
+
+
+CatalogDetailsActions.init.listen(getProducts);
+
+CatalogDetailsActions.update.listen(getProducts); /* istanbul ignore next */exports.default =
+
+CatalogDetailsActions;
+
+function getProducts(catalogId) {
+    return (/* istanbul ignore next */_api2.default.service.fetchCatalog(catalogId).
+        then(this.completed, this.failed));
+}

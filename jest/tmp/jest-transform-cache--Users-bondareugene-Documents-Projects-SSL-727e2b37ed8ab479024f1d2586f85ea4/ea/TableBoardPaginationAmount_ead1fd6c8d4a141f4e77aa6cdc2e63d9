@@ -1,0 +1,13 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+TableBoardPaginationAmount;var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function TableBoardPaginationAmount( /* istanbul ignore next */_ref) {/* istanbul ignore next */var currentPage = _ref.currentPage,pageAmount = _ref.pageAmount;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "table-pagination-amount" }, /* istanbul ignore next */"page " +
+            currentPage + " of " + pageAmount));
+
+
+}
+
+TableBoardPaginationAmount.propTypes = {
+    currentPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+    pageAmount: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired };

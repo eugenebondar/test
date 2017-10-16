@@ -1,0 +1,217 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Validators = require('../Utils/Validators'); /* istanbul ignore next */var _Validators2 = _interopRequireDefault(_Validators);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var priv = { /* istanbul ignore next */
+    getData: function getData() {
+        return typeof this.data === 'undefined' ? {} : this.data;
+    }, /* istanbul ignore next */
+    initData: function initData() {
+        if (!this.data) {
+            this.data = {};
+        }
+    } };
+
+
+var model = function model() {};
+
+/**
+                                  * Updates inner data fields
+                                  * @param {*} data
+                                  */
+model.prototype.setMany = function (data) {
+    if (! /* istanbul ignore next */_Validators2.default.Type.isObject(data)) {
+        throw new Error('Data must be an object');
+    }
+    priv.initData.call(this);
+
+    for (var i in data) {
+        this.data[i] = data[i];
+        //run onUpdate
+    }
+};
+
+/**
+    * Set's single field with value
+    * @param name - field name
+    * @param value - new value
+    */
+model.prototype.set = function (name, value) {
+    priv.initData.call(this);
+
+    this.data[name] = value;
+};
+/**
+    * Removes field from inner data.
+    * Returns true if key vas removed, false otherwise
+    * @param key
+    * @returns boolean
+    */
+model.prototype.remove = function (key) {
+    var data = priv.getData.call(this);
+    if (typeof data[key] !== 'undefined') {
+        delete data[key];
+        return true;
+    }
+    return false;
+};
+
+/**
+    * Register onSet callback for given field
+    * @param key - field name
+    * @param callback - function to run when field is set
+    */
+model.prototype.onSet = function (key, callback) {
+
+};
+/**
+    * Get desired data field value
+    * @param name
+    * @return {*}
+    */
+model.prototype.get = function (name) {
+    var data = priv.getData.call(this);
+    return data[name] ? this.data[name] : null;
+};
+
+/**
+    * Returns raw data object
+    * @return {{}|*}
+    */
+model.prototype.getRaw = function () {
+    return this.data ? this.data : null;
+};
+
+/**
+    * Serialization of model and its children
+    * @return {{}|*}
+    */
+model.prototype.toDict = function () {
+    var dict = this.getRaw();
+    // Iterate raw data
+    Object.keys(dict).forEach(function (key) {
+        var value = dict[key];
+        if (value !== null) {
+            if (value instanceof Array) {
+                // Property is an array
+                value.map(function (element, idx) {
+                    // Check if element has its own toDict or getRaw method
+                    if (typeof element.toDict === 'function') {
+                        value[idx] = element.toDict();
+                    } else if (typeof element.getRaw === 'function') {
+                        value[idx] = element.getRaw();
+                    }
+                });
+            } else {
+                // Check if property has its own toDict or getRaw method
+                if (typeof value.toDict === 'function') {
+                    dict[key] = value.toDict();
+                } else if (typeof value.getRaw === 'function') {
+                    dict[key] = value.getRaw();
+                }
+            }
+        }
+    });
+    return dict;
+};
+
+/**
+    * Returns true if object has field, false otherwise
+    * @param name
+    * @return {boolean}
+    */
+model.prototype.hasField = function (name) {
+    return this.data ? typeof this.data[name] !== 'undefined' : false;
+};
+
+/**
+    * SetsDefault object fields
+    * @param data
+    */
+model.prototype.setDefaults = function (data) {
+    this.defaults = JSON.parse(JSON.stringify(data));
+    this.data = JSON.parse(JSON.stringify(data));
+};
+
+/**
+    * Standard model field: Sync
+    * @param {Boolean} sync.
+    */
+model.prototype.setSync = function (sync) {
+    this.data.isSync = sync;
+};
+model.prototype.isSync = function () {
+    return this.data.isSync;
+};
+
+/**
+    * Standard model field: ID
+    * @param {string} [modelID]
+    */
+model.prototype.setID = function (modelID) {
+    this.data.id = modelID;
+};
+model.prototype.getID = function () {
+    if (this.data.id) {
+        return this.data.id;
+    } else if (this.data.objectId) {
+        // Temporary code.
+        return this.data.objectId;
+    }
+    return null;
+};
+
+/**
+    * Save method is used to server-object synchronisation.
+    * Should use es6-promise patterns of callbacks.
+    * @see {@link https://github.com/jakearchibald/es6-promise | GitHub}
+    * @param {Function} [foo] function(resolve, reject);
+    * @return es6-promise object.
+    */
+model.prototype.save = function (foo) {
+    console.error('Please overwrite function');
+    return undefined;
+};
+
+/**
+    * If you need to refresh an object you already have with the latest
+    * data that is in the Cloud, you can call the fetch method.
+    */
+model.prototype.fetch = function () {
+    console.error('Please overwrite function');
+    return undefined;
+};
+
+/**
+    * Checks if model is valid and ready to be saved in external storage
+    * @return boolean
+    */
+model.prototype.isValid = function () {
+    //TODO:add global validation system
+    console.error('Please overwrite function');
+    return undefined;
+};
+
+/**
+    * If you need to refresh an object you already have with the latest
+    * data that is in the Cloud, you can call the fetch method.
+    */
+model.prototype.refresh = function () {
+    console.error('Please overwrite function');
+    return undefined;
+};
+
+/**
+    * @type {{Extend: Function, New: Function}}
+    */
+var Class = { /* istanbul ignore next */
+    Extend: function Extend(base, extendedModel) {
+        extendedModel.prototype = Object.create(base.prototype);
+        return extendedModel;
+    }, /* istanbul ignore next */
+
+    New: function New(foo) {
+        var f = typeof foo === 'function' ? foo : function () {};
+        return this.Extend(model, f);
+    } }; /* istanbul ignore next */exports.default =
+
+
+Class;

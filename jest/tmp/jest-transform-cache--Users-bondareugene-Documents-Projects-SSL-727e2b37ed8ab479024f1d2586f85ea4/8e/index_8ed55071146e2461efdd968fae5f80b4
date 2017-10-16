@@ -1,0 +1,78 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_Radio = require('./Radio'); /* istanbul ignore next */var _Radio2 = _interopRequireDefault(_Radio);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * Radio.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @module Shared/Elements/Radio
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @version 1.0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @requires React
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @author Yevhen Bondar
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * @copyright (c) 2016 SoftServe.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */var RadioComponent = function (_React$Component) {_inherits(RadioComponent, _React$Component);function /* istanbul ignore next */RadioComponent(props) {/* istanbul ignore next */_classCallCheck(this, RadioComponent);var _this = _possibleConstructorReturn(this, (RadioComponent.__proto__ || Object.getPrototypeOf(RadioComponent)).call(this, props)); /* istanbul ignore next */_this.checkValue = /* istanbul ignore next */_this.checkValue.bind( /* istanbul ignore next */_this); /* istanbul ignore next */_this.onChange = /* istanbul ignore next */_this.onChange.bind( /* istanbul ignore next */_this); /* istanbul ignore next */_this.setDefault = /* istanbul ignore next */_this.setDefault.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;}_createClass(RadioComponent, [{ key: 'componentWillMount', value: function componentWillMount()
+
+        {
+            this.setDefault(this.props);
+        } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            this.setDefault(nextProps);
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;var _props =
+            this.props,radio = _props.radio,value = _props.value,id = _props.id;
+            var radioButtons = radio.map(function (item, i) {
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Radio2.default, /* istanbul ignore next */{
+                        key: i,
+                        name: id,
+                        title: item.title,
+                        value: item.value,
+                        currentValue: value,
+                        onChange: /* istanbul ignore next */_this2.onChange }));
+
+
+            });
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'radio-input__wrap' },
+                    radioButtons));
+
+
+        } }, { key: 'checkValue', value: function checkValue(
+
+        source) {/* istanbul ignore next */var
+            radio = source.radio,value = source.value;
+            return radio.findIndex(function (item) {
+                return item.value === value;
+            });
+        } }, { key: 'onChange', value: function onChange(
+
+        value) {/* istanbul ignore next */var _props2 =
+            this.props,updateValue = _props2.updateValue,id = _props2.id;
+            updateValue(id, value, 'radio');
+        } }, { key: 'setDefault', value: function setDefault(
+
+        source) {/* istanbul ignore next */var
+            radio = source.radio,id = source.id,updateValue = source.updateValue;
+            if (this.checkValue(source) < 0 && radio.length > 0) {
+                var value = radio[0].value;
+                updateValue(id, value, 'radio');
+            }
+        } }]);return RadioComponent;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = RadioComponent;
+
+
+RadioComponent.propTypes = {
+    id: /* istanbul ignore next */_react2.default.PropTypes.string,
+    updateValue: /* istanbul ignore next */_react2.default.PropTypes.func,
+    radio: /* istanbul ignore next */_react2.default.PropTypes.array,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    value: /* istanbul ignore next */_react2.default.PropTypes.any };

@@ -1,0 +1,38 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.defaultState = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_DeleteButtonWithConfirmationActions = require('./DeleteButtonWithConfirmationActions'); /* istanbul ignore next */var _DeleteButtonWithConfirmationActions2 = _interopRequireDefault(_DeleteButtonWithConfirmationActions);
+var /* istanbul ignore next */_FindingDialogActions = require('../../../FindingDialog/FindingDialogActions'); /* istanbul ignore next */var _FindingDialogActions2 = _interopRequireDefault(_FindingDialogActions);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var defaultState = /* istanbul ignore next */exports.defaultState = {
+    isFindingWaitingForConfirmationToBeDeleted: false }; /* istanbul ignore next */var
+
+
+DeleteButtonWithConfirmationStore = function (_Reflux$Store) {_inherits(DeleteButtonWithConfirmationStore, _Reflux$Store);
+    function /* istanbul ignore next */DeleteButtonWithConfirmationStore() {/* istanbul ignore next */_classCallCheck(this, DeleteButtonWithConfirmationStore);var _this = _possibleConstructorReturn(this, (DeleteButtonWithConfirmationStore.__proto__ || Object.getPrototypeOf(DeleteButtonWithConfirmationStore)).call(this));
+
+
+        /* istanbul ignore next */_this.state = /* istanbul ignore next */_extends({}, defaultState);
+        /* istanbul ignore next */_this.listenables = /* istanbul ignore next */_DeleteButtonWithConfirmationActions2.default;
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_FindingDialogActions2.default.navigate, /* istanbul ignore next */_this.onNavigate); /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * @listens FindingDialogActions.navigate
+       */_createClass(DeleteButtonWithConfirmationStore, [{ key: 'onNavigate', value: function onNavigate()
+        {
+            this.setState({ isFindingWaitingForConfirmationToBeDeleted: false });
+        }
+
+        /**
+           * @listens DeleteButtonWithConfirmationActions.deleteFinding.completed
+           */ }, { key: 'onConfirmDeleting', value: function onConfirmDeleting()
+        {
+            this.setState({ isFindingWaitingForConfirmationToBeDeleted: true });
+        }
+
+        /**
+           * @listens DeleteButtonWithConfirmationActions.destroy
+           */ }, { key: 'onDestroy', value: function onDestroy()
+        {
+            this.setState(defaultState);
+        } }]);return DeleteButtonWithConfirmationStore;}( /* istanbul ignore next */_reflux2.default.Store); /* istanbul ignore next */exports.default = DeleteButtonWithConfirmationStore;

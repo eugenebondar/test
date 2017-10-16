@@ -1,0 +1,180 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_deepEqual = require('deep-equal'); /* istanbul ignore next */var _deepEqual2 = _interopRequireDefault(_deepEqual);
+
+var /* istanbul ignore next */_LoadingModalDialog = require('../../../Shared/Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+var /* istanbul ignore next */_RoleForm = require('./RoleForm'); /* istanbul ignore next */var _RoleForm2 = _interopRequireDefault(_RoleForm);
+var /* istanbul ignore next */_permissionDependencies = require('./permissionDependencies'); /* istanbul ignore next */var _permissionDependencies2 = _interopRequireDefault(_permissionDependencies);
+
+/* istanbul ignore next */require('./RoleDialog.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+RoleDialog = function (_React$Component) {_inherits(RoleDialog, _React$Component);
+    function /* istanbul ignore next */RoleDialog(props) {/* istanbul ignore next */_classCallCheck(this, RoleDialog);var _this = _possibleConstructorReturn(this, (RoleDialog.__proto__ || Object.getPrototypeOf(RoleDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            fields: props.fields };
+
+
+        /** this is cache to display */
+        /* istanbul ignore next */_this.permissionCache = {
+            /** @type {Object.<string,string[]>}*/
+            perRoleType: {},
+            /** @type {string[]}*/
+            nonBasicViewer: [] };
+
+
+        /* istanbul ignore next */_this.onToggleBasicViewer = /* istanbul ignore next */ /* istanbul ignore next */_this.onToggleBasicViewer.bind(_this);
+        /* istanbul ignore next */_this.onPermissionChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onPermissionChange.bind(_this);
+        /* istanbul ignore next */_this.onRoleTypeChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onRoleTypeChange.bind(_this);
+        /* istanbul ignore next */_this.onChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onChange.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(RoleDialog, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            if (! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.fields, this.props.fields)) {
+                this.setState({
+                    fields: nextProps.fields,
+                    fieldsCache: nextProps.fields });
+
+            }
+        } }, { key: 'render', value: function render()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingModalDialog2.default, /* istanbul ignore next */{
+                        loading: this.props.isLoading || this.props.isSaving,
+                        isOpen: /* istanbul ignore next */true,
+                        header: this.getDialogTitle(),
+                        footer: this.getDialogFooter() },
+
+                    !this.props.isLoading &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RoleForm2.default, /* istanbul ignore next */{
+                        fields: this.state.fields,
+                        permissionsList: this.getFilteredPermissions(),
+                        organizationsList: this.props.organizationsList,
+                        validation: this.props.validation,
+                        onChange: this.onChange,
+                        onToggleBasicViewer: this.onToggleBasicViewer,
+                        onPermissionChange: this.onPermissionChange,
+                        onRoleTypeChange: this.onRoleTypeChange })));
+
+
+
+
+        } }, { key: 'getDialogTitle', value: function getDialogTitle()
+
+        {
+            var translateKey = this.props.isEdit ? 'editRole' : 'addRole';
+            return (/* istanbul ignore next */(0, _counterpart2.default)( /* istanbul ignore next */'roles.' + translateKey));
+        } }, { key: 'getDialogFooter', value: function getDialogFooter()
+
+        {/* istanbul ignore next */var _this2 = this;
+            var areFieldsNotChanged = this.isSavingDisabled();
+            var saveButton = this.props.isEdit ? /* istanbul ignore next */(0, _counterpart2.default)('general.save') : /* istanbul ignore next */(0, _counterpart2.default)('general.add');
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'cancel-btn sc-btn', onClick: this.props.onClose },
+                        /* istanbul ignore next */(0, _counterpart2.default)('customers.popup.cancel')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                            className: 'sc-btn sc-btn-primary',
+                            onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onSubmit( /* istanbul ignore next */_this2.state.fields));},
+                            disabled: areFieldsNotChanged || this.props.isLoading || this.props.isSaving },
+
+                        saveButton)));
+
+
+
+        }
+
+        /**
+           * @return {boolean}
+           */ }, { key: 'isSavingDisabled', value: function isSavingDisabled()
+        {
+            var isFormUnchanged = /* istanbul ignore next */(0, _deepEqual2.default)(this.state.fields, this.state.fieldsCache);
+            if (isFormUnchanged) {
+                return true;
+            }
+            var isNotBasicViewerAndPermissionsAreEmpty = !this.state.fields.basicViewer && this.state.fields.permissions.length === 0;
+            return isNotBasicViewerAndPermissionsAreEmpty;
+        } }, { key: 'getFilteredPermissions', value: function getFilteredPermissions()
+
+        {
+            var permissions = this.props.permissionsList[this.state.fields.role_type];
+            return permissions ? permissions : [];
+        } }, { key: 'onChange', value: function onChange(
+
+        updatedField) {
+            this.setState({
+                fields: /* istanbul ignore next */_extends({}, this.state.fields, updatedField) });
+
+        } }, { key: 'onToggleBasicViewer', value: function onToggleBasicViewer()
+
+        {
+            var newBasicViewer = !this.state.fields.basicViewer;
+            if (newBasicViewer) {
+                this.permissionCache.nonBasicViewer = this.state.fields.permissions;
+            }
+            this.setState({
+                fields: /* istanbul ignore next */_extends({},
+                this.state.fields, {
+                    basicViewer: newBasicViewer,
+                    permissions: newBasicViewer ? [] : this.permissionCache.nonBasicViewer }) });
+
+
+        } }, { key: 'onRoleTypeChange', value: function onRoleTypeChange(
+
+        newRoleType) {/* istanbul ignore next */var
+            fields = this.state.fields;
+            var newPermissionFromCache = this.permissionCache.perRoleType[newRoleType] || [];
+            this.permissionCache.perRoleType[fields.role_type] = fields.permissions;
+            this.setState({
+                fields: /* istanbul ignore next */_extends({},
+                fields, {
+                    role_type: newRoleType,
+                    permissions: newPermissionFromCache,
+                    organization_id: newRoleType === /* istanbul ignore next */_RoleForm.ROLE_TYPE.STAFF ? null : fields.organization_id }) });
+
+
+        } }, { key: 'onPermissionChange', value: function onPermissionChange(
+
+        key, value) {
+            var permissions = /* istanbul ignore next */[].concat(_toConsumableArray(this.state.fields.permissions));
+            if (value) {
+                permissions.push(key);
+                /* istanbul ignore next */_permissionDependencies2.default[key] && /* istanbul ignore next */_permissionDependencies2.default[key].forEach(function (dependency) {
+                    if (!permissions.includes(dependency)) {
+                        permissions.push(dependency);
+                    }
+                });
+            } else {
+                var index = permissions.indexOf(key);
+                permissions.splice(index, 1);
+            }
+            this.onChange({ permissions: permissions });
+        } }]);return RoleDialog;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = RoleDialog;
+
+
+RoleDialog.propTypes = {
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isEdit: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        role_type: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        basicViewer: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+        organization_id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        permissions: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string).isRequired }),
+
+    organizationsList: /* istanbul ignore next */_react2.default.PropTypes.arrayOf(
+    /* istanbul ignore next */_react2.default.PropTypes.shape({
+        corporation_name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })),
+
+
+    permissionsList: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        customer: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired).isRequired,
+        staff: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired).isRequired }),
+
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object,
+    onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };

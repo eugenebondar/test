@@ -1,0 +1,16 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+FieldValue;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function FieldValue( /* istanbul ignore next */_ref) {/* istanbul ignore next */var value = _ref.value,_ref$testForEmptyValu = _ref.testForEmptyValue,testForEmptyValue = _ref$testForEmptyValu === undefined ? /* istanbul ignore next */(0, _counterpart2.default)('findings.na') : _ref$testForEmptyValu;
+    var content = value || value === 0 ? value : testForEmptyValue;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, content));
+
+}
+
+FieldValue.propTypes = {
+    value: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+    /* istanbul ignore next */_react2.default.PropTypes.string,
+    /* istanbul ignore next */_react2.default.PropTypes.number]),
+
+    testForEmptyValue: /* istanbul ignore next */_react2.default.PropTypes.string };

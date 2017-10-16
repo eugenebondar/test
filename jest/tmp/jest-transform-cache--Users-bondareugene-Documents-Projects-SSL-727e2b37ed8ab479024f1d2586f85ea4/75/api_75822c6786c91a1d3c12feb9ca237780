@@ -1,0 +1,26 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var RolesAPI = /* istanbul ignore next */_Model2.default.New();
+
+RolesAPI.fetchRoles = function (isService) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/' + (isService ? 'service/' : '') + 'roles.json'));
+};
+
+RolesAPI.fetchRoleById = function (id) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/roles/' + id));
+};
+
+RolesAPI.addRole = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/service/roles', data));
+};
+
+RolesAPI.deleteRole = function (id) {
+    return (/* istanbul ignore next */_Api2.default.delete('/api/service/roles/' + id));
+};
+
+RolesAPI.editRole = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.put('/api/service/roles/' + id, data));
+}; /* istanbul ignore next */exports.default =
+
+RolesAPI;

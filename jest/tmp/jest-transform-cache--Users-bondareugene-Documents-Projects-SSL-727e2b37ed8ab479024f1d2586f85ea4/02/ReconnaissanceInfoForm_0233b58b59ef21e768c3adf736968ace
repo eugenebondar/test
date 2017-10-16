@@ -1,0 +1,40 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();exports.default =
+
+
+
+
+
+
+ReconnaissanceInfoForm;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_index = require('../../../../Shared/Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);var /* istanbul ignore next */_FormField = require('../../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);var /* istanbul ignore next */_ReconnaissanceInfoDialogStore = require('./ReconnaissanceInfoDialogStore'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function ReconnaissanceInfoForm( /* istanbul ignore next */_ref) {/* istanbul ignore next */var fields = _ref.fields,onChange = _ref.onChange,testCategoryName = _ref.testCategoryName;
+    var fieldsOrder = /* istanbul ignore next */_ReconnaissanceInfoDialogStore.reconFieldsByTestCategory[testCategoryName];
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+            Object.entries(fields).
+            sort(function (a, b) {
+                var aIndex = fieldsOrder.indexOf(a[0]);
+                var bIndex = fieldsOrder.indexOf(b[0]);
+                return aIndex - bIndex;
+            }).
+            map(function ( /* istanbul ignore next */_ref2) /* istanbul ignore next */{var _ref3 = _slicedToArray(_ref2, 2),key = _ref3[0],value = _ref3[1];return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            key: key,
+                            label: /* istanbul ignore next */(0, _counterpart2.default)( /* istanbul ignore next */'reconnaissanceDialog.' + key) },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                            id: key,
+                            updateValue: function /* istanbul ignore next */updateValue(key, newValue) /* istanbul ignore next */{return onChange( /* istanbul ignore next */_extends({},
+                                fields, _defineProperty({},
+                                key, newValue)));},
+
+                            value: value })));})));
+
+
+
+
+
+}
+
+ReconnaissanceInfoForm.propTypes = {
+    testCategoryName: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired };

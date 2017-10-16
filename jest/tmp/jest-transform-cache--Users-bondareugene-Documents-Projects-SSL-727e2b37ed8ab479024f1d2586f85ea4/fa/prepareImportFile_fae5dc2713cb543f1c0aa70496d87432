@@ -1,0 +1,8 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = prepareImportFile;function prepareImportFile(data) {
+    var file = new FormData();
+
+    for (var key in data) {
+        file.append(key, data[key]);
+    }
+    return file;
+}

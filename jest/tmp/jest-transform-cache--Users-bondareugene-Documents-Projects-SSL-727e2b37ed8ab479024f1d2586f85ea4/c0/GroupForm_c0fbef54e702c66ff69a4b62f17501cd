@@ -1,0 +1,134 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_UsersField = require('./UsersField'); /* istanbul ignore next */var _UsersField2 = _interopRequireDefault(_UsersField);
+var /* istanbul ignore next */_SelectField = require('./SelectField'); /* istanbul ignore next */var _SelectField2 = _interopRequireDefault(_SelectField);
+var /* istanbul ignore next */_Input = require('../../../../Shared/Elements/Input'); /* istanbul ignore next */var _Input2 = _interopRequireDefault(_Input);
+var /* istanbul ignore next */_Radio = require('../../../../Shared/Elements/Radio'); /* istanbul ignore next */var _Radio2 = _interopRequireDefault(_Radio);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+GroupForm = function (_React$Component) {_inherits(GroupForm, _React$Component);
+    function /* istanbul ignore next */GroupForm(props) {/* istanbul ignore next */_classCallCheck(this, GroupForm);var _this = _possibleConstructorReturn(this, (GroupForm.__proto__ || Object.getPrototypeOf(GroupForm)).call(this,
+        props));
+
+        /* istanbul ignore next */_this.getValidationError = /* istanbul ignore next */_this.getValidationError.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.getValidationClass = /* istanbul ignore next */_this.getValidationClass.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.changeUsers = /* istanbul ignore next */_this.changeUsers.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.changeType = /* istanbul ignore next */_this.changeType.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(GroupForm, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _props =
+            this.props,fields = _props.fields,users = _props.users,roles = _props.roles,updateValue = _props.updateValue,getTranslate = _props.getTranslate,isEdit = _props.isEdit,organizationsList = _props.organizationsList; /* istanbul ignore next */var
+            getValidationError = this.getValidationError,getValidationClass = this.getValidationClass;
+            var require = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-error required-star' }, /* istanbul ignore next */'*');
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'roles-dialog' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' + getValidationClass('name') },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                            getTranslate('name'), /* istanbul ignore next */': ',
+                            require),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Input2.default, /* istanbul ignore next */{
+                                id: 'name',
+                                updateValue: updateValue,
+                                value: fields.name }),
+
+                            getValidationError('name'))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SelectField2.default, /* istanbul ignore next */{
+                        isEdit: isEdit,
+                        getValidationClass: getValidationClass,
+                        getTranslate: getTranslate,
+                        getValidationError: getValidationError,
+                        updateValue: this.changeType,
+                        value: fields.group_type,
+                        valueForEditMode: fields.group_type,
+                        options: ['customer', 'staff'],
+                        id: 'group_type' }),
+
+                    fields.group_type === 'customer' ?
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SelectField2.default, /* istanbul ignore next */{
+                        isEdit: isEdit,
+                        getValidationClass: getValidationClass,
+                        getTranslate: getTranslate,
+                        getValidationError: getValidationError,
+                        updateValue: updateValue,
+                        value: fields.organization_id,
+                        valueForEditMode: isEdit ? organizationsList[organizationsList.findIndex(function (item) {
+                            return item.value === fields.organization_id;
+                        })].name : fields.organization_id,
+                        options: organizationsList,
+                        id: 'organization_id' }) :
+
+                    null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' + getValidationClass('role_id') },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                            getTranslate('role')),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'role-list-wrap' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Radio2.default, /* istanbul ignore next */{
+                                    id: 'role_id',
+                                    updateValue: updateValue,
+                                    value: fields.role_id,
+                                    radio: roles[fields.group_type] }),
+
+                                getValidationError('role_id')))),
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_UsersField2.default, /* istanbul ignore next */{
+                        fields: fields,
+                        users: users,
+                        updateValue: this.changeUsers,
+                        getTranslate: getTranslate,
+                        getValidationError: getValidationError })));
+
+
+
+        } }, { key: 'changeType', value: function changeType(
+        id, value) {
+            this.props.updateValue(id, value);
+            this.props.updateValue('user_ids', []);
+            this.props.updateValue('role_id', '');
+        } }, { key: 'changeUsers', value: function changeUsers(
+        map) {
+            var user_ids = [];
+            Array.from(map, function (item) {
+                if (item[1]) {
+                    user_ids.push(item[0]);
+                }
+            });
+            this.props.updateValue('user_ids', user_ids);
+        }
+        /**
+           * Check validation and get error for pass key if it needs.
+           * @return {JSX}
+           */ }, { key: 'getValidationError', value: function getValidationError(
+        key) {
+            var validation = this.props.validation;
+            return validation && 'undefined' !== typeof validation[key] ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'validation__error-message sc-error' },
+                validation[key].charAt(0).toUpperCase() + validation[key].substr(1)) :
+
+            null;
+        }
+        /**
+           * Check validation and get error class for pass key if it needs.
+           * @return {String} error class
+           */ }, { key: 'getValidationClass', value: function getValidationClass(
+        key) {
+            var validation = this.props.validation;
+            return validation && !!validation[key] ? ' error-input' : '';
+        } }]);return GroupForm;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = GroupForm;
+
+
+GroupForm.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    updateValue: /* istanbul ignore next */_react2.default.PropTypes.func,
+    changeRoleType: /* istanbul ignore next */_react2.default.PropTypes.func,
+    getTranslate: /* istanbul ignore next */_react2.default.PropTypes.func,
+    isEdit: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    users: /* istanbul ignore next */_react2.default.PropTypes.object,
+    roles: /* istanbul ignore next */_react2.default.PropTypes.object,
+    organizationsList: /* istanbul ignore next */_react2.default.PropTypes.array,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object };

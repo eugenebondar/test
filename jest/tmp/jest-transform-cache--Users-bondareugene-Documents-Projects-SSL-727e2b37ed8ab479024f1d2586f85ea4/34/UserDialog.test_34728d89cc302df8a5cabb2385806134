@@ -1,0 +1,63 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */var _enzymeToJson2 = _interopRequireDefault(_enzymeToJson);
+
+var /* istanbul ignore next */_User = require('../../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);
+var /* istanbul ignore next */_UserDialogContainer = require('./UserDialogContainer'); /* istanbul ignore next */var _UserDialogContainer2 = _interopRequireDefault(_UserDialogContainer);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('UserDialog', function () {
+    describe('with default set of props', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+        var context = { currentUser: new /* istanbul ignore next */_User2.default({}) };
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        describe('matches snapshot for New mode ', function () {
+            beforeEach(function () {
+                component = /* istanbul ignore next */(0, _enzyme.mount)(
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_UserDialogContainer2.default, /* istanbul ignore next */{
+                    mode: /* istanbul ignore next */_UserDialogContainer.USER_DIALOG_MODE.NEW,
+                    userId: 'userId',
+                    onClose: function /* istanbul ignore next */onClose() /* istanbul ignore next */{return null;} }),
+                { context: context });
+
+            });
+
+            it('for customer user', function () {
+                expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+            });
+
+            it('for staff user', function () {
+                component.setContext({ currentUser: new /* istanbul ignore next */_User2.default({ user_type: 'staff' }) });
+                expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+            });
+        });
+
+        describe('matches snapshot for Edit mode ', function () {
+            beforeEach(function () {
+                component = /* istanbul ignore next */(0, _enzyme.mount)(
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_UserDialogContainer2.default, /* istanbul ignore next */{
+                    mode: /* istanbul ignore next */_UserDialogContainer.USER_DIALOG_MODE.EDIT,
+                    userId: 'userId',
+                    onClose: function /* istanbul ignore next */onClose() /* istanbul ignore next */{return null;} }),
+                { context: context });
+
+            });
+
+            it('for customer user', function () {
+                expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+            });
+
+            it('for staff user', function () {
+                component.setContext({ currentUser: new /* istanbul ignore next */_User2.default({ user_type: 'staff' }) });
+                expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+            });
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

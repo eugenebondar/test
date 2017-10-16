@@ -1,0 +1,48 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var findingAttachmentsAPI = {
+    service: {
+        baseUrl: '/api/service' },
+
+    customer: {
+        baseUrl: '/api' } };
+
+
+
+findingAttachmentsAPI.customer.getAttachments = getAttachments;
+findingAttachmentsAPI.service.getAttachments = getAttachments;
+
+findingAttachmentsAPI.service.deleteFindingAttachment = deleteFindingAttachment;
+
+findingAttachmentsAPI.service.addFindingAttachment = addFindingAttachment; /* istanbul ignore next */exports.default =
+
+findingAttachmentsAPI;
+
+/**
+                        * @Param {string} runId
+                        * @Param {string} findingId
+                        * @return {Promise.<[]>}
+                        */
+function getAttachments(runId, findingId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings/' + findingId + '/finding_attachments/link_to_attachments.json'));
+}
+
+/**
+   * @Param {string} runId
+   * @Param {string} findingId
+   * @Param {string} attachmentId
+   * @return {Promise.<{}>}
+   */
+function deleteFindingAttachment(runId, findingId, attachmentId) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings/' + findingId + '/finding_attachments/' + attachmentId));
+}
+
+/**
+   * @Param {string} runId
+   * @Param {string} findingId
+   * @Param {Object} attachment
+   * @return {Promise.<{}>}
+   */
+function addFindingAttachment(runId, findingId, attachment) {
+    return (/* istanbul ignore next */_Api2.default.sendFile( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings/' + findingId + '/finding_attachments', attachment));
+}

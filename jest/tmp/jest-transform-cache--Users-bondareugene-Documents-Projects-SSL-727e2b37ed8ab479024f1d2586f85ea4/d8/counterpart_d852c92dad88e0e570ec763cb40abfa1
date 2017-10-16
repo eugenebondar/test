@@ -1,0 +1,7 @@
+/* istanbul ignore next */'use strict';module.exports = function (path, options) {
+    var scope = options && options.scope || '';
+    if (scope) {
+        return (/* istanbul ignore next */scope + '.' + path);
+    }
+    return path;
+};

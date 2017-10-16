@@ -1,0 +1,55 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Designed mostly for elements with position absolute, but for relative will work as well.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * It sets maximum height to prevent children component to be displayed out of document bounds.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */var
+MaxHeightGuard = function (_React$Component) {_inherits(MaxHeightGuard, _React$Component);
+    function /* istanbul ignore next */MaxHeightGuard(props) {/* istanbul ignore next */_classCallCheck(this, MaxHeightGuard);var _this = _possibleConstructorReturn(this, (MaxHeightGuard.__proto__ || Object.getPrototypeOf(MaxHeightGuard)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            bottomBound: /* istanbul ignore next */_this.getBodyBottomBound(),
+            containerRef: null };
+
+
+        /* istanbul ignore next */_this.setContainerRef = /* istanbul ignore next */_this.setContainerRef.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(MaxHeightGuard, [{ key: 'getBodyBottomBound', value: function getBodyBottomBound()
+
+        {
+            return document.body.scrollHeight - this.props.bottomOffset;
+        } }, { key: 'getMaxHeight', value: function getMaxHeight()
+
+        {
+            if (!this.state.containerRef) {
+                return 0;
+            }
+
+            var topToBody = this.state.containerRef.getBoundingClientRect().top + document.body.scrollTop;
+            var maxHeightBasedOnDistanceToBottom = this.getBodyBottomBound() - topToBody;
+            return Math.max(0, Math.min(maxHeightBasedOnDistanceToBottom, this.props.maxComponentHeight));
+        } }, { key: 'setContainerRef', value: function setContainerRef(
+
+        ref) {
+            this.setState({ containerRef: ref });
+        } }, { key: 'render', value: function render()
+
+        {
+            var maxHeight = this.getMaxHeight();
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { maxHeight: maxHeight }, ref: this.setContainerRef },
+                    this.props.children));
+
+
+
+        } }]);return MaxHeightGuard;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = MaxHeightGuard;
+
+
+MaxHeightGuard.propTypes = {
+    maxComponentHeight: /* istanbul ignore next */_react2.default.PropTypes.number,
+    bottomOffset: /* istanbul ignore next */_react2.default.PropTypes.number,
+    children: /* istanbul ignore next */_react2.default.PropTypes.node };
+
+
+MaxHeightGuard.defaultProps = {
+    maxComponentHeight: 500,
+    bottomOffset: 40 };

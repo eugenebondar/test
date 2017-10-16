@@ -1,0 +1,39 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+HailstormUnManagedRunFields;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_FormField = require('../../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);var /* istanbul ignore next */_index = require('../../../../Shared/Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function HailstormUnManagedRunFields( /* istanbul ignore next */_ref) {/* istanbul ignore next */var onChange = _ref.onChange,fields = _ref.fields;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.hailApp'),
+                    isRequired: /* istanbul ignore next */true },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                    id: 'application_id',
+                    updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return onChange( /* istanbul ignore next */_defineProperty({}, key, value));},
+                    value: fields.application_id })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.assessmentRun'),
+                    isRequired: /* istanbul ignore next */true },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                    id: 'assessment_run_id',
+                    updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return onChange( /* istanbul ignore next */_defineProperty({}, key, value));},
+                    value: fields.assessment_run_id }))));
+
+
+
+
+}
+
+HailstormUnManagedRunFields.propTypes = {
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        application_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        assessment_run_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }).
+    isRequired };

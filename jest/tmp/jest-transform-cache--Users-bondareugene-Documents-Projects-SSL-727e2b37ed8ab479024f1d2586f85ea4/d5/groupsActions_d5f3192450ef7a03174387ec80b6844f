@@ -1,0 +1,17 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.userGroupsActions = exports.popupActionName = undefined;var /* istanbul ignore next */_reactTranslateComponent = require('react-translate-component');
+
+var popupActionName = /* istanbul ignore next */exports.popupActionName = {
+    editGroup: 'editGroup',
+    deleteGroup: 'deleteGroup' };
+
+
+var userGroupsActions = /* istanbul ignore next */exports.userGroupsActions = [
+{
+    value: popupActionName.editGroup,
+    title: /* istanbul ignore next */(0, _reactTranslateComponent.translate)('actions.editGroup'),
+    icon: 'sc-icon-pencil' },
+
+{
+    value: popupActionName.deleteGroup,
+    title: /* istanbul ignore next */(0, _reactTranslateComponent.translate)('actions.deleteGroup'),
+    icon: 'sc-icon-trash-closed' }];

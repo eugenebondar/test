@@ -1,0 +1,19 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_downloadBlob = require('../../Utils/downloadBlob'); /* istanbul ignore next */var _downloadBlob2 = _interopRequireDefault(_downloadBlob);
+var /* istanbul ignore next */_processBlobResponse = require('../../Utils/processBlobResponse'); /* istanbul ignore next */var _processBlobResponse2 = _interopRequireDefault(_processBlobResponse);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var LinkToDownloadableActions = {
+    download: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    init: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }) };
+
+
+LinkToDownloadableActions.download.listen(function (uuid, url) {
+    /* istanbul ignore next */_Api2.default.getFull(url).
+    then( /* istanbul ignore next */_processBlobResponse2.default).
+    then(function ( /* istanbul ignore next */_ref) /* istanbul ignore next */{var url = _ref.url,filename = _ref.filename;return (/* istanbul ignore next */(0, _downloadBlob2.default)(url, filename));}).
+    then(this.completed);
+}); /* istanbul ignore next */exports.default =
+
+LinkToDownloadableActions;

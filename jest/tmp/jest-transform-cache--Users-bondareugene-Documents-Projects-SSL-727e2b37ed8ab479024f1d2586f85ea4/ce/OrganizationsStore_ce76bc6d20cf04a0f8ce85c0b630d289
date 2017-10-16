@@ -1,0 +1,256 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_Actions = require('../Actions');
+
+var /* istanbul ignore next */_api = require('../Models/ServiceUser/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_CustomerModel = require('../Models/ServiceUser/CustomerModel'); /* istanbul ignore next */var _CustomerModel2 = _interopRequireDefault(_CustomerModel);
+
+var /* istanbul ignore next */_SessionUserStore = require('./SessionUser/SessionUserStore'); /* istanbul ignore next */var _SessionUserStore2 = _interopRequireDefault(_SessionUserStore);
+var /* istanbul ignore next */_BaseStore2 = require('./BaseStore'); /* istanbul ignore next */var _BaseStore3 = _interopRequireDefault(_BaseStore2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @classdesc Class representing a ServiceUser Store.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @class
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */
+
+var categories = [
+{ name: 'Web App Pen Test & Web App Managed Scan', value: 'Web App Pen Test & Web App Managed Scan' },
+{ name: 'Internal Network Managed Scan', value: 'Internal Network Managed Scan' },
+{ name: 'External Network Managed Scan', value: 'External Network Managed Scan' },
+{ name: 'Internal Network Pen Test', value: 'Internal Network Pen Test' },
+{ name: 'External Network Pen Test', value: 'External Network Pen Test' },
+{ name: 'Wireless Network Pen Test', value: 'Wireless Network Pen Test' },
+{ name: 'Mobile App Test', value: 'Mobile App Test' }
+// {name: 'Embedded Device Test', value: 'Embedded Device Test'},
+// {name: 'Static Code Analysis', value: 'Static Code Analysis'}
+]; /* istanbul ignore next */var
+
+OrganizationsStore = function (_BaseStore) {_inherits(OrganizationsStore, _BaseStore);
+    function /* istanbul ignore next */OrganizationsStore() {/* istanbul ignore next */_classCallCheck(this, OrganizationsStore);var _this = _possibleConstructorReturn(this, (OrganizationsStore.__proto__ || Object.getPrototypeOf(OrganizationsStore)).call(this,
+        [/* istanbul ignore next */_Actions.OrganizationsActions]));
+        /* istanbul ignore next */_this.customersList = null;
+        /* istanbul ignore next */_this.testCategoriesList = null;
+        /* istanbul ignore next */_this.assigneeList = null;
+        /* istanbul ignore next */_this.settingsList = false;
+        /* istanbul ignore next */_this.isService = null;
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_SessionUserStore2.default, /* istanbul ignore next */_this.output); /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * Listener for SessionStore Store.
+       * Set isService according with SessionStore's currentUser.
+       * @param {event} [event]
+       * @param {data} [data]
+       * @config {Bool} - set isService.
+       */_createClass(OrganizationsStore, [{ key: 'output', value: function output(
+        event, data) {
+            switch (event) {
+                case 'isService':
+                    this.isService = data;
+                    break;}
+
+        }
+
+        /**
+           * Fetch customers list.
+           * @config {Array} - set customersList.
+           * @trigger {Array} - customer list.
+           */ }, { key: 'fetchCustomers', value: function fetchCustomers(
+        filter) {/* istanbul ignore next */var _this2 = this;
+            /* istanbul ignore next */_api2.default.fetchCustomers({ filter: filter }).
+            then(function (response) {
+                var total = parseInt(response.headers.get('Total'));
+                return response.json().then(function (json) /* istanbul ignore next */{return [json, total];});
+            }).
+            then(function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var _ref2 = _slicedToArray(_ref, 2),json = _ref2[0],total = _ref2[1];
+                /* istanbul ignore next */_this2.customersList = json.organizations;
+                var result = {
+                    customers: /* istanbul ignore next */_this2.customersList.map(function (item) /* istanbul ignore next */{return new /* istanbul ignore next */_CustomerModel2.default(item).data;}),
+                    total: json.total || -1,
+                    totalFiltered: total };
+
+                /* istanbul ignore next */_this2.trigger('customersList', result);
+            });
+        } }, { key: 'fetchCustomer', value: function fetchCustomer(
+
+        id) {/* istanbul ignore next */var _this3 = this;
+            /* istanbul ignore next */_api2.default.fetchCustomer(id).
+            then(function (json) {
+                /* istanbul ignore next */_this3.trigger('customer', json);
+            });
+        }
+
+        /**
+           * Create a new customer.
+           * @param {Object} [data] - customer's fields values.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'addCustomer', value: function addCustomer(
+        data) {/* istanbul ignore next */var _this4 = this;
+            /* istanbul ignore next */_api2.default.addCustomer(data).
+            then(function (response) {
+                /* istanbul ignore next */_this4.checkValidation(response, 'customerValidation');
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this4.trigger('customerSubmitted', true);
+                }
+            }).
+            catch(function (error) {
+            });
+        }
+
+        /**
+           * Update customer by id.
+           * @param {Object} [data] - customer's fields values.
+           * @param {String} [id] - customer's id.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'editCustomer', value: function editCustomer(
+        data, id) {/* istanbul ignore next */var _this5 = this;
+            /* istanbul ignore next */_api2.default.editCustomer(data, id).
+            then(function (response) {
+                /* istanbul ignore next */_this5.checkValidation(response, 'customerValidation');
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this5.trigger('customerSubmitted', true);
+                }
+            }).
+            catch(function (error) {
+            });
+        }
+
+        /**
+           * Remove customer by id.
+           * @param {String} [id] - customer's id.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'deleteCustomer', value: function deleteCustomer(
+        id) {/* istanbul ignore next */var _this6 = this;
+            /* istanbul ignore next */_api2.default.deleteCustomer(id).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this6.trigger('deleteCustomerSubmitted', true);
+                }
+            });
+        }
+
+        /**
+           * Suspend customer by id.
+           * @param {String} [id] - customer's id.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'suspendCustomer', value: function suspendCustomer(
+        id) {/* istanbul ignore next */var _this7 = this;
+            /* istanbul ignore next */_api2.default.suspendCustomer(id, { suspended: true }).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this7.trigger('suspendCustomerSubmitted', true);
+                }
+            });
+        }
+
+        /**
+           * unSuspend customer by id.
+           * @param {String} [id] - customer's id.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'unSuspendCustomer', value: function unSuspendCustomer(
+        id) {/* istanbul ignore next */var _this8 = this;
+            /* istanbul ignore next */_api2.default.suspendCustomer(id, { suspended: false }).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this8.trigger('unSuspendCustomerSubmitted', true);
+                }
+            });
+        }
+
+        /**
+           * Fetch test category list.
+           * @config {Array} - set testCategoriesList.
+           * @trigger {Array} - category list.
+           */ }, { key: 'getTestCategoriesList', value: function getTestCategoriesList()
+        {
+            this.testCategoriesList = categories;
+            this.trigger('testCategoriesList', this.testCategoriesList);
+        }
+
+        /**
+           * Fetch test assignee list.
+           * @config {Array} - set assigneeList.
+           * @trigger {Array} - assignee list.
+           */ }, { key: 'getTestAssigneeList', value: function getTestAssigneeList()
+        {/* istanbul ignore next */var _this9 = this;
+            /* istanbul ignore next */_api2.default.getTestAssigneeList().
+            then(function (json) {
+                /* istanbul ignore next */_this9.assigneeList = json.users;
+                /* istanbul ignore next */_this9.trigger('assigneeList', /* istanbul ignore next */_this9.assigneeList);
+            });
+        }
+
+        /**
+           * Create a new test.
+           * @param {Object} [data] - test's fields values.
+           * @param {Bool} [trigger] - show if page needs to refresh.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'addNewTest', value: function addNewTest(
+        test, trigger) {/* istanbul ignore next */var _this10 = this;
+            /* istanbul ignore next */_api2.default.addNewTest(test).
+            then(function (response) {
+                /* istanbul ignore next */_this10.checkValidation(response, 'testValidation');
+                if (response.statusText === 'OK') {
+                    response.json().then(function (json) {
+                        /* istanbul ignore next */_this10.trigger('testAdded', true);
+                        /* istanbul ignore next */_this10.trigger(trigger, json.id);
+                    });
+                }
+            }).
+            catch(function (error) {
+            });
+        } }, { key: 'fetchTest', value: function fetchTest(
+
+        id) {/* istanbul ignore next */var _this11 = this;
+            /* istanbul ignore next */_api2.default.fetchTest(id).
+            then(function (json) {
+                /* istanbul ignore next */_this11.trigger('testSubscription', json);
+            });
+        } }, { key: 'editTest', value: function editTest(
+        test, id) {/* istanbul ignore next */var _this12 = this;
+            /* istanbul ignore next */_api2.default.editTest(test, id).
+            then(function (response) {
+                /* istanbul ignore next */_this12.checkValidation(response, 'testEditValidation');
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this12.trigger('testEdited', true);
+                }
+            }).
+            catch(function (error) {
+            });
+        }
+        /**
+           * Add/Update test's settings.
+           * Invoke checkValidation.
+           * @param {String} [id] - test's id.
+           * @param {Object} [data] - setting's fields values.
+           * @param {Bool} [isClaim] - show if is claim.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'addTestSettings', value: function addTestSettings(
+        id, data, isClaim) {/* istanbul ignore next */var _this13 = this;
+            /* istanbul ignore next */_api2.default.addTestSettings(id, this.isService, data, isClaim).
+            then(function (response) {
+                /* istanbul ignore next */_this13.checkValidation(response, 'settingsValidation');
+                /* istanbul ignore next */_this13.trigger('settingsSubmitted', response.statusText === 'OK');
+            }).
+            catch(function (error) {
+            });
+        }
+
+        /**
+           * If response status is 422 - prepare object with errors.
+           * @param {Object} [response] - response.
+           * @param {String} [triggerName] - name of trigger.
+           * @trigger {Object} - object of errors.
+           */ }, { key: 'checkValidation', value: function checkValidation(
+        response, triggerName) {/* istanbul ignore next */var _this14 = this;
+            if (response.status === 422) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_this14.validation = {};
+                    for (var key in json.errors) {
+                        /* istanbul ignore next */_this14.validation[key] = json.errors[key].join(', ');
+                    }
+                    /* istanbul ignore next */_this14.trigger(triggerName, /* istanbul ignore next */_this14.validation);
+                });
+            }
+        } }]);return OrganizationsStore;}(_BaseStore3.default); /* istanbul ignore next */exports.default =
+
+
+new OrganizationsStore();

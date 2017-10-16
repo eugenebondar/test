@@ -1,0 +1,119 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_deepEqual = require('deep-equal'); /* istanbul ignore next */var _deepEqual2 = _interopRequireDefault(_deepEqual);
+
+var /* istanbul ignore next */_DisabledEditDueTestStateAlert = require('../DisabledEditDueTestStateAlert/DisabledEditDueTestStateAlert'); /* istanbul ignore next */var _DisabledEditDueTestStateAlert2 = _interopRequireDefault(_DisabledEditDueTestStateAlert);
+var /* istanbul ignore next */_LoadingModalDialog = require('../Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+var /* istanbul ignore next */_LoadingModalDialogWithoutBackground = require('../Elements/LoadingModalDialog/LoadingModalDialogWithoutBackground'); /* istanbul ignore next */var _LoadingModalDialogWithoutBackground2 = _interopRequireDefault(_LoadingModalDialogWithoutBackground);
+var /* istanbul ignore next */_TestScheduleContainer = require('./TestScheduleEditor/TestScheduleContainer'); /* istanbul ignore next */var _TestScheduleContainer2 = _interopRequireDefault(_TestScheduleContainer);
+
+/* istanbul ignore next */require('./ScheduleDialog.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ScheduleDialog = function (_React$Component) {_inherits(ScheduleDialog, _React$Component);
+    function /* istanbul ignore next */ScheduleDialog(props) {/* istanbul ignore next */_classCallCheck(this, ScheduleDialog);var _this = _possibleConstructorReturn(this, (ScheduleDialog.__proto__ || Object.getPrototypeOf(ScheduleDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            fields: props.fields }; /* istanbul ignore next */return _this;
+
+    }_createClass(ScheduleDialog, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            if (! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.fields, this.props.fields)) {
+                this.setState({
+                    fields: nextProps.fields,
+                    fieldsCache: nextProps.fields });
+
+            }
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;var _props =
+
+
+
+
+
+
+
+            this.props,withBackground = _props.withBackground,isEditDisabledDueTestState = _props.isEditDisabledDueTestState,testState = _props.testState,errors = _props.errors,isLoading = _props.isLoading,props = _objectWithoutProperties(_props, ['withBackground', 'isEditDisabledDueTestState', 'testState', 'errors', 'isLoading']);
+            var СomponentName = withBackground ? /* istanbul ignore next */_LoadingModalDialog2.default : /* istanbul ignore next */_LoadingModalDialogWithoutBackground2.default;
+            /* eslint-disable react/jsx-pascal-case */
+            return (
+                /* istanbul ignore next */_react2.default.createElement(СomponentName, /* istanbul ignore next */_extends({},
+                    props, {
+                        className: 'schedule-modal-dialog left',
+                        isOpen: /* istanbul ignore next */true,
+                        header: /* istanbul ignore next */(0, _counterpart2.default)('dashboard.schedules.title'),
+                        footer: this.getDialogFooter(),
+                        loading: isLoading }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DisabledEditDueTestStateAlert2.default, /* istanbul ignore next */{
+                        isShown: isEditDisabledDueTestState,
+                        testState: testState }),
+
+                    !isLoading &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TestScheduleContainer2.default, /* istanbul ignore next */{
+                        errors: errors,
+                        updateSchedule: function /* istanbul ignore next */updateSchedule(updatedSchedule) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.setState({ fields: updatedSchedule }));},
+                        scheduleData: this.state.fields,
+                        onLoadingStarted: function /* istanbul ignore next */onLoadingStarted() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.setState({ isLoading: true }));},
+                        onLoadingCompleted: function /* istanbul ignore next */onLoadingCompleted() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.setState({ isLoading: false }));} })));
+
+
+
+
+            /* eslint-enable react/jsx-pascal-case */
+        } }, { key: 'getDialogFooter', value: function getDialogFooter()
+
+        {/* istanbul ignore next */var _this3 = this;
+            var areFieldsNotChanged = /* istanbul ignore next */(0, _deepEqual2.default)(this.state.fields, this.state.fieldsCache);
+            var isSubmitButtonDisabled = [
+            areFieldsNotChanged,
+            this.props.isLoading,
+            this.props.isSaving,
+            this.props.isEditDisabledDueTestState].
+            some(function (value) /* istanbul ignore next */{return value;});
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'cancel-btn sc-btn', onClick: this.props.onClose },
+                        /* istanbul ignore next */(0, _counterpart2.default)('general.cancel')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                            disabled: isSubmitButtonDisabled,
+                            className: 'sc-btn sc-btn-primary',
+                            onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this3.props.onSubmit( /* istanbul ignore next */_this3.state.fields));} },
+
+                        /* istanbul ignore next */(0, _counterpart2.default)('general.update'))));
+
+
+
+        } }]);return ScheduleDialog;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = ScheduleDialog;
+
+
+ScheduleDialog.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        start_date: /* istanbul ignore next */_react2.default.PropTypes.string,
+        due_date: /* istanbul ignore next */_react2.default.PropTypes.string,
+        monday: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        tuesday: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        wednesday: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        thursday: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        friday: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        saturday: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        sunday: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        time_from: /* istanbul ignore next */_react2.default.PropTypes.string,
+        time_to: /* istanbul ignore next */_react2.default.PropTypes.string }),
+
+    errors: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string),
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    isEditDisabledDueTestState: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    testState: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    withBackground: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+
+ScheduleDialog.defaultProps = {
+    withBackground: true };

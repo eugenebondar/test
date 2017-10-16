@@ -1,0 +1,90 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var ManagerAPI = /* istanbul ignore next */_Model2.default.New();
+
+ManagerAPI.fetchCategories = function (filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull('/api/service/categories.json', filter));
+};
+
+ManagerAPI.fetchCategory = function (categoryId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/categories/' + categoryId + '.json'));
+};
+
+ManagerAPI.fetchCategoriesList = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/categories/list.json'));
+};
+
+ManagerAPI.addCategory = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/service/categories', data));
+};
+
+ManagerAPI.deleteCategory = function (id) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/categories/' + id));
+};
+
+ManagerAPI.editCategory = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/categories/' + id, data));
+};
+
+ManagerAPI.fetchClassifications = function (filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull('/api/service/classifications', filter));
+};
+
+ManagerAPI.fetchClassification = function (id) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/classifications/' + id));
+};
+
+ManagerAPI.addClassification = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/service/classifications', data));
+};
+
+ManagerAPI.deleteClassification = function (id) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/classifications/' + id));
+};
+
+ManagerAPI.editClassification = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/classifications/' + id, data));
+};
+
+ManagerAPI.importClassifications = function (file) {
+    return (/* istanbul ignore next */_Api2.default.sendFile('/api/service/classifications/import', file));
+};
+
+ManagerAPI.getClassificationsCount = function (count_type) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/classifications/classifications_count.json', count_type));
+};
+
+ManagerAPI.fetchClassificationsGroups = function (filter) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/classification_groups', filter));
+};
+
+ManagerAPI.fetchClassificationsGroupsList = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/classification_groups/list.json'));
+};
+
+ManagerAPI.fetchClassificationGroup = function (id) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/classification_groups/' + id));
+};
+
+ManagerAPI.addClassificationGroup = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/service/classification_groups', data));
+};
+
+ManagerAPI.deleteClassificationGroup = function (id) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/classification_groups/' + id));
+};
+
+ManagerAPI.editClassificationGroup = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/classification_groups/' + id, data));
+};
+
+ManagerAPI.removeClassificationGroup = function (id, parentId) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/classification_groups/' + parentId + '/children/' + id));
+};
+
+ManagerAPI.addClassificationGroupChild = function (parentId, data) {
+    return (/* istanbul ignore next */_Api2.default.post( /* istanbul ignore next */'/api/service/classification_groups/' + parentId + '/children', data));
+}; /* istanbul ignore next */exports.default =
+
+ManagerAPI;

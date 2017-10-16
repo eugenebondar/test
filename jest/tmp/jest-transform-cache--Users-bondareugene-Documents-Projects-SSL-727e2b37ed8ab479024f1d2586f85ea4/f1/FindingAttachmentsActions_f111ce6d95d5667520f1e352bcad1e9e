@@ -1,0 +1,18 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_api = require('../../Models/FindingAttachments/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_getUserType = require('../../Utils/getUserType'); /* istanbul ignore next */var _getUserType2 = _interopRequireDefault(_getUserType);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var FindingAttachmentsActions = {
+    initPage: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+FindingAttachmentsActions.initPage.listen(function (runId, findingId, isService) {/* istanbul ignore next */var _this = this;
+    var userType = /* istanbul ignore next */(0, _getUserType2.default)(isService);
+    /* istanbul ignore next */_api2.default[userType].getAttachments(runId, findingId).
+    then(function (json) {
+        (!json.error ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(json);
+    });
+}); /* istanbul ignore next */exports.default =
+
+FindingAttachmentsActions;

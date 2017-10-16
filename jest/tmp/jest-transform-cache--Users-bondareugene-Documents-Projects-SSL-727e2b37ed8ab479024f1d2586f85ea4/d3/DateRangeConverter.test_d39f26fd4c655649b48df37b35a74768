@@ -1,0 +1,212 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_DateRangeConverter = require('./DateRangeConverter'); /* istanbul ignore next */var _DateRangeConverter2 = _interopRequireDefault(_DateRangeConverter);
+var /* istanbul ignore next */_moment = require('moment'); /* istanbul ignore next */var _moment2 = _interopRequireDefault(_moment);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('DateRangeConverter', function () {
+    describe('when start equals end', function () {
+        var start = /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:00:00Z');
+        var end = /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:00:00Z');
+        /** @type DateRangeConverter */
+        var converter = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            converter = new /* istanbul ignore next */_DateRangeConverter2.default(start, end);
+        });
+
+        describe('toMaxNumberRange', function () {
+            it('returns 1 - which gives two slider points if min is 0', function () {
+                expect(converter.toMaxNumberRange()).toBe(1);
+            });
+        });
+
+        describe('toDateRange', function () {
+            describe('when rangeStart=0 and rangeEnd=1', function () {
+                it('returns original start and end', function () {/* istanbul ignore next */var _converter$toDateRang =
+                    converter.toDateRange(0, 1),resultStart = _converter$toDateRang.start,resultEnd = _converter$toDateRang.end;
+                    expect(resultStart).toBe(start);
+                    expect(resultEnd).toBe(end);
+                });
+            });
+            describe('when rangeStart=0 and rangeEnd=0', function () {
+                it('returns original start and end', function () {/* istanbul ignore next */var _converter$toDateRang2 =
+                    converter.toDateRange(0, 0),resultStart = _converter$toDateRang2.start,resultEnd = _converter$toDateRang2.end;
+                    expect(resultStart).toBe(start);
+                    expect(resultEnd).toBe(end);
+                });
+            });
+            describe('when rangeStart=1 and rangeEnd=1', function () {
+                it('returns original start and end', function () {/* istanbul ignore next */var _converter$toDateRang3 =
+                    converter.toDateRange(1, 1),resultStart = _converter$toDateRang3.start,resultEnd = _converter$toDateRang3.end;
+                    expect(resultStart).toBe(start);
+                    expect(resultEnd).toBe(end);
+                });
+            });
+        });
+
+        describe('toSelectedRange', function () {
+            describe('when start=start and end=end', function () {
+                it('returns [0,1]', function () {
+                    var result = converter.toSelectedRange(start, end);
+                    expect(result[0]).toBe(0);
+                    expect(result[1]).toBe(1);
+                });
+            });
+            describe('when start=start and end=end+1minute', function () {
+                it('returns [0,1]', function () {
+                    var result = converter.toSelectedRange(start, /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:01:00Z'));
+                    expect(result[0]).toBe(0);
+                    expect(result[1]).toBe(1);
+                });
+            });
+            describe('when start=start-1minute and end=end', function () {
+                it('returns [0,1]', function () {
+                    var result = converter.toSelectedRange( /* istanbul ignore next */(0, _moment2.default)('2017-05-20T11:59:00Z'), end);
+                    expect(result[0]).toBe(0);
+                    expect(result[1]).toBe(1);
+                });
+            });
+        });
+    });
+
+    describe('when diff between start and end is 10 minutes', function () {
+        var start = /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:00:00Z');
+        var end = /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:10:00Z');
+        var converter = /* istanbul ignore next */void 0;
+        beforeAll(function () {
+            converter = new /* istanbul ignore next */_DateRangeConverter2.default(start, end);
+        });
+        describe('toMaxNumberRange', function () {
+            it('returns 10 - one for every minute', function () {
+                expect(converter.toMaxNumberRange()).toBe(10);
+            });
+        });
+        describe('toSelectedRange', function () {
+            describe('when start=start and end=end', function () {
+                it('returns [0,10]', function () {
+                    var result = converter.toSelectedRange(start, end);
+                    expect(result[0]).toBe(0);
+                    expect(result[1]).toBe(10);
+                });
+            });
+            describe('when start=start and end=start+5minutes', function () {
+                it('returns [0,5]', function () {
+                    var result = converter.toSelectedRange(start, /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:05:00Z'));
+                    expect(result[0]).toBe(0);
+                    expect(result[1]).toBe(5);
+                });
+            });
+            describe('when start=start+5minutes and end=end', function () {
+                it('returns [5,10]', function () {
+                    var result = converter.toSelectedRange( /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:05:00Z'), end);
+                    expect(result[0]).toBe(5);
+                    expect(result[1]).toBe(10);
+                });
+            });
+            describe('when start=start and end=end+1minute', function () {
+                it('returns [0,10]', function () {
+                    var result = converter.toSelectedRange(start, /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:11:00Z'));
+                    expect(result[0]).toBe(0);
+                    expect(result[1]).toBe(10);
+                });
+            });
+            describe('when start=start-1minute and end=end', function () {
+                it('returns [0,10]', function () {
+                    var result = converter.toSelectedRange( /* istanbul ignore next */(0, _moment2.default)('2017-05-20T11:59:00Z'), end);
+                    expect(result[0]).toBe(0);
+                    expect(result[1]).toBe(10);
+                });
+            });
+        });
+    });
+
+    describe('when diff between start and end is 60 minutes', function () {
+        var start = /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:00:00Z');
+        var end = /* istanbul ignore next */(0, _moment2.default)('2017-05-20T13:00:00Z');
+        var converter = /* istanbul ignore next */void 0;
+        beforeAll(function () {
+            converter = new /* istanbul ignore next */_DateRangeConverter2.default(start, end);
+        });
+        describe('toMaxNumberRange', function () {
+            it('returns 60 - one for every minute', function () {
+                expect(converter.toMaxNumberRange()).toBe(60);
+            });
+        });
+
+        describe('toDateRange', function () {
+            describe('when rangeStart=0 and rangeEnd=60', function () {
+                it('returns original start and end', function () {/* istanbul ignore next */var _converter$toDateRang4 =
+                    converter.toDateRange(0, 60),resultStart = _converter$toDateRang4.start,resultEnd = _converter$toDateRang4.end;
+                    expect(resultStart.toISOString()).toBe(start.toISOString());
+                    expect(resultEnd.toISOString()).toBe(end.toISOString());
+                });
+            });
+            describe('when rangeStart=0 and rangeEnd=30', function () {
+                it('end part is 30 minutes later then min start', function () {/* istanbul ignore next */var _converter$toDateRang5 =
+                    converter.toDateRange(0, 30),resultEnd = _converter$toDateRang5.end;
+                    expect(resultEnd.toISOString()).toBe(start.clone().add(30, 'minutes').toISOString());
+                });
+            });
+            describe('when rangeStart=30 and rangeEnd=60', function () {
+                it('start part is 30 minutes later then min start', function () {/* istanbul ignore next */var _converter$toDateRang6 =
+                    converter.toDateRange(30, 60),resultStart = _converter$toDateRang6.start;
+                    expect(resultStart.toISOString()).toBe(start.clone().add(30, 'minutes').toISOString());
+                });
+            });
+        });
+    });
+
+    describe('when diff between start and end is 100 minutes', function () {
+        var start = /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:00:00Z');
+        var end = /* istanbul ignore next */(0, _moment2.default)('2017-05-20T13:40:00Z');
+        var converter = /* istanbul ignore next */void 0;
+        beforeAll(function () {
+            converter = new /* istanbul ignore next */_DateRangeConverter2.default(start, end);
+        });
+        describe('toMaxNumberRange', function () {
+            it('returns 100 - because it`s a maximum', function () {
+                expect(converter.toMaxNumberRange()).toBe(100);
+            });
+        });
+
+        describe('when rangeStart=45 and rangeEnd=46', function () {
+            var result = /* istanbul ignore next */void 0;
+            beforeAll(function () {
+                result = converter.toDateRange(45, 46);
+            });
+
+            it('start part is 45 minutes later then min start', function () {
+                expect(result.start.toISOString()).toBe(start.clone().add(45, 'minutes').toISOString());
+            });
+            it('end part is 46 minutes later then min start', function () {
+                expect(result.start.toISOString()).toBe(start.clone().add(45, 'minutes').toISOString());
+            });
+        });
+    });
+
+    describe('when diff between start and end is 10 days', function () {
+        var start = /* istanbul ignore next */(0, _moment2.default)('2017-05-20T12:00:00Z');
+        var end = /* istanbul ignore next */(0, _moment2.default)('2017-05-30T12:00:00Z');
+        var converter = /* istanbul ignore next */void 0;
+        beforeAll(function () {
+            converter = new /* istanbul ignore next */_DateRangeConverter2.default(start, end);
+        });
+        describe('toMaxNumberRange', function () {
+            it('returns 100 - because it`s a maximum', function () {
+                expect(converter.toMaxNumberRange()).toBe(100);
+            });
+        });
+
+        describe('when rangeStart=1 and rangeEnd=2', function () {
+            var result = /* istanbul ignore next */void 0;
+            beforeAll(function () {
+                result = converter.toDateRange(1, 2);
+            });
+
+            it('1 step from 0 equal 144 minutes later than min start', function () {
+                expect(result.start.toISOString()).toBe(start.clone().add(144, 'minutes').toISOString());
+            });
+            it('2 steps from 0 equals 288 minutes later than min start', function () {
+                expect(result.end.toISOString()).toBe(start.clone().add(288, 'minutes').toISOString());
+            });
+        });
+    });
+});

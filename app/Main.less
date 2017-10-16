@@ -1,0 +1,68 @@
+@import 'grid';
+@import 'MainTheme';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 300;
+  margin-bottom: 35px;
+}
+
+.footer {
+  background-color: #f2f2f2;
+  flex: 0 0 auto;
+  padding: 15px 0;
+}
+
+.footer li {
+  display: inline-block;
+  margin-right: 15px;
+}
+.footer li a {
+  color: #222222;
+  opacity: 0.6;
+  text-decoration: none;
+}
+.footer li a:hover {
+  text-decoration: underline;
+}
+
+.app__wrapper, .container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main__wrap {
+  flex: 1 0 auto;
+}
+.app__content {
+  padding: 25px 0;
+}

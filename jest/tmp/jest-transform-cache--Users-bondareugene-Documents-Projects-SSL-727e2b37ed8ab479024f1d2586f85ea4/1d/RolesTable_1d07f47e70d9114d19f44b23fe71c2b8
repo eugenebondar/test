@@ -1,0 +1,51 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+
+
+RolesTable;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactSanfona = require('react-sanfona');var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_index = require('../../Shared/TableBoard/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);var /* istanbul ignore next */_index3 = require('../../Shared/Preloader/index'); /* istanbul ignore next */var _index4 = _interopRequireDefault(_index3);var /* istanbul ignore next */_TableBoardPagination = require('../../Shared/TableBoardPagination/TableBoardPagination'); /* istanbul ignore next */var _TableBoardPagination2 = _interopRequireDefault(_TableBoardPagination);var /* istanbul ignore next */_rolesConfig = require('./rolesConfig'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function RolesTable( /* istanbul ignore next */_ref) {/* istanbul ignore next */var actionsTrigger = _ref.actionsTrigger,data = _ref.data,onAddRole = _ref.onAddRole,paginationProps = _ref.paginationProps;
+    if (!data) {
+        return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index4.default, /* istanbul ignore next */null));
+    }
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'categories-panel' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 1 },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: /* istanbul ignore next */(0, _counterpart2.default)('roles.title'), slug: 1 },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'users-controls-wrap' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'sc-btn sc-btn-primary', onClick: onAddRole },
+                            /* istanbul ignore next */(0, _counterpart2.default)('actions.addRole'))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'tests-expand-content' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: paginationProps },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                className: 'categories-table table',
+                                data: data,
+                                columnConfig: /* istanbul ignore next */_rolesConfig.columnConfig,
+                                actions: /* istanbul ignore next */_rolesConfig.actions,
+                                actionsTrigger: actionsTrigger,
+                                emptyTableTitle: /* istanbul ignore next */(0, _counterpart2.default)('roles.noRoles') })))))));
+
+
+
+
+
+
+
+}
+
+RolesTable.propTypes = {
+    data: /* istanbul ignore next */_react2.default.PropTypes.array.isRequired,
+    onAddRole: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    actionsTrigger: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    paginationProps: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        currentPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        itemsPerPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        totalItems: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+        itemsName: /* istanbul ignore next */_react2.default.PropTypes.string }).
+    isRequired };

@@ -1,0 +1,53 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};exports.default =
+
+
+
+
+
+
+
+
+TableBoardPagination;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_apocReact = require('apoc-react');var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);var /* istanbul ignore next */_TableBoardPaginationTitle = require('./TableBoardPaginationTitle'); /* istanbul ignore next */var _TableBoardPaginationTitle2 = _interopRequireDefault(_TableBoardPaginationTitle);var /* istanbul ignore next */_TableBoardPaginationAmount = require('./TableBoardPaginationAmount'); /* istanbul ignore next */var _TableBoardPaginationAmount2 = _interopRequireDefault(_TableBoardPaginationAmount); /* istanbul ignore next */require('./TableBoardPagination.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function TableBoardPagination( /* istanbul ignore next */_ref) {/* istanbul ignore next */var children = _ref.children,pagination = _ref.pagination,_ref$className = _ref.className,className = _ref$className === undefined ? '' : _ref$className;
+    var pageAmount = Math.ceil(pagination.totalItems / pagination.itemsPerPage);
+    var shouldShowPagination = pageAmount > 1;
+    var shouldShowPageAmount = pagination.totalItems > 0;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: /* istanbul ignore next */(0, _classnames2.default)('table-board-pagination', className) },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'table-pagination-wrapper' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPaginationTitle2.default, /* istanbul ignore next */{
+                    currentPage: pagination.currentPage,
+                    itemsPerPage: pagination.itemsPerPage,
+                    totalItems: pagination.totalItems,
+                    itemsName: pagination.itemsName }),
+
+                shouldShowPagination && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Pagination, /* istanbul ignore next */_extends({ key: pagination.totalItems }, pagination))),
+
+            children,
+            shouldShowPageAmount &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPaginationAmount2.default, /* istanbul ignore next */{
+                currentPage: pagination.currentPage,
+                pageAmount: pageAmount })));
+
+
+
+
+}
+
+TableBoardPagination.propTypes = {
+    pagination: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        /**
+                                                                             * passed to apoc react pagination
+                                                                             */
+        currentPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        /**
+                                                                                             * passed to apoc react pagination
+                                                                                             */
+        itemsPerPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        /**
+                                                                                              * passed to apoc react pagination
+                                                                                              */
+        totalItems: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired }),
+
+    children: /* istanbul ignore next */_react2.default.PropTypes.node,
+    className: /* istanbul ignore next */_react2.default.PropTypes.string };

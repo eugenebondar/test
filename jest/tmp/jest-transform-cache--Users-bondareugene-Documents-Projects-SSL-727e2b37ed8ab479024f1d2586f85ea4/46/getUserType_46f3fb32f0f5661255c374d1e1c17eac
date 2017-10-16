@@ -1,0 +1,8 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+getUserType; /**
+              * @param {boolean} [isService]
+              * @return {string|} type of user
+              */function getUserType(isService) {return isService ? 'service' : 'customer';}

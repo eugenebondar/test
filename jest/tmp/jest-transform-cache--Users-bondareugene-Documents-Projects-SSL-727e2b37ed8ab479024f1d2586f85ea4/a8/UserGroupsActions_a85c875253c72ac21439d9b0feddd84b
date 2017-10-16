@@ -1,0 +1,21 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.fetchListOfRoles = exports.fetchUsers = exports.deleteGroup = exports.editGroup = exports.addGroup = exports.fetchGroup = exports.fetchGroups = undefined;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var fetchGroups = /* istanbul ignore next */exports.fetchGroups = 'fetchGroups';
+var fetchGroup = /* istanbul ignore next */exports.fetchGroup = 'fetchGroup';
+var addGroup = /* istanbul ignore next */exports.addGroup = 'addGroup';
+var editGroup = /* istanbul ignore next */exports.editGroup = 'editGroup';
+var deleteGroup = /* istanbul ignore next */exports.deleteGroup = 'deleteGroup';
+var fetchUsers = /* istanbul ignore next */exports.fetchUsers = 'fetchUsers';
+var fetchListOfRoles = /* istanbul ignore next */exports.fetchListOfRoles = 'fetchListOfRoles';
+
+var UserGroupsActions = /* istanbul ignore next */_reflux2.default.createActions([
+fetchGroups,
+fetchGroup,
+addGroup,
+editGroup,
+deleteGroup,
+fetchUsers,
+fetchListOfRoles]); /* istanbul ignore next */exports.default =
+
+
+UserGroupsActions;

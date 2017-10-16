@@ -1,0 +1,28 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};exports.default =
+
+
+
+
+
+
+
+
+
+createLoadingDialog;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);var /* istanbul ignore next */_apocReact = require('apoc-react'); /* istanbul ignore next */require('./LoadingModalDialog.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @param {React.Component} [WrapperComponent] - component in which content should be wrapped
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @returns {React.Component}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */function createLoadingDialog(WrapperComponent) {function LoadingModalComponent( /* istanbul ignore next */_ref) {/* istanbul ignore next */var loading = _ref.loading,className = _ref.className,props = _objectWithoutProperties(_ref, ['loading', 'className']);var modifiedClassName = /* istanbul ignore next */(0, _classnames2.default)(className, { 'loading-modal-dialog': true,
+            'loading-modal-dialog--idle': !loading,
+            'loading-modal-dialog--loading': loading });
+
+        return (/* istanbul ignore next */_react2.default.createElement(WrapperComponent, /* istanbul ignore next */_extends({}, props, { className: modifiedClassName })));
+    }
+
+    LoadingModalComponent.propTypes = /* istanbul ignore next */_extends({},
+    /* istanbul ignore next */_apocReact.Modal.propTypes, {
+        loading: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        className: /* istanbul ignore next */_react2.default.PropTypes.string });
+
+
+    return LoadingModalComponent;
+}

@@ -1,0 +1,12 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _fieldNameByGroupingV;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var groupingValues = {
+    UNGROUPED: 'UNGROUPED',
+    BY_CLASSIFICATION: 'BY_CLASSIFICATION',
+    BY_LOCATION: 'BY_LOCATION' };
+
+
+var fieldNameByGroupingValue = /* istanbul ignore next */exports.fieldNameByGroupingValue = (_fieldNameByGroupingV = {}, _defineProperty(_fieldNameByGroupingV,
+groupingValues.BY_LOCATION, 'location'), _defineProperty(_fieldNameByGroupingV,
+groupingValues.BY_CLASSIFICATION, 'classification_id'), _fieldNameByGroupingV); /* istanbul ignore next */exports.default =
+
+
+groupingValues;

@@ -1,0 +1,242 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactAddonsTestUtils = require('react-addons-test-utils'); /* istanbul ignore next */var _reactAddonsTestUtils2 = _interopRequireDefault(_reactAddonsTestUtils);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_reactRouter = require('react-router');
+var /* istanbul ignore next */_index = require('./index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var history = /* istanbul ignore next */(0, _reactRouter.createMemoryHistory)('/external-runs/1');
+
+var routes = [{
+    path: '/external-runs/:id',
+    component: /* istanbul ignore next */_react2.default.createClass({ /* istanbul ignore next */
+        render: function render() {
+            return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null, this.props.children));
+        } },
+
+    {
+        path: '*',
+        onEnter: '/' }) }];
+
+
+
+
+describe('TableBoard', function () {
+    var props = /* istanbul ignore next */void 0,component = /* istanbul ignore next */void 0,route = /* istanbul ignore next */void 0,state = /* istanbul ignore next */void 0,user = /* istanbul ignore next */void 0,context = /* istanbul ignore next */void 0;
+    user = {
+        user_type: 'staff',
+        permissions: [] };
+
+    var mountRoute = function mountRoute() {
+        route = /* istanbul ignore next */_reactAddonsTestUtils2.default.renderIntoDocument( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Router, /* istanbul ignore next */{ routes: routes, history: history }));
+    },
+    mountComponent = function mountComponent() {
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ params: props }), {
+            context: context,
+            childContextTypes: {
+                currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default),
+                router: /* istanbul ignore next */_react2.default.PropTypes.object } });
+
+
+    };
+    beforeEach(function () {
+        props = {
+            id: '1' };
+
+        context = {
+            currentUser: new /* istanbul ignore next */_User2.default(user),
+            router: {
+                push: function /* istanbul ignore next */push() {},
+                createHref: function /* istanbul ignore next */createHref() {} } };
+
+
+        state = {};
+    });
+
+    it('route will be defined', function () {
+        mountRoute();
+        expect(route.state.location.pathname).toEqual('/external-runs/1');
+    });
+
+    describe('route will be redirected to home ', function () {
+        it('with undefined id', function () {
+            props.id = undefined;
+            mountComponent();
+
+            var inst = component.instance();
+            spyOn(inst, 'redirectToHome');
+            inst.checkPossibilityToView({ params: props }, context);
+            expect(inst.redirectToHome).toHaveBeenCalledTimes(1);
+        });
+
+        it('with user type "customer"', function () {
+            user.user_type = 'customer';
+            context.currentUser = new /* istanbul ignore next */_User2.default(user);
+            mountComponent();
+
+            var inst = component.instance();
+            spyOn(inst, 'redirectToHome');
+            inst.checkPossibilityToView({ params: props }, context);
+            expect(inst.redirectToHome).toHaveBeenCalledTimes(1);
+        });
+    });
+
+    it('component will be mounted only for service user', function () {
+        mountRoute();
+        mountComponent();
+
+        expect(component.find('.external-runs-page').length).toBe(0);
+        component.setState({ testDetails: [] });
+        expect(component.find('.external-runs-page').length).toBe(1);
+    });
+
+    it('component will show Preloader during fetching new data', function () {
+        mountRoute();
+        mountComponent();
+        expect(component.find('.preloading__wrap').length).toBe(0);
+        component.setState({ testDetails: [], isImportingNow: true, isImportExternal: true });
+        expect(component.find('.preloading__wrap').length > 0).toBeTruthy();
+    });
+
+    it('component will show external Runs table', function () {
+        mountRoute();
+        mountComponent();
+        expect(component.find('.external-runs-table').length).toBe(0);
+        component.setState({ testDetails: [], externalRuns: [] });
+        expect(component.find('.external-runs-table').length).toBe(1);
+    });
+    //
+    // it('checkForOneOfPermissions functions works correct', () => {
+    //     mountRoute();
+    //     component = mount(<ExternalRuns params={props}/>);
+    //     let inst = component.instance(),
+    //         result = undefined,
+    //         permission = ['import_external_runs'],
+    //         permissions = ['import_external_runs', 'add_findings'];
+    //
+    //     result = inst.checkForOneOfPermissions(permission, permissions);
+    //     expect(result).toBeTruthy();
+    //
+    //     permissions = ['add_findings'];
+    //     result = inst.checkForOneOfPermissions(permission, permissions);
+    //     expect(result).toBeFalsy();
+    //
+    //     component.setState({userPermissions: ['import_external_runs', 'add_findings']});
+    //     result = inst.checkForOneOfPermissions(permission);
+    //     expect(result).toBeTruthy();
+    // });
+    //
+    // it('importFinding functions opens import findings popup', () => {
+    //     mountRoute();
+    //     component = mount(<ExternalRuns params={props}/>);
+    //     let inst = component.instance();
+    //
+    //     component.setState({isImportExternal: false});
+    //     inst.importFinding();
+    //     expect(component.state().importDialogConfig).toBeNull();
+    //
+    //     component.setState({isImportExternal: true});
+    //     inst.importFinding();
+    //     expect(component.state().importDialogConfig).not.toBeNull();
+    // });
+    //
+    // it('getSources returns array with source', () => {
+    //     mountRoute();
+    //     component = mount(<ExternalRuns params={props}/>);
+    //     let inst = component.instance();
+    //     let result = inst.getSources();
+    //
+    //     expect(result.length).toEqual(2);
+    //     expect(result[0]).toEqual({name: 'Hailstorm'});
+    //     expect(result[1]).toEqual({name: 'Nessus'});
+    // });
+    //
+    // it('importTrigger works correct', () => {
+    //     mountRoute();
+    //     component = mount(<ExternalRuns params={props}/>);
+    //     component.setState({importDialogConfig: {}});
+    //     let inst = component.instance();
+    //
+    //     component.setState({isImportExternal: true});
+    //     inst.importFinding();
+    //     expect(inst.state.isImportingNow).not.toBeTruthy();
+    //
+    //     inst.importTrigger();
+    //     expect(inst.state.isImportingNow).toBeTruthy();
+    // });
+    //
+    // it('fetchExternalRuns works correct', () => {
+    //     let ExternalRunsActions = require('../../Actions').ExternalRunsActions;
+    //     mountRoute();
+    //     component = mount(<ExternalRuns params={props}/>);
+    //     let inst = component.instance();
+    //
+    //     spyOn(ExternalRunsActions, 'getExternalRuns');
+    //     inst.fetchExternalRuns();
+    //     expect(ExternalRunsActions.getExternalRuns).toHaveBeenCalledTimes(1);
+    //     expect(ExternalRunsActions.getExternalRuns).toHaveBeenCalledWith(inst.props.params.id);
+    // });
+    //
+    // it('fetchTestDetails works correct', () => {
+    //     let TestDetailsActions = require('../../Actions').TestDetailsActions;
+    //     mountRoute();
+    //     component = mount(<ExternalRuns params={props}/>);
+    //     let inst = component.instance();
+    //
+    //     spyOn(TestDetailsActions, 'fetchTestDetails');
+    //     inst.fetchTestDetails('123');
+    //     expect(TestDetailsActions.fetchTestDetails).toHaveBeenCalledTimes(1);
+    //     expect(TestDetailsActions.fetchTestDetails).toHaveBeenCalledWith('123');
+    // });
+    //
+    // it('findIndexById returns correct value', () => {
+    //     mountRoute();
+    //     component = mount(<ExternalRuns params={props}/>);
+    //     let inst = component.instance(),
+    //         Array = [{id: '00'}, {id: '22'}, {id: '11'}],
+    //         index = '22',
+    //         result;
+    //
+    //     result = inst.findIndexById(Array, index);
+    //     expect(result).toBe(1);
+    // });
+    //
+    // it('_listenExternalRunsStore listener works correct ', () => {
+    //     mountRoute();
+    //     props.id = '00';
+    //     component = mount(<ExternalRuns params={props}/>);
+    //     let currentRun = {test_id: '11'};
+    //     component.setState({currentRun: currentRun, testDetails: []});
+    //     let inst = component.instance(),
+    //         event = 'externalRuns',
+    //         data = [{id: '00', test_id: '000'}, {id: '22'}, {id: '11'}];
+    //
+    //     inst._listenExternalRunsStore(event, data);
+    //     expect(inst.state.currentRun).toEqual(currentRun);
+    //
+    //     component.setState({testDetails: null});
+    //     inst._listenExternalRunsStore(event, data);
+    //     expect(inst.state.currentRun).toEqual(data[0]);
+    // });
+    //
+    // it('_listenTestDetailsStore listener works correct ', () => {
+    //     mountRoute();
+    //     component = mount(<ExternalRuns params={props}/>);
+    //     let inst = component.instance(),
+    //         event = 'siteTestDetailsInfo',
+    //         data = null;
+    //
+    //     inst._listenTestDetailsStore(event, data);
+    //     expect(inst.state.testDetails).toEqual(data);
+    //
+    //     spyOn(inst, 'fetchExternalRuns');
+    //     event = 'findingsImported';
+    //     inst._listenTestDetailsStore(event, data);
+    //     expect(inst.fetchExternalRuns).toHaveBeenCalledTimes(0);
+    //
+    //     event = 'findingsImported';
+    //     data = [{id: '00', test_id: '000'}];
+    //     inst._listenTestDetailsStore(event, data);
+    //     expect(inst.fetchExternalRuns).toHaveBeenCalledTimes(1);
+    // });
+});

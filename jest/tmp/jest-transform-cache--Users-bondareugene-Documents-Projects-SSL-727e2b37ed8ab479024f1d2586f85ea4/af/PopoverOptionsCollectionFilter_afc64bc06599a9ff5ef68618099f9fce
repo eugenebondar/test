@@ -1,0 +1,97 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+
+var /* istanbul ignore next */_LoadingPopoverFilter = require('./LoadingPopoverFilter'); /* istanbul ignore next */var _LoadingPopoverFilter2 = _interopRequireDefault(_LoadingPopoverFilter);
+var /* istanbul ignore next */_PopoverFilterSection = require('./PopoverFilterSection'); /* istanbul ignore next */var _PopoverFilterSection2 = _interopRequireDefault(_PopoverFilterSection);
+var /* istanbul ignore next */_PopoverFilterSectionItem = require('./PopoverFilterSectionItem'); /* istanbul ignore next */var _PopoverFilterSectionItem2 = _interopRequireDefault(_PopoverFilterSectionItem);
+var /* istanbul ignore next */_MaxHeightGuard = require('../MaxHeightGuard/MaxHeightGuard'); /* istanbul ignore next */var _MaxHeightGuard2 = _interopRequireDefault(_MaxHeightGuard);
+var /* istanbul ignore next */_deepEqual = require('deep-equal'); /* istanbul ignore next */var _deepEqual2 = _interopRequireDefault(_deepEqual);
+
+/* istanbul ignore next */require('./PopoverOptionsCollectionFilter.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}
+
+var PopoverOptionsCollectionFilter = /* istanbul ignore next */_react2.default.createClass({
+    displayName: 'PopoverOptionsCollectionFilter',
+    propTypes: {
+        updateFilter: /* istanbul ignore next */_react2.default.PropTypes.func,
+        className: /* istanbul ignore next */_react2.default.PropTypes.string,
+        isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        /**@type {Object.<String,String[]>} */
+        filter: /* istanbul ignore next */_react2.default.PropTypes.object,
+        isDisabled: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        /**@type {Object.<String,Number|String>} */
+        counts: /* istanbul ignore next */_react2.default.PropTypes.object,
+        filterOptionsBySection: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+            title: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+            /* istanbul ignore next */_react2.default.PropTypes.string,
+            /* istanbul ignore next */_react2.default.PropTypes.node]),
+
+            name: /* istanbul ignore next */_react2.default.PropTypes.string,
+            options: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+                name: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+                /* istanbul ignore next */_react2.default.PropTypes.string,
+                /* istanbul ignore next */_react2.default.PropTypes.node]),
+
+                value: /* istanbul ignore next */_react2.default.PropTypes.string })) })) }, /* istanbul ignore next */
+
+
+
+    shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
+        return nextProps.isLoading !== this.props.isLoading ||
+        nextProps.isDisabled !== this.props.isDisabled ||
+        ! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.counts, this.props.counts) ||
+        ! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.filterOptionsBySection, this.props.filterOptionsBySection) ||
+        ! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.filter, this.props.filter);
+    }, /* istanbul ignore next */
+    render: function render() {/* istanbul ignore next */var _this = this;var _props =
+        this.props,filter = _props.filter,isDisabled = _props.isDisabled,filterOptionsBySection = _props.filterOptionsBySection,counts = _props.counts;
+        return (
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingPopoverFilter2.default, /* istanbul ignore next */{ disabled: isDisabled,
+                    isLoading: this.props.isLoading,
+                    className: /* istanbul ignore next */(0, _classnames2.default)('ssl-portal-popover-filter', this.props.className) },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_MaxHeightGuard2.default, /* istanbul ignore next */null,
+                    filterOptionsBySection.map(function (sectionFilterOptions) /* istanbul ignore next */{return (
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_PopoverFilterSection2.default, /* istanbul ignore next */{
+                                    key: sectionFilterOptions.name,
+                                    label: sectionFilterOptions.title,
+                                    name: sectionFilterOptions.name,
+                                    onChange: function /* istanbul ignore next */onChange(value) /* istanbul ignore next */{return (/* istanbul ignore next */_this.updateFilter(sectionFilterOptions.name, value));} },
+
+                                sectionFilterOptions.options.map(function (option) /* istanbul ignore next */{return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_PopoverFilterSectionItem2.default, /* istanbul ignore next */{
+                                            key: option.name,
+                                            label:
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'popover-filter-item-wrapper' },
+                                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'popover-filter-item' },
+                                                    option.name),
+
+                                                counts &&
+                                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'popover-filter-item-counter' }, /* istanbul ignore next */'(',
+                                                    counts[option.value] ? counts[option.value] : '0', /* istanbul ignore next */')')),
+
+
+
+
+                                            value: option.value,
+                                            checked: filter[sectionFilterOptions.name] && filter[sectionFilterOptions.name].includes(option.value),
+                                            disabled: !counts[option.value] }));})));}))));
+
+
+
+
+
+
+
+    }, /* istanbul ignore next */
+    /**
+                                   * @param {string} name
+                                   * @param {Map<boolean,string>} mapKeysValues
+                                   */
+    updateFilter: function updateFilter(name, mapKeysValues) {
+        var selectedOptionsNames = /* istanbul ignore next */[].concat(_toConsumableArray(mapKeysValues)).
+        filter(function ( /* istanbul ignore next */_ref) /* istanbul ignore next */{var _ref2 = _slicedToArray(_ref, 2),name = _ref2[0],isChecked = _ref2[1];return isChecked;}).
+        map(function ( /* istanbul ignore next */_ref3) /* istanbul ignore next */{var _ref4 = _slicedToArray(_ref3, 2),name = _ref4[0],isChecked = _ref4[1];return name;});
+
+        this.props.updateFilter(name, selectedOptionsNames);
+    } }); /* istanbul ignore next */exports.default =
+
+
+PopoverOptionsCollectionFilter;

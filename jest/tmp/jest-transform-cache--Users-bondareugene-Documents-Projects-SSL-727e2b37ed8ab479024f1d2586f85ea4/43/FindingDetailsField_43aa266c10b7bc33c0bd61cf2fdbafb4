@@ -1,0 +1,21 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+FindingDetailsField;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);var /* istanbul ignore next */_FieldValue = require('./FieldValue'); /* istanbul ignore next */var _FieldValue2 = _interopRequireDefault(_FieldValue);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function FindingDetailsField( /* istanbul ignore next */_ref) {/* istanbul ignore next */var value = _ref.value,translationKey = _ref.translationKey,_ref$className = _ref.className,className = _ref$className === undefined ? '' : _ref$className;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: /* istanbul ignore next */(0, _classnames2.default)('finding-details-field', className) },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)(translationKey), /* istanbul ignore next */': '),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FieldValue2.default, /* istanbul ignore next */{ value: value })));
+
+
+}
+
+FindingDetailsField.propTypes = {
+    translationKey: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    value: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+    /* istanbul ignore next */_react2.default.PropTypes.string,
+    /* istanbul ignore next */_react2.default.PropTypes.number]),
+
+    className: /* istanbul ignore next */_react2.default.PropTypes.string };

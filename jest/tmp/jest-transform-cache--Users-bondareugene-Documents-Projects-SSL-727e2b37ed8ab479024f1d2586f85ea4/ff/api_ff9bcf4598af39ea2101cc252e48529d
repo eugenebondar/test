@@ -1,0 +1,161 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_getNameSpacing = require('../../Utils/getNameSpacing'); /* istanbul ignore next */var _getNameSpacing2 = _interopRequireDefault(_getNameSpacing);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var ServiceAPI = {};
+
+/**
+                      * @Param {Object} filter
+                      * @return {Promise.<[]>}
+                      */
+ServiceAPI.fetchCustomers = function (filter) {
+  return (/* istanbul ignore next */_Api2.default.getFull('/api/service/organizations.json', filter));
+};
+
+/**
+    * @return {Promise.<[]>}
+    */
+ServiceAPI.fetchOrganizationsList = function () {
+  return (/* istanbul ignore next */_Api2.default.get('/api/service/organizations/list.json'));
+};
+
+/**
+    * @Param {string} customerId
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.fetchCustomer = function (customerId) {
+  return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/organizations/' + customerId));
+};
+
+/**
+    * @Param {string} customerId
+    * @Param {string} templateType
+    * @return {Promise.<[]>}
+    */
+ServiceAPI.fetchTemplates = function (customerId, templateType) {
+  return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/organizations/' + customerId + '/templates/' + templateType));
+};
+
+/**
+    * @Param {string} customerId
+    * @Param {Object} data
+    * @return {Promise.<[]>}
+    */
+ServiceAPI.setCustomerDefaultTemplates = function (customerId, data) {
+  return (/* istanbul ignore next */_Api2.default.post( /* istanbul ignore next */'/api/service/organizations/' + customerId + '/templates', data));
+};
+
+/**
+    * @Param {Object} data
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.addCustomer = function (data) {
+  return (/* istanbul ignore next */_Api2.default.post('/api/service/organizations', data));
+};
+
+/**
+    * @Param {Object} data
+    * @Param {string} customerId
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.updateCustomer = function (data, customerId) {
+  return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/organizations/' + customerId + '.json', data));
+};
+
+/**
+    * @Param {string} customerId
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.deleteCustomer = function (customerId) {
+  return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/organizations/' + customerId + '.json', customerId));
+};
+
+/**
+    * @Param {string} customerId
+    * @Param {Object} data
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.suspendCustomer = function (customerId, data) {
+  return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/organizations/' + customerId + '.json', data));
+};
+
+/**
+    * @Param {string} customerId
+    * @Param {Object} data
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.editBranding = function (customerId, data) {
+  return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/organizations/' + customerId + '.json', data));
+};
+
+/**
+    * @Param {string} customerId
+    * @Param {Object} data
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.editBrandingFile = function (customerId, data) {
+  return (/* istanbul ignore next */_Api2.default.updateForm( /* istanbul ignore next */'/api/service/organizations/' + customerId + '.json', data));
+};
+
+/**
+    * @Param {Object} data
+    * @return {Promise.<[]>}
+    */
+ServiceAPI.getTestAssigneeList = function () {
+  return (/* istanbul ignore next */_Api2.default.get('/api/service/users/service.json'));
+};
+
+/**
+    * @Param {Object} data
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.addNewTest = function (data) {
+  return (/* istanbul ignore next */_Api2.default.post('/api/service/tests.json', data));
+};
+
+/**
+    * @Param {Object} data
+    * @Param {string} testId
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.editTest = function (data, id) {
+  return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/tests/' + id, data));
+};
+
+/**
+    * @Param {string} testId
+    * @Param {Object} data
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.editTestAssignee = function (testId, data) {
+  return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/tests/' + testId + '/edit_assignee', data).then(function (response) /* istanbul ignore next */{return response.json();}));
+};
+
+/**
+    * @Param {string} testId
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.fetchTest = function (testId) {
+  return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/tests/' + testId));
+};
+
+/**
+    * @Param {string} testId
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.deleteTest = function (testId) {
+  return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/tests/' + testId));
+};
+
+/**
+    * @Param {string} testId
+    * @Param {boolean} isService
+    * @Param {Object} data
+    * @Param {boolean} isClaim
+    * @return {Promise.<{}>}
+    */
+ServiceAPI.addTestSettings = function (testId, isService, data, isClaim) {
+  var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+  return (/* istanbul ignore next */_Api2.default.post( /* istanbul ignore next */'/api/' + nameSpacing + 'tests/' + testId + '/configure' + (isClaim ? '_and_claim' : '') + '.json', data));
+}; /* istanbul ignore next */exports.default =
+
+ServiceAPI;

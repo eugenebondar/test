@@ -1,0 +1,58 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.ROLE_DIALOG_MODE = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _get = function get(object, property, receiver) {if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {var parent = Object.getPrototypeOf(object);if (parent === null) {return undefined;} else {return get(parent, property, receiver);}} else if ("value" in desc) {return desc.value;} else {var getter = desc.get;if (getter === undefined) {return undefined;}return getter.call(receiver);}};var /* istanbul ignore next */_reflux = require('reflux');
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_RoleDialogStore = require('./RoleDialogStore'); /* istanbul ignore next */var _RoleDialogStore2 = _interopRequireDefault(_RoleDialogStore);
+var /* istanbul ignore next */_RoleDialogActions = require('./RoleDialogActions'); /* istanbul ignore next */var _RoleDialogActions2 = _interopRequireDefault(_RoleDialogActions);
+
+var /* istanbul ignore next */_RoleDialog = require('./RoleDialog'); /* istanbul ignore next */var _RoleDialog2 = _interopRequireDefault(_RoleDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var ROLE_DIALOG_MODE = /* istanbul ignore next */exports.ROLE_DIALOG_MODE = {
+    NEW: 'NEW',
+    EDIT: 'EDIT' }; /* istanbul ignore next */var
+
+
+RoleDialogContainer = function (_Component) {_inherits(RoleDialogContainer, _Component);
+    function /* istanbul ignore next */RoleDialogContainer() {/* istanbul ignore next */_classCallCheck(this, RoleDialogContainer);var _this = _possibleConstructorReturn(this, (RoleDialogContainer.__proto__ || Object.getPrototypeOf(RoleDialogContainer)).call(this));
+
+        /* istanbul ignore next */_this.store = /* istanbul ignore next */_RoleDialogStore2.default;
+
+        /* istanbul ignore next */_this.onSubmit = /* istanbul ignore next */ /* istanbul ignore next */_this.onSubmit.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(RoleDialogContainer, [{ key: 'componentDidMount', value: function componentDidMount()
+
+        {/* istanbul ignore next */var _this2 = this,_ROLE_DIALOG_MODE$NEW;
+            var initAction = /* istanbul ignore next */(_ROLE_DIALOG_MODE$NEW = {}, _defineProperty(_ROLE_DIALOG_MODE$NEW,
+            ROLE_DIALOG_MODE.NEW, function () /* istanbul ignore next */{return (/* istanbul ignore next */_RoleDialogActions2.default.initNew());}), _defineProperty(_ROLE_DIALOG_MODE$NEW,
+            ROLE_DIALOG_MODE.EDIT, function () /* istanbul ignore next */{return (/* istanbul ignore next */_RoleDialogActions2.default.initEdit( /* istanbul ignore next */_this2.props.roleId));}), _ROLE_DIALOG_MODE$NEW)[
+            this.props.mode];
+            initAction();
+        } }, { key: 'componentWillUnmount', value: function componentWillUnmount()
+
+        {
+            /* istanbul ignore next */_get(RoleDialogContainer.prototype.__proto__ || Object.getPrototypeOf(RoleDialogContainer.prototype), 'componentWillUnmount', this).call(this);
+            /* istanbul ignore next */_RoleDialogActions2.default.destroy();
+        } }, { key: 'render', value: function render()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RoleDialog2.default, /* istanbul ignore next */_extends({},
+                this.state, {
+                    onSubmit: this.onSubmit,
+                    onClose: this.props.onClose,
+                    isEdit: this.props.mode === ROLE_DIALOG_MODE.EDIT })));
+
+
+        } }, { key: 'onSubmit', value: function onSubmit(
+
+        fields) {
+            if (this.props.mode === ROLE_DIALOG_MODE.NEW) {
+                /* istanbul ignore next */_RoleDialogActions2.default.createRole(fields);
+            } else {
+                /* istanbul ignore next */_RoleDialogActions2.default.editRole(fields.id, fields);
+            }
+        } }]);return RoleDialogContainer;}(_reflux.Component); /* istanbul ignore next */exports.default = RoleDialogContainer;
+
+
+RoleDialogContainer.propTypes = {
+    mode: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    roleId: /* istanbul ignore next */_react2.default.PropTypes.string };

@@ -1,0 +1,24 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;}; /**
+                                                                                                                                                                                                                                                                                                                                                                                * Type
+                                                                                                                                                                                                                                                                                                                                                                                * @module Validators/Type
+                                                                                                                                                                                                                                                                                                                                                                                * @version 1.0.0
+                                                                                                                                                                                                                                                                                                                                                                                *
+                                                                                                                                                                                                                                                                                                                                                                                * @author Yevhen Bondar
+                                                                                                                                                                                                                                                                                                                                                                                * @copyright (c) 2016 SeftServe.
+                                                                                                                                                                                                                                                                                                                                                                                */
+
+var isObject = /* istanbul ignore next */exports.isObject = function isObject(value) {
+    return value !== null && /* istanbul ignore next */(typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object';
+};
+
+var isString = /* istanbul ignore next */exports.isString = function isString(value) {
+    return typeof value === 'string';
+};
+
+var isFunction = /* istanbul ignore next */exports.isFunction = function isFunction(value) {
+    return typeof value === 'function';
+};
+
+var isArray = /* istanbul ignore next */exports.isArray = function isArray(value) {
+    return Object.prototype.toString.call(value) === '[object Array]';
+};

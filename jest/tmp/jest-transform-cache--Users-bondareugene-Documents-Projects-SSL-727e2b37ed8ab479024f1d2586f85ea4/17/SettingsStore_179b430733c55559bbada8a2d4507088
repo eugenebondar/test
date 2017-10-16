@@ -1,0 +1,202 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.sectionFormFields = exports.TEST_CATEGORIES = undefined;var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _settingsConfig;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_Actions = require('../Actions'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+var TEST_CATEGORIES = /* istanbul ignore next */exports.TEST_CATEGORIES = {
+    WEB_APPLICATION: 'web_application',
+    MOBILE_SINGE_OS: 'mobile_single_os',
+    MOBILE_MULTI_OS: 'mobile_multi_os',
+    MOBILE_SOURCE_CODE: 'mobile_source_code',
+    EMBEDDED_DEVICE: 'embedded_device',
+    SOURCE_CODE: 'source_code',
+    NETWORK: 'network',
+    WIRELESS: 'wireless' };
+
+
+var settingsConfig = /* istanbul ignore next */(_settingsConfig = {}, _defineProperty(_settingsConfig,
+TEST_CATEGORIES.WEB_APPLICATION, ['basicSettings', 'webAppSettings']), _defineProperty(_settingsConfig,
+TEST_CATEGORIES.MOBILE_SINGE_OS, ['basicSettings', 'mobileAppQuestions']), _defineProperty(_settingsConfig,
+TEST_CATEGORIES.MOBILE_MULTI_OS, ['basicSettings', 'mobileAppQuestions']), _defineProperty(_settingsConfig,
+TEST_CATEGORIES.MOBILE_SOURCE_CODE, ['basicSettings', 'staticCodeQuest']), _defineProperty(_settingsConfig,
+TEST_CATEGORIES.EMBEDDED_DEVICE, ['basicSettings', 'embedded']), _defineProperty(_settingsConfig,
+TEST_CATEGORIES.SOURCE_CODE, ['basicSettings', 'staticCodeQuest']), _defineProperty(_settingsConfig,
+TEST_CATEGORIES.NETWORK, ['basicSettings', 'testsTargets', 'network', 'infrastrAndComm']), _defineProperty(_settingsConfig,
+TEST_CATEGORIES.WIRELESS, ['basicSettings', 'wireless']), _settingsConfig);
+
+
+var sectionFormFields = /* istanbul ignore next */exports.sectionFormFields = {
+    basicSettings: {
+        default: {
+            environment: '',
+            primary_contact_name: '',
+            primary_contact_email: '',
+            primary_contact_phone: '',
+            primary_contact_mobile: '',
+            connectivity_contact_as_primary: true,
+            connectivity_contact_name: '',
+            connectivity_contact_email: '',
+            connectivity_contact_phone: '',
+            connectivity_contact_mobile: '',
+            usage_help_contact_as_primary: true,
+            usage_help_contact_name: '',
+            usage_help_contact_email: '',
+            usage_help_contact_phone: '',
+            usage_help_contact_mobile: '',
+            after_hours_contact_as_primary: true,
+            after_hours_contact_name: '',
+            after_hours_contact_email: '',
+            after_hours_contact_phone: '',
+            after_hours_contact_mobile: '',
+            comments: '' } },
+
+
+    webAppSettings: { /* istanbul ignore next */
+        fields: function fields() {/* istanbul ignore next */var custom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+            return (/* istanbul ignore next */_extends({
+                    urls_to_be_tested: '',
+                    other_hosts: '' },
+                custom, {
+                    number_of_forms: '',
+                    number_of_pages: '' }));
+
+        },
+        get default() {
+            return this.fields({
+                basic_user_1: '',
+                basic_user_1_password: '',
+                basic_user_2: '',
+                basic_user_2_password: '',
+                privileged_user_1: '',
+                privileged_user_1_password: '',
+                privileged_user_2: '',
+                privileged_user_2_password: '' });
+
+        },
+        get unmanaged() {
+            return this.fields({
+                login_page_url: '',
+                user_name: '',
+                password: '' });
+
+        } },
+
+    testsTargets: {
+        default: {
+            ip_addresses: '',
+            netmask: '',
+            default_gateway: '',
+            primary_intarnal_dns: '',
+            secondary_intarnal_dns: '' } },
+
+
+    network: {
+        default: {
+            workstations_in_scope: '',
+            servers_in_scope: '',
+            database: '',
+            file: '',
+            web: '',
+            other: '',
+            oses_on_workstations: '',
+            oses_on_servers: '',
+            user_roles_number: '',
+            how_files_stored_and_shared: '',
+            data_sensitiveness: '',
+            how_where_is_antivirus_used: '',
+            how_are_backups_performed: '',
+            how_are_removable_devices_managed: '',
+            dr_plan: '',
+            externally_available_services_number: '',
+            externally_available_services_types: '' } },
+
+
+    infrastrAndComm: {
+        default: {
+            switches_and_routers: '',
+            vlans_number: '',
+            mixed_networks_number: '',
+            egress_filtering: false,
+            dlp_solution_on_servers: false,
+            dlp_solution_on_workstations: false,
+            network_access_control: false } },
+
+
+    wireless: {
+        default: {
+            ip_addresses: '',
+            netmask: '',
+            default_gateway: '',
+            primary_intarnal_dns: '',
+            secondary_intarnal_dns: '',
+            how_are_wireless_users_managed: '',
+            byod_program: '',
+            organization_ssids: '',
+            guest_ssids: '',
+            encryption_and_authentication_measures: '',
+            wireless_ids_ips: '' } },
+
+
+    mobileAppQuestions: {
+        default: {
+            urls_to_be_tested: '',
+            other_hosts: '',
+            basic_user_1: '',
+            basic_user_1_password: '',
+            basic_user_2: '',
+            basic_user_2_password: '',
+            privileged_user_1: '',
+            privileged_user_1_password: '',
+            privileged_user_2: '',
+            privileged_user_2_password: '',
+            number_of_forms: '',
+            mobile_os: 'ios' } },
+
+
+    embedded: {
+        default: {
+            embedded: '' } },
+
+
+    staticCodeQuest: {
+        default: {
+            application_name: '',
+            application_version: '',
+            programming_languages: '',
+            lines_of_code: '',
+            number_of_files: '',
+            summary: '',
+            security_requirements: false,
+            design_documentation: false,
+            threat_model: false,
+            architectural_risk_assessment: false,
+            user_types_and_roles: '',
+            types_of_authentication: '',
+            sensitive_information: '' } } };
+
+
+
+
+/**
+                                              * @classdesc Class representing a SettingsUser Store.
+                                              * @class
+                                              */ /* istanbul ignore next */var
+
+SettingsStore = function (_Reflux$Store) {_inherits(SettingsStore, _Reflux$Store);
+    function /* istanbul ignore next */SettingsStore() {/* istanbul ignore next */_classCallCheck(this, SettingsStore);var _this = _possibleConstructorReturn(this, (SettingsStore.__proto__ || Object.getPrototypeOf(SettingsStore)).call(this));
+
+        /* istanbul ignore next */_this.listenToMany( /* istanbul ignore next */_Actions.SettingsActions); /* istanbul ignore next */return _this;
+    }_createClass(SettingsStore, [{ key: 'getSettingsConfig', value: function getSettingsConfig(
+
+        testCategoryName, testTypeName) {
+            var config = settingsConfig[testCategoryName].map(function (formSection) {
+                var fields = sectionFormFields[formSection][testTypeName] || sectionFormFields[formSection].default;
+                return {
+                    key: formSection,
+                    fields: fields };
+
+            });
+            this.trigger({ event: 'settingsConfig', data: config });
+        } }]);return SettingsStore;}( /* istanbul ignore next */_reflux2.default.Store); /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */_reflux2.default.initStore(SettingsStore);

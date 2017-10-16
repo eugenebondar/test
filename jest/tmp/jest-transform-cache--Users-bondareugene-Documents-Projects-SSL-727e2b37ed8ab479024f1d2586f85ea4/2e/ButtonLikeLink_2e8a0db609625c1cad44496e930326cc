@@ -1,0 +1,11 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};exports.default =
+
+
+
+ButtonLikeLink;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames); /* istanbul ignore next */require('./ButtonLikeLink.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}function ButtonLikeLink( /* istanbul ignore next */_ref) {/* istanbul ignore next */var className = _ref.className,props = _objectWithoutProperties(_ref, ['className']);
+    var finalClassName = /* istanbul ignore next */(0, _classnames2.default)('button-like-link', className);
+    return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */_extends({ className: finalClassName }, props)));
+}
+
+ButtonLikeLink.propTypes = {
+    className: /* istanbul ignore next */_react2.default.PropTypes.string };

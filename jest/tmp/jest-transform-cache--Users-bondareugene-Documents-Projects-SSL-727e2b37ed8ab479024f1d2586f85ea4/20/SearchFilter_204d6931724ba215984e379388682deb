@@ -1,0 +1,65 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_SearchInput = require('../Elements/SearchInput/SearchInput'); /* istanbul ignore next */var _SearchInput2 = _interopRequireDefault(_SearchInput);
+/* istanbul ignore next */require('./SearchFilter.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+SearchFilter = function (_React$Component) {_inherits(SearchFilter, _React$Component);
+    function /* istanbul ignore next */SearchFilter(props) {/* istanbul ignore next */_classCallCheck(this, SearchFilter);var _this = _possibleConstructorReturn(this, (SearchFilter.__proto__ || Object.getPrototypeOf(SearchFilter)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            filter: /* istanbul ignore next */_this.props.filter };
+
+        /* istanbul ignore next */_this.onKeyPress = /* istanbul ignore next */_this.onKeyPress.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.updateValue = /* istanbul ignore next */_this.updateValue.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.changeTrigger = /* istanbul ignore next */_this.changeTrigger.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(SearchFilter, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            if (this.props.filter !== nextProps.filter) {
+                this.setState({ filter: nextProps.filter });
+            }
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'search-filter' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SearchInput2.default, /* istanbul ignore next */{
+                        autoFocus: this.props.autoFocus,
+                        placeholder: this.props.placeholder,
+                        disabled: this.props.isDisabled,
+                        id: 'filter',
+                        onKeyPress: this.onKeyPress,
+                        onChange: this.updateValue,
+                        value: this.state.filter,
+                        onClear: function /* istanbul ignore next */onClear() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.setState({ filter: '' }, /* istanbul ignore next */_this2.changeTrigger));} })));
+
+
+
+        } }, { key: 'onKeyPress', value: function onKeyPress(
+
+        e) {
+            if (e.charCode === 13) {
+                this.changeTrigger();
+            }
+        } }, { key: 'updateValue', value: function updateValue(
+
+        e) {
+            this.setState({ filter: e.target.value });
+        } }, { key: 'changeTrigger', value: function changeTrigger()
+
+        {
+            this.props.updateFilter('search_by_name', this.state.filter);
+        } }]);return SearchFilter;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = SearchFilter;
+
+
+SearchFilter.defaultProps = {
+    autoFocus: true,
+    placeholder: '' };
+
+
+SearchFilter.propTypes = {
+    autoFocus: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    filter: /* istanbul ignore next */_react2.default.PropTypes.string,
+    placeholder: /* istanbul ignore next */_react2.default.PropTypes.string,
+    isDisabled: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    updateFilter: /* istanbul ignore next */_react2.default.PropTypes.func };

@@ -1,0 +1,74 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Input.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @module Shared/Elements/Input
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @version 1.0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @requires React
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @author Yevhen Bondar
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * @copyright (c) 2016 SoftServe.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */var Checkbox = function (_React$Component) {_inherits(Checkbox, _React$Component);function /* istanbul ignore next */Checkbox(props) {/* istanbul ignore next */_classCallCheck(this, Checkbox);var _this = _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).call(this, props)); /* istanbul ignore next */_this.onClick = /* istanbul ignore next */_this.onClick.bind( /* istanbul ignore next */_this); /* istanbul ignore next */_this.handleChange = /* istanbul ignore next */_this.handleChange.bind( /* istanbul ignore next */_this); /* istanbul ignore next */_this.onClickLabel = /* istanbul ignore next */_this.onClickLabel.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;}_createClass(Checkbox, [{ key: "render", value: function render()
+
+        {/* istanbul ignore next */var _props =
+            this.props,value = _props.value,label = _props.label;
+            var input =
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"input", /* istanbul ignore next */{ type: "checkbox",
+                onChange: this.handleChange,
+                onClick: this.onClick,
+                checked: value,
+                disabled: this.props.disabled });
+
+
+            if (label) {
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "checkbox-label-wrap" },
+                        input,
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"span", /* istanbul ignore next */{ onClick: this.onClickLabel }, label)));
+
+
+            }
+            return input;
+        } }, { key: "onClick", value: function onClick(
+
+        e) {/* istanbul ignore next */var
+            onClick = this.props.onClick;
+            if ('undefined' !== typeof onClick) {
+                onClick(e);
+            }
+        } }, { key: "handleChange", value: function handleChange(
+
+        e) {/* istanbul ignore next */var _props2 =
+            this.props,onChange = _props2.onChange,id = _props2.id,data = _props2.data;
+            var value = e.target.checked;
+            onChange(id, value, 'checkbox', data);
+        } }, { key: "onClickLabel", value: function onClickLabel()
+
+        {/* istanbul ignore next */var _props3 =
+            this.props,onChange = _props3.onChange,value = _props3.value,id = _props3.id,data = _props3.data;
+            onChange(id, !value, 'checkbox', data);
+        } }]);return Checkbox;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = Checkbox;
+
+
+Checkbox.propTypes = {
+    id: /* istanbul ignore next */_react2.default.PropTypes.string,
+    label: /* istanbul ignore next */_react2.default.PropTypes.string,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onClick: /* istanbul ignore next */_react2.default.PropTypes.func,
+    value: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    data: /* istanbul ignore next */_react2.default.PropTypes.any,
+    disabled: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+
+Checkbox.defaultProps = {
+    value: false,
+    data: null,
+    label: null };

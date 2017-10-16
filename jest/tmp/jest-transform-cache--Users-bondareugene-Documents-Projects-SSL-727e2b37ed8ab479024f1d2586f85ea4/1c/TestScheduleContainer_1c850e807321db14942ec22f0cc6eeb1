@@ -1,0 +1,87 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _get = function get(object, property, receiver) {if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {var parent = Object.getPrototypeOf(object);if (parent === null) {return undefined;} else {return get(parent, property, receiver);}} else if ("value" in desc) {return desc.value;} else {var getter = desc.get;if (getter === undefined) {return undefined;}return getter.call(receiver);}};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reflux = require('reflux');
+var /* istanbul ignore next */_TestScheduleStore = require('./TestScheduleStore'); /* istanbul ignore next */var _TestScheduleStore2 = _interopRequireDefault(_TestScheduleStore);
+var /* istanbul ignore next */_TestScheduleEditor = require('./TestScheduleEditor'); /* istanbul ignore next */var _TestScheduleEditor2 = _interopRequireDefault(_TestScheduleEditor);
+var /* istanbul ignore next */_Actions = require('./Actions');
+var /* istanbul ignore next */_scheduleHelpers = require('../../../Models/Tests/scheduleHelpers'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+TestScheduleEditorContainer = function (_Component) {_inherits(TestScheduleEditorContainer, _Component);
+
+
+
+
+
+
+    function /* istanbul ignore next */TestScheduleEditorContainer(props) {/* istanbul ignore next */_classCallCheck(this, TestScheduleEditorContainer);var _this = _possibleConstructorReturn(this, (TestScheduleEditorContainer.__proto__ || Object.getPrototypeOf(TestScheduleEditorContainer)).call(this,
+        props));
+
+        /* istanbul ignore next */_this.state = {};
+        /* istanbul ignore next */_this.store = /* istanbul ignore next */_TestScheduleStore2.default;
+
+        /* istanbul ignore next */_this.mapStoreToState( /* istanbul ignore next */_TestScheduleStore2.default, function (newState) {
+            /* istanbul ignore next */_this.callOnLoadingCompleted(newState);
+            /* istanbul ignore next */_this.callOnLoadingStarted(newState);
+            /* istanbul ignore next */_this.setScheduleTime(newState);
+        });
+
+        /* istanbul ignore next */(0, _Actions.openTestScheduleEditor)(); /* istanbul ignore next */return _this;
+    }_createClass(TestScheduleEditorContainer, [{ key: 'callOnLoadingStarted', value: function callOnLoadingStarted(_ref)
+
+        {/* istanbul ignore next */var isLoading = _ref.isLoading;
+            if (this.state.isLoading === false && isLoading === true) {
+                this.props.onLoadingStarted && this.props.onLoadingStarted();
+            }
+        } }, { key: 'callOnLoadingCompleted', value: function callOnLoadingCompleted(_ref2)
+
+        {/* istanbul ignore next */var isLoading = _ref2.isLoading;
+            if (this.state.isLoading === true && isLoading === false) {
+                this.props.onLoadingCompleted && this.props.onLoadingCompleted();
+            }
+        } }, { key: 'setScheduleTime', value: function setScheduleTime(_ref3)
+
+        {/* istanbul ignore next */var time_to = _ref3.time_to,time_from = _ref3.time_from;
+            if (time_to !== undefined && time_from !== undefined) {
+                this.props.updateSchedule( /* istanbul ignore next */_extends({},
+                this.props.scheduleData, {
+                    time_from: time_from,
+                    time_to: time_to }));
+
+            }
+        } }, { key: 'componentWillUnmount', value: function componentWillUnmount()
+
+        {
+            /* istanbul ignore next */_get(TestScheduleEditorContainer.prototype.__proto__ || Object.getPrototypeOf(TestScheduleEditorContainer.prototype), 'componentWillUnmount', this).call(this);
+            /* istanbul ignore next */(0, _Actions.closeEditor)();
+        }
+
+        /**
+           * Ensures that selected timezone is inside of timezones collection
+           */ }, { key: 'getSafelyTimezoneValue', value: function getSafelyTimezoneValue()
+        {/* istanbul ignore next */var _this2 = this;
+            var selectedTimezone = this.state.timezones.find(function (timezone) /* istanbul ignore next */{return timezone.time_zone === /* istanbul ignore next */_this2.props.scheduleData.time_zone;});
+            if (selectedTimezone) {
+                return selectedTimezone.time_zone;
+            }
+            return (/* istanbul ignore next */_scheduleHelpers.defaultTimezone);
+        } }, { key: 'areTestingHoursAllowed', value: function areTestingHoursAllowed()
+
+        {
+            return Boolean(this.props.scheduleData.time_from && this.props.scheduleData.time_to);
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this3 = this;
+            return (
+                !this.state.isLoading && this.state.timezones.length > 0 &&
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TestScheduleEditor2.default, /* istanbul ignore next */_extends({},
+                this.props, {
+                    scheduleData: /* istanbul ignore next */_extends({},
+                    this.props.scheduleData, {
+                        time_zone: this.getSafelyTimezoneValue() }),
+
+                    timezones: this.state.timezones,
+                    areTestingHoursAllowed: this.areTestingHoursAllowed(),
+                    onAreTestingHoursAllowedChange: function /* istanbul ignore next */onAreTestingHoursAllowedChange(isAllowed) /* istanbul ignore next */{return (/* istanbul ignore next */(0, _Actions.areTestingHoursAllowedChange)(isAllowed, /* istanbul ignore next */_this3.props.scheduleData));} })));
+
+
+
+        } }]);return TestScheduleEditorContainer;}(_reflux.Component); /* istanbul ignore next */TestScheduleEditorContainer.propTypes = _extends({}, /* istanbul ignore next */_TestScheduleEditor2.default.propTypes, { onLoadingStarted: /* istanbul ignore next */_react2.default.PropTypes.func, onLoadingCompleted: /* istanbul ignore next */_react2.default.PropTypes.func }); /* istanbul ignore next */exports.default = TestScheduleEditorContainer;

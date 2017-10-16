@@ -1,0 +1,70 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = undefined;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_moment = require('moment'); /* istanbul ignore next */var _moment2 = _interopRequireDefault(_moment);
+var /* istanbul ignore next */_reactDatetime = require('react-datetime'); /* istanbul ignore next */var _reactDatetime2 = _interopRequireDefault(_reactDatetime);
+
+var /* istanbul ignore next */_index = require('../../../Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_DateFormats = require('../../../../Utils/DateFormats'); /* istanbul ignore next */var _DateFormats2 = _interopRequireDefault(_DateFormats);
+var /* istanbul ignore next */_FieldValue = require('../FindingDetails/FieldValue'); /* istanbul ignore next */var _FieldValue2 = _interopRequireDefault(_FieldValue);
+var /* istanbul ignore next */_FindingFormField = require('./FindingFormField'); /* istanbul ignore next */var _FindingFormField2 = _interopRequireDefault(_FindingFormField);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function FormThirdColumn( /* istanbul ignore next */_ref) {/* istanbul ignore next */var validation = _ref.validation,_onChange = _ref.onChange,fields = _ref.fields,classificationFields = _ref.classificationFields;
+    function getDateValue(date) {
+        return date && date !== '' ?
+        /* istanbul ignore next */(0, _moment2.default)(date, /* istanbul ignore next */_DateFormats2.default.sourceShortDate).format( /* istanbul ignore next */_DateFormats2.default.shortDate) :
+        '';
+    }
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__column' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__input' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.publicId'), /* istanbul ignore next */': '), /* istanbul ignore next */' ', /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */null),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FieldValue2.default, /* istanbul ignore next */{ value: classificationFields.cwe_id, testForEmptyValue: /* istanbul ignore next */(0, _counterpart2.default)('findings.notDefined') })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.cve'),
+                    id: 'cve',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'cve', updateValue: _onChange, value: fields.cve })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.osvdb'),
+                    id: 'osvdb',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'osvdb', updateValue: _onChange, value: fields.osvdb })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.bid'),
+                    id: 'bid',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'bid', updateValue: _onChange, value: fields.bid })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.cert'),
+                    id: 'cert',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'cert', updateValue: _onChange, value: fields.cert })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__input' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.vulnPubDate'), /* istanbul ignore next */':'),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactDatetime2.default, /* istanbul ignore next */{
+                    className: 'dt__wrap dt__only-date',
+                    closeOnSelect: /* istanbul ignore next */true,
+                    value: getDateValue(fields.vuln_publication_date),
+                    inputProps: { readOnly: true },
+                    onChange: function /* istanbul ignore next */onChange(value) /* istanbul ignore next */{return _onChange('vuln_publication_date', /* istanbul ignore next */(0, _moment2.default)(value).format( /* istanbul ignore next */_DateFormats2.default.shortDate));} }))));
+
+
+
+
+} /* istanbul ignore next */exports.default = FormThirdColumn;
+
+FormThirdColumn.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object,
+    classificationFields: /* istanbul ignore next */_react2.default.PropTypes.object,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func };

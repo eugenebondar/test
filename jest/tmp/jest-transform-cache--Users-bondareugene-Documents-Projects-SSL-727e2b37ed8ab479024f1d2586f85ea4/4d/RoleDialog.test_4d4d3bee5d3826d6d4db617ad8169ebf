@@ -1,0 +1,146 @@
+/* istanbul ignore next */'use strict';var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */var _enzymeToJson2 = _interopRequireDefault(_enzymeToJson);
+var /* istanbul ignore next */_RoleDialogContainer = require('./RoleDialogContainer'); /* istanbul ignore next */var _RoleDialogContainer2 = _interopRequireDefault(_RoleDialogContainer);
+var /* istanbul ignore next */_RoleDialog = require('./RoleDialog'); /* istanbul ignore next */var _RoleDialog2 = _interopRequireDefault(_RoleDialog);
+var /* istanbul ignore next */_deepEqual = require('deep-equal'); /* istanbul ignore next */var _deepEqual2 = _interopRequireDefault(_deepEqual);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var permissionList = {
+    'customer': ['a', 'b', 'c', 'd'],
+    'staff': ['e', 'f'] };
+
+
+var organizationsList = [];
+
+var roleInstance = {
+    role_type: 'customer',
+    permissions: ['a', 'b'],
+    basicViewer: false,
+    name: 'Some name' };
+
+
+/**
+                          * @return {ReactWrapper<P, S>}
+                          */
+var getRoleDialogContainer = function getRoleDialogContainer() {/* istanbul ignore next */var renderer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _enzyme.mount;
+    return renderer(
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RoleDialogContainer2.default, /* istanbul ignore next */{
+        roleId: 'roleId',
+        mode: /* istanbul ignore next */_RoleDialogContainer.ROLE_DIALOG_MODE.NEW,
+        onClose: function /* istanbul ignore next */onClose() /* istanbul ignore next */{return null;} }));
+
+
+};
+
+/**
+    * @return {ReactWrapper<P, S>}
+    */
+var getRoleDialog = function getRoleDialog() {/* istanbul ignore next */var renderer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _enzyme.mount;
+    return renderer(
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RoleDialog2.default, /* istanbul ignore next */{
+        isLoading: false,
+        isSaving: false,
+        isEdit: true,
+        fields: /* istanbul ignore next */_extends({}, roleInstance),
+        organizationsList: [
+        { corporation_name: 'corporation_name 1', id: "1" },
+        { corporation_name: 'corporation_name 2', id: "2" }],
+
+        permissionsList: {
+            staff: ['a', 'b', 'c'],
+            customer: ['d', 'e', 'f'] },
+
+        onSubmit: function /* istanbul ignore next */onSubmit() /* istanbul ignore next */{return null;},
+        onClose: function /* istanbul ignore next */onClose() /* istanbul ignore next */{return null;},
+        validation: null }));
+
+
+};
+
+describe('RoleDialog', function () {
+
+    it('should match snapshot for New mode', function () {
+        var tree = /* istanbul ignore next */(0, _enzymeToJson2.default)(getRoleDialogContainer());
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('should match snapshot for Edit mode', function () {
+        var component = getRoleDialogContainer();
+        component.setProps({ mode: /* istanbul ignore next */_RoleDialogContainer.ROLE_DIALOG_MODE.EDIT });
+        var tree = /* istanbul ignore next */(0, _enzymeToJson2.default)(component);
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('should be rendered', function () {
+        var component = getRoleDialogContainer();
+        expect(component).toBeTruthy();
+    });
+
+    describe('state fields', function () {
+        it('should equal to role instance', function () {
+            var component = getRoleDialog();
+            expect( /* istanbul ignore next */(0, _deepEqual2.default)(roleInstance, component.state().fields)).toBeTruthy();
+        });
+    });
+
+    describe('onToggleBasicViewer()', function () {
+        it('should bring back selected permissions', function () {
+            var groupDialog = getRoleDialog();
+            expect(groupDialog.state().fields.basicViewer).toEqual(false);
+            expect(groupDialog.state().fields.permissions).toEqual(roleInstance.permissions);
+
+            groupDialog.instance().onToggleBasicViewer(); //first toggle
+
+            expect(groupDialog.state().fields.basicViewer).toEqual(true);
+            expect(groupDialog.state().fields.permissions).toEqual([]);
+
+            groupDialog.instance().onToggleBasicViewer(); //second toggle
+
+            expect(groupDialog.state().fields.basicViewer).toEqual(false);
+            expect(groupDialog.state().fields.permissions).toEqual(roleInstance.permissions);
+        });
+    });
+
+    describe('onRoleTypeChange()', function () {
+        describe('when executed with empty cache', function () {
+            var groupDialog = /* istanbul ignore next */void 0;
+            beforeAll(function () {
+                groupDialog = getRoleDialog();
+                groupDialog.instance().permissionCache.perRoleType['staff'] = [];
+                expect(groupDialog.state().fields.role_type).toEqual('customer');
+                expect(groupDialog.state().fields.permissions).toEqual(roleInstance.permissions);
+                groupDialog.instance().onRoleTypeChange('staff');
+            });
+
+            it('role type should be changed', function () {
+                expect(groupDialog.state().fields.role_type).toEqual('staff');
+            });
+            it('permissions in state should be empty', function () {
+                expect(groupDialog.state().fields.permissions).toEqual([]);
+            });
+            it('permissions in cache should equal to permissions in state before execution', function () {
+                expect(groupDialog.instance().permissionCache.perRoleType['customer']).toEqual(roleInstance.permissions);
+            });
+        });
+        describe('when executed with no empty cache', function () {
+            var groupDialog = /* istanbul ignore next */void 0;
+            beforeAll(function () {
+                groupDialog = getRoleDialog();
+                groupDialog.instance().permissionCache.perRoleType['staff'] = ['e'];
+                expect(groupDialog.state().fields.role_type).toEqual('customer');
+                expect(groupDialog.state().fields.permissions).toEqual(roleInstance.permissions);
+                groupDialog.instance().onRoleTypeChange('staff');
+            });
+
+            it('role type should be changed', function () {
+                expect(groupDialog.state().fields.role_type).toEqual('staff');
+            });
+            it('permissions in state equal to cached permissions', function () {
+                expect(groupDialog.state().fields.permissions).toEqual(['e']);
+            });
+            it('permissions in cache should equal to permissions in state before execution', function () {
+                expect(groupDialog.instance().permissionCache.perRoleType['customer']).toEqual(roleInstance.permissions);
+            });
+        });
+    });
+});

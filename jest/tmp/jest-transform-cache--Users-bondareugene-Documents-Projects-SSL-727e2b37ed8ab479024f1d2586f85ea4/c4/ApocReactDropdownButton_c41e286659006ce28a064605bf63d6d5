@@ -1,0 +1,63 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};exports.default =
+
+
+
+
+
+
+
+ApocReactDropdownButton;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * This file have modified Apoc-React's dropdown. THe changes should be moved to apoc-react, but are not due to need of
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * quick fixes.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */function ApocReactDropdownButton( /* istanbul ignore next */_ref) {/* istanbul ignore next */var label = _ref.label,className = _ref.className,onClick = _ref.onClick,isExpanded = _ref.isExpanded,id = _ref.id,onKeyDown = _ref.onKeyDown,restOfProps = _objectWithoutProperties(_ref, ['label', 'className', 'onClick', 'isExpanded', 'id', 'onKeyDown']);var buttonClasses = /* istanbul ignore next */(0, _classnames2.default)('sc-btn', 'sc-btn-dropdown', className);return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */_extends({
+        className: buttonClasses,
+        type: 'button',
+        /* istanbul ignore next */'aria-haspopup': 'true',
+        /* istanbul ignore next */'aria-expanded': isExpanded,
+        onClick: onClick,
+        id: id,
+        onKeyDown: onKeyDown },
+      restOfProps),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-btn-dropdown-text' }, label),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-icon-down-arrow' })));
+
+
+}
+
+ApocReactDropdownButton.propTypes = {
+  /**
+                                       * Text or element inside of a button
+                                       */
+  label: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([/* istanbul ignore next */_react2.default.PropTypes.string, /* istanbul ignore next */_react2.default.PropTypes.element]),
+
+  /**
+                                                                                                                                                                                                    * Optional callback. Needed by [Dropdown](#Dropdown) but custom callback can be set here without any conflict.
+                                                                                                                                                                                                    */
+  onClick: /* istanbul ignore next */_react2.default.PropTypes.func,
+
+  /**
+                                                                      * Optional callback. Needed by [Dropdown](#Dropdown) but custom callback can be set here without any conflict.
+                                                                      */
+  onKeyDown: /* istanbul ignore next */_react2.default.PropTypes.func,
+
+  /**
+                                                                        * Controls aria-expanded attribute of a button. Optional. Needed by [Dropdown](#Dropdown).
+                                                                        */
+  isExpanded: /* istanbul ignore next */_react2.default.PropTypes.bool,
+
+  /**
+                                                                         * Sets `id` attribute of a `button`. Useful to match it with a `label`'s `for` attribute to enhance UX.
+                                                                         */
+  id: /* istanbul ignore next */_react2.default.PropTypes.string,
+
+  /**
+                                                                   * Css classes of button.
+                                                                   */
+  className: /* istanbul ignore next */_react2.default.PropTypes.string };
+
+
+ApocReactDropdownButton.defaultProps = {
+  className: 'sc-btn-default',
+  isExpanded: false };

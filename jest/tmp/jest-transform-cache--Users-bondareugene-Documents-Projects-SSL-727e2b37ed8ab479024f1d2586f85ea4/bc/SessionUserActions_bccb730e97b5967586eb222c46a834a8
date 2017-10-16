@@ -1,0 +1,28 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.checkResponseStatus = exports.extendUserSession = exports.resetSessionTimeout = undefined;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var resetSessionTimeout = /* istanbul ignore next */exports.resetSessionTimeout = 'resetSessionTimeout';
+var extendUserSession = /* istanbul ignore next */exports.extendUserSession = 'extendUserSession';
+var checkResponseStatus = /* istanbul ignore next */exports.checkResponseStatus = 'checkResponseStatus';
+
+var SessionUserActions = /* istanbul ignore next */_reflux2.default.createActions([
+'getActiveSession',
+'reloadUserSettings',
+'signOut',
+'signIn',
+resetSessionTimeout,
+extendUserSession,
+checkResponseStatus,
+'setUnauthorized',
+'getUserType',
+'getUserSettings',
+'updateAuth',
+'saveTableConfig',
+'configureAuth',
+'updateActiveSession',
+'resetPassword',
+'getUserPermissions',
+'setTopLevelError',
+'resetTopLevelError']); /* istanbul ignore next */exports.default =
+
+
+SessionUserActions;

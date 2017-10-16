@@ -1,0 +1,71 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_api = require('../../Models/Permisssion/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_api3 = require('../../Models/Users/api'); /* istanbul ignore next */var _api4 = _interopRequireDefault(_api3);
+var /* istanbul ignore next */_api5 = require('../../Models/Tests/api'); /* istanbul ignore next */var _api6 = _interopRequireDefault(_api5);
+var /* istanbul ignore next */_api7 = require('../../Models/Groups/api'); /* istanbul ignore next */var _api8 = _interopRequireDefault(_api7);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}
+
+var EditPermissionActions = {
+    addPermission: /* istanbul ignore next */_reflux2.default.createAction(),
+    modifyPermission: /* istanbul ignore next */_reflux2.default.createAction(),
+    removePermission: /* istanbul ignore next */_reflux2.default.createAction(),
+    save: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    openDialog: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    closeDialog: /* istanbul ignore next */_reflux2.default.createAction(),
+    updateSearchPhrase: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+EditPermissionActions.save.listen(function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var resourceType = _ref.resourceType,resourceId = _ref.resourceId,permissions = _ref.permissions,isCurrentUserStaff = _ref.isCurrentUserStaff;
+    /* istanbul ignore next */_api2.default.putByResourceTypeAndId(resourceType, resourceId, permissions, isCurrentUserStaff).
+    then(this.completed, this.failed);
+});
+
+EditPermissionActions.openDialog.listen(function ( /* istanbul ignore next */_ref2) {/* istanbul ignore next */var _context;var resourceId = _ref2.resourceId,resourceType = _ref2.resourceType,isCurrentUserStaff = _ref2.isCurrentUserStaff;
+    var customerUsersPromise = fetchCustomerUsers(resourceId);
+    var staffUsersPromise = isCurrentUserStaff ? fetchStuffUsers() : [];
+    var permissionsPromise = /* istanbul ignore next */_api2.default.fetchByResourceTypeAndId(resourceType, resourceId, isCurrentUserStaff);
+    var groupsPromise = /* istanbul ignore next */_api8.default.fetchGroups(isCurrentUserStaff);
+
+    Promise.all([customerUsersPromise, staffUsersPromise, groupsPromise, permissionsPromise]).
+    then(function (response) {
+        var permittees = /* istanbul ignore next */[].concat(_toConsumableArray(response[0]), _toConsumableArray(response[1]), _toConsumableArray(response[2]));
+        var permissions = response[3];
+        //this is necessary due the fact that backend is filtering staff users and staff user groups from response
+        //when customer user is asking for it, but it's not doing that for permissions
+        var permissionsThatHavePermittees = permissions.filter(function (permission) {
+            return permittees.some(function (permittee) /* istanbul ignore next */{return permittee.id === permission.permittee_id;});
+        });
+
+        return { permittees: permittees, permissions: permissionsThatHavePermittees };
+    }).
+    then(this.completed, this.failed).
+    catch( /* istanbul ignore next */ /* istanbul ignore next */(_context = console).error.bind(_context));
+
+    function fetchStuffUsers() {
+        return (/* istanbul ignore next */_api4.default.fetchUsers({
+                filter: {
+                    user_type: 'staff' } }).
+
+            then(function (response) {
+                return response.json();
+            }).then(function (response) {
+                return response.users;
+            }));
+    }
+
+    function fetchCustomerUsers(resourceId) {
+        return (/* istanbul ignore next */_api6.default.fetchTestDetails(resourceId, isCurrentUserStaff).then(function (test) {
+                return (/* istanbul ignore next */_api4.default.fetchUsers({
+                        filter: {
+                            user_type: 'customer',
+                            organization_id: test.organization_id } }));
+
+
+            }).then(function (response) {
+                return response.json();
+            }).then(function (response) {
+                return response.users;
+            }));
+    }
+}); /* istanbul ignore next */exports.default =
+
+EditPermissionActions;

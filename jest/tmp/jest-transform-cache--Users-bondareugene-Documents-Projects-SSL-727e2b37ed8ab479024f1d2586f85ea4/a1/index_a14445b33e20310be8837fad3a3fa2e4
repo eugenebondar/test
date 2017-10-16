@@ -1,0 +1,94 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var PHONE_NUMBER_MAX_LENGTH = 30; /* istanbul ignore next */var
+
+Input = function (_React$Component) {_inherits(Input, _React$Component);
+    function /* istanbul ignore next */Input(props) {/* istanbul ignore next */_classCallCheck(this, Input);var _this = _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).call(this,
+        props));
+        /* istanbul ignore next */_this.onBlur = /* istanbul ignore next */ /* istanbul ignore next */_this.onBlur.bind(_this);
+        /* istanbul ignore next */_this.handleChange = /* istanbul ignore next */ /* istanbul ignore next */_this.handleChange.bind(_this);
+        /* istanbul ignore next */_this.onKeyPress = /* istanbul ignore next */ /* istanbul ignore next */_this.onKeyPress.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(Input, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _props =
+            this.props,className = _props.className,type = _props.type,placeholder = _props.placeholder,isDisabled = _props.isDisabled;
+            var safeValue = this.props.value === undefined || this.props.value === null ? '' : this.props.value;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ className: 'sc-form-ele ' + className,
+                    type: type,
+                    placeholder: placeholder,
+                    onChange: this.handleChange,
+                    onBlur: this.onBlur,
+                    onKeyPress: this.onKeyPress,
+                    value: safeValue,
+                    autoComplete: type === 'password' ? 'off' : 'on',
+                    disabled: isDisabled }));
+
+
+        } }, { key: 'onBlur', value: function onBlur(
+
+        e) {/* istanbul ignore next */var _props2 =
+            this.props,onBlur = _props2.onBlur,id = _props2.id;
+            if ('undefined' !== typeof onBlur) {
+                onBlur(e.target.value, id);
+            }
+        } }, { key: 'onKeyPress', value: function onKeyPress(
+
+        e) {/* istanbul ignore next */var
+            onKeyPress = this.props.onKeyPress;
+            if ('undefined' !== typeof onKeyPress) {
+                onKeyPress(e.charCode);
+            }
+        } }, { key: 'handleChange', value: function handleChange(
+
+        e) {/* istanbul ignore next */var _props3 =
+            this.props,onChange = _props3.onChange,validationType = _props3.validationType,id = _props3.id;
+            if ('undefined' !== typeof onChange) {
+                onChange();
+            }
+            var value = e.target.value;
+            switch (validationType) {
+                case 'number':
+                    value = value.replace(/[^0-9]/gim, '');
+                    break;
+                case 'phone':
+                    value = this.removeIncorrectCharactersForPhoneNumber(value);
+                    break;}
+
+            this.updateValue(id, value);
+        } }, { key: 'removeIncorrectCharactersForPhoneNumber', value: function removeIncorrectCharactersForPhoneNumber(
+
+        value) {
+            return value.
+            replace(/[^ a-z0-9#()+\-]/gim, '').
+            substr(0, PHONE_NUMBER_MAX_LENGTH);
+        } }, { key: 'updateValue', value: function updateValue(
+
+        id, value) {
+            this.props.updateValue(id, value);
+        } }]);return Input;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = Input;
+
+
+Input.propTypes = {
+    id: /* istanbul ignore next */_react2.default.PropTypes.string,
+    updateValue: /* istanbul ignore next */_react2.default.PropTypes.func,
+    value: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+    /* istanbul ignore next */_react2.default.PropTypes.string,
+    /* istanbul ignore next */_react2.default.PropTypes.number]),
+
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    validationType: /* istanbul ignore next */_react2.default.PropTypes.string,
+    className: /* istanbul ignore next */_react2.default.PropTypes.string,
+    type: /* istanbul ignore next */_react2.default.PropTypes.string,
+    placeholder: /* istanbul ignore next */_react2.default.PropTypes.string,
+    onBlur: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onKeyPress: /* istanbul ignore next */_react2.default.PropTypes.func,
+    isDisabled: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+
+Input.defaultProps = {
+    validationType: 'text',
+    type: 'text',
+    className: '',
+    placeholder: '',
+    value: '' };

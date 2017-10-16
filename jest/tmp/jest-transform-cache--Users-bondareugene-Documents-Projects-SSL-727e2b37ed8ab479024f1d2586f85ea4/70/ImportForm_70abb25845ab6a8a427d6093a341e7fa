@@ -1,0 +1,86 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.EXTERNAL_RUN_IMPORT_SOURCE = undefined;exports.default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ImportForm;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_apocReact = require('apoc-react');var /* istanbul ignore next */_AlertType = require('../../../../Utils/AlertType'); /* istanbul ignore next */var _AlertType2 = _interopRequireDefault(_AlertType);var /* istanbul ignore next */_ApocReactAlert = require('../../../../Shared/ApocReactAlert/ApocReactAlert'); /* istanbul ignore next */var _ApocReactAlert2 = _interopRequireDefault(_ApocReactAlert);var /* istanbul ignore next */_ValidationMessage = require('../../../../Shared/ValidationMessage/ValidationMessage'); /* istanbul ignore next */var _ValidationMessage2 = _interopRequireDefault(_ValidationMessage);var /* istanbul ignore next */_FormField = require('../../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);var /* istanbul ignore next */_DropdownWithDirectionInsideDialog = require('../../../../Shared/ApocReactDropdown/DropdownWithDirectionInsideDialog'); /* istanbul ignore next */var _DropdownWithDirectionInsideDialog2 = _interopRequireDefault(_DropdownWithDirectionInsideDialog);var /* istanbul ignore next */_DropdownButton = require('../../../../Shared/ApocReactDropdown/DropdownButton'); /* istanbul ignore next */var _DropdownButton2 = _interopRequireDefault(_DropdownButton);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var EXTERNAL_RUN_IMPORT_SOURCE = /* istanbul ignore next */exports.EXTERNAL_RUN_IMPORT_SOURCE = { NESSUS: 'Nessus', CHECKMARX: 'Checkmarx', HAILSTORM: 'Hailstorm' };function ImportForm( /* istanbul ignore next */_ref)
+
+
+
+
+
+{/* istanbul ignore next */var runDetails = _ref.runDetails,onSourceChange = _ref.onSourceChange,importSource = _ref.importSource,formSorce = _ref.formSorce,validation = _ref.validation;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+            validation &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ApocReactAlert2.default, /* istanbul ignore next */{ type: /* istanbul ignore next */_AlertType2.default.ERROR, isClosable: false, closeTimeout: 0 },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ValidationMessage2.default, /* istanbul ignore next */{ validationMessage: validation })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.importTo')),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.customer') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, runDetails.customer_name)),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.test') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, runDetails.name)),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.testRun') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, runDetails.id_alias)),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.importFrom')),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                        label: /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.source') },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownWithDirectionInsideDialog2.default, /* istanbul ignore next */{
+                            button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null),
+                            onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return onSourceChange(e.value);},
+                            name: 'dropdown' },
+
+                        Object.values(EXTERNAL_RUN_IMPORT_SOURCE).map(function (source, i) {
+                            return (
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                                    key: i,
+                                    label: source,
+                                    value: source,
+                                    isSelected: importSource === source }));
+
+
+                        }))),
+
+
+                formSorce)));
+
+
+
+}
+
+ImportForm.propTypes = {
+    importSource: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    onSourceChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string),
+    runDetails: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        customer_name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        id_alias: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired }),
+
+    formSorce: /* istanbul ignore next */_react2.default.PropTypes.node.isRequired };

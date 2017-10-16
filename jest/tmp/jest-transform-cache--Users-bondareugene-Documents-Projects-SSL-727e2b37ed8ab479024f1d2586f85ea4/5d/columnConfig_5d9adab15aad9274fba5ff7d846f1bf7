@@ -1,0 +1,13 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });function getName(suffix) {
+    return 'activityLogs.table.' + suffix;
+} /* istanbul ignore next */exports.default =
+
+[
+getName('created_at'),
+getName('event'),
+getName('item_type'),
+getName('item_id'),
+getName('user_full_name'),
+getName('user_agent'),
+getName('changeset'),
+getName('ip_address')];

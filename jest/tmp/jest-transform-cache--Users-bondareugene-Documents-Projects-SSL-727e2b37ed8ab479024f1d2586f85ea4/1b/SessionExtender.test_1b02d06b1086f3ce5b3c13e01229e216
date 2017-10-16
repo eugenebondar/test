@@ -1,0 +1,50 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json');
+var /* istanbul ignore next */_SessionExtender = require('./SessionExtender'); /* istanbul ignore next */var _SessionExtender2 = _interopRequireDefault(_SessionExtender);
+var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);
+var /* istanbul ignore next */_SessionExpirationAlert = require('./SessionExpirationAlert'); /* istanbul ignore next */var _SessionExpirationAlert2 = _interopRequireDefault(_SessionExpirationAlert);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('SessionExtender', function () {
+    describe('with no empty user', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SessionExtender2.default, /* istanbul ignore next */null), { context: { currentUser: new /* istanbul ignore next */_User2.default({}) } });
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+
+        it('does render SessionExpirationAlert', function () {
+            expect(component.find( /* istanbul ignore next */_SessionExpirationAlert2.default)).toBePresent();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('with empty user', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SessionExtender2.default, /* istanbul ignore next */null), { context: { currentUser: new /* istanbul ignore next */_User2.default() } });
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+
+        it('does not render SessionExpirationAlert', function () {
+            expect(component.find( /* istanbul ignore next */_SessionExpirationAlert2.default)).not.toBePresent();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

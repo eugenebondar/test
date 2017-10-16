@@ -1,0 +1,51 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();exports.default =
+
+
+createFilterChangeDebouncer;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_debounce = require('debounce'); /* istanbul ignore next */var _debounce2 = _interopRequireDefault(_debounce);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}function createFilterChangeDebouncer( /* istanbul ignore next */_ref) {/* istanbul ignore next */var Component = _ref.Component,_ref$valuePropName = _ref.valuePropName,valuePropName = _ref$valuePropName === undefined ? 'value' : _ref$valuePropName,_ref$onChangePropName = _ref.onChangePropName,onChangePropName = _ref$onChangePropName === undefined ? 'onChange' : _ref$onChangePropName,_ref$debounceTime = _ref.debounceTime,debounceTime = _ref$debounceTime === undefined ? 250 : _ref$debounceTime; /* istanbul ignore next */var
+    FilterChangeDebouncer = function (_React$Component) {_inherits(FilterChangeDebouncer, _React$Component);
+
+        function /* istanbul ignore next */FilterChangeDebouncer(props) {/* istanbul ignore next */_classCallCheck(this, FilterChangeDebouncer);var _this = _possibleConstructorReturn(this, (FilterChangeDebouncer.__proto__ || Object.getPrototypeOf(FilterChangeDebouncer)).call(this,
+            props));
+
+            /* istanbul ignore next */_this.debouncedOnChange = /* istanbul ignore next */(0, _debounce2.default)(props[onChangePropName], props.debounceTime);
+
+            /* istanbul ignore next */_this.state = /* istanbul ignore next */_defineProperty({},
+            valuePropName, props[valuePropName]);
+
+
+            /* istanbul ignore next */_this.onChange = /* istanbul ignore next */_this.onChange.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+        }_createClass(FilterChangeDebouncer, [{ key: 'onChange', value: function onChange(
+
+            filter) {
+                this.setState({ filter: filter });
+                this.debouncedOnChange(filter);
+            } }, { key: 'shouldComponentUpdate', value: function shouldComponentUpdate(
+
+            nextProps, nextState) {
+                return this.state !== nextState;
+            } }, { key: 'render', value: function render()
+
+            {/* istanbul ignore next */
+                /*eslint-disable */var _props =
+                this.props,filter = _props.filter,onChange = _props.onChange,debounceTime = _props.debounceTime,restOfProps = _objectWithoutProperties(_props, ['filter', 'onChange', 'debounceTime']);
+                /*eslint-enable */
+                return (
+                    /* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */_extends({},
+                    restOfProps, {
+                        filter: this.state.filter,
+                        onChange: this.onChange })));
+
+
+            } }]);return FilterChangeDebouncer;}( /* istanbul ignore next */_react2.default.Component);
+
+
+    FilterChangeDebouncer.propTypes = /* istanbul ignore next */_extends({},
+    Component.props);
+
+
+    FilterChangeDebouncer.defaultProps = {
+        debounceTime: debounceTime };
+
+
+    return FilterChangeDebouncer;
+}

@@ -1,0 +1,80 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_reactSanfona = require('react-sanfona');
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_TableBoard = require('../../../Shared/TableBoard'); /* istanbul ignore next */var _TableBoard2 = _interopRequireDefault(_TableBoard);
+var /* istanbul ignore next */_UsersList = require('../Elements/UsersList'); /* istanbul ignore next */var _UsersList2 = _interopRequireDefault(_UsersList);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+GroupsTable = function (_React$Component) {_inherits(GroupsTable, _React$Component);
+    function /* istanbul ignore next */GroupsTable(props) {/* istanbul ignore next */_classCallCheck(this, GroupsTable);return _possibleConstructorReturn(this, (GroupsTable.__proto__ || Object.getPrototypeOf(GroupsTable)).call(this,
+        props));
+    }_createClass(GroupsTable, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _props =
+            this.props,data = _props.data,actionsTrigger = _props.actionsTrigger,addGroup = _props.addGroup;
+            var columnConfig = [
+            {
+                source: 'name',
+                name: 'userGroups.name',
+                width: '604',
+                sortable: false,
+                type: 'text' },
+            {
+                source: 'group_type',
+                name: 'userGroups.group_type',
+                width: '564',
+                sortable: false,
+                type: 'text' }];
+
+
+            var actions = [{
+                value: 'editGroup',
+                title: /* istanbul ignore next */(0, _counterpart2.default)('actions.editGroup'),
+                icon: 'sc-icon-pencil' },
+            {
+                value: 'deleteGroup',
+                title: /* istanbul ignore next */(0, _counterpart2.default)('actions.deleteGroup'),
+                icon: 'sc-icon-trash-closed' }];
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'user-groups-page customers-table' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 1 },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: /* istanbul ignore next */(0, _counterpart2.default)('userGroups.userGroups', { length: data.length }), slug: 1 },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'users-controls-wrap' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Button, /* istanbul ignore next */{ className: 'sc-btn sc-btn-primary', onClick: addGroup },
+                                    /* istanbul ignore next */(0, _counterpart2.default)('userGroups.addUserGroup'))),
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'tests-expand-content' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoard2.default, /* istanbul ignore next */{
+                                    className: 'user-table table',
+                                    data: data,
+                                    columnConfig: columnConfig,
+                                    actions: actions,
+                                    actionsTrigger: actionsTrigger,
+                                    emptyTableTitle: /* istanbul ignore next */(0, _counterpart2.default)('userGroups.noUserGroups'),
+                                    expansion: true,
+                                    getExpansionData: this.getExpansionData }))))));
+
+
+
+
+
+
+        }
+
+        /**
+           * Find expanded test by id and return expansion data for it.
+           * @param {String} [id] expanded test's id.
+           * @return {JSX} Test delails for expanded test.
+           */ }, { key: 'getExpansionData', value: function getExpansionData(
+        id) {
+            return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_UsersList2.default, /* istanbul ignore next */{ id: id }));
+        } }]);return GroupsTable;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = GroupsTable;
+
+
+GroupsTable.propTypes = {
+    data: /* istanbul ignore next */_react2.default.PropTypes.array,
+    actionsTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    addGroup: /* istanbul ignore next */_react2.default.PropTypes.func };

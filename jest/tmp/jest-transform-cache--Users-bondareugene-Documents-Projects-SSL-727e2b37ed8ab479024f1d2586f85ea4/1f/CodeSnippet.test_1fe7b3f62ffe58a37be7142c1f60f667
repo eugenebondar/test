@@ -1,0 +1,55 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json');
+var /* istanbul ignore next */_CodeSnippet = require('./CodeSnippet'); /* istanbul ignore next */var _CodeSnippet2 = _interopRequireDefault(_CodeSnippet);
+var /* istanbul ignore next */_LineOfCode = require('./LineOfCode'); /* istanbul ignore next */var _LineOfCode2 = _interopRequireDefault(_LineOfCode);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('CodeSnippet', function () {
+    describe('with required set of props', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CodeSnippet2.default, /* istanbul ignore next */{ fileName: 'some file name' }));
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('with lines of code', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CodeSnippet2.default, /* istanbul ignore next */{
+                fileName: 'some file name',
+                children: [
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LineOfCode2.default, /* istanbul ignore next */{ lineNumber: '1', children: 'code here' }),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LineOfCode2.default, /* istanbul ignore next */{ lineNumber: '2', children: 'code here' }),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LineOfCode2.default, /* istanbul ignore next */{ lineNumber: '4', children: 'code here' }),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LineOfCode2.default, /* istanbul ignore next */{ lineNumber: '5', children: 'code here' })] }));
+
+
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

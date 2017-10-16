@@ -1,0 +1,28 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+millisecondsToMinutes = millisecondsToMinutes; /* istanbul ignore next */exports.
+
+
+millisecondsToPrettyMinutesAndSeconds = millisecondsToPrettyMinutesAndSeconds;var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var translateScope = { scope: 'utils.time' };function translate(path) {return (/* istanbul ignore next */(0, _counterpart2.default)(path, translateScope));}function millisecondsToMinutes(milliseconds) {return Math.floor(milliseconds / 60000);}function millisecondsToPrettyMinutesAndSeconds(milliseconds) {
+    var minutes = millisecondsToMinutes(milliseconds);
+    var seconds = Math.floor(milliseconds / 1000) % 60;
+
+    return [{
+        value: minutes,
+        unit: minutes > 1 ? translate('minutes') : translate('minute') },
+    {
+        value: seconds,
+        unit: seconds > 1 ? translate('seconds') : translate('second') }].
+
+    filter(function (valueAndUnit) /* istanbul ignore next */{return valueAndUnit.value > 0;}).
+    map(function (valueAndUnit) /* istanbul ignore next */{return valueAndUnit.value + ' ' + valueAndUnit.unit;}).
+    join( /* istanbul ignore next */' ' + translate('and') + ' ');
+}

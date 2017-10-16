@@ -1,0 +1,126 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_reactDropzone = require('react-dropzone'); /* istanbul ignore next */var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_index = require('../../../../Shared/Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_FormField = require('../../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_ApocReactAlert = require('../../../../Shared/ApocReactAlert/ApocReactAlert'); /* istanbul ignore next */var _ApocReactAlert2 = _interopRequireDefault(_ApocReactAlert);
+var /* istanbul ignore next */_ReportItem = require('../TestReports/ReportItem'); /* istanbul ignore next */var _ReportItem2 = _interopRequireDefault(_ReportItem);
+
+/* istanbul ignore next */require('./ImportForm.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ImportForm = function (_React$Component) {_inherits(ImportForm, _React$Component);
+    function /* istanbul ignore next */ImportForm(props) {/* istanbul ignore next */_classCallCheck(this, ImportForm);return _possibleConstructorReturn(this, (ImportForm.__proto__ || Object.getPrototypeOf(ImportForm)).call(this,
+        props));
+    }_createClass(ImportForm, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;var _props =
+
+
+
+            this.props,fileName = _props.fileName,attachment = _props.attachment,type = _props.type,attachments = _props.attachments,updateValue = _props.updateValue,onDrop = _props.onDrop,isBrowseDisabled = _props.isBrowseDisabled,isLoading = _props.isLoading;
+
+            var loading = isLoading &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'li', /* istanbul ignore next */null,
+                attachment.name,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'loading-icon' }));
+
+
+            var attachmentsList = attachments.map(function (item, i) {
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ReportItem2.default, /* istanbul ignore next */{
+                        key: i,
+                        item: item,
+                        deleteReport: function /* istanbul ignore next */deleteReport() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.removeFile(item));},
+                        isEditable: /* istanbul ignore next */true }));
+
+
+            });
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'import-form' },
+                    Object.keys(this.props.validation).
+                    filter(function (key) /* istanbul ignore next */{return key !== 'name';}).
+                    map(function (key) /* istanbul ignore next */{return (
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ApocReactAlert2.default, /* istanbul ignore next */{
+                                    key: key,
+                                    type: /* istanbul ignore next */_apocReact.AlertTypes.ERROR,
+                                    isClosable: /* istanbul ignore next */true,
+                                    closeTimeout: 0 },
+
+                                /* istanbul ignore next */_this2.props.validation[key]));}),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)(['dashboard_test_run_element',
+                            type === 'attachment' ? 'attachmentName' : 'reportName']),
+                            validationMessage: this.props.validation.name,
+                            isValid: !this.props.validation.name,
+                            isRequired: /* istanbul ignore next */true },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                            id: 'name',
+                            updateValue: updateValue,
+                            value: attachment.name })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)(['dashboard_test_run_element',
+                            type === 'attachment' ? 'browseForAttachment' : 'browseForReport']),
+                            isRequired: /* istanbul ignore next */true },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactDropzone2.default, /* istanbul ignore next */{ ref: 'dropzone', className: 'dropzone-wrap', onDrop: onDrop }),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'dropzone-wrap' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ disabled: isBrowseDisabled,
+                                    onClick: isLoading ? null : /* istanbul ignore next */this.onOpenClick.bind(this),
+                                    className: 'browse-btn sc-btn sc-btn-primary-outline' },
+                                /* istanbul ignore next */(0, _counterpart2.default)('general.browse'))),
+
+
+                        fileName &&
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null, /* istanbul ignore next */'( selected file: ',
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'selected-file-name' }, fileName), /* istanbul ignore next */' )')),
+
+
+
+
+                    /* istanbul ignore next */(0, _counterpart2.default)(['findings',
+                    type === 'attachment' ? 'ImportAttachmentNotification' : 'ImportReportsNotification']),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'ul', /* istanbul ignore next */{ className: 'report-list' },
+                        loading,
+                        attachmentsList)));
+
+
+
+        } }, { key: 'onOpenClick', value: function onOpenClick()
+
+        {
+            this.refs.dropzone.open();
+        } }]);return ImportForm;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = ImportForm;
+
+
+ImportForm.propTypes = {
+    updateValue: /* istanbul ignore next */_react2.default.PropTypes.func,
+    removeFile: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onDrop: /* istanbul ignore next */_react2.default.PropTypes.func,
+    attachment: /* istanbul ignore next */_react2.default.PropTypes.shape(
+    name),
+
+    fileName: /* istanbul ignore next */_react2.default.PropTypes.string,
+    attachments: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string,
+        file_url: /* istanbul ignore next */_react2.default.PropTypes.string,
+        attachable_id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        attachable_type: /* istanbul ignore next */_react2.default.PropTypes.string })),
+
+    type: /* istanbul ignore next */_react2.default.PropTypes.string,
+    isBrowseDisabled: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired };
+
+
+ImportForm.defaultProps = {
+    type: 'attachment' };

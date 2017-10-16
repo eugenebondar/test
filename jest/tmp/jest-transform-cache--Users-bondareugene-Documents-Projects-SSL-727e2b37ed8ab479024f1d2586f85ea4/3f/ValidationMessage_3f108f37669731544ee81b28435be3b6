@@ -1,0 +1,28 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+ValidationMessage;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);var /* istanbul ignore next */_firstCharUpperCase = require('../../Utils/firstCharUpperCase'); /* istanbul ignore next */var _firstCharUpperCase2 = _interopRequireDefault(_firstCharUpperCase); /* istanbul ignore next */require('./ValidationMessage.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ValidationMessage( /* istanbul ignore next */_ref) {/* istanbul ignore next */var validationMessage = _ref.validationMessage,_ref$className = _ref.className,className = _ref$className === undefined ? '' : _ref$className;
+    var classNameWithDefaults = /* istanbul ignore next */(0, _classnames2.default)(className, 'validation__error-message sc-error');
+    var validationMessageArray = Array.isArray(validationMessage) ? validationMessage : [validationMessage];
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: classNameWithDefaults },
+            validationMessageArray.map(function (message, key) {
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ key: key },
+                        /* istanbul ignore next */(0, _firstCharUpperCase2.default)(message)));
+
+
+            })));
+
+
+}
+
+ValidationMessage.propTypes = {
+    className: /* istanbul ignore next */_react2.default.PropTypes.string,
+    validationMessage: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+    /* istanbul ignore next */_react2.default.PropTypes.string,
+    /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string)]) };

@@ -1,0 +1,23 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var serviceUserGroupsColumns = /* istanbul ignore next */exports.serviceUserGroupsColumns = [
+{
+    source: 'name',
+    name: 'userGroups.name',
+    width: '604',
+    sortable: false,
+    type: 'text' },
+{
+    source: 'group_type',
+    name: 'userGroups.group_type',
+    width: '564',
+    sortable: false,
+    type: 'text' }];
+
+
+
+var userGroupsColumns = /* istanbul ignore next */exports.userGroupsColumns = [
+{
+    source: 'name',
+    name: 'userGroups.name',
+    width: '1168',
+    sortable: false,
+    type: 'text' }];

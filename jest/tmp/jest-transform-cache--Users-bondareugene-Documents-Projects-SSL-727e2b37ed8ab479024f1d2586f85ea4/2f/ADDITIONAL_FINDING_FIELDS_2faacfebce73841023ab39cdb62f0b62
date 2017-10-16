@@ -1,0 +1,41 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var ADDITIONAL_FINDING_FIELDS = [
+{
+    fieldKey: 'classification_cwe_id',
+    translationKey: 'findings.publicId' },
+{
+    fieldKey: 'cve',
+    translationKey: 'findings.cve' },
+{
+    fieldKey: 'osvdb',
+    translationKey: 'findings.osvdb' },
+{
+    fieldKey: 'bid',
+    translationKey: 'findings.bid' },
+{
+    fieldKey: 'cert',
+    translationKey: 'findings.cert' },
+{
+    fieldKey: 'vuln_publication_date',
+    translationKey: 'findings.vulnPubDate' },
+{
+    fieldKey: 'cvss_base_score',
+    translationKey: 'findings.cvssBaseScore' },
+{
+    fieldKey: 'cvss_temporal_score',
+    translationKey: 'findings.cvssTemporalScore' },
+{
+    fieldKey: 'cvss_vector',
+    translationKey: 'findings.cvssVector' },
+{
+    fieldKey: 'cvss_temporal_vector',
+    translationKey: 'findings.cvssTemporalVector' },
+{
+    fieldKey: 'exploit_available',
+    translationKey: 'findings.exploitAvailable' },
+{
+    fieldKey: 'exploit_ease',
+    translationKey: 'findings.exploitEase' }]; /* istanbul ignore next */exports.default =
+
+
+
+ADDITIONAL_FINDING_FIELDS;

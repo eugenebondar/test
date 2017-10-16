@@ -1,0 +1,10 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+Label;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_RequireStar = require('./RequireStar'); /* istanbul ignore next */var _RequireStar2 = _interopRequireDefault(_RequireStar);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function Label( /* istanbul ignore next */_ref) {/* istanbul ignore next */var _ref$isRequired = _ref.isRequired,isRequired = _ref$isRequired === undefined ? false : _ref$isRequired,children = _ref.children;
+    var star = isRequired ? /* istanbul ignore next */_RequireStar2.default : null;
+    return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null, children, /* istanbul ignore next */' ', star));
+}
+Label.propTypes = {
+    isRequired: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    children: /* istanbul ignore next */_react2.default.PropTypes.any };

@@ -1,0 +1,36 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reflux = require('reflux');
+
+var /* istanbul ignore next */_FilesStore = require('../../Stores/FilesStore'); /* istanbul ignore next */var _FilesStore2 = _interopRequireDefault(_FilesStore);
+
+var /* istanbul ignore next */_FindingDialog = require('./FindingDialog'); /* istanbul ignore next */var _FindingDialog2 = _interopRequireDefault(_FindingDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+FindingDialogCommunicatorWithRefluxTriggers = function (_Component) {_inherits(FindingDialogCommunicatorWithRefluxTriggers, _Component);
+    function /* istanbul ignore next */FindingDialogCommunicatorWithRefluxTriggers(props) {/* istanbul ignore next */_classCallCheck(this, FindingDialogCommunicatorWithRefluxTriggers);var _this = _possibleConstructorReturn(this, (FindingDialogCommunicatorWithRefluxTriggers.__proto__ || Object.getPrototypeOf(FindingDialogCommunicatorWithRefluxTriggers)).call(this,
+        props));
+        /* istanbul ignore next */_this.mapStoreToState( /* istanbul ignore next */_FilesStore2.default, /* istanbul ignore next */_this.listenFilesStore); /* istanbul ignore next */return _this;
+    }_createClass(FindingDialogCommunicatorWithRefluxTriggers, [{ key: 'render', value: function render()
+
+        {
+            return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDialog2.default, this.props));
+        }
+
+        /**
+           * Listener for Files Store.
+           * @param {Object} [e.event, e.data] - event name and data response.
+           */ }, { key: 'listenFilesStore', value: function listenFilesStore()
+        {/* istanbul ignore next */var e = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { event: '', data: null }; /* istanbul ignore next */var
+            event = e.event,data = e.data;
+            switch (event) {
+                case 'findingFileImported':
+                case 'findingFileDeleted':
+                    if (data) {
+                        this.props.getFindingDetails();
+                    }
+                    break;}
+
+        } }]);return FindingDialogCommunicatorWithRefluxTriggers;}(_reflux.Component); /* istanbul ignore next */exports.default = FindingDialogCommunicatorWithRefluxTriggers;
+
+
+FindingDialogCommunicatorWithRefluxTriggers.propTypes = {
+    getFindingDetails: /* istanbul ignore next */_react2.default.PropTypes.func };

@@ -1,0 +1,123 @@
+/* istanbul ignore next */'use strict';var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_index = require('./index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var props = /* istanbul ignore next */void 0,component = /* istanbul ignore next */void 0,data = /* istanbul ignore next */void 0,columnConfig = /* istanbul ignore next */void 0,actions = /* istanbul ignore next */void 0;
+
+function mountTable() {/* istanbul ignore next */var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {}; /* istanbul ignore next */var userContextParams = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var context = {
+        currentUser: new /* istanbul ignore next */_User2.default( /* istanbul ignore next */_extends({ isStaff: function /* istanbul ignore next */isStaff() /* istanbul ignore next */{return false;} }, userContextParams)) };
+
+    return (/* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */_extends({
+            data: data,
+            tableName: 'someName',
+            columnConfig: columnConfig,
+            actions: actions,
+            actionsTrigger: props.actionsTrigger,
+            getExpansionData: props.getExpansionData,
+            updateSortableStatus: props.updateSortableStatus },
+        props)),
+        { context: context }));
+}
+
+describe('TableBoard', function () {
+    beforeEach(function () {
+        props = {
+            className: 'className',
+            tableName: 'someName',
+            userSettings: {},
+            emptyTableTitle: '-',
+            expandId: '1',
+            data: [],
+            title: 'title',
+            pagination: false,
+            expansion: false,
+            selectable: false,
+            isAllSelected: false,
+            columnConfig: [],
+            actions: [],
+            actionsTrigger: function /* istanbul ignore next */actionsTrigger() {
+            },
+            selectTrigger: function /* istanbul ignore next */selectTrigger() {
+            },
+            updateSortableStatus: function /* istanbul ignore next */updateSortableStatus() {
+            },
+            trigger: function /* istanbul ignore next */trigger() {
+            },
+            getExpansionData: function /* istanbul ignore next */getExpansionData() {
+            } };
+
+        data = [{ 'customer_name': 'Jerde-Williamson' }];
+        columnConfig = [{
+            'source': 'customer_name',
+            'name': 'tableCell.customer',
+            'width': '10',
+            'sortable': false,
+            'type': 'text' }];
+
+        actions = [{ 'value': 'editTestSettings', 'title': 'Edit Test Settings', 'icon': 'sc-icon-pencil' }];
+    });
+    it('component will be mounted', function () {
+        var component = mountTable(props);
+        expect(component).toBeTruthy();
+    });
+    it('component will be mounted with defined title', function () {
+        var newProps = { title: 'title' };
+        component = mountTable( /* istanbul ignore next */_extends({}, props, newProps));
+        expect(component).toBeTruthy();
+        component.setState({ profileColumnsSettings: [] });
+        expect(component.find('.test__table__component').length).toBe(1);
+    });
+    describe('getProfileColumnSettings method', function () {
+        var contextColumnsSettings = [1, 2, 3, 4];
+        describe('when component has defaultColumnSettings prop set', function () {
+            var defaultColumnsSettings = [5, 6, 7, 8];
+            var props = { defaultColumnsSettings: defaultColumnsSettings };
+            describe('when context is empty', function () {
+                var component = /* istanbul ignore next */void 0;
+                beforeEach(function () /* istanbul ignore next */{return component = mountTable(props);});
+                it('returns empty array', function () {
+                    expect(component.instance().getProfileColumnSettings()).toEqual(defaultColumnsSettings);
+                });
+            });
+            describe('when context has settings matching tableName prop', function () {
+                var userContextParams = { settings: { 'someName': contextColumnsSettings } };
+                beforeEach(function () /* istanbul ignore next */{return component = mountTable(props, userContextParams);});
+                it('returns settings from defaultColumnSettings prop', function () {
+                    expect(component.instance().getProfileColumnSettings()).toEqual(contextColumnsSettings);
+                });
+            });
+            describe('when context has _not_ settings matching tableName prop', function () {
+                var userContextParams = { settings: { 'someOtherName': contextColumnsSettings } };
+                beforeEach(function () /* istanbul ignore next */{return component = mountTable(props, userContextParams);});
+                it('returns settings from defaultColumnSettings prop', function () {
+                    expect(component.instance().getProfileColumnSettings()).toEqual(defaultColumnsSettings);
+                });
+            });
+        });
+        describe('when component has _not_ defaultColumnSettings prop set', function () {
+            describe('when context is empty', function () {
+                var component = /* istanbul ignore next */void 0;
+                beforeEach(function () /* istanbul ignore next */{return component = mountTable();});
+                it('returns empty array', function () {
+                    expect(component.instance().getProfileColumnSettings()).toEqual([]);
+                });
+            });
+            describe('when context has settings matching tableName prop', function () {
+                var userContextParams = { settings: { 'someName': contextColumnsSettings } };
+                beforeEach(function () /* istanbul ignore next */{return component = mountTable({}, userContextParams);});
+                it('returns settings from context', function () {
+                    expect(component.instance().getProfileColumnSettings()).toEqual(contextColumnsSettings);
+                });
+            });
+            describe('when context has _not_ settings matching tableName prop', function () {
+                var userContextParams = { settings: { 'someOtherName': contextColumnsSettings } };
+                beforeEach(function () /* istanbul ignore next */{return component = mountTable({}, userContextParams);});
+                it('returns empty array', function () {
+                    expect(component.instance().getProfileColumnSettings()).toEqual([]);
+                });
+            });
+        });
+    });
+});

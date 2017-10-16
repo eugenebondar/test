@@ -1,0 +1,73 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var TestsAPI = /* istanbul ignore next */_Model2.default.New();
+
+TestsAPI.fetchTestDetails = function (id, isService, filter) {
+    if (isService) {
+        return (/* istanbul ignore next */_Api2.default.get('/api/service/tests/' + id, filter));
+    } else {
+        return (/* istanbul ignore next */_Api2.default.get('/api/tests/' + id + '.json'));
+    }
+};
+
+TestsAPI.updateStatus = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.put('api/service/tests/' + id + '/change_state', data));
+};
+
+TestsAPI.requestTest = function (id) {
+    return (/* istanbul ignore next */_Api2.default.put('api/tests/' + id + '/request_testing'));
+};
+
+TestsAPI.respondTest = function (id) {
+    return (/* istanbul ignore next */_Api2.default.put('api/tests/' + id + '/respond'));
+};
+
+TestsAPI.updateScheduler = function (data, id) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/service/schedules/test/' + id, data));
+};
+
+TestsAPI.updateTestInfo = function (data, id, isService) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/' + (isService ? 'service/' : '') + 'tests/' + id + '/configure', data));
+};
+
+TestsAPI.updateTestComment = function (data, id, isService) {
+    return (/* istanbul ignore next */_Api2.default.put('/api/' + (isService ? 'service/' : '') + 'tests/' + id + '/configure_comments', data));
+};
+
+TestsAPI.importFile = function (file) {
+    return (/* istanbul ignore next */_Api2.default.sendFile('/api/attachments', file));
+};
+
+TestsAPI.deleteAttachment = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.delete('/api/attachments/' + id, data));
+};
+
+TestsAPI.getAssessmentRuns = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/import/runs/', data));
+};
+
+TestsAPI.importFindings = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/import/findings/', data));
+};
+
+TestsAPI.importNessus = function (data) {
+    return (/* istanbul ignore next */_Api2.default.sendFile('/api/import/upload', data));
+};
+
+TestsAPI.reportDownloadCoverTemplateUrl = function (id) {
+    return '/api/service/runs/' + id + '/report/templates/cover';
+};
+
+TestsAPI.reportDownloadTemplateUrl = function (id) {
+    return '/api/service/runs/' + id + '/report/templates/default';
+};
+
+TestsAPI.reportConfigurePreview = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.sendMultipart('/api/service/runs/' + id + '/report/preview.pdf', data));
+};
+
+TestsAPI.reportConfigureGenerate = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.sendMultipart('/api/service/runs/' + id + '/report', data));
+}; /* istanbul ignore next */exports.default =
+
+TestsAPI;

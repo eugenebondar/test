@@ -1,0 +1,15 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.DashboardActions = exports.ActionNames = undefined;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var ActionNames = /* istanbul ignore next */exports.ActionNames = {
+    openEditTestPermissionDialog: 'openEditTestPermissionDialog',
+    closeEditTestPermissionDialog: 'closeEditTestPermissionDialog',
+    getTestsCount: 'getTestsCount',
+    getCompletedTests: 'getCompletedTests',
+    getActiveTests: 'getActiveTests',
+    getSeverityChart: 'getSeverityChart',
+    getTrendsChart: 'getTrendsChart',
+    updateTrigger: 'updateTrigger',
+    deleteTest: 'deleteTest' };
+
+
+var DashboardActions = /* istanbul ignore next */exports.DashboardActions = /* istanbul ignore next */_reflux2.default.createActions(Object.values(ActionNames));

@@ -1,0 +1,13 @@
+/* istanbul ignore next */'use strict';
+
+/* istanbul ignore next */jest.mock('../../../Models/TransactionLogs/api', function () {
+    return {
+        getLogs: jest.fn(function () {
+            return Promise.resolve({
+                json: function /* istanbul ignore next */json() {
+                    return getLogsResult;
+                } });
+
+        }) };
+
+});var getLogsResult = { transaction_logs: [], total: 0 };

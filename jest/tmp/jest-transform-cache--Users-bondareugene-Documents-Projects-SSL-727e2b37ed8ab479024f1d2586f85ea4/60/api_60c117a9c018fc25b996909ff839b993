@@ -1,0 +1,17 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var DictionaryAPI = {};
+
+DictionaryAPI.fetchPermissionsList = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/dictionary/permissions.json'));
+};
+
+DictionaryAPI.fetchFindingCategories = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/dictionary/finding/categories.json'));
+};
+
+DictionaryAPI.fetchFindingTypes = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/dictionary/finding_types'));
+}; /* istanbul ignore next */exports.default =
+
+DictionaryAPI;

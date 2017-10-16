@@ -1,0 +1,17 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var CustomerModel = /* istanbul ignore next */_Model2.default.New(function (customer) {
+    this.setMany({
+        id: customer.id,
+        corporation_name: customer.corporation_name,
+        email: customer.email,
+        name: customer.name,
+        phone: customer.phone,
+        cover_id: customer.cover_template_id,
+        main_id: customer.main_template_id,
+        suspended: customer.suspended,
+        suspended_text: customer.suspended ? 'Yes' : 'No' });
+
+}); /* istanbul ignore next */exports.default =
+
+CustomerModel;

@@ -1,0 +1,63 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_index = require('./index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('Checkbox', function () {
+    var props = /* istanbul ignore next */void 0,component = /* istanbul ignore next */void 0,clicked = /* istanbul ignore next */void 0;
+    beforeEach(function () {
+        clicked = false;
+        props = {
+            id: '1',
+            label: 'label',
+            value: true,
+            data: 'data',
+            onChange: function /* istanbul ignore next */onChange() {
+            },
+            onClick: function /* istanbul ignore next */onClick() {
+                clicked = true;
+            } };
+
+    });
+    it('will be mounted with label', function () {
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ label: props.label, value: props.value }));
+        expect(component).toBeTruthy();
+        expect(component.find('.checkbox-label-wrap input')).toHaveProp('checked', true);
+        expect(component.find('.checkbox-label-wrap span')).toHaveText(props.label);
+    });
+    it('will be mounted without label', function () {
+        props.label = null;
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ label: props.label, value: props.value }));
+        expect(component.find('.checkbox-label-wrap').length).toEqual(0);
+    });
+    it('click works', function () {
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ label: props.label, value: props.value, onClick: props.onClick }));
+        expect(clicked).toBeFalsy();
+        component.find('input').simulate('click');
+        expect(clicked).toBeTruthy();
+    });
+    it('click does not be called', function () {
+        props.onClick = undefined;
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ label: props.label, value: props.value, onClick: props.onClick }));
+        component.find('input').simulate('click');
+        expect(clicked).toBeFalsy();
+    });
+    it('changes are being handled', function () {
+        var handleWorks = jasmine.createSpy('handleChange');
+        var eventMock = {
+            target: {
+                checked: false } };
+
+
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ label: props.label, id: props.id, data: props.data, value: props.value, onChange: handleWorks }));
+        component.find('input').simulate('change', eventMock);
+        expect(handleWorks).toHaveBeenCalledTimes(1);
+        expect(handleWorks).toHaveBeenCalledWith(props.id, false, 'checkbox', props.data);
+    });
+    it('label click changes are being handled', function () {
+        var onClickLabel = jasmine.createSpy('onClickLabel');
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ label: props.label, id: props.id, data: props.data, value: props.value, onChange: onClickLabel }));
+        component.find('.checkbox-label-wrap span').simulate('click');
+        expect(onClickLabel).toHaveBeenCalledTimes(1);
+        expect(onClickLabel).toHaveBeenCalledWith(props.id, false, 'checkbox', props.data);
+    });
+});

@@ -1,0 +1,170 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_SessionUserActions = require('./SessionUserActions'); /* istanbul ignore next */var _SessionUserActions2 = _interopRequireDefault(_SessionUserActions);
+var /* istanbul ignore next */_UpdatePasswordDialogActions = require('../../Modules/Login/Components/UpdatePasswordDialog/UpdatePasswordDialogActions'); /* istanbul ignore next */var _UpdatePasswordDialogActions2 = _interopRequireDefault(_UpdatePasswordDialogActions);
+var /* istanbul ignore next */_RoleDialogActions = require('../../Modules/Roles/RoleDialog/RoleDialogActions'); /* istanbul ignore next */var _RoleDialogActions2 = _interopRequireDefault(_RoleDialogActions);
+var /* istanbul ignore next */_UserDialogActions = require('../../Modules/Users/UserDialog/UserDialogActions'); /* istanbul ignore next */var _UserDialogActions2 = _interopRequireDefault(_UserDialogActions);
+
+var /* istanbul ignore next */_api = require('../../Models/Session/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+
+var /* istanbul ignore next */_User = require('./User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @classdesc Class representing a SessionUser Store.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @class
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */var
+SessionUserStore = function (_Reflux$Store) {_inherits(SessionUserStore, _Reflux$Store);
+    function /* istanbul ignore next */SessionUserStore() {/* istanbul ignore next */_classCallCheck(this, SessionUserStore);var _this = _possibleConstructorReturn(this, (SessionUserStore.__proto__ || Object.getPrototypeOf(SessionUserStore)).call(this));
+
+        /* istanbul ignore next */_this.listenables = [/* istanbul ignore next */_SessionUserActions2.default, /* istanbul ignore next */_UpdatePasswordDialogActions2.default];
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_RoleDialogActions2.default.editRole.completed, /* istanbul ignore next */ /* istanbul ignore next */_this.checkIsUserUpdatedOwnRole.bind(_this));
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_UserDialogActions2.default.editUser.completed, /* istanbul ignore next */ /* istanbul ignore next */_this.checkIsUserUpdatedHimself.bind(_this));
+
+        /* istanbul ignore next */_this.currentUser = new /* istanbul ignore next */_User2.default(); /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * @listens SessionUserActions.getActiveSession.completed
+       */_createClass(SessionUserStore, [{ key: 'onGetActiveSessionCompleted', value: function onGetActiveSessionCompleted(
+        json) {
+            this.currentUser = new /* istanbul ignore next */_User2.default(json);
+            this.trigger({ event: 'currentUser', data: this.currentUser });
+        }
+
+        /**
+           * @listens SessionUserActions.getActiveSession.failed
+           */ }, { key: 'onGetActiveSessionFailed', value: function onGetActiveSessionFailed(
+        json) {
+            var is2FAuthNotConfigured = function is2FAuthNotConfigured(json) /* istanbul ignore next */{return json && json.reason === 'enforced_two_factor_auth_not_configured';};
+
+            if (is2FAuthNotConfigured(json)) {
+                this.trigger({ event: 'enforcedTwoFactorAuth', data: json.errors[0] });
+            }
+            this.currentUser = new /* istanbul ignore next */_User2.default();
+            this.trigger({ event: 'currentUser', data: this.currentUser });
+        } }, { key: 'setUnauthorized', value: function setUnauthorized(
+
+        message) {
+            if (!this.currentUser.isEmpty) {
+                this.userSettings = null;
+                this.currentUser = new /* istanbul ignore next */_User2.default();
+                this.trigger({ event: 'currentUser', data: this.currentUser });
+                this.trigger({ event: 'loginMessage', data: message });
+            }
+        }
+
+        /**
+           * @listens SessionUserActions.signOut.completed
+           */ }, { key: 'onSignOutCompleted', value: function onSignOutCompleted(
+        notAuthorizedMessage) {
+            this.setUnauthorized(notAuthorizedMessage);
+        } }, { key: 'signIn', value: function signIn(
+
+        data) {/* istanbul ignore next */var _this2 = this;
+            /* istanbul ignore next */_api2.default.signIn(data).
+            then(function (json) {
+                if (json.success) {
+                    /* istanbul ignore next */_SessionUserActions2.default.getActiveSession();
+                } else {
+                    /* istanbul ignore next */_this2.trigger({ event: 'loginValidation', data: json });
+                }
+            });
+        } }, { key: 'saveTableConfig', value: function saveTableConfig(
+
+        data) {
+            var saveConfigPromise = /* istanbul ignore next */_api2.default.saveConfig(data);
+            saveConfigPromise.then(function (response) /* istanbul ignore next */{return response.ok && /* istanbul ignore next */_SessionUserActions2.default.getActiveSession();});
+            saveConfigPromise.then(function (response) /* istanbul ignore next */{return !response.ok && Promise.reject(response);}); //TODO move that stuff into API layer or somewhere :)
+        } }, { key: 'updateAuth', value: function updateAuth(
+
+        data) {/* istanbul ignore next */var _this3 = this;
+            /* istanbul ignore next */_api2.default.updateAuth(data).
+            then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (json) {
+                        /* istanbul ignore next */_this3.trigger({ event: 'updatedAuth', data: json });
+                        /* istanbul ignore next */_SessionUserActions2.default.getActiveSession();
+                    });
+                } else if (response.status === 400) {
+                    response.json().then(function (json) {
+                        /* istanbul ignore next */_this3.trigger({ event: 'updateAuthValidation', data: json.errors });
+                    });
+                }
+            });
+        } }, { key: 'configureAuth', value: function configureAuth()
+
+        {/* istanbul ignore next */var _this4 = this;
+            /* istanbul ignore next */_api2.default.configureAuth().
+            then(function (response) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_this4.trigger({ event: 'configuredAuth', data: json });
+                });
+            }).
+            catch(function (error) {
+            });
+        } }, { key: 'resetPassword', value: function resetPassword(
+
+        data) {/* istanbul ignore next */var _this5 = this;
+            /* istanbul ignore next */_api2.default.resetPassword({ user: data }).
+            then(function (response) {
+                if (response.ok || response.status === 400) {
+                    response.json().then(function (json) {
+                        /* istanbul ignore next */_this5.trigger({ event: 'resetPassword', data: json });
+                    });
+                } else if (response.status === 422) {
+                    response.json().then(function (json) {
+                        /* istanbul ignore next */_this5.trigger({ event: 'resetPasswordValidation', data: json.errors });
+                    });
+                }
+            });
+        } }, { key: 'onSubmitCompleted', value: function onSubmitCompleted(_ref)
+
+        {/* istanbul ignore next */var profile = _ref.profile;
+            this.currentUser = new /* istanbul ignore next */_User2.default(profile);
+            /* istanbul ignore next */_SessionUserActions2.default.getActiveSession();
+        }
+
+        /**
+           * @listens RoleDialogActions.editRole.completed
+           */ }, { key: 'checkIsUserUpdatedOwnRole', value: function checkIsUserUpdatedOwnRole(_ref2)
+        {/* istanbul ignore next */var id = _ref2.id;
+            if (this.currentUser.role_id === id) {
+                /* istanbul ignore next */_SessionUserActions2.default.getActiveSession();
+            }
+        }
+
+        /**
+           * @listens UserDialogActions.editUser.completed
+           */ }, { key: 'checkIsUserUpdatedHimself', value: function checkIsUserUpdatedHimself(_ref3)
+        {/* istanbul ignore next */var id = _ref3.id;
+            if (this.currentUser.id === id) {
+                /* istanbul ignore next */_SessionUserActions2.default.getActiveSession();
+            }
+        }
+
+        /**
+           * If response status is 422 - prepare object with errors.
+           * @param {Object} [response] - response.
+           * @param {String} [triggerName] - name of trigger.
+           * @trigger {Object} - object of errors.
+           */ }, { key: 'checkValidation', value: function checkValidation(
+        response, triggerName) {/* istanbul ignore next */var _this6 = this;
+            if (response.status === 422) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_this6.validation = {};
+                    for (var key in json) {
+                        /* istanbul ignore next */_this6.validation[key] = json[key].join(', ');
+                    }
+                    /* istanbul ignore next */_this6.trigger({ event: triggerName, data: /* istanbul ignore next */_this6.validation });
+                });
+            }
+        } }]);return SessionUserStore;}( /* istanbul ignore next */_reflux2.default.Store); /* istanbul ignore next */exports.default =
+
+
+new SessionUserStore();
+
+var MESSAGES = {
+    MUST_SIGN_IN: 'You need to sign in or sign up before continuing.',
+    SESSION_TIMEOUT: 'Your session has been expired. Please sign in again.' };
+
+Object.freeze(MESSAGES);

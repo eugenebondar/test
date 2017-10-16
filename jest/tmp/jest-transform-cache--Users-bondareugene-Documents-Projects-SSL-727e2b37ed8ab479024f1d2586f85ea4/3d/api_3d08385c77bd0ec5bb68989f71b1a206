@@ -1,0 +1,50 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var productAPI = {
+    service: {
+        baseUrl: '/api/service' },
+
+    customer: {
+        baseUrl: '/api' } };
+
+
+
+productAPI.service.fetchProducts = fetchProducts;
+productAPI.customer.fetchProducts = fetchProducts;
+
+productAPI.service.fetchProductsList = fetchProductsList;
+productAPI.customer.fetchProductsList = fetchProductsList;
+
+productAPI.service.fetchAllProducts = fetchAllProducts;
+
+productAPI.service.addProduct = addProduct;
+
+function addProduct(data) {
+    return (/* istanbul ignore next */_Api2.default.post(this.baseUrl + '/products', data));
+}
+
+function fetchProducts(filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull(this.baseUrl + '/products', filter));
+}
+
+function fetchAllProducts(filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull(this.baseUrl + '/products/list', filter));
+}
+
+function fetchProductsList(filter) {
+    return (/* istanbul ignore next */_Api2.default.get(this.baseUrl + '/products/list.json', filter));
+}
+
+productAPI.service.addProduct = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post(this.baseUrl + '/products', data));
+};
+
+productAPI.service.editProduct = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.put(this.baseUrl + /* istanbul ignore next */('/products/' + id + '.json'), data));
+};
+
+productAPI.service.deleteProduct = function (id) {
+    return (/* istanbul ignore next */_Api2.default.delete(this.baseUrl + /* istanbul ignore next */('/products/' + id + '.json'), {}));
+}; /* istanbul ignore next */exports.default =
+
+productAPI;

@@ -1,0 +1,29 @@
+/* istanbul ignore next */'use strict'; /* istanbul ignore next */jest.mock('../../../Models/Permisssion/api', function () {
+    return {};
+});
+
+/* istanbul ignore next */jest.mock('../../../Models/Groups/api', function () {
+    return {
+        fetchGroups: jest.fn(function () /* istanbul ignore next */{return Promise.resolve([]);}) };
+
+});
+
+/* istanbul ignore next */jest.mock('../../../Models/Tests/api', function () {
+    return {
+        fetchTestDetails: jest.fn(function () /* istanbul ignore next */{return Promise.resolve({ organization_id: 1 });}) };
+
+});
+
+
+
+/* istanbul ignore next */jest.mock('../../../Models/Users/api', function () {
+    return {
+        fetchUsers: jest.fn(function () {
+            return Promise.resolve({
+                json: function /* istanbul ignore next */json() {
+                    return fetchUsersResult;
+                } });
+
+        }) };
+
+}); /* istanbul ignore next */Object.defineProperty(exports, "__esModule", { value: true });var fetchUsersResult = /* istanbul ignore next */exports.fetchUsersResult = { users: [] };

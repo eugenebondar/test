@@ -1,0 +1,39 @@
+/* istanbul ignore next */'use strict';var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+
+var /* istanbul ignore next */_TestRunDate = require('./TestRunDate'); /* istanbul ignore next */var _TestRunDate2 = _interopRequireDefault(_TestRunDate);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+Date.prototype.getTimezoneOffset = function () {
+    return 120;
+};
+
+var props = {
+    title: 'title',
+    value: '2017-08-08T09:12:13',
+    offset: -300,
+    onChange: function /* istanbul ignore next */onChange() /* istanbul ignore next */{return null;},
+    onValidationCheck: function /* istanbul ignore next */onValidationCheck() /* istanbul ignore next */{return null;} };
+
+
+describe('TestRunDate', function () {
+    describe('with default set of props', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.shallow)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TestRunDate2.default, /* istanbul ignore next */_extends({},
+            props, {
+                isEditable: true })));
+
+
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

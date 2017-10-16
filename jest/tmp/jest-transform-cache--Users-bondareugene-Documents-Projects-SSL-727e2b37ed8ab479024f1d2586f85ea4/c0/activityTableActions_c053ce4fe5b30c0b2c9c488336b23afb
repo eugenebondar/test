@@ -1,0 +1,12 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reactTranslateComponent = require('react-translate-component'); /* istanbul ignore next */exports.default =
+
+[
+{
+    value: 'changeset',
+    title: /* istanbul ignore next */(0, _reactTranslateComponent.translate)('activityLogs.actions.viewFullChangeset'),
+    icon: 'sc-icon-invisible',
+    /**
+                                * @param {{}} [log] Scan data
+                                * @return {function(): (boolean)}
+                                */
+    getIsVisibleCallback: function /* istanbul ignore next */getIsVisibleCallback(log) /* istanbul ignore next */{return function () /* istanbul ignore next */{return JSON.stringify(log.changeset) !== '{}';};} }];

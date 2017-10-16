@@ -1,0 +1,38 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+
+PaginationWithTitle;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);var /* istanbul ignore next */_apocReact = require('apoc-react');var /* istanbul ignore next */_PaginationTitle = require('./PaginationTitle'); /* istanbul ignore next */var _PaginationTitle2 = _interopRequireDefault(_PaginationTitle); /* istanbul ignore next */require('./PaginationWithTitle.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function PaginationWithTitle( /* istanbul ignore next */_ref) {/* istanbul ignore next */var className = _ref.className,currentPage = _ref.currentPage,itemsPerPage = _ref.itemsPerPage,totalItems = _ref.totalItems,itemsName = _ref.itemsName,onChange = _ref.onChange;
+    var finalClassName = /* istanbul ignore next */(0, _classnames2.default)(className, 'pagination-with-title');
+    var shouldShowPagination = totalItems > itemsPerPage;
+    return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: finalClassName },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_PaginationTitle2.default, /* istanbul ignore next */{
+                currentPage: currentPage,
+                itemsPerPage: itemsPerPage,
+                totalItems: totalItems,
+                itemsName: itemsName }),
+
+            shouldShowPagination && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Pagination, /* istanbul ignore next */{ key: totalItems,
+                currentPage: currentPage,
+                itemsPerPage: itemsPerPage,
+                totalItems: totalItems,
+                onChange: onChange })));
+
+
+}
+
+PaginationWithTitle.defaultProps = {
+    classNames: '' };
+
+
+PaginationWithTitle.propTypes = {
+    className: /* istanbul ignore next */_react2.default.PropTypes.string,
+    currentPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+    itemsPerPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+    totalItems: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+    itemsName: /* istanbul ignore next */_react2.default.PropTypes.string,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };

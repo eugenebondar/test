@@ -1,0 +1,47 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var AssetsGroupsAPI = {
+    service: {
+        baseUrl: '/api/service' },
+
+    customer: {
+        baseUrl: '/api' } };
+
+
+
+AssetsGroupsAPI.service.fetchAssetsGroups = fetchAssetsGroups;
+AssetsGroupsAPI.customer.fetchAssetsGroups = fetchAssetsGroups;
+
+AssetsGroupsAPI.service.fetchAssetsGroup = fetchAssetsGroup;
+AssetsGroupsAPI.customer.fetchAssetsGroup = fetchAssetsGroup;
+
+AssetsGroupsAPI.service.addAssetsGroup = addAssetsGroup;
+AssetsGroupsAPI.customer.addAssetsGroup = addAssetsGroup;
+
+AssetsGroupsAPI.service.editAssetsGroup = editAssetsGroup;
+AssetsGroupsAPI.customer.editAssetsGroup = editAssetsGroup;
+
+AssetsGroupsAPI.service.deleteAssetsGroup = deleteAssetsGroup;
+AssetsGroupsAPI.customer.deleteAssetsGroup = deleteAssetsGroup;
+
+function fetchAssetsGroups(filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull( /* istanbul ignore next */this.baseUrl + '/asset_groups.json', filter));
+}
+
+function fetchAssetsGroup(assetsGroupId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */this.baseUrl + '/asset_groups/' + assetsGroupId + '.json'));
+}
+
+function addAssetsGroup(data) {
+    return (/* istanbul ignore next */_Api2.default.post( /* istanbul ignore next */this.baseUrl + '/asset_groups.json', data));
+}
+
+function editAssetsGroup(assetsGroupId, data) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */this.baseUrl + '/asset_groups/' + assetsGroupId + '.json', data));
+}
+
+function deleteAssetsGroup(assetsGroupId) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */this.baseUrl + '/asset_groups/' + assetsGroupId + '.json'));
+} /* istanbul ignore next */exports.default =
+
+AssetsGroupsAPI;

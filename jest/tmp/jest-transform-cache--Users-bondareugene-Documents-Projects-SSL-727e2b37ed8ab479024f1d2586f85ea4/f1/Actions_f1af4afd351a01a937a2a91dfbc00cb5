@@ -1,0 +1,104 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDom = require('react-dom'); /* istanbul ignore next */var _reactDom2 = _interopRequireDefault(_reactDom);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+
+var /* istanbul ignore next */_Action = require('../Elements/Actions/Action'); /* istanbul ignore next */var _Action2 = _interopRequireDefault(_Action);
+var /* istanbul ignore next */_BrandedHamburgerButton = require('../../Elements/BrandedHamburgerButton/BrandedHamburgerButton'); /* istanbul ignore next */var _BrandedHamburgerButton2 = _interopRequireDefault(_BrandedHamburgerButton);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+Actions = function (_React$Component) {_inherits(Actions, _React$Component);
+    function /* istanbul ignore next */Actions(props) {/* istanbul ignore next */_classCallCheck(this, Actions);var _this = _possibleConstructorReturn(this, (Actions.__proto__ || Object.getPrototypeOf(Actions)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            isShow: false,
+            isClicked: false };
+
+        /* istanbul ignore next */_this.hideList = /* istanbul ignore next */_this.hideList.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.handleDocumentClick = /* istanbul ignore next */_this.handleDocumentClick.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.onClick = /* istanbul ignore next */_this.onClick.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.closeOnClick = /* istanbul ignore next */_this.closeOnClick.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(Actions, [{ key: 'componentDidMount', value: function componentDidMount()
+
+        {
+            window.addEventListener('click', this.handleDocumentClick);
+        } }, { key: 'componentWillUnmount', value: function componentWillUnmount()
+
+        {
+            window.removeEventListener('click', this.handleDocumentClick);
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;
+            var actionsList = this.props.actions.map(function (item, i) {
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Action2.default, /* istanbul ignore next */{
+                        key: i,
+                        action: item,
+                        actionsTrigger: /* istanbul ignore next */_this2.props.actionsTrigger }));
+
+
+            }); /* istanbul ignore next */var _state =
+            this.state,isShow = _state.isShow,isClicked = _state.isClicked;
+            var divWrapClasses = /* istanbul ignore next */(0, _classnames2.default)('test-actions-wrap dropdown__wrap', {
+                'test-actions-wrap-disabled': this.props.disabled });
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */{ ref: 'area',
+                        onMouseLeave: this.hideList,
+                        style: { width: '58px' },
+                        className: 'center' },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: divWrapClasses,
+                            onClick: this.onClick },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_BrandedHamburgerButton2.default, /* istanbul ignore next */null),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'table-action-list-wrapper sc-txt-primary' + (isShow && !isClicked ? '' : ' hide') },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'ul', /* istanbul ignore next */{
+                                    onClick: this.closeOnClick,
+                                    className: 'sc-bg-primary-children-hover table-action-dropdown-list action-dropdown-list' },
+
+                                actionsList)))));
+
+
+
+
+
+
+        } }, { key: 'hideList', value: function hideList()
+
+        {
+            this.setState({
+                isShow: false,
+                isClicked: false });
+
+        } }, { key: 'handleDocumentClick', value: function handleDocumentClick(
+
+        e) {
+            var area = /* istanbul ignore next */_reactDom2.default.findDOMNode(this.refs.area);
+            if (!area.contains(e.target)) {
+                this.hideList();
+            }
+        } }, { key: 'onClick', value: function onClick()
+
+        {
+            if (this.props.disabled) {
+                return;
+            }
+            this.setState({
+                isShow: true });
+
+        } }, { key: 'closeOnClick', value: function closeOnClick()
+
+        {
+            if (this.closeOnClick) {
+                this.setState({
+                    isClicked: true,
+                    isShow: false });
+
+            }
+        } }]);return Actions;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = Actions;
+
+
+Actions.propTypes = {
+    actions: /* istanbul ignore next */_react2.default.PropTypes.array,
+    actionsTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    disabled: /* istanbul ignore next */_react2.default.PropTypes.bool };

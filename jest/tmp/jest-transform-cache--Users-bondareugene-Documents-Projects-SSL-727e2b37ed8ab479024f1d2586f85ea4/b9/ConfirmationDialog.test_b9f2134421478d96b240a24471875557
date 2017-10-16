@@ -1,0 +1,43 @@
+/* istanbul ignore next */'use strict';var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json');
+var /* istanbul ignore next */_ConfirmationDialog = require('./ConfirmationDialog'); /* istanbul ignore next */var _ConfirmationDialog2 = _interopRequireDefault(_ConfirmationDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('ConfirmationDialog', function () {
+    var defaultProps = {
+        title: 'Modal title',
+        confirmationText: 'Confirmation Text',
+        buttons: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */null, /* istanbul ignore next */'Button') };
+
+
+    beforeEach(function () {
+        spyOn(console, 'error').and.callFake(function (msg) {throw new Error(msg);});
+    });
+
+    describe('with default set of props', function () {
+        var component = /* istanbul ignore next */void 0,props = /* istanbul ignore next */void 0;
+
+        beforeEach(function () {
+            props = defaultProps;
+            component = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ConfirmationDialog2.default, defaultProps));
+        });
+
+        it('matches snapshot', function () {
+            component = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ConfirmationDialog2.default, props));
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)(component)).toMatchSnapshot();
+        });
+    });
+
+    describe('with cancel button', function () {
+        var component = /* istanbul ignore next */void 0,props = /* istanbul ignore next */void 0;
+
+        beforeEach(function () {
+            props = /* istanbul ignore next */_extends({}, defaultProps, { onCancel: function /* istanbul ignore next */onCancel() {} });
+            component = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ConfirmationDialog2.default, props));
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)(component)).toMatchSnapshot();
+        });
+    });
+});

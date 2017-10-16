@@ -1,0 +1,98 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_DashboardActions = require('../../../../Stores/Dashboard/DashboardActions');
+
+var /* istanbul ignore next */_Array = require('../../Elements/Cells/Array'); /* istanbul ignore next */var _Array2 = _interopRequireDefault(_Array);
+var /* istanbul ignore next */_Permissions = require('../../Elements/Cells/Permissions'); /* istanbul ignore next */var _Permissions2 = _interopRequireDefault(_Permissions);
+var /* istanbul ignore next */_Reports = require('../../Elements/Cells/Reports'); /* istanbul ignore next */var _Reports2 = _interopRequireDefault(_Reports);
+var /* istanbul ignore next */_Date = require('../../Elements/Cells/Date'); /* istanbul ignore next */var _Date2 = _interopRequireDefault(_Date);
+var /* istanbul ignore next */_LinkTD = require('../../Elements/Cells/LinkTD'); /* istanbul ignore next */var _LinkTD2 = _interopRequireDefault(_LinkTD);
+var /* istanbul ignore next */_Blank = require('../../Elements/Cells/Blank'); /* istanbul ignore next */var _Blank2 = _interopRequireDefault(_Blank);
+var /* istanbul ignore next */_Text = require('../../Elements/Cells/Text'); /* istanbul ignore next */var _Text2 = _interopRequireDefault(_Text);
+var /* istanbul ignore next */_Input = require('../../Elements/Cells/Input'); /* istanbul ignore next */var _Input2 = _interopRequireDefault(_Input);
+var /* istanbul ignore next */_Email = require('../../Elements/Cells/Email'); /* istanbul ignore next */var _Email2 = _interopRequireDefault(_Email);
+var /* istanbul ignore next */_Trigger = require('../../Elements/Cells/Trigger'); /* istanbul ignore next */var _Trigger2 = _interopRequireDefault(_Trigger);
+var /* istanbul ignore next */_Status = require('../../Elements/Cells/Status'); /* istanbul ignore next */var _Status2 = _interopRequireDefault(_Status);
+var /* istanbul ignore next */_Severity = require('../../Elements/Cells/Severity'); /* istanbul ignore next */var _Severity2 = _interopRequireDefault(_Severity);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * TableTD representing a table's TD cell component.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @module TableBoard/Elements/Table/TableTH
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @version 1.0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @requires React
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @author Yevhen Bondar
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    * @copyright (c) 2016 SoftServe.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    */var TableTD = /* istanbul ignore next */_react2.default.createClass({ /* istanbul ignore next */displayName: 'TableTD', propTypes: { value: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([/* istanbul ignore next */_react2.default.PropTypes.string, /* istanbul ignore next */_react2.default.PropTypes.number, /* istanbul ignore next */_react2.default.PropTypes.array, /* istanbul ignore next */_react2.default.PropTypes.object]),
+
+        test: /* istanbul ignore next */_react2.default.PropTypes.object,
+        link: /* istanbul ignore next */_react2.default.PropTypes.object,
+        expansion: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        isExpand: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        isService: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        expandTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+        trigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+        type: /* istanbul ignore next */_react2.default.PropTypes.string,
+        translate: /* istanbul ignore next */_react2.default.PropTypes.string,
+        width: /* istanbul ignore next */_react2.default.PropTypes.string,
+        selectable: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        selectTrigger: /* istanbul ignore next */_react2.default.PropTypes.func },
+
+    statics: { /* istanbul ignore next */
+        /**
+                                           * Get class object for cells.
+                                           * @static
+                                           * @param {String} cellType.
+                                           * @return {Object} cell class or null.
+                                           */
+        getCell: function getCell(cellType) {
+            var Cell = {
+                'text': /* istanbul ignore next */_Text2.default,
+                'blank': /* istanbul ignore next */_Blank2.default,
+                'link': /* istanbul ignore next */_LinkTD2.default,
+                'severity': /* istanbul ignore next */_Severity2.default,
+                'status': /* istanbul ignore next */_Status2.default,
+                'email': /* istanbul ignore next */_Email2.default,
+                'input': /* istanbul ignore next */_Input2.default,
+                'trigger': /* istanbul ignore next */_Trigger2.default,
+                'reports': /* istanbul ignore next */_Reports2.default,
+                'list': /* istanbul ignore next */_Permissions2.default,
+                'array': /* istanbul ignore next */_Array2.default,
+                'date': /* istanbul ignore next */_Date2.default }[
+            cellType];
+            return typeof Cell === 'undefined' ? null : Cell;
+        } }, /* istanbul ignore next */
+
+    render: function render() {/* istanbul ignore next */var _props =
+        this.props,type = _props.type,width = _props.width,other = _objectWithoutProperties(_props, ['type', 'width']);
+        var style = {
+            width: width !== '' && width ? width + 'px' : '',
+            maxWidth: width !== '' && width ? width + 'px' : '' };
+
+        var Component = this.constructor.getCell(type);
+        return type !== 'hidden' ?
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */{
+                className: this.props.expansion || this.props.selectable ? 'expand-cell' : '',
+                style: style },
+
+            /* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */_extends({}, other, { openChangeStatusPopup: this.openChangeStatusPopup }))) :
+
+        null;
+    }, /* istanbul ignore next */
+    openChangeStatusPopup: function openChangeStatusPopup(value) {
+        /* istanbul ignore next */_DashboardActions.DashboardActions.updateTrigger('openChangeStatusPopup', {
+            id: this.props.test.id,
+            state: value });
+
+    } }); /* istanbul ignore next */exports.default =
+
+
+TableTD;

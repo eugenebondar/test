@@ -1,0 +1,86 @@
+/* istanbul ignore next */'use strict';var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */var _enzymeToJson2 = _interopRequireDefault(_enzymeToJson);
+var /* istanbul ignore next */_CustomizeAccountDialog = require('./CustomizeAccountDialog'); /* istanbul ignore next */var _CustomizeAccountDialog2 = _interopRequireDefault(_CustomizeAccountDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var defaultProps = {
+    onClose: function /* istanbul ignore next */onClose() /* istanbul ignore next */{return null;},
+    onSubmit: function /* istanbul ignore next */onSubmit() /* istanbul ignore next */{return null;},
+    uploadedImages: [],
+    fields: null,
+    organizationId: 'organizationId',
+    isSaving: false,
+    isLoading: true,
+    isError: false };
+
+
+/**
+                       * @return {ReactWrapper<P, S>}
+                       */
+var getCustomizeAccountDialog = function getCustomizeAccountDialog() {/* istanbul ignore next */var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    return (/* istanbul ignore next */(0, _enzyme.mount)(
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CustomizeAccountDialog2.default, /* istanbul ignore next */_extends({},
+        defaultProps,
+        props))));
+
+
+};
+
+describe('CustomizeAccountDialog', function () {
+    describe('with default set of props', function () {
+        var errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        describe('matches snapshot with', function () {
+            it('loading data', function () {
+                var component = getCustomizeAccountDialog();
+                expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+            });
+
+            describe('loaded data', function () {
+
+                it('when branding is disabled', function () {
+                    var component = getCustomizeAccountDialog({
+                        isLoading: false,
+                        fields: {
+                            enabled: false,
+                            id: 'id',
+                            images: [],
+                            main_color: '#ff0000' } });
+
+
+                    expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+                });
+
+                it('when branding is enabled', function () {
+                    var component = getCustomizeAccountDialog({
+                        isLoading: false,
+                        fields: {
+                            enabled: true,
+                            id: 'id',
+                            images: [{
+                                branding_id: 'branding_id',
+                                created_at: 'created_at',
+                                id: 'id',
+                                image_file: {
+                                    url: 'url' },
+
+                                image_type: 'image_type',
+                                updated_at: 'updated_at' }],
+
+                            main_color: '#ff0000' } });
+
+
+                    expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+                });
+            });
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

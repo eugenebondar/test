@@ -1,0 +1,78 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json');
+var /* istanbul ignore next */_ConfirmAccount = require('./ConfirmAccount'); /* istanbul ignore next */var _ConfirmAccount2 = _interopRequireDefault(_ConfirmAccount);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('ConfirmAccount', function () {
+    var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+    var context = {
+        router: {} };
+
+
+    beforeAll(function () {
+        errorConsole = spyOn(console, 'error');
+    });
+
+
+    describe('with default set of props', function () {
+        var props = {
+            password: '',
+            password_confirmation: '',
+            pending: false,
+            errors: {}, /* istanbul ignore next */
+            onSubmit: function onSubmit() {} };
+
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ConfirmAccount2.default, props), { context: context });
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('with errors', function () {
+        var props = {
+            password: '',
+            password_confirmation: '',
+            pending: false,
+            errors: {
+                password: ['password error'],
+                password_confirmation: ['password_confirmation error'] }, /* istanbul ignore next */
+
+            onSubmit: function onSubmit() {} };
+
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ConfirmAccount2.default, props), { context: context });
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+    });
+
+    describe('pending', function () {
+        var props = {
+            password: '',
+            password_confirmation: '',
+            pending: true,
+            errors: {}, /* istanbul ignore next */
+            onSubmit: function onSubmit() {} };
+
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ConfirmAccount2.default, props), { context: context });
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+    });
+});

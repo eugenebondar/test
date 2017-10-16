@@ -1,0 +1,20 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_Type = require('./Validators/Type'); /* istanbul ignore next */var Type = _interopRequireWildcard(_Type); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}
+
+var Validators = {
+  Type: Type }; /**
+                 * Validators
+                 * @module Validators/Validators
+                 * @version 1.0.0
+                 *
+                 * @author Yevhen Bondar
+                 * @copyright (c) 2016 SoftServe.
+                 */ /* istanbul ignore next */exports.default = Validators;

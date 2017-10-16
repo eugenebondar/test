@@ -1,0 +1,66 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _get = function get(object, property, receiver) {if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {var parent = Object.getPrototypeOf(object);if (parent === null) {return undefined;} else {return get(parent, property, receiver);}} else if ("value" in desc) {return desc.value;} else {var getter = desc.get;if (getter === undefined) {return undefined;}return getter.call(receiver);}};var /* istanbul ignore next */_reflux = require('reflux');
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_ImportExternalRunDialogStore = require('./ImportExternalRunDialogStore'); /* istanbul ignore next */var _ImportExternalRunDialogStore2 = _interopRequireDefault(_ImportExternalRunDialogStore);
+var /* istanbul ignore next */_ImportExternalRunDialogActions = require('./ImportExternalRunDialogActions'); /* istanbul ignore next */var _ImportExternalRunDialogActions2 = _interopRequireDefault(_ImportExternalRunDialogActions);
+
+var /* istanbul ignore next */_ImportExternalRunDialog = require('./ImportExternalRunDialog'); /* istanbul ignore next */var _ImportExternalRunDialog2 = _interopRequireDefault(_ImportExternalRunDialog);
+var /* istanbul ignore next */_ImportForm = require('./ImportForm/ImportForm'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ImportExternalRunDialogContainer = function (_Component) {_inherits(ImportExternalRunDialogContainer, _Component);
+    function /* istanbul ignore next */ImportExternalRunDialogContainer() {/* istanbul ignore next */_classCallCheck(this, ImportExternalRunDialogContainer);var _this = _possibleConstructorReturn(this, (ImportExternalRunDialogContainer.__proto__ || Object.getPrototypeOf(ImportExternalRunDialogContainer)).call(this));
+
+        /* istanbul ignore next */_this.store = /* istanbul ignore next */_ImportExternalRunDialogStore2.default;
+
+        /* istanbul ignore next */_this.mapStoreToState( /* istanbul ignore next */_ImportExternalRunDialogStore2.default, function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var assessmentRuns = _ref.assessmentRuns;
+            if ( /* istanbul ignore next */_this.state && assessmentRuns) {
+                var assesmentRunId = assessmentRuns.length > 0 ? assessmentRuns[0] : '';
+                /* istanbul ignore next */_this.setState({ hailstormFields: /* istanbul ignore next */_extends({}, /* istanbul ignore next */_this.state.hailstormFields, { assessment_run_id: assesmentRunId }) });
+            }
+        });
+
+        /* istanbul ignore next */_this.onSubmit = /* istanbul ignore next */ /* istanbul ignore next */_this.onSubmit.bind(_this);
+        /* istanbul ignore next */_this.onRequestTestRun = /* istanbul ignore next */ /* istanbul ignore next */_this.onRequestTestRun.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(ImportExternalRunDialogContainer, [{ key: 'componentWillUnmount', value: function componentWillUnmount()
+
+        {
+            /* istanbul ignore next */_get(ImportExternalRunDialogContainer.prototype.__proto__ || Object.getPrototypeOf(ImportExternalRunDialogContainer.prototype), 'componentWillUnmount', this).call(this);
+            /* istanbul ignore next */_ImportExternalRunDialogActions2.default.destroy();
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ImportExternalRunDialog2.default, /* istanbul ignore next */_extends({},
+                this.state, {
+                    runDetails: this.props.runDetails,
+                    onClose: this.props.onClose,
+                    onSubmit: this.onSubmit,
+                    onRequestTestRun: this.onRequestTestRun,
+                    onSourceChange: /* istanbul ignore next */_ImportExternalRunDialogActions2.default.changeSource,
+                    onChange: function /* istanbul ignore next */onChange(newState) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.setState(newState));},
+                    onChangeHailstormType: /* istanbul ignore next */_ImportExternalRunDialogActions2.default.changeHailstormType })));
+
+
+        } }, { key: 'onRequestTestRun', value: function onRequestTestRun(
+
+        fields) {
+            /* istanbul ignore next */_ImportExternalRunDialogActions2.default.fetchAssessmentRuns( /* istanbul ignore next */_extends({}, fields, { run_id: this.props.runId, source: /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.HAILSTORM }));
+        } }, { key: 'onSubmit', value: function onSubmit(
+
+        data) {/* istanbul ignore next */var _EXTERNAL_RUN_IMPORT_;
+            var submitAction = /* istanbul ignore next */(_EXTERNAL_RUN_IMPORT_ = {}, _defineProperty(_EXTERNAL_RUN_IMPORT_,
+            /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.HAILSTORM, /* istanbul ignore next */_ImportExternalRunDialogActions2.default.importHailstorm), _defineProperty(_EXTERNAL_RUN_IMPORT_,
+            /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.NESSUS, /* istanbul ignore next */_ImportExternalRunDialogActions2.default.importNessus), _defineProperty(_EXTERNAL_RUN_IMPORT_,
+            /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.CHECKMARX, /* istanbul ignore next */_ImportExternalRunDialogActions2.default.importCheckmarx), _EXTERNAL_RUN_IMPORT_)[
+            this.state.importSource];
+            submitAction( /* istanbul ignore next */_extends({}, data, { run_id: this.props.runId, source: this.state.importSource }));
+        } }]);return ImportExternalRunDialogContainer;}(_reflux.Component); /* istanbul ignore next */exports.default = ImportExternalRunDialogContainer;
+
+
+ImportExternalRunDialogContainer.propTypes = {
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    runId: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    runDetails: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        customer_name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        id_alias: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired }) };

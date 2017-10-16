@@ -1,0 +1,184 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+FindingDetails;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactSanfona = require('react-sanfona');var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_DateTimeFormat = require('../../../Configuration/DateTimeFormat'); /* istanbul ignore next */var _DateTimeFormat2 = _interopRequireDefault(_DateTimeFormat);var /* istanbul ignore next */_DateFormats = require('../../../../Utils/DateFormats'); /* istanbul ignore next */var _DateFormats2 = _interopRequireDefault(_DateFormats);var /* istanbul ignore next */_CollapseSection = require('./CollapseSection'); /* istanbul ignore next */var _CollapseSection2 = _interopRequireDefault(_CollapseSection);var /* istanbul ignore next */_AttachmentsField = require('./AttachmentsField'); /* istanbul ignore next */var _AttachmentsField2 = _interopRequireDefault(_AttachmentsField);var /* istanbul ignore next */_FieldValue = require('./FieldValue'); /* istanbul ignore next */var _FieldValue2 = _interopRequireDefault(_FieldValue);var /* istanbul ignore next */_SeverityField = require('./SeverityField'); /* istanbul ignore next */var _SeverityField2 = _interopRequireDefault(_SeverityField);var /* istanbul ignore next */_FindingDetailsColumn = require('./FindingDetailsColumn'); /* istanbul ignore next */var _FindingDetailsColumn2 = _interopRequireDefault(_FindingDetailsColumn);var /* istanbul ignore next */_FindingDetailsField = require('./FindingDetailsField'); /* istanbul ignore next */var _FindingDetailsField2 = _interopRequireDefault(_FindingDetailsField);var /* istanbul ignore next */_ADDITIONAL_FINDING_FIELDS = require('./ADDITIONAL_FINDING_FIELDS'); /* istanbul ignore next */var _ADDITIONAL_FINDING_FIELDS2 = _interopRequireDefault(_ADDITIONAL_FINDING_FIELDS);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function FindingDetails( /* istanbul ignore next */_ref) {/* istanbul ignore next */var finding = _ref.finding,isService = _ref.isService;
+    var COLUMN_SIZE = 6;
+    var notEmptyAditionalFindingFields = /* istanbul ignore next */_ADDITIONAL_FINDING_FIELDS2.default.filter(function (field) {
+        var value = finding[field.fieldKey];
+        return value || value === 0;
+    });
+    /*
+         * @type {Array.<Array.<FindingDetailsField>>}
+         */
+    var additionalColumnToFieldsList = notEmptyAditionalFindingFields.reduce(function (arrayMap, field, i) {
+        var indexOfColumn = Math.ceil((i + 1) / COLUMN_SIZE);
+        if (!arrayMap[indexOfColumn]) {
+            arrayMap[indexOfColumn] = [];
+        }
+        arrayMap[indexOfColumn].push(
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsField2.default, /* istanbul ignore next */{ key: i,
+            value: finding[field.fieldKey],
+            translationKey: field.translationKey }));
+
+
+        return arrayMap;
+    }, []);
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__finding-content' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.summary')),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsField2.default, /* istanbul ignore next */{
+                value: finding.location,
+                translationKey: 'findings.locationFound',
+                className: 'finding-details-perforating-field' }),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__findings-header row' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsColumn2.default, /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsField2.default, /* istanbul ignore next */{
+                        value: finding.id_alias,
+                        translationKey: 'findings.findingsId' }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsField2.default, /* istanbul ignore next */{
+                        value: finding.classification_category_title,
+                        translationKey: 'findings.category' }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsField2.default, /* istanbul ignore next */{
+                        value: finding.classification_title,
+                        translationKey: 'findings.classification' }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsField2.default, /* istanbul ignore next */{
+                        value: finding.finding_type,
+                        translationKey: 'findings.type' }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.protocolPort'), /* istanbul ignore next */': '),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FieldValue2.default, /* istanbul ignore next */{ value: finding.port }), /* istanbul ignore next */'/',
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FieldValue2.default, /* istanbul ignore next */{ value: finding.protocol }), /* istanbul ignore next */'/',
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FieldValue2.default, /* istanbul ignore next */{ value: finding.svc_name })),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsField2.default, /* istanbul ignore next */{
+                        value: finding.classification_ssl_id,
+                        translationKey: 'findings.ssuId' })),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsColumn2.default, /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SeverityField2.default, /* istanbul ignore next */{ finding: finding, isService: isService }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsField2.default, /* istanbul ignore next */{
+                        value: finding.score,
+                        translationKey: 'findings.riskScore' }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.whenFound'), /* istanbul ignore next */': '),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DateTimeFormat2.default, /* istanbul ignore next */{
+                            dataFormat: /* istanbul ignore next */_DateFormats2.default.shortDate,
+                            emptyValue: /* istanbul ignore next */(0, _counterpart2.default)('findings.notDefined'),
+                            date: finding.found_date })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.fixDate'), /* istanbul ignore next */': '),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DateTimeFormat2.default, /* istanbul ignore next */{
+                            dataFormat: /* istanbul ignore next */_DateFormats2.default.shortDate,
+                            emptyValue: /* istanbul ignore next */(0, _counterpart2.default)('findings.notDefined'),
+                            date: finding.fixed_date })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsField2.default, /* istanbul ignore next */{
+                        value: finding.status,
+                        translationKey: 'findings.fixStatus' }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.published'), /* istanbul ignore next */': '),
+                        finding.published ? /* istanbul ignore next */(0, _counterpart2.default)('general.yes') : /* istanbul ignore next */(0, _counterpart2.default)('general.no')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.included'), /* istanbul ignore next */': '),
+                        finding.included ? /* istanbul ignore next */(0, _counterpart2.default)('general.yes') : /* istanbul ignore next */(0, _counterpart2.default)('general.no'))),
+
+
+                additionalColumnToFieldsList.map(function (fieldsList, i) /* istanbul ignore next */{return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetailsColumn2.default, /* istanbul ignore next */{ key: i }, fieldsList));})),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'finding-dialog-collapse-section' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 1 },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: /* istanbul ignore next */(0, _counterpart2.default)('findings.findingDetails'), slug: 1 },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'finding-sub-collapse' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__expand' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                    title: /* istanbul ignore next */(0, _counterpart2.default)('findings.message'),
+                                    value: finding.message,
+                                    isOpen: /* istanbul ignore next */true,
+                                    isRaw: false,
+                                    tag: 'pre' }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                    title: /* istanbul ignore next */(0, _counterpart2.default)('findings.request'),
+                                    value: finding.request,
+                                    isOpen: false,
+                                    isRaw: false,
+                                    tag: 'pre' }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                    title: /* istanbul ignore next */(0, _counterpart2.default)('findings.response'),
+                                    value: finding.response,
+                                    isOpen: false,
+                                    isRaw: false,
+                                    tag: 'pre' }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_AttachmentsField2.default, /* istanbul ignore next */{
+                                    title: /* istanbul ignore next */(0, _counterpart2.default)('findings.attachments'),
+                                    value: finding.attachments,
+                                    isOpen: false }))))),
+
+
+
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 0 },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: /* istanbul ignore next */(0, _counterpart2.default)('findings.securityLabsInformation'), slug: 'title' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'finding-sub-collapse' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__expand' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                    title: /* istanbul ignore next */(0, _counterpart2.default)('findings.description'),
+                                    value: finding.classification_description,
+                                    isOpen: false,
+                                    isRaw: /* istanbul ignore next */true }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                    title: /* istanbul ignore next */(0, _counterpart2.default)('findings.impact'),
+                                    value: finding.classification_impact,
+                                    isOpen: false,
+                                    isRaw: /* istanbul ignore next */true }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                    title: /* istanbul ignore next */(0, _counterpart2.default)('findings.remediation'),
+                                    value: finding.classification_remediation,
+                                    isOpen: false,
+                                    isRaw: /* istanbul ignore next */true }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CollapseSection2.default, /* istanbul ignore next */{
+                                    title: /* istanbul ignore next */(0, _counterpart2.default)('findings.references'),
+                                    value: finding.classification_references,
+                                    isOpen: false,
+                                    isRaw: /* istanbul ignore next */true }))))))));
+
+
+
+
+
+
+
+
+}
+
+FindingDetails.propTypes = {
+    finding: /* istanbul ignore next */_react2.default.PropTypes.object,
+    isService: /* istanbul ignore next */_react2.default.PropTypes.bool };

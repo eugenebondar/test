@@ -1,0 +1,64 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var GroupsAPI = /* istanbul ignore next */_Model2.default.New();
+
+/**
+                                                                  * @param {boolean} isService
+                                                                  * @param {string} url
+                                                                  */
+function getServiceUrl(isService, url) {
+  return isService ? /* istanbul ignore next */'/service' + url : url;
+}
+
+/**
+   * @param {boolean} isService
+   * @return {Promise.<[]>} collection of user groups
+   */
+GroupsAPI.fetchGroups = function () {/* istanbul ignore next */var isService = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  var url = getServiceUrl(isService, '/user_groups.json');
+  return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api' + url).then(function (responseJson) /* istanbul ignore next */{return responseJson.user_groups;}));
+};
+
+/**
+    * @param {string} id
+    * @param {boolean} isService
+    * @return {Promise.<>}
+    */
+GroupsAPI.fetchGroup = function (id) {/* istanbul ignore next */var isService = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var url = getServiceUrl(isService, /* istanbul ignore next */'/user_groups/' + id + '.json');
+  return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/' + url));
+};
+
+/**
+    * @param {{}} data
+    * @return {Promise.<>}
+    */
+GroupsAPI.addGroup = function (data) {
+  return (/* istanbul ignore next */_Api2.default.post('/api/service/user_groups.json', data));
+};
+
+/**
+    * @param {string} id
+    * @param {{}} data
+    * @return {Promise.<>}
+    */
+GroupsAPI.editGroup = function (id, data) {
+  return (/* istanbul ignore next */_Api2.default.put('/api/service/user_groups/' + id + '.json', data));
+};
+
+/**
+    * @param {string} id
+    * @return {Promise.<>}
+    */
+GroupsAPI.deleteGroup = function (id) {
+  return (/* istanbul ignore next */_Api2.default.delete('/api/service/user_groups/' + id + '.json'));
+};
+
+/**
+    * @return {Promise.<>}
+    */
+GroupsAPI.fetchUsers = function () {
+  return (/* istanbul ignore next */_Api2.default.get('/api/service/users.json'));
+}; /* istanbul ignore next */exports.default =
+GroupsAPI;

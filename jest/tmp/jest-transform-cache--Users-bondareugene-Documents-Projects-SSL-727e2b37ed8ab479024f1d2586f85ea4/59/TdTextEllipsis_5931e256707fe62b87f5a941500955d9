@@ -1,0 +1,36 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+/* istanbul ignore next */require('./TdTextEllipsis.less');
+var /* istanbul ignore next */_Td = require('./../Td/Td'); /* istanbul ignore next */var _Td2 = _interopRequireDefault(_Td);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var defaultWithValue = -1; /* istanbul ignore next */var
+
+TdTextEllipsis = function (_React$PureComponent) {_inherits(TdTextEllipsis, _React$PureComponent);
+    function /* istanbul ignore next */TdTextEllipsis() {/* istanbul ignore next */_classCallCheck(this, TdTextEllipsis);return _possibleConstructorReturn(this, (TdTextEllipsis.__proto__ || Object.getPrototypeOf(TdTextEllipsis)).call(this));
+
+    }_createClass(TdTextEllipsis, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _props =
+            this.props,className = _props.className,children = _props.children,width = _props.width,props = _objectWithoutProperties(_props, ['className', 'children', 'width']);
+            var finalClassName = /* istanbul ignore next */(0, _classnames2.default)('td-text-ellipsis', className);
+
+            var style = width !== defaultWithValue ? { width: width, maxWidth: width } : {};
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Td2.default, /* istanbul ignore next */_extends({}, props, { className: finalClassName, style: style }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'td-text-ellipsis-children-container' },
+                        children)));
+
+
+
+        } }]);return TdTextEllipsis;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = TdTextEllipsis;
+
+
+TdTextEllipsis.defaultProps = {
+    width: defaultWithValue };
+
+
+TdTextEllipsis.propTypes = {
+    children: /* istanbul ignore next */_react2.default.PropTypes.node,
+    width: /* istanbul ignore next */_react2.default.PropTypes.number,
+    className: /* istanbul ignore next */_react2.default.PropTypes.string };

@@ -1,0 +1,17 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_eventemitter = require('eventemitter3'); /* istanbul ignore next */var _eventemitter2 = _interopRequireDefault(_eventemitter);
+var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function BaseStore(listenables) {
+    this.subscriptions = [];
+    this.emitter = new /* istanbul ignore next */_eventemitter2.default();
+    this.eventLabel = 'change';
+
+    if (listenables) {
+        var arr = [].concat(listenables);
+        arr.forEach(this.listenToMany, this);
+    }
+}
+
+BaseStore.prototype = Object.getPrototypeOf( /* istanbul ignore next */_reflux2.default.createStore({})); /* istanbul ignore next */exports.default =
+
+BaseStore;

@@ -1,0 +1,64 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_DateFormats = require('../../Utils/DateFormats'); /* istanbul ignore next */var _DateFormats2 = _interopRequireDefault(_DateFormats);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function getName(suffix) {
+    return 'activityLogs.table.' + suffix;
+} /* istanbul ignore next */exports.default =
+
+[
+{
+    source: 'created_at',
+    name: getName('created_at'),
+    width: '80',
+    sortable: false,
+    type: 'date',
+    dataFormat: /* istanbul ignore next */_DateFormats2.default.fullDateWithSeconds },
+{
+    source: 'event',
+    name: getName('event'),
+    width: '80',
+    sortable: false,
+    type: 'translation',
+    counterPartOptions: { scope: 'activityLogs.values' },
+    useOriginalTextAsFallback: true },
+{
+    source: 'item_type',
+    name: getName('item_type'),
+    width: '80',
+    sortable: false,
+    type: 'text',
+    availableForUserType: ['staff', 'customer'] },
+{
+    source: 'item_id',
+    name: getName('item_id'),
+    width: '80',
+    sortable: false,
+    type: 'text',
+    availableForUserType: ['staff', 'customer'] },
+{
+    source: 'user_full_name',
+    name: getName('user_full_name'),
+    width: '80',
+    sortable: false,
+    type: 'text',
+    availableForUserType: ['staff', 'customer'] },
+{
+    source: 'user_agent',
+    name: getName('user_agent'),
+    width: '80',
+    sortable: false,
+    type: 'text',
+    availableForUserType: ['staff', 'customer'] },
+{
+    source: 'changeset',
+    name: getName('changeset'),
+    width: '90',
+    sortable: false,
+    type: 'json',
+    availableForUserType: ['staff', 'customer'] },
+{
+    source: 'ip_address',
+    name: getName('ip_address'),
+    width: '50',
+    sortable: false,
+    type: 'text',
+    availableForUserType: ['staff', 'customer'] }];

@@ -1,0 +1,9 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+BrandedHamburgerButton;var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function BrandedHamburgerButton() {
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"button", /* istanbul ignore next */{ className: "test-action-btn sc-txt-primary sc-txt-primary-hover" },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"span", /* istanbul ignore next */{ className: "sc-icon-hamburger-menu" })));
+
+
+}

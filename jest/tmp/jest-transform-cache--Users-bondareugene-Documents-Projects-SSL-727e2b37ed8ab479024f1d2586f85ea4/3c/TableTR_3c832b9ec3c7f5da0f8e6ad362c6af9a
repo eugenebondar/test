@@ -1,0 +1,105 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_TableTD = require('./TableTD'); /* istanbul ignore next */var _TableTD2 = _interopRequireDefault(_TableTD);
+var /* istanbul ignore next */_Actions = require('../Actions'); /* istanbul ignore next */var _Actions2 = _interopRequireDefault(_Actions);
+var /* istanbul ignore next */_User = require('../../../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+TableTR = function (_React$Component) {_inherits(TableTR, _React$Component);
+    function /* istanbul ignore next */TableTR(props) {/* istanbul ignore next */_classCallCheck(this, TableTR);var _this = _possibleConstructorReturn(this, (TableTR.__proto__ || Object.getPrototypeOf(TableTR)).call(this,
+        props));
+        /* istanbul ignore next */_this.expandTrigger = /* istanbul ignore next */_this.expandTrigger.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.actionsTrigger = /* istanbul ignore next */_this.actionsTrigger.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.trigger = /* istanbul ignore next */_this.trigger.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(TableTR, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;var _props =
+            this.props,test = _props.test,columnConfig = _props.columnConfig,expansion = _props.expansion,selectable = _props.selectable,selectTrigger = _props.selectTrigger,expandId = _props.expandId,isService = _props.isService;
+            var actions = this.getListOfVisibleActions();
+            var tdList = columnConfig.map(function (item, i) {
+                var sourceArray = item.source.split('/');
+                var value = null;
+                sourceArray.forEach(function (item, i) {
+                    value = i > 0 ? value[item] : test[item];
+                });
+                if ('undefined' !== typeof value && value !== null) {
+                    value = 'object' === /* istanbul ignore next */(typeof value === 'undefined' ? 'undefined' : _typeof(value)) ? value : value.toString();
+                } else {
+                    value = '';
+                }
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableTD2.default, /* istanbul ignore next */_extends({},
+                    item, {
+                        expansion: expansion && i === 0,
+                        selectable: selectable && i === 0,
+                        expandTrigger: /* istanbul ignore next */_this2.expandTrigger,
+                        selectTrigger: selectTrigger,
+                        isService: isService,
+                        isExpand: expandId === test.id,
+                        key: i,
+                        value: value,
+                        test: /* istanbul ignore next */_this2.props.test,
+                        trigger: /* istanbul ignore next */_this2.trigger })));
+
+
+            });
+            var hasActions = this.props.actions && this.props.actions.length > 0;
+            var isDisabled = hasActions && actions.length === 0;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tr', /* istanbul ignore next */{ className: (expandId === test.id ? 'expand-tr ' : ' ') + (test.isSelected ? 'selected-tr' : '') },
+                    tdList,
+                    hasActions && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Actions2.default, /* istanbul ignore next */{ actionsTrigger: this.actionsTrigger, actions: actions, disabled: isDisabled })));
+
+
+        } }, { key: 'getListOfVisibleActions', value: function getListOfVisibleActions()
+
+        {/* istanbul ignore next */var _this3 = this;var _props2 =
+            this.props,actions = _props2.actions,test = _props2.test;
+            return actions.reduce(function (actionsMap, action) {
+                if (action.getIsVisibleCallback) {
+                    var isVisibleCallback = action.getIsVisibleCallback(test, /* istanbul ignore next */_this3.context.currentUser);
+                    var isActionVisible = isVisibleCallback();
+                    if (isActionVisible) {
+                        actionsMap.push(action);
+                    }
+                } else {
+                    actionsMap.push(action);
+                }
+                return actionsMap;
+            }, []);
+        } }, { key: 'expandTrigger', value: function expandTrigger()
+
+        {/* istanbul ignore next */var _props3 =
+            this.props,expansion = _props3.expansion,changeExpandId = _props3.changeExpandId,test = _props3.test;
+            if (expansion) {
+                changeExpandId(test.id);
+            }
+        } }, { key: 'actionsTrigger', value: function actionsTrigger(
+
+        type, e) {/* istanbul ignore next */var _props4 =
+            this.props,actionsTrigger = _props4.actionsTrigger,test = _props4.test;
+            actionsTrigger(type, test.id, e);
+        } }, { key: 'trigger', value: function trigger(
+
+        e) {/* istanbul ignore next */var _props5 =
+            this.props,trigger = _props5.trigger,test = _props5.test;
+            trigger(e, test.id);
+        } }]);return TableTR;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = TableTR;
+
+
+TableTR.propTypes = {
+    test: /* istanbul ignore next */_react2.default.PropTypes.object,
+    actions: /* istanbul ignore next */_react2.default.PropTypes.array,
+    columnConfig: /* istanbul ignore next */_react2.default.PropTypes.array,
+    expansion: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isService: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    getExpansionData: /* istanbul ignore next */_react2.default.PropTypes.func,
+    actionsTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    changeExpandId: /* istanbul ignore next */_react2.default.PropTypes.func,
+    trigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    selectable: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    selectTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    expandId: /* istanbul ignore next */_react2.default.PropTypes.string };
+
+
+TableTR.contextTypes = {
+    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default) };

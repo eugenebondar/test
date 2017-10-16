@@ -1,0 +1,67 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_LoadingModalDialog = require('../../../../../Shared/Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+var /* istanbul ignore next */_DisabledEditDueTestStateAlert = require('../../../../../Shared/DisabledEditDueTestStateAlert/DisabledEditDueTestStateAlert'); /* istanbul ignore next */var _DisabledEditDueTestStateAlert2 = _interopRequireDefault(_DisabledEditDueTestStateAlert);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+NotesDialog = function (_React$PureComponent) {_inherits(NotesDialog, _React$PureComponent);
+
+
+
+
+
+
+
+
+
+    function /* istanbul ignore next */NotesDialog(props) {/* istanbul ignore next */_classCallCheck(this, NotesDialog);var _this = _possibleConstructorReturn(this, (NotesDialog.__proto__ || Object.getPrototypeOf(NotesDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            comment: props.comment };
+
+        /* istanbul ignore next */_this.onCommentChange = /* istanbul ignore next */_this.onCommentChange.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(NotesDialog, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingModalDialog2.default, /* istanbul ignore next */{
+                        isOpen: /* istanbul ignore next */true,
+                        header: /* istanbul ignore next */(0, _counterpart2.default)('dashboard.comments.commentsEditor'),
+                        footer:
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                                    className: 'cancel-btn sc-btn',
+                                    onClick: this.props.onClose },
+
+                                /* istanbul ignore next */(0, _counterpart2.default)('general.cancel')),
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                                    className: 'sc-btn sc-btn-primary',
+                                    disabled: this.props.isEditDisabledDueTestState || this.state.comment.trim() === this.props.comment.trim(),
+                                    onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onSubmit( /* istanbul ignore next */_this2.state.comment));} },
+
+                                /* istanbul ignore next */(0, _counterpart2.default)('general.update'))),
+
+
+
+                        loading: this.props.isLoading },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DisabledEditDueTestStateAlert2.default, /* istanbul ignore next */{
+                        isShown: this.props.isEditDisabledDueTestState,
+                        testState: this.props.testState }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'textarea', /* istanbul ignore next */{
+                        autoFocus: /* istanbul ignore next */true,
+                        className: 'notes-edit-input',
+                        onChange: this.onCommentChange,
+                        value: this.state.comment })));
+
+
+
+        } }, { key: 'onCommentChange', value: function onCommentChange(
+
+        event) {
+            this.setState({
+                comment: event.target.value });
+
+        } }]);return NotesDialog;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */NotesDialog.propTypes = { comment: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired, testState: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired, onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired, onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired, isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired, isEditDisabledDueTestState: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired }; /* istanbul ignore next */exports.default = NotesDialog;

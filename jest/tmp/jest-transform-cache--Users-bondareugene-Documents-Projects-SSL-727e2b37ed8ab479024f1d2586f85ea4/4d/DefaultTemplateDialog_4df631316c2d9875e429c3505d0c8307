@@ -1,0 +1,73 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_AlertType = require('../../../../../Utils/AlertType'); /* istanbul ignore next */var _AlertType2 = _interopRequireDefault(_AlertType);
+
+var /* istanbul ignore next */_ApocReactAlert = require('../../../../../Shared/ApocReactAlert/ApocReactAlert'); /* istanbul ignore next */var _ApocReactAlert2 = _interopRequireDefault(_ApocReactAlert);
+var /* istanbul ignore next */_LoadingModalDialog = require('../../../../../Shared/Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+
+var /* istanbul ignore next */_DefaultTemplateDialogForm = require('./DefaultTemplateDialogForm'); /* istanbul ignore next */var _DefaultTemplateDialogForm2 = _interopRequireDefault(_DefaultTemplateDialogForm);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+DefaultTemplateDialog = function (_React$Component) {_inherits(DefaultTemplateDialog, _React$Component);function DefaultTemplateDialog() {_classCallCheck(this, DefaultTemplateDialog);return _possibleConstructorReturn(this, (DefaultTemplateDialog.__proto__ || Object.getPrototypeOf(DefaultTemplateDialog)).apply(this, arguments));}_createClass(DefaultTemplateDialog, [{ key: 'render', value: function render()
+        {
+            var isSaveDisabled = this.props.isLoading || this.props.isSaving ||
+            !!this.props.isError || !this.props.mainTemplates.length && !this.props.coverTemplates.length;
+            var dialogFooter =
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'cancel-btn sc-btn', onClick: this.props.onClose },
+                    /* istanbul ignore next */(0, _counterpart2.default)('customers.popup.cancel')),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                        className: 'sc-btn sc-btn-primary',
+                        onClick: this.props.onSetDefaultTemplates,
+                        disabled: isSaveDisabled },
+
+                    /* istanbul ignore next */(0, _counterpart2.default)('general.save')));
+
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingModalDialog2.default, /* istanbul ignore next */{
+                        isOpen: /* istanbul ignore next */true,
+                        header: /* istanbul ignore next */(0, _counterpart2.default)('customers.defaultTemplate.title'),
+                        footer: dialogFooter,
+                        className: 'customer-templates-dialog',
+                        loading: this.props.isLoading || this.props.isSaving },
+
+                    !this.props.isLoading &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DefaultTemplateDialogForm2.default, /* istanbul ignore next */{
+                        onUpdateValue: this.props.onUpdateValue,
+                        coverTemplates: this.props.coverTemplates,
+                        mainTemplates: this.props.mainTemplates,
+                        fields: this.props.fields }),
+
+
+                    this.props.isError &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ApocReactAlert2.default, /* istanbul ignore next */{ type: /* istanbul ignore next */_AlertType2.default.ERROR, isClosable: false, closeTimeout: 0 },
+                        this.props.isError)));
+
+
+
+
+        } }]);return DefaultTemplateDialog;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = DefaultTemplateDialog;
+
+
+DefaultTemplateDialog.propTypes = {
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isError: /* istanbul ignore next */_react2.default.PropTypes.string,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        main_id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        cover_id: /* istanbul ignore next */_react2.default.PropTypes.string }),
+
+    mainTemplates: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string })),
+
+    coverTemplates: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string })),
+
+    onUpdateValue: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onSetDefaultTemplates: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };

@@ -1,0 +1,123 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.defaultState = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_CustomerAccountDialogActions = require('./CustomerAccountDialogActions'); /* istanbul ignore next */var _CustomerAccountDialogActions2 = _interopRequireDefault(_CustomerAccountDialogActions);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var defaultFields = {
+    corporation_name: '',
+    name: '',
+    email: '',
+    phone: '',
+    notification_setting: {
+        test_created: false,
+        test_changed_state_company: false,
+        test_changed_state_primary: true,
+        test_assigned_company: false,
+        test_assigned_primary: false } };
+
+
+
+var defaultState = /* istanbul ignore next */exports.defaultState = {
+    isLoading: true,
+    isSaving: false,
+    isError: false,
+    fields: null,
+    validation: null }; /* istanbul ignore next */var
+
+
+CustomerAccountDialogStore = function (_Reflux$Store) {_inherits(CustomerAccountDialogStore, _Reflux$Store);
+
+    function /* istanbul ignore next */CustomerAccountDialogStore() {/* istanbul ignore next */_classCallCheck(this, CustomerAccountDialogStore);var _this = _possibleConstructorReturn(this, (CustomerAccountDialogStore.__proto__ || Object.getPrototypeOf(CustomerAccountDialogStore)).call(this));
+
+
+        /* istanbul ignore next */_this.listenables = /* istanbul ignore next */_CustomerAccountDialogActions2.default;
+
+        /* istanbul ignore next */_this.state = /* istanbul ignore next */_extends({}, defaultState); /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * @listens CustomerAccountDialogActions.initNew
+       */_createClass(CustomerAccountDialogStore, [{ key: 'onInitNew', value: function onInitNew()
+        {
+            this.setState({
+                isLoading: false,
+                fields: /* istanbul ignore next */_extends({}, defaultFields) });
+
+        }
+
+        /**
+           * @listens CustomerAccountDialogActions.initEdit.completed
+           */ }, { key: 'onInitEditCompleted', value: function onInitEditCompleted(
+        customerAccount) {
+            this.setState({
+                fields: customerAccount,
+                isLoading: false });
+
+        }
+
+        /**
+           * @listens CustomerAccountDialogActions.initEdit.failed
+           */ }, { key: 'onInitEditFailed', value: function onInitEditFailed()
+        {
+            this.setState({
+                isLoading: false,
+                isError: true });
+
+        }
+
+        /**
+           * @listens CustomerAccountDialogActions.destroy
+           */ }, { key: 'onDestroy', value: function onDestroy()
+        {
+            this.setState(defaultState);
+        }
+
+        /**
+           * @listens CustomerAccountDialogActions.createCustomer
+           */ }, { key: 'onCreateCustomer', value: function onCreateCustomer()
+        {
+            this.setState({ isSaving: true });
+        }
+
+        /**
+           * @listens CustomerAccountDialogActions.createCustomer.completed
+           */ }, { key: 'onCreateCustomerCompleted', value: function onCreateCustomerCompleted()
+        {
+            this.setState({ isSaving: false });
+        }
+
+        /**
+           * @listens CustomerAccountDialogActions.createCustomer.failed
+           */ }, { key: 'onCreateCustomerFailed', value: function onCreateCustomerFailed(_ref)
+        {/* istanbul ignore next */var errors = _ref.errors;
+            this.setState({
+                isSaving: false,
+                validation: errors });
+
+        }
+
+        /**
+           * @listens CustomerAccountDialogActions.updateCustomer
+           */ }, { key: 'onUpdateCustomer', value: function onUpdateCustomer()
+        {
+            this.setState({ isSaving: true });
+        }
+
+        /**
+           * @listens CustomerAccountDialogActions.updateCustomer.completed
+           */ }, { key: 'onUpdateCustomerCompleted', value: function onUpdateCustomerCompleted()
+        {
+            this.setState({ isSaving: false });
+        }
+
+        /**
+           * @listens CustomerAccountDialogActions.updateCustomer.failed
+           */ }, { key: 'onUpdateCustomerFailed', value: function onUpdateCustomerFailed(_ref2)
+        {/* istanbul ignore next */var errors = _ref2.errors;
+            this.setState({
+                isSaving: false,
+                validation: errors });
+
+        } }]);return CustomerAccountDialogStore;}( /* istanbul ignore next */_reflux2.default.Store); /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */_reflux2.default.initStore(CustomerAccountDialogStore);

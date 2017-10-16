@@ -1,0 +1,57 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_index = require('./index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('Input', function () {
+    it('renders', function () {
+        var component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */null));
+        expect(component).toBeTruthy();
+    });
+
+    it('validates phone number length', function () {
+        var updateSpy = jasmine.createSpy('updateSpy');
+        var component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'id', validationType: 'phone', updateValue: updateSpy, value: value }));
+
+        var value = '1'.repeat(50);
+        component.find('input').simulate('change', { target: { value: value } });
+        expect(updateSpy).toHaveBeenCalledWith('id', '1'.repeat(30));
+
+        value = '1'.repeat(10);
+        component.find('input').simulate('change', { target: { value: value } });
+        expect(updateSpy).toHaveBeenCalledWith('id', value);
+    });
+
+    it('validates phone number chars', function () {
+        var updateSpy = jasmine.createSpy('updateSpy');
+        var component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'id', validationType: 'phone', updateValue: updateSpy, value: '' }));
+
+        var resultCheck = function resultCheck(value, expected) {
+            component.find('input').simulate('change', { target: { value: value } });
+            expect(updateSpy).toHaveBeenCalledWith('id', expected);
+        };
+        var validCharacters = 'abcDEF1234567890#() -+';
+        validCharacters.split("").forEach(function (char) /* istanbul ignore next */{return resultCheck(char, char);});
+
+        var invalidCharacters = '!@#$%^&*_=[]{};\'\\:"|,./<>?';
+        invalidCharacters.split("").forEach(function (char) /* istanbul ignore next */{return resultCheck(char, '');});
+    });
+
+    it('executes onChange callback', function () {
+        var changeSpy = jasmine.createSpy('changeSpy');
+        var updateSpy = jasmine.createSpy('updateSpy');
+        var component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'id', updateValue: updateSpy, onChange: changeSpy, value: 'test' }));
+        component.find('input').simulate('change');
+        expect(changeSpy).toHaveBeenCalledTimes(1);
+        expect(changeSpy).toHaveBeenCalledWith();
+        expect(updateSpy).toHaveBeenCalledTimes(1);
+        expect(updateSpy).toHaveBeenCalledWith('id', 'test');
+    });
+
+    it('executes onBlur callback', function () {
+        var spy = jasmine.createSpy('spy');
+        var component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'id', onBlur: spy, value: 'test' }));
+        component.find('input').simulate('blur');
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledWith('test', 'id');
+    });
+});

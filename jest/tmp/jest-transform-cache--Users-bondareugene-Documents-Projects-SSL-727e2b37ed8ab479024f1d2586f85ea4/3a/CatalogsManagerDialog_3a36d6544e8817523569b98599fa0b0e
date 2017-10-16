@@ -1,0 +1,93 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_LoadingModalDialog = require('../../../Shared/Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+var /* istanbul ignore next */_CatalogsForm = require('./CatalogsForm'); /* istanbul ignore next */var _CatalogsForm2 = _interopRequireDefault(_CatalogsForm);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+CatalogsManagerDialog = function (_React$PureComponent) {_inherits(CatalogsManagerDialog, _React$PureComponent);
+    function /* istanbul ignore next */CatalogsManagerDialog(props) {/* istanbul ignore next */_classCallCheck(this, CatalogsManagerDialog);var _this = _possibleConstructorReturn(this, (CatalogsManagerDialog.__proto__ || Object.getPrototypeOf(CatalogsManagerDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.handleSubmit = /* istanbul ignore next */_this.handleSubmit.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(CatalogsManagerDialog, [{ key: 'render', value: function render()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingModalDialog2.default, /* istanbul ignore next */{
+                        loading: this.props.isLoading || this.props.isSaving,
+                        isOpen: /* istanbul ignore next */true,
+                        header: this.getDialogTitle(),
+                        footer: this.getDialogFooter() },
+
+                    !this.props.isLoading &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CatalogsForm2.default, /* istanbul ignore next */{
+                        allProducts: this.props.allProducts,
+                        catalog: this.props.catalog,
+                        onUpdateCheckbox: this.props.onUpdateCheckbox,
+                        onUpdateInput: this.props.onUpdateInput,
+                        onUpdateProductPrice: this.props.onUpdateProductPrice,
+                        isService: this.props.isService,
+                        isEdit: this.props.isEdit,
+                        errors: this.props.errors })));
+
+
+
+
+        } }, { key: 'getDialogTitle', value: function getDialogTitle()
+        {
+            return this.props.isEdit ? /* istanbul ignore next */(0, _counterpart2.default)('catalogsManager.editCatalog') : /* istanbul ignore next */(0, _counterpart2.default)('catalogsManager.addCatalog');
+        } }, { key: 'getDialogFooter', value: function getDialogFooter()
+
+        {
+            var saveButton = this.props.isEdit ? /* istanbul ignore next */(0, _counterpart2.default)('general.save') : /* istanbul ignore next */(0, _counterpart2.default)('general.add');
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'cancel-btn sc-btn', onClick: this.props.onClose },
+                        /* istanbul ignore next */(0, _counterpart2.default)('customers.popup.cancel')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                            disabled: this.props.isPristine || this.props.isLoading || this.props.isSaving,
+                            className: 'sc-btn sc-btn-primary',
+                            onClick: this.handleSubmit },
+
+                        saveButton)));
+
+
+
+        } }, { key: 'handleSubmit', value: function handleSubmit()
+
+        {
+            var catalog = {
+                name: this.props.catalog.name,
+                catalog_products: this.props.allProducts.
+                filter(function (product) /* istanbul ignore next */{return product.isSelected;}).
+                map(function (product) /* istanbul ignore next */{return { product_id: product.id, price: product.price };}) };
+
+            this.props.onSubmit({ id: this.props.catalog.id, catalog: catalog });
+        } }]);return CatalogsManagerDialog;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = CatalogsManagerDialog;
+
+
+CatalogsManagerDialog.propTypes = {
+    isEdit: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isService: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isPristine: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    allProducts: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string,
+        price: /* istanbul ignore next */_react2.default.PropTypes.string,
+        isSelected: /* istanbul ignore next */_react2.default.PropTypes.bool })),
+
+    catalog: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }),
+
+    errors: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        name: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string),
+        products: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string) }),
+
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onUpdateProductPrice: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onUpdateCheckbox: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onUpdateInput: /* istanbul ignore next */_react2.default.PropTypes.func };

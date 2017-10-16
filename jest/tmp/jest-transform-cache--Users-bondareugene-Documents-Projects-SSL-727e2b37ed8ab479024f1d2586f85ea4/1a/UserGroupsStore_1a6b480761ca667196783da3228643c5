@@ -1,0 +1,143 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_BaseStore2 = require('./../BaseStore'); /* istanbul ignore next */var _BaseStore3 = _interopRequireDefault(_BaseStore2);
+
+var /* istanbul ignore next */_UserGroupsActions = require('./UserGroupsActions'); /* istanbul ignore next */var _UserGroupsActions2 = _interopRequireDefault(_UserGroupsActions);
+
+var /* istanbul ignore next */_api = require('../../Models/Groups/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_api3 = require('../../Models/Roles/api'); /* istanbul ignore next */var _api4 = _interopRequireDefault(_api3);
+var /* istanbul ignore next */_api5 = require('../../Models/Users/api'); /* istanbul ignore next */var _api6 = _interopRequireDefault(_api5);
+
+var /* istanbul ignore next */_SessionUserStore = require('../SessionUser/SessionUserStore'); /* istanbul ignore next */var _SessionUserStore2 = _interopRequireDefault(_SessionUserStore);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @classdesc Class representing a UserGroups Store.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @class
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */var
+UserGroupsStore = function (_BaseStore) {_inherits(UserGroupsStore, _BaseStore);
+    function /* istanbul ignore next */UserGroupsStore() {/* istanbul ignore next */_classCallCheck(this, UserGroupsStore);var _this = _possibleConstructorReturn(this, (UserGroupsStore.__proto__ || Object.getPrototypeOf(UserGroupsStore)).call(this,
+        [/* istanbul ignore next */_UserGroupsActions2.default]));
+        /* istanbul ignore next */_this.isService = null;
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_SessionUserStore2.default, /* istanbul ignore next */_this.output); /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * Listener for SessionStore Store.
+       * Set isService according with SessionStore's currentUser.
+       * @param {Object} [e.event, e.data] - event name and data response.
+       * @config {Bool} - set isService.
+       */_createClass(UserGroupsStore, [{ key: 'output', value: function output()
+        {/* istanbul ignore next */var e = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { event: '', data: null }; /* istanbul ignore next */var
+            event = e.event,data = e.data;
+            switch (event) {
+                case 'currentUser':
+                    this.isService = data.isService;
+                    break;}
+
+        } }, { key: 'onInitCompleted', value: function onInitCompleted(_ref)
+
+        {/* istanbul ignore next */var users = _ref.users,organizationsList = _ref.organizationsList,roles = _ref.roles,fields = _ref.fields;
+            this.trigger({
+                event: 'onUsersGroupsDialogInit',
+                data: { users: users, organizationsList: organizationsList, roles: roles, fields: fields, isLoading: false } });
+
+        } }, { key: 'fetchGroups', value: function fetchGroups(
+
+        filter) {/* istanbul ignore next */var _this2 = this;
+            /* istanbul ignore next */_api2.default.fetchGroups({ filter: filter }, this.isService).
+            then(function (json) {
+                /* istanbul ignore next */_this2.trigger({ event: 'groups', data: json });
+            });
+        } }, { key: 'fetchGroup', value: function fetchGroup(
+
+        id) {/* istanbul ignore next */var _this3 = this;
+            /* istanbul ignore next */_api2.default.fetchGroup(id, this.isService).
+            then(function (json) {
+                /* istanbul ignore next */_this3.trigger({ event: 'group', data: json });
+            });
+        } }, { key: 'addGroup', value: function addGroup(
+
+        data) {/* istanbul ignore next */var _this4 = this;
+            /* istanbul ignore next */_api2.default.addGroup(data, this.isService).
+            then(function (response) {
+                /* istanbul ignore next */_this4.checkValidation(response, 'groupValidation');
+                /* istanbul ignore next */_this4.trigger({
+                    event: 'groupAdded',
+                    data: { status: response.ok } });
+
+            });
+        } }, { key: 'editGroup', value: function editGroup(
+
+        id, data) {/* istanbul ignore next */var _this5 = this;
+            /* istanbul ignore next */_api2.default.editGroup(id, data, this.isService).
+            then(function (response) {
+                /* istanbul ignore next */_this5.checkValidation(response, 'groupValidation');
+                /* istanbul ignore next */_this5.trigger({
+                    event: 'groupEdited',
+                    data: { status: response.ok, id: id } });
+
+            });
+        } }, { key: 'deleteGroup', value: function deleteGroup(
+
+        id) {/* istanbul ignore next */var _this6 = this;
+            /* istanbul ignore next */_api2.default.deleteGroup(id, this.isService).
+            then(function (json) {
+                /* istanbul ignore next */_this6.trigger({
+                    event: 'groupDeleted',
+                    data: { status: json } });
+
+            });
+        } }, { key: 'fetchUsers', value: function fetchUsers()
+
+        {/* istanbul ignore next */var _this7 = this;
+            /* istanbul ignore next */_api6.default.fetchUsersList(this.isService).
+            then(function (json) {
+                /* istanbul ignore next */_this7.trigger({
+                    event: 'usersList',
+                    data: json.users.reduce(function (userMap, item) {
+                        userMap[item.user_type].push({
+                            id: item.id,
+                            organization_id: item.organization_id,
+                            name: item.first_name + ' ' + item.last_name });
+
+                        return userMap;
+                    }, { customer: [], staff: [] }) });
+
+            });
+        } }, { key: 'fetchListOfRoles', value: function fetchListOfRoles()
+
+        {/* istanbul ignore next */var _this8 = this;
+            /* istanbul ignore next */_api4.default.fetchRolesList(this.isService).
+            then(function (json) {
+                /* istanbul ignore next */_this8.trigger({
+                    event: 'rolesList',
+                    data: json.roles.reduce(function (rolesMap, item) {
+                        rolesMap[item.role_type].push({
+                            value: item.id,
+                            title: item.name,
+                            organizationId: item.organization_id });
+
+                        return rolesMap;
+                    }, { customer: [], staff: [] }) });
+
+            });
+        }
+
+        /**
+           * If response status is 422 - prepare object with errors.
+           * @param {Object} [response] - response.
+           * @param {String} [triggerName] - name of trigger.
+           * @trigger {Object} - object of errors.
+           */ }, { key: 'checkValidation', value: function checkValidation(
+        response, triggerName) {/* istanbul ignore next */var _this9 = this;
+            if (response.status === 422) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_this9.validation = {};
+                    for (var key in json.errors) {
+                        /* istanbul ignore next */_this9.validation[key] = json.errors[key].join(', ');
+                    }
+                    /* istanbul ignore next */_this9.trigger({ event: triggerName, data: /* istanbul ignore next */_this9.validation });
+                });
+            }
+        } }]);return UserGroupsStore;}(_BaseStore3.default); /* istanbul ignore next */exports.default =
+
+
+new UserGroupsStore();

@@ -1,0 +1,269 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_reactRouter = require('react-router');
+
+var /* istanbul ignore next */_TestDetailsStore = require('../../Stores/TestDetailsStore'); /* istanbul ignore next */var _TestDetailsStore2 = _interopRequireDefault(_TestDetailsStore);
+var /* istanbul ignore next */_ExternalRunsStore = require('../../Stores/ExternalRunsStore'); /* istanbul ignore next */var _ExternalRunsStore2 = _interopRequireDefault(_ExternalRunsStore);
+var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);
+
+var /* istanbul ignore next */_Actions = require('../../Actions');
+
+var /* istanbul ignore next */_BaseComponent2 = require('../../Shared/BaseComponent'); /* istanbul ignore next */var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+var /* istanbul ignore next */_ImportFindingDialog = require('./Components/Dialogs/ImportFindingDialog'); /* istanbul ignore next */var _ImportFindingDialog2 = _interopRequireDefault(_ImportFindingDialog);
+
+var /* istanbul ignore next */_Preloader = require('../../Shared/Preloader'); /* istanbul ignore next */var _Preloader2 = _interopRequireDefault(_Preloader);
+var /* istanbul ignore next */_TestRunsTable = require('./Components/TestRunsTable'); /* istanbul ignore next */var _TestRunsTable2 = _interopRequireDefault(_TestRunsTable);
+
+/* istanbul ignore next */require('./ExternalRuns.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ExternalRuns = function (_BaseComponent) {_inherits(ExternalRuns, _BaseComponent);
+    function /* istanbul ignore next */ExternalRuns(props) {/* istanbul ignore next */_classCallCheck(this, ExternalRuns);var _this = _possibleConstructorReturn(this, (ExternalRuns.__proto__ || Object.getPrototypeOf(ExternalRuns)).call(this,
+        props));
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_ExternalRunsStore2.default, /* istanbul ignore next */_this._listenExternalRunsStore);
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_TestDetailsStore2.default, /* istanbul ignore next */_this._listenTestDetailsStore);
+        /* istanbul ignore next */_this.state = {
+            isImportingNow: false,
+            externalRuns: null,
+            currentRun: null,
+            testDetails: null,
+            importDialogConfig: null };
+
+        /* istanbul ignore next */_this.importFinding = /* istanbul ignore next */_this.importFinding.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.importTrigger = /* istanbul ignore next */_this.importTrigger.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.fetchExternalRuns = /* istanbul ignore next */_this.fetchExternalRuns.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.closeDialog = /* istanbul ignore next */_this.closeDialog.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(ExternalRuns, [{ key: 'componentWillMount', value: function componentWillMount()
+
+        {
+            this.checkPossibilityToView(this.props, this.context);
+        } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps, nextContext) {
+            this.checkPossibilityToView(nextProps, nextContext);
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _state =
+
+
+            this.state,testDetails = _state.testDetails,isImportingNow = _state.isImportingNow,externalRuns = _state.externalRuns,importDialogConfig = _state.importDialogConfig; /* istanbul ignore next */var
+            currentUser = this.context.currentUser;
+            var canImportExternal = currentUser.hasPermission( /* istanbul ignore next */_User.STAFF_PERMISSIONS.IMPORT_EXTERNAL_RUNS);
+            if (testDetails) {
+                var importPreload = isImportingNow && canImportExternal && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Preloader2.default, /* istanbul ignore next */null);
+                var testRunsTable = externalRuns ?
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TestRunsTable2.default, /* istanbul ignore next */{
+                    testId: testDetails.id,
+                    runId: this.props.params.id,
+                    data: externalRuns }) :
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Preloader2.default, /* istanbul ignore next */null);
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'bread-crumb-navigation' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'content-wrapper' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ className: 'sc-txt-primary', to: '/' }, /* istanbul ignore next */(0, _counterpart2.default)('findings.dashboard')),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-icon-caret-right' }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Link, /* istanbul ignore next */{ className: 'sc-txt-primary',
+                                        to: '/test-details/' + testDetails.id + '/' + this.props.params.id }, testDetails.name),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-icon-caret-right' }),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('externalRuns.externalRuns')))),
+
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'site-content' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'external-runs-page' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'extertal-runs-info clearfix' },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'eri__form' },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.targetName')),
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, testDetails.name)))),
+
+
+
+                                    canImportExternal &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'eri-button-wrap' },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                                                onClick: this.importFinding,
+                                                className: 'fd__button sc-btn sc-btn-primary' },
+
+                                            /* istanbul ignore next */(0, _counterpart2.default)('externalRuns.importExternalRun')))),
+
+
+
+
+                                importPreload,
+                                testRunsTable)),
+
+
+                        importDialogConfig &&
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ImportFindingDialog2.default, importDialogConfig)));
+
+
+
+            }
+            return null;
+        } }, { key: 'closeDialog', value: function closeDialog(
+
+        key) {
+            if (key) {
+                var state = this.state;
+                state[key] = null;
+                this.setState(state);
+            }
+        }
+
+        /**
+           * Open import findings dialog.
+           */ }, { key: 'importFinding', value: function importFinding()
+        {
+            this.setState({
+                importDialogConfig: {
+                    name: 'importDialogConfig',
+                    close: this.closeDialog,
+                    testDetails: this.state.testDetails,
+                    // runId: this.props.params.id,
+                    currentRun: this.state.currentRun,
+                    getSources: this.getSources,
+                    validation: null } });
+
+
+        }
+
+        /**
+           * Get import sources.
+           * @return {Array} - array of sources.
+           */ }, { key: 'getSources', value: function getSources()
+        {
+            // TODO temporary we have only ONE hardcoded Source, in future will move to BE side
+            return [
+            {
+                name: 'Hailstorm' },
+            {
+                name: 'Nessus' }];
+
+
+        }
+
+        /**
+           * Set isImportingNow to true.
+           * Triggered when user import findings.
+           */ }, { key: 'importTrigger', value: function importTrigger()
+        {/* istanbul ignore next */var
+            importDialogConfig = this.state.importDialogConfig;
+            importDialogConfig.validation = null;
+            this.closeDialog('importDialogConfig');
+            this.setState({
+                importDialogConfig: importDialogConfig,
+                isImportingNow: true });
+
+        }
+
+        /**
+           * Redirect to home page.
+           */ }, { key: 'redirectToHome', value: function redirectToHome()
+        {
+            this.context.router.push('/#/');
+        }
+
+        /**
+           * Fetch current external runs.
+           * Invoke ExternalRunsA's action - getExternalRuns.
+           */ }, { key: 'fetchExternalRuns', value: function fetchExternalRuns()
+        {
+            /* istanbul ignore next */_Actions.ExternalRunsActions.getExternalRuns(this.props.params.id);
+        }
+
+        /**
+           * Fetch test details by id.
+           * Invoke TestDetails's action - fetchTestDetails.
+           * @param {String} [id] - test id.
+           */ }, { key: 'fetchTestDetails', value: function fetchTestDetails(
+        id) {
+            /* istanbul ignore next */_Actions.TestDetailsActions.fetchTestDetails(id);
+        }
+
+        /**
+           * Get index of element at passed array by passed id.
+           * @param {Array} [array] - passed array of object.
+           * @param {String} [id] - passed id.
+           * @return {Number} - index at array.
+           */ }, { key: 'findIndexById', value: function findIndexById(
+        array, id) {
+            return array.findIndex(function (item) {
+                return item.id === id;
+            });
+        } }, { key: 'checkPossibilityToView', value: function checkPossibilityToView(
+
+        props, context) {
+            var currentUser = context.currentUser;
+            var isPossibleToView = currentUser.isService;
+            if (isPossibleToView && 'undefined' !== typeof props.params.id) {
+                this.fetchExternalRuns();
+            } else {
+                this.redirectToHome();
+            }
+        }
+
+        /**
+           * Listener for ExternalRuns Store.
+           * @param {String} [event] - event name.
+           * @param {*} [data] - event data.
+           */ }, { key: '_listenExternalRunsStore', value: function _listenExternalRunsStore(
+        event, data) {
+            switch (event) {
+                case 'externalRuns':
+                    var externalRuns = data;
+                    var currentRun = this.state.currentRun;
+                    var currentRunsIndex = /* istanbul ignore next */void 0;
+                    var testId = /* istanbul ignore next */void 0;
+                    if (!this.state.testDetails) {
+                        currentRunsIndex = this.findIndexById(externalRuns, this.props.params.id);
+                        currentRun = externalRuns[currentRunsIndex];
+                        testId = currentRun.test_id;
+                        this.fetchTestDetails(testId);
+                    }
+                    this.setState({
+                        externalRuns: externalRuns,
+                        currentRun: currentRun,
+                        isImportingNow: false });
+
+                    break;}
+
+        }
+
+        /**
+           * Listener for TestDetails Store.
+           * @param {String} [event] - event name.
+           * @param {*} [data] - event data.
+           */ }, { key: '_listenTestDetailsStore', value: function _listenTestDetailsStore(
+        event, data) {
+            switch (event) {
+                case 'siteTestDetailsInfo':
+                    this.setState({
+                        testDetails: data });
+
+                    break;
+                case 'findingsImportValidation': /* istanbul ignore next */var
+                    importDialogConfig = this.state.importDialogConfig;
+                    importDialogConfig.validation = data;
+                    this.setState({
+                        importDialogConfig: importDialogConfig });
+
+                    break;
+                case 'findingsImported':
+                    if (data) {
+                        this.fetchExternalRuns();
+                        this.closeDialog('importDialogConfig');
+                    }
+                    break;}
+
+        } }]);return ExternalRuns;}(_BaseComponent3.default); /* istanbul ignore next */exports.default = ExternalRuns;
+
+
+ExternalRuns.propTypes = {
+    params: /* istanbul ignore next */_react2.default.PropTypes.object };
+
+
+ExternalRuns.contextTypes = {
+    router: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default) };

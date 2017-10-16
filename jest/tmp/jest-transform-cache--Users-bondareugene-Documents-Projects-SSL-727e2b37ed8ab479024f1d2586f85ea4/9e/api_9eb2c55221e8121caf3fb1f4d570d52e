@@ -1,0 +1,85 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var findingsAPI = {
+    service: {
+        baseUrl: '/api/service' },
+
+    customer: {
+        baseUrl: '/api' } };
+
+
+
+function getFindings(runId, filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings.json', filter));
+}
+
+function getFinding(runId, findingId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings/' + findingId + '.json').
+        then(function (result) {
+            return { finding: result };
+        }));
+}
+
+function getFindingsCount(runId, filter) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings/findings_count.json', filter));
+}
+
+function exportFindings(runId, format, filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings.' + format, filter));
+}
+
+function exportFindingsInNewTab(runId, format, filter) {
+    return (/* istanbul ignore next */_Api2.default.openInNewTab( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings.' + format, filter));
+}
+
+findingsAPI.service.getFindings = getFindings;
+findingsAPI.customer.getFindings = getFindings;
+
+findingsAPI.service.getFinding = getFinding;
+findingsAPI.customer.getFinding = getFinding;
+
+findingsAPI.service.getFindingsCount = getFindingsCount;
+findingsAPI.customer.getFindingsCount = getFindingsCount;
+
+findingsAPI.service.exportFindings = exportFindings;
+findingsAPI.customer.exportFindings = exportFindings;
+
+findingsAPI.service.exportFindingsInNewTab = exportFindingsInNewTab;
+findingsAPI.customer.exportFindingsInNewTab = exportFindingsInNewTab;
+
+findingsAPI.getFindingCategories = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/dictionary/finding/categories.json'));
+};
+
+findingsAPI.getFindingClassifications = function (categoryId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/categories/' + categoryId + '/classifications.json'));
+};
+
+findingsAPI.getFindingTypes = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/dictionary/finding_types'));
+};
+
+findingsAPI.service.addFinding = function (runId, data) {
+    return (/* istanbul ignore next */_Api2.default.post( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings.json', data).then(function (response) /* istanbul ignore next */{return response.json();}));
+};
+
+findingsAPI.service.editFinding = function (runId, findingId, data) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings/' + findingId + '.json', data).then(function (response) /* istanbul ignore next */{return response.json();}));
+};
+findingsAPI.service.makeExcluded = function (runId, findingId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings/' + findingId + '/make_excluded'));
+};
+
+findingsAPI.service.makeIncluded = function (runId, findingId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings/' + findingId + '/make_included'));
+};
+
+findingsAPI.service.publish = function (runId, findingId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings/' + findingId + '/publish'));
+};
+
+findingsAPI.service.unpublish = function (runId, findingId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */this.baseUrl + '/runs/' + runId + '/findings/' + findingId + '/unpublish'));
+}; /* istanbul ignore next */exports.default =
+
+findingsAPI;

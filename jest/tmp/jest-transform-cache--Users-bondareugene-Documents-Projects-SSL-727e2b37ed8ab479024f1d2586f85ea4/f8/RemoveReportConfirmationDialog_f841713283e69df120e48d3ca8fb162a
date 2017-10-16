@@ -1,0 +1,32 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+RemoveReportConfirmationDialog;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_index = require('../../../../Shared/ConfirmationDialog/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function RemoveReportConfirmationDialog( /* istanbul ignore next */_ref) {/* istanbul ignore next */var reportItem = _ref.reportItem,isDeleting = _ref.isDeleting,type = _ref.type,onSubmit = _ref.onSubmit,onCancel = _ref.onCancel;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+            title: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)(['customers.popup',
+                    type === 'attachment' ? 'deleteAttachment' : 'deleteReport'])),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'sc-dialog-file-name' }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, reportItem.name)),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, /* istanbul ignore next */'?')),
+
+            returnData: {
+                id: reportItem.id,
+                data: reportItem },
+
+            submit: onSubmit,
+            cancel: onCancel,
+            className: 'small-dialog',
+            isOnProcess: isDeleting }));
+
+}
+
+RemoveReportConfirmationDialog.propTypes = {
+    reportItem: /* istanbul ignore next */_react2.default.PropTypes.object,
+    isDeleting: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    type: /* istanbul ignore next */_react2.default.PropTypes.string,
+    onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onCancel: /* istanbul ignore next */_react2.default.PropTypes.func };

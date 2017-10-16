@@ -1,0 +1,31 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "es6",
+    "jsx",
+    "json"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/jest/"
+  ],
+  "testPathDirs": ["frontend/"],
+  "testPathIgnorePatterns": ["node_modules/"],
+  "coverageDirectory": "coverage/jest",
+  "transform": {".*": "<rootDir>/node_modules/babel-jest"},
+  "collectCoverageFrom": ["frontend/src/app/*.*", "frontend/src/app/**/*.*"],
+  "setupTestFrameworkScriptFile": "node_modules/jest-enzyme/lib/index.js",
+  "testRegex": ".test.jsx?$",
+  "mocksPattern": "(?:[\\/]|^)__mocks__[\\/]|(\/jest\/mocks\/.*)",
+  "moduleNameMapper": {
+    "^.+\\.(css|less)$": "<rootDir>/jest/mocks/style.js",
+    "^.+\\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$": "<rootDir>/jest/mocks/file.js"
+  },
+  "unmockedModulePathPatterns": [
+    "react",
+    "enzyme",
+    "jasmine-enzyme"
+  ],
+  "cacheDirectory": "jest/tmp",
+  "testResultsProcessor": "./node_modules/jest-junit"
+}

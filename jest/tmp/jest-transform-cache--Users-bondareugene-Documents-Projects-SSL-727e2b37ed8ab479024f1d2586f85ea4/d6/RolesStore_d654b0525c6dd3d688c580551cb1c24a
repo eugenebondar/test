@@ -1,0 +1,142 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.defaultState = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_RolesActions = require('./RolesActions'); /* istanbul ignore next */var _RolesActions2 = _interopRequireDefault(_RolesActions);
+var /* istanbul ignore next */_RoleDialogActions = require('./RoleDialog/RoleDialogActions'); /* istanbul ignore next */var _RoleDialogActions2 = _interopRequireDefault(_RoleDialogActions);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var defaultState = /* istanbul ignore next */exports.defaultState = {
+    isLoading: true,
+    isError: false,
+    roles: null,
+    rolesTotal: 0,
+    requestParams: {
+        page: 1,
+        per: 30 },
+
+    roleDialogConfig: null,
+    confirmationDialogConfig: null }; /* istanbul ignore next */var
+
+
+RolesStore = function (_Reflux$Store) {_inherits(RolesStore, _Reflux$Store);
+
+    function /* istanbul ignore next */RolesStore() {/* istanbul ignore next */_classCallCheck(this, RolesStore);var _this = _possibleConstructorReturn(this, (RolesStore.__proto__ || Object.getPrototypeOf(RolesStore)).call(this));
+
+
+        /* istanbul ignore next */_this.listenables = /* istanbul ignore next */_RolesActions2.default;
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_RoleDialogActions2.default.createRole.completed, /* istanbul ignore next */ /* istanbul ignore next */_this.closeDialogAndUpdateTable.bind(_this));
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_RoleDialogActions2.default.editRole.completed, /* istanbul ignore next */ /* istanbul ignore next */_this.closeDialogAndUpdateTable.bind(_this));
+
+        /* istanbul ignore next */_this.state = /* istanbul ignore next */_extends({}, defaultState);
+        /* istanbul ignore next */_this.defaultState = /* istanbul ignore next */_extends({}, /* istanbul ignore next */_this.state); /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * @listens RolesActions.init.completed
+       */_createClass(RolesStore, [{ key: 'onInitCompleted', value: function onInitCompleted(_ref)
+        {/* istanbul ignore next */var roles = _ref.roles,rolesTotal = _ref.rolesTotal;
+            this.setState({
+                roles: roles,
+                rolesTotal: rolesTotal,
+                isLoading: false });
+
+        }
+
+        /**
+           * @listens RolesActions.init.failed
+           */ }, { key: 'onInitFailed', value: function onInitFailed()
+        {
+            this.setState({
+                isLoading: false,
+                isError: true });
+
+        }
+
+        /**
+           * @listens RolesActions.updateRoles.completed
+           */ }, { key: 'onUpdateRolesCompleted', value: function onUpdateRolesCompleted(_ref2)
+        {/* istanbul ignore next */var roles = _ref2.roles,rolesTotal = _ref2.rolesTotal;
+            this.setState({
+                roles: roles,
+                rolesTotal: rolesTotal });
+
+        }
+
+        /**
+           * @listens RolesActions.destroy
+           */ }, { key: 'onDestroy', value: function onDestroy()
+        {
+            this.setState(defaultState);
+        }
+
+        /**
+           * @listens RolesActions.changeRequestParams
+           */ }, { key: 'onChangeRequestParams', value: function onChangeRequestParams(
+        newValue) {
+            this.setState({
+                requestParams: /* istanbul ignore next */_extends({}, this.state.requestParams, newValue) });
+
+        }
+
+        /**
+           * @listens RolesActions.deleteRole.completed
+           */ }, { key: 'onDeleteRoleCompleted', value: function onDeleteRoleCompleted()
+        {
+            this.setState({
+                requestParams: /* istanbul ignore next */_extends({}, this.state.requestParams),
+                confirmationDialogConfig: null });
+
+        }
+
+        /**
+           * @listens RolesActions.openRoleDialog
+           */ }, { key: 'onOpenRoleDialog', value: function onOpenRoleDialog(
+        mode, roleId) {
+            this.setState({
+                roleDialogConfig: {
+                    mode: mode,
+                    roleId: roleId } });
+
+
+        }
+
+        /**
+           * @listens RolesActions.closeRoleDialog
+           */ }, { key: 'onCloseRoleDialog', value: function onCloseRoleDialog()
+        {
+            this.setState({ roleDialogConfig: null });
+        }
+
+        /**
+           * @listens RolesActions.openConfirmationDialog
+           */ }, { key: 'onOpenConfirmationDialog', value: function onOpenConfirmationDialog(
+        roleId) {
+            this.setState({
+                confirmationDialogConfig: {
+                    roleId: roleId,
+                    returnData: roleId,
+                    className: 'small-dialog' } });
+
+
+        }
+
+        /**
+           * @listens RolesActions.closeConfirmationDialog
+           */ }, { key: 'onCloseConfirmationDialog', value: function onCloseConfirmationDialog()
+        {
+            this.setState({
+                confirmationDialogConfig: null });
+
+        }
+
+        /**
+           * @listens RoleDialogActions.createRole.completed
+           * @listens RoleDialogActions.editRole.completed
+           */ }, { key: 'closeDialogAndUpdateTable', value: function closeDialogAndUpdateTable()
+        {
+            this.setState({
+                requestParams: /* istanbul ignore next */_extends({}, this.state.requestParams),
+                roleDialogConfig: null });
+
+        } }]);return RolesStore;}( /* istanbul ignore next */_reflux2.default.Store); /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */_reflux2.default.initStore(RolesStore);

@@ -1,0 +1,77 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+
+var /* istanbul ignore next */_Checkbox = require('../../../Elements/Checkbox'); /* istanbul ignore next */var _Checkbox2 = _interopRequireDefault(_Checkbox);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * Text representing a table's td value with type text.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @module TableBoard/Elements/Table/Cells/Text
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @version 1.0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @requires React
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @author Yevhen Bondar
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @copyright (c) 2016 SoftServe.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */var Trigger = function (_React$Component) {_inherits(Trigger, _React$Component);function /* istanbul ignore next */Trigger(props) {/* istanbul ignore next */_classCallCheck(this, Trigger);var _this = _possibleConstructorReturn(this, (Trigger.__proto__ || Object.getPrototypeOf(Trigger)).call(this, props)); /* istanbul ignore next */_this.checkboxTrigger = /* istanbul ignore next */_this.checkboxTrigger.bind( /* istanbul ignore next */_this); /* istanbul ignore next */_this.expandTrigger = /* istanbul ignore next */_this.expandTrigger.bind( /* istanbul ignore next */_this); /* istanbul ignore next */_this.onClick = /* istanbul ignore next */_this.onClick.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;}_createClass(Trigger, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _props =
+            this.props,value = _props.value,isExpand = _props.isExpand,expansion = _props.expansion,test = _props.test,selectable = _props.selectable;
+            var contentClass = /* istanbul ignore next */(0, _classnames2.default)('test-table-cell-wrap', {
+                'cont-with-checkbox': selectable });
+
+            var buttonClass = /* istanbul ignore next */(0, _classnames2.default)('expand-btn', {
+                'expand': isExpand });
+
+            var content = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'a', /* istanbul ignore next */{ className: contentClass, onClick: this.onClick }, value);
+            var button = expansion ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: buttonClass, onClick: this.expandTrigger },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: isExpand ? 'sc-icon-down-arrow' : 'sc-icon-right-arrow' })) :
+
+            null;
+            var checkbox = selectable ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Checkbox2.default, /* istanbul ignore next */{ id: 'selected', onChange: this.checkboxTrigger, value: test.isSelected }) :
+            null;
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: expansion ? 'expand-cell-wrap' : '' },
+                    button,
+                    checkbox,
+                    content));
+
+
+        } }, { key: 'checkboxTrigger', value: function checkboxTrigger(
+
+        id, value) {/* istanbul ignore next */var _props2 =
+            this.props,selectTrigger = _props2.selectTrigger,test = _props2.test;
+            selectTrigger(false, value, test.id);
+        } }, { key: 'expandTrigger', value: function expandTrigger()
+
+        {/* istanbul ignore next */var _props3 =
+            this.props,expansion = _props3.expansion,expandTrigger = _props3.expandTrigger;
+            if (expansion) {
+                expandTrigger();
+            }
+        } }, { key: 'onClick', value: function onClick(
+
+        e) {
+            this.props.trigger(e);
+            e.preventDefault();
+        } }]);return Trigger;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = Trigger;
+
+
+Trigger.propTypes = {
+    value: /* istanbul ignore next */_react2.default.PropTypes.string,
+    test: /* istanbul ignore next */_react2.default.PropTypes.object,
+    expandTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    selectTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    trigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    expansion: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    selectable: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isExpand: /* istanbul ignore next */_react2.default.PropTypes.bool };

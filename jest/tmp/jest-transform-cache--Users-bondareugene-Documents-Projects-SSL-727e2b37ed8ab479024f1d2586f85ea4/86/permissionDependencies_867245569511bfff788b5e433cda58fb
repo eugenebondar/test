@@ -1,0 +1,34 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _PERMISSION_DEPENDENC;var /* istanbul ignore next */_User = require('../../../Stores/SessionUser/User'); /* istanbul ignore next */function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+var PERMISSION_DEPENDENCIES = /* istanbul ignore next */(_PERMISSION_DEPENDENC = {}, _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.EDIT_ALL_TESTS, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_ALL_TESTS]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_ROLES, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_ROLES]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_ALL_USERS, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_ROLES, /* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_ALL_USERS]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.IMPORT_EXTERNAL_RUNS, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_EXTERNAL_RUNS, /* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_EXTERNAL_RUNS]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_EXTERNAL_RUNS, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_EXTERNAL_RUNS, /* istanbul ignore next */_User.STAFF_PERMISSIONS.IMPORT_EXTERNAL_RUNS]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.GENERATE_REPORTS, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_ATTACHMENTS, /* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_ATTACHMENTS]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.MANAGE_COMPANY_USERS, [/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.VIEW_COMPANY_USERS, /* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.VIEW_USER_ROLES]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_COMPANIES, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_COMPANIES]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.REQUEST_TESTS, [/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.EDIT_COMPANY_TESTS, /* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.VIEW_COMPANY_TESTS]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_CLASSIFICATIONS, [
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_CLASSIFICATIONS,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_CATEGORIES,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_CLASSIFICATION_GROUPS]), _defineProperty(_PERMISSION_DEPENDENC,
+
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_CLASSIFICATION_GROUPS, [
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_CLASSIFICATION_GROUPS,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_CLASSIFICATIONS,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_CATEGORIES]), _defineProperty(_PERMISSION_DEPENDENC,
+
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_TEMPLATES, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_COMPANIES]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.EDIT_COMPANY_TESTS, [/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.VIEW_COMPANY_TESTS]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.MANAGE_COMPANY_USERS, [/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.VIEW_COMPANY_USERS, /* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.VIEW_USER_ROLES]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.MANAGE_COMPANY_USER_GROUPS, [/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.VIEW_COMPANY_USERS, /* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.VIEW_USER_ROLES]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.MANAGE_COMPANY_ATTACHMENTS, [/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.VIEW_COMPANY_ATTACHMENTS]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.MANAGE_TEST_SCHEDULE, [/* istanbul ignore next */_User.CUSTOMER_PERMISSIONS.VIEW_TEST_SCHEDULE]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_CATEGORIES, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_CATEGORIES]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_PRODUCTS, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_PRODUCTS]), _defineProperty(_PERMISSION_DEPENDENC,
+/* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_ATTACHMENTS, [/* istanbul ignore next */_User.STAFF_PERMISSIONS.VIEW_ATTACHMENTS]), _PERMISSION_DEPENDENC); /* istanbul ignore next */exports.default =
+
+
+PERMISSION_DEPENDENCIES;

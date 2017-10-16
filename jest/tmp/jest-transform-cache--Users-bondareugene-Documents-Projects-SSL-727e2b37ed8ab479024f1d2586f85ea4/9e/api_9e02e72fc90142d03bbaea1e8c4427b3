@@ -1,0 +1,22 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var BrandingAPI = /* istanbul ignore next */_Model2.default.New();
+
+BrandingAPI.fetchBranding = function (brandingId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/brandings/' + brandingId + '.json'));
+};
+
+BrandingAPI.editBranding = function (brandingId, data) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/brandings/' + brandingId + '.json', data));
+};
+
+BrandingAPI.uploadImage = function (brandingId, data) {
+    return (/* istanbul ignore next */_Api2.default.sendFile( /* istanbul ignore next */'/api/service/brandings/' + brandingId + '/branding_images.json', data));
+};
+
+BrandingAPI.deleteImage = function (brandingId, imageId) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/brandings/' + brandingId + '/branding_images/' + imageId + '.json'));
+}; /* istanbul ignore next */exports.default =
+
+BrandingAPI;

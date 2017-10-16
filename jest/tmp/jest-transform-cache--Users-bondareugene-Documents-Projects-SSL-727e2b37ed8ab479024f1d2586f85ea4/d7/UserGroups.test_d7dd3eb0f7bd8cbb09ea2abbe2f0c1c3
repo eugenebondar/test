@@ -1,0 +1,90 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactAddonsTestUtils = require('react-addons-test-utils'); /* istanbul ignore next */var _reactAddonsTestUtils2 = _interopRequireDefault(_reactAddonsTestUtils);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_reactRouter = require('react-router');
+var /* istanbul ignore next */_index = require('./index.jsx'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var history = /* istanbul ignore next */(0, _reactRouter.createMemoryHistory)('/user-groups');
+
+var routes = [{
+    path: '/user-groups',
+    component: /* istanbul ignore next */_react2.default.createClass({ /* istanbul ignore next */
+        render: function render() {
+            return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null, this.props.children));
+        } },
+
+    {
+        path: '*',
+        onEnter: '/' }) }];
+
+
+
+
+describe('TableBoard', function () {
+    var component = /* istanbul ignore next */void 0,route = /* istanbul ignore next */void 0,state = /* istanbul ignore next */void 0;
+    var mountRoute = function mountRoute() {
+        route = /* istanbul ignore next */_reactAddonsTestUtils2.default.renderIntoDocument( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Router, /* istanbul ignore next */{ routes: routes, history: history }));
+    },
+    mountComponent = function mountComponent() {
+        component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */null));
+    };
+    beforeEach(function () {
+        state = {};
+        mountRoute();
+        mountComponent();
+    });
+
+    it('route will be defined', function () {
+
+        expect(route.state.location.pathname).toEqual('/user-groups');
+    });
+
+    it('component will show Preloader during fetching new data', function () {
+        expect(component.find('.preloading__wrap').length > 0).toBeTruthy();
+        component.setState({ groups: [] });
+        expect(component.find('.preloading__wrap').length).toBe(0);
+    });
+
+    it('component will show user groups table', function () {
+        expect(component.find('.user-groups-page').length).toBe(0);
+        component.setState({ groups: [] });
+        expect(component.find('.user-groups-page').length).toBe(1);
+    });
+
+    it('checkForOneOfPermissions functions works correct', function () {
+        var inst = component.instance(),
+        result = undefined,
+        permission = ['manage_user_groups'],
+        permissions = ['manage_user_groups', 'add_findings'];
+
+        result = inst.checkForOneOfPermissions(permission, permissions);
+        expect(result).toBeTruthy();
+
+        permissions = ['add_findings'];
+        result = inst.checkForOneOfPermissions(permission, permissions);
+        expect(result).toBeFalsy();
+    });
+
+    // it('fetchGroupsList works correct', () => {
+    //     var UserGroupsActions = require('../../Stores/UserGroups/UserGroupsActions');
+    //     mountRoute();
+    //     component = mount(<UserGroups />);
+    //     let inst = component.instance();
+    //
+    //     spyOn(UserGroupsActions, 'fetchGroups');
+    //     inst.fetchGroupsList();
+    //     expect(UserGroupsActions.fetchGroups).toHaveBeenCalledTimes(1);
+    // });
+    //
+    // it('deleteGroup works correct', () => {
+    //     var UserGroupsActions = require('../../Stores/UserGroups/UserGroupsActions');
+    //     mountRoute();
+    //     component = mount(<UserGroups />);
+    //     let inst = component.instance();
+    //
+    //     spyOn(UserGroupsActions, 'deleteGroup');
+    //     inst.fetchGroupsList();
+    //     expect(UserGroupsActions.deleteGroup).toHaveBeenCalledTimes(1);
+    //     expect(UserGroupsActions.deleteGroup).toHaveBeenCalledWith('1');
+    // });
+});

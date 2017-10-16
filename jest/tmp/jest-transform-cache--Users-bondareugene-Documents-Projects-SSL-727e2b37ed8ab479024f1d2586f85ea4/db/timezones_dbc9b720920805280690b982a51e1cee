@@ -1,0 +1,20 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+getTimezones = getTimezones;var /* istanbul ignore next */_Api = require('../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);var /* istanbul ignore next */_memoryCache = require('memory-cache'); /* istanbul ignore next */var _memoryCache2 = _interopRequireDefault(_memoryCache);var /* istanbul ignore next */_configuration = require('./../configuration'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var cacheId = 'time'; /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  * @return {Promise.<[]{}>}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  */function getTimezones() {var cachedTimezones = /* istanbul ignore next */_memoryCache2.default.get(cacheId);if (cachedTimezones) {
+        return Promise.resolve(cachedTimezones);
+    }
+
+    return (/* istanbul ignore next */_Api2.default.get('/api/timezones').
+        then(function (data) {
+            /* istanbul ignore next */_memoryCache2.default.put(cacheId, data.timezones, /* istanbul ignore next */_configuration.DEFAULT_CACHE_LIFESPAN);
+            return data.timezones;
+        }));
+}

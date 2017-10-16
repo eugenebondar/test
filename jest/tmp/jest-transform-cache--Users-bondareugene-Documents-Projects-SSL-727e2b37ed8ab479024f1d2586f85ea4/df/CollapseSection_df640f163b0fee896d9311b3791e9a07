@@ -1,0 +1,27 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+CollapseSection;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactSanfona = require('react-sanfona');var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function CollapseSection( /* istanbul ignore next */_ref) {/* istanbul ignore next */var title = _ref.title,value = _ref.value,isOpen = _ref.isOpen,isRaw = _ref.isRaw,tag = _ref.tag;
+    var slug = isOpen ? 1 : 0;
+    var emptyValue = (!value || !value.length) && /* istanbul ignore next */(0, _counterpart2.default)('general.none');
+    var content = emptyValue || value;
+    var WrapTag = emptyValue ? 'div' : tag || 'div';
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 1 },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: title, slug: slug },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fb-expand-content' },
+                    isRaw ? /* istanbul ignore next */_react2.default.createElement(WrapTag, /* istanbul ignore next */{ dangerouslySetInnerHTML: { __html: content } }) : /* istanbul ignore next */_react2.default.createElement(WrapTag, /* istanbul ignore next */null, content)))));
+
+
+
+
+}
+
+CollapseSection.propTypes = {
+    title: /* istanbul ignore next */_react2.default.PropTypes.string,
+    value: /* istanbul ignore next */_react2.default.PropTypes.string,
+    isOpen: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isRaw: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    tag: /* istanbul ignore next */_react2.default.PropTypes.string };

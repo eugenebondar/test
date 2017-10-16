@@ -1,0 +1,163 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.ROLE_TYPE = undefined;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_DropdownButton = require('../../../Shared/ApocReactDropdown/DropdownButton'); /* istanbul ignore next */var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
+var /* istanbul ignore next */_DropdownWithDirectionInsideDialog = require('../../../Shared/ApocReactDropdown/DropdownWithDirectionInsideDialog'); /* istanbul ignore next */var _DropdownWithDirectionInsideDialog2 = _interopRequireDefault(_DropdownWithDirectionInsideDialog);
+var /* istanbul ignore next */_index = require('../../../Shared/Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_FormField = require('../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_dropdownWithEmptyOptionHOC = require('../../../Shared/ApocReactDropdown/dropdownWithEmptyOptionHOC');
+var /* istanbul ignore next */_MultiselectWithSearch = require('../../../Shared/Elements/ElementsListWithSearch/MultiselectWithSearch'); /* istanbul ignore next */var _MultiselectWithSearch2 = _interopRequireDefault(_MultiselectWithSearch);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+var Dropdown = /* istanbul ignore next */(0, _dropdownWithEmptyOptionHOC.dropdownWithEmptyOptionHOC)( /* istanbul ignore next */_DropdownWithDirectionInsideDialog2.default);
+
+var ROLE_TYPE = /* istanbul ignore next */exports.ROLE_TYPE = {
+    CUSTOMER: 'customer',
+    STAFF: 'staff' };
+
+
+function RoleForm( /* istanbul ignore next */_ref)
+
+
+
+
+
+
+
+
+{/* istanbul ignore next */var fields = _ref.fields,permissionsList = _ref.permissionsList,organizationsList = _ref.organizationsList,_onChange2 = _ref.onChange,onToggleBasicViewer = _ref.onToggleBasicViewer,onPermissionChange = _ref.onPermissionChange,onRoleTypeChange = _ref.onRoleTypeChange,validation = _ref.validation;
+    /**
+                                                                                                                                                                                                                                                                                                                                     * @param fieldKey
+                                                                                                                                                                                                                                                                                                                                     * @return {string|undefined}
+                                                                                                                                                                                                                                                                                                                                     */
+    function getValidationMessage(fieldKey) {
+        if (!validation) {
+            return null;
+        }
+
+        return validation[fieldKey];
+    }
+
+    /**
+       * Field is valid if there is no error message for it
+       * @param {string} [fieldKey]
+       * @return {boolean}
+       */
+    function isFieldValid(fieldKey) {
+        return !getValidationMessage(fieldKey);
+    }
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'roles-dialog' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('roles.name'),
+                    isRequired: /* istanbul ignore next */true,
+                    isValid: isFieldValid('name'),
+                    validationMessage: getValidationMessage('name') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                    id: 'name',
+                    updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return _onChange2( /* istanbul ignore next */_defineProperty({}, key, value));},
+                    value: fields.name })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('roles.roleType'),
+                    isRequired: /* istanbul ignore next */true,
+                    isValid: isFieldValid('role_type'),
+                    validationMessage: getValidationMessage('role_type') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownWithDirectionInsideDialog2.default, /* istanbul ignore next */{
+                        button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null),
+                        name: 'coverTemplateId',
+                        onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return onRoleTypeChange(e.value);} },
+
+                    Object.values(ROLE_TYPE).map(function (type) /* istanbul ignore next */{return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                                label: type,
+                                value: type,
+                                key: type,
+                                selected: type === fields.role_type }));}))),
+
+
+
+
+            fields.role_type === ROLE_TYPE.CUSTOMER &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('roles.customer'),
+                    isRequired: /* istanbul ignore next */true,
+                    isValid: isFieldValid('organization'),
+                    validationMessage: getValidationMessage('organization') },
+
+                /* istanbul ignore next */_react2.default.createElement(Dropdown, /* istanbul ignore next */{
+                        key: fields.organization_id,
+                        button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null),
+                        onChange: function /* istanbul ignore next */onChange( /* istanbul ignore next */_ref2) /* istanbul ignore next */{var value = _ref2.value;return _onChange2({ organization_id: value });},
+                        name: 'organization_id' },
+
+                    organizationsList.map(function (organization) /* istanbul ignore next */{return (
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                                key: organization.id,
+                                label: organization.corporation_name,
+                                value: organization.id,
+                                selected: organization.id === fields.organization_id }));}))),
+
+
+
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('roles.basic_viewer') },
+                fields.basicViewer !== undefined &&
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ToggleButton, /* istanbul ignore next */{
+                    toggleSize: 'sm',
+                    isOn: fields.basicViewer,
+                    onSwitch: function /* istanbul ignore next */onSwitch() /* istanbul ignore next */{return onToggleBasicViewer();} })),
+
+
+
+            fields.basicViewer === false &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('roles.permissions'),
+                    isRequired: /* istanbul ignore next */true,
+                    isValid: isFieldValid('permissions'),
+                    validationMessage: getValidationMessage('permissions') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_MultiselectWithSearch2.default, /* istanbul ignore next */{ onChange: function /* istanbul ignore next */onChange() /* istanbul ignore next */{return null;} },
+                    permissionsList.map(function (permission, i) {
+                        return (
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Checkbox, /* istanbul ignore next */{
+                                key: i,
+                                label: /* istanbul ignore next */(0, _counterpart2.default)( /* istanbul ignore next */'roles.' + permission),
+                                name: permission,
+                                onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return onPermissionChange(permission, e.target.checked);},
+                                checked: fields.permissions.includes(permission) }));
+
+
+                    })))));
+
+
+
+
+
+} /* istanbul ignore next */exports.default = RoleForm;
+
+RoleForm.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        role_type: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        basicViewer: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+        organization_id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        permissions: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string).isRequired }).
+    isRequired,
+    permissionsList: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired).isRequired,
+    organizationsList: /* istanbul ignore next */_react2.default.PropTypes.arrayOf(
+    /* istanbul ignore next */_react2.default.PropTypes.shape({
+        corporation_name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })).
+
+    isRequired,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onToggleBasicViewer: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onPermissionChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onRoleTypeChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object };

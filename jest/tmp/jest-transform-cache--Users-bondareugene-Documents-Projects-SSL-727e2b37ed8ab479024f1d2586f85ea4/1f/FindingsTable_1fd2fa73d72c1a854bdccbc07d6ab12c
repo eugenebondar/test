@@ -1,0 +1,193 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.cells = exports.TABLE_SORT_ORDER = undefined;var _React$PropTypes$shap;var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+var /* istanbul ignore next */_TableActionContextOption = require('../../../../Shared/TableActionContextOption/TableActionContextOption'); /* istanbul ignore next */var _TableActionContextOption2 = _interopRequireDefault(_TableActionContextOption);
+var /* istanbul ignore next */_TableActionContextMenu = require('../../../../Shared/TableActionContextMenu/TableActionContextMenu'); /* istanbul ignore next */var _TableActionContextMenu2 = _interopRequireDefault(_TableActionContextMenu);
+var /* istanbul ignore next */_ButtonLikeLink = require('../../../../Shared/ButtonLikeLink/ButtonLikeLink'); /* istanbul ignore next */var _ButtonLikeLink2 = _interopRequireDefault(_ButtonLikeLink);
+var /* istanbul ignore next */_TdTextEllipsis = require('../../../../Shared/TdTextEllipsis/TdTextEllipsis'); /* istanbul ignore next */var _TdTextEllipsis2 = _interopRequireDefault(_TdTextEllipsis);
+var /* istanbul ignore next */_Td = require('../../../../Shared/Td/Td'); /* istanbul ignore next */var _Td2 = _interopRequireDefault(_Td);
+var /* istanbul ignore next */_Severity = require('../../../../Shared/TableBoard/Elements/Cells/Severity'); /* istanbul ignore next */var _Severity2 = _interopRequireDefault(_Severity);
+var /* istanbul ignore next */_AttachmentIcon = require('../../../../Shared/TableBoard/Elements/Cells/AttachmentIcon'); /* istanbul ignore next */var _AttachmentIcon2 = _interopRequireDefault(_AttachmentIcon);
+var /* istanbul ignore next */_DateTimeFormat = require('../../../../Shared/Configuration/DateTimeFormat'); /* istanbul ignore next */var _DateTimeFormat2 = _interopRequireDefault(_DateTimeFormat);
+
+var /* istanbul ignore next */_loadingHoc = require('../../../../Shared/LoadingHoc/loadingHoc'); /* istanbul ignore next */var _loadingHoc2 = _interopRequireDefault(_loadingHoc);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+function t(key) {
+    return (/* istanbul ignore next */(0, _counterpart2.default)(key, { scope: 'findings.tableCell' }));
+}
+
+var cells = {
+    ID_ALIAS: 'id_alias',
+    CLASSIFICATION_TITLE: 'classification_title',
+    FINDING_TYPE: 'finding_type',
+    SEVERITY: 'severity',
+    SCORE: 'score',
+    LOCATION: 'location',
+    FOUND_DATE: 'found_date',
+    SOURCE: 'source',
+    CVE: 'cve',
+    CLASSIFICATION_CWE_ID: 'classification_cwe_id',
+    CLASSIFICATION_SSL_ID: 'classification_ssl_id',
+    ATTACHMENTS: 'attachments',
+    STATUS: 'status' };
+
+
+var notSortableCells = [cells.SOURCE, cells.CLASSIFICATION_SSL_ID, cells.ATTACHMENTS];
+var sortableCells = Object.values(cells).filter(function (cell) /* istanbul ignore next */{return !notSortableCells.includes(cell);}); /* istanbul ignore next */exports.
+
+TABLE_SORT_ORDER = _apocReact.TABLE_SORT_ORDER; /* istanbul ignore next */exports.cells = cells;
+
+var LoadingTable = /* istanbul ignore next */(0, _loadingHoc2.default)( /* istanbul ignore next */_apocReact.Table); /* istanbul ignore next */var
+
+FindingsTable = function (_React$PureComponent) {_inherits(FindingsTable, _React$PureComponent);function FindingsTable() {_classCallCheck(this, FindingsTable);return _possibleConstructorReturn(this, (FindingsTable.__proto__ || Object.getPrototypeOf(FindingsTable)).apply(this, arguments));}_createClass(FindingsTable, [{ key: 'isCellVisible', value: function isCellVisible(
+
+        cellName) {
+            return this.props.visibleColumns.includes(cellName);
+        } }, { key: 'getSortOrder', value: function getSortOrder(
+
+        cellName) {
+            return this.props.sortField === cellName ? this.props.sortOrder : '';
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;
+            var isCellVisible = /* istanbul ignore next */this.isCellVisible.bind(this);
+            return (
+                /* istanbul ignore next */_react2.default.createElement(LoadingTable, /* istanbul ignore next */{ isRowsStriped: /* istanbul ignore next */true, isLoading: this.props.loading },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableHeadRow, /* istanbul ignore next */null,
+                        Object.values(cells).filter(function (cell) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.isCellVisible(cell));}).map(function (cell) /* istanbul ignore next */{return (
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableHeadCell, /* istanbul ignore next */{ key: cell,
+                                        sortable: sortableCells.includes(cell),
+                                        sortOrder: /* istanbul ignore next */_this2.getSortOrder(cell),
+                                        onSort: function /* istanbul ignore next */onSort(newSortOrder) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onSortChange(cell, newSortOrder));} },
+                                    t(cell)));}),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableHeadCell, /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('tableCell.actions'))),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tbody', /* istanbul ignore next */null,
+                        this.props.findings.length === 0 &&
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tr', /* istanbul ignore next */null,
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */{ colSpan: this.props.visibleColumns.length + 1, className: 'empty-table' },
+                                this.props.hasAnyFindings && /* istanbul ignore next */(0, _counterpart2.default)('findings.emptySearchResult'),
+                                !this.props.hasAnyFindings && /* istanbul ignore next */(0, _counterpart2.default)('findings.noFindings'))),
+
+
+
+                        this.props.findings.map(function (row) /* istanbul ignore next */{return (
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tr', /* istanbul ignore next */{ key: row[cells.ID_ALIAS] },
+                                    isCellVisible(cells.ID_ALIAS) &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Td2.default, /* istanbul ignore next */{ width: 60 },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ButtonLikeLink2.default, /* istanbul ignore next */{
+                                                onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onViewFinding(row));} }, row[cells.ID_ALIAS])),
+
+
+                                    isCellVisible(cells.CLASSIFICATION_TITLE) &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 100 },
+                                        row[cells.CLASSIFICATION_TITLE]),
+
+
+                                    isCellVisible(cells.FINDING_TYPE) &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 80 },
+                                        row[cells.FINDING_TYPE]),
+
+
+                                    isCellVisible(cells.SEVERITY) &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 87 }, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Severity2.default, /* istanbul ignore next */{ value: row[cells.SEVERITY] })),
+
+                                    isCellVisible(cells.SCORE) && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 85 }, row[cells.SCORE]),
+                                    isCellVisible(cells.LOCATION) &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 132 },
+                                        row[cells.LOCATION] && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'a', /* istanbul ignore next */{ href: row[cells.LOCATION] }, row[cells.LOCATION]),
+                                        !row[cells.LOCATION] && 'N/A'),
+
+
+                                    isCellVisible(cells.FOUND_DATE) &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 111 },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DateTimeFormat2.default, /* istanbul ignore next */{ dateFormat: 'fullDateWithSeconds', date: row[cells.FOUND_DATE] })),
+
+
+                                    isCellVisible(cells.SOURCE) && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 85 }, row[cells.SOURCE]),
+                                    isCellVisible(cells.CVE) && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 76 }, row[cells.CVE]),
+                                    isCellVisible(cells.CLASSIFICATION_CWE_ID) &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 76 },
+                                        row[cells.CLASSIFICATION_CWE_ID]),
+
+
+                                    isCellVisible(cells.CLASSIFICATION_SSL_ID) &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 76 },
+                                        row[cells.CLASSIFICATION_SSL_ID]),
+
+
+                                    isCellVisible(cells.ATTACHMENTS) &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */null, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_AttachmentIcon2.default, /* istanbul ignore next */{ value: row[cells.ATTACHMENTS] })),
+
+                                    isCellVisible(cells.STATUS) &&
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 76 },
+                                        row[cells.STATUS]),
+
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Td2.default, /* istanbul ignore next */{ width: 56 },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableActionContextMenu2.default, /* istanbul ignore next */null,
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableActionContextOption2.default, /* istanbul ignore next */{ onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onViewFinding(row));},
+                                                iconClassName: 'sc-icon-visible',
+                                                label: /* istanbul ignore next */(0, _counterpart2.default)('actions.viewFindingDetails') }),
+
+                                            row.edit_permission &&
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableActionContextOption2.default, /* istanbul ignore next */{ onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onEditFinding(row));},
+                                                iconClassName: 'sc-icon-pencil',
+                                                label: /* istanbul ignore next */(0, _counterpart2.default)('actions.editFinding') }),
+
+
+                                            row.edit_permission &&
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableActionContextOption2.default, /* istanbul ignore next */{ onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onEditAttachments(row));},
+                                                iconClassName: 'sc-icon-files',
+                                                label: /* istanbul ignore next */(0, _counterpart2.default)('actions.editAttachments') }),
+
+
+                                            row.edit_permission &&
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableActionContextOption2.default, /* istanbul ignore next */{ onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onDeleteFinding(row));},
+                                                iconClassName: 'sc-icon-trash-closed',
+                                                label: /* istanbul ignore next */(0, _counterpart2.default)('actions.deleteFinding') })))));}))));
+
+
+
+
+
+
+
+
+
+        } }]);return FindingsTable;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = FindingsTable;
+
+
+FindingsTable.defaultProps = {
+    sortField: '',
+    sortOrder: '' };
+
+
+FindingsTable.propTypes = {
+    findings: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape( /* istanbul ignore next */(_React$PropTypes$shap = {}, _defineProperty(_React$PropTypes$shap,
+    cells.ID_ALIAS, /* istanbul ignore next */_react2.default.PropTypes.number), _defineProperty(_React$PropTypes$shap,
+    cells.CLASSIFICATION_TITLE, /* istanbul ignore next */_react2.default.PropTypes.string), _defineProperty(_React$PropTypes$shap,
+    cells.FINDING_TYPE, /* istanbul ignore next */_react2.default.PropTypes.string), _defineProperty(_React$PropTypes$shap,
+    cells.SEVERITY, /* istanbul ignore next */_react2.default.PropTypes.string), _defineProperty(_React$PropTypes$shap,
+    cells.SCORE, /* istanbul ignore next */_react2.default.PropTypes.number), _defineProperty(_React$PropTypes$shap,
+    cells.LOCATION, /* istanbul ignore next */_react2.default.PropTypes.string), _defineProperty(_React$PropTypes$shap,
+    cells.FOUND_DATE, /* istanbul ignore next */_react2.default.PropTypes.string), _defineProperty(_React$PropTypes$shap,
+    cells.CVE, /* istanbul ignore next */_react2.default.PropTypes.string), _defineProperty(_React$PropTypes$shap,
+    cells.CLASSIFICATION_CWE_ID, /* istanbul ignore next */_react2.default.PropTypes.string), _defineProperty(_React$PropTypes$shap,
+    cells.CLASSIFICATION_SSL_ID, /* istanbul ignore next */_react2.default.PropTypes.string), _defineProperty(_React$PropTypes$shap,
+    cells.ATTACHMENTS, /* istanbul ignore next */_react2.default.PropTypes.array), _defineProperty(_React$PropTypes$shap,
+    cells.STATUS, /* istanbul ignore next */_react2.default.PropTypes.string), _defineProperty(_React$PropTypes$shap, 'edit_permission',
+    /* istanbul ignore next */_react2.default.PropTypes.bool), _React$PropTypes$shap))).
+    isRequired,
+    loading: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    hasAnyFindings: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    visibleColumns: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string).isRequired,
+    sortField: /* istanbul ignore next */_react2.default.PropTypes.oneOf( /* istanbul ignore next */[].concat(_toConsumableArray(sortableCells), [''])),
+    sortOrder: /* istanbul ignore next */_react2.default.PropTypes.oneOf(Object.values( /* istanbul ignore next */_apocReact.TABLE_SORT_ORDER)),
+    onSortChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onEditFinding: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onViewFinding: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onEditAttachments: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onDeleteFinding: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };

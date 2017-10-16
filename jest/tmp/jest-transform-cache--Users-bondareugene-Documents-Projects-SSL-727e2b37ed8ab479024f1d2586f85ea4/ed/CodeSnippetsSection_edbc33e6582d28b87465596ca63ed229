@@ -1,0 +1,42 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+CodeSnippetSection;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_CodeSnippet = require('../CodeSnippet/CodeSnippet'); /* istanbul ignore next */var _CodeSnippet2 = _interopRequireDefault(_CodeSnippet);var /* istanbul ignore next */_LineOfCode = require('../CodeSnippet/LineOfCode'); /* istanbul ignore next */var _LineOfCode2 = _interopRequireDefault(_LineOfCode);var /* istanbul ignore next */_AccordionItemSection = require('./AccordionItemSection'); /* istanbul ignore next */var _AccordionItemSection2 = _interopRequireDefault(_AccordionItemSection);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function CodeSnippetSection( /* istanbul ignore next */_ref) {/* istanbul ignore next */var snippets = _ref.snippets;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_AccordionItemSection2.default, /* istanbul ignore next */{
+                title: /* istanbul ignore next */(0, _counterpart2.default)('findings.codeSnippets') },
+
+
+            snippets.map(function ( /* istanbul ignore next */_ref2, i) /* istanbul ignore next */{var file_name = _ref2.file_name,lines_of_code = _ref2.lines_of_code;return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CodeSnippet2.default, /* istanbul ignore next */{ key: file_name + i,
+                            fileName: file_name },
+
+                        lines_of_code.map(function ( /* istanbul ignore next */_ref3) /* istanbul ignore next */{var number = _ref3.number,code = _ref3.code;return (
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LineOfCode2.default, /* istanbul ignore next */{ key: number,
+                                        lineNumber: number },
+
+                                    code));})));})));
+
+
+
+
+
+
+
+
+}
+
+CodeSnippetSection.propTypes = {
+    /*eslint-disable react/forbid-prop-types*/
+    snippets: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        file_name: /* istanbul ignore next */_react2.default.PropTypes.string,
+        lines_of_code: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+            code: /* istanbul ignore next */_react2.default.PropTypes.string,
+            number: /* istanbul ignore next */_react2.default.PropTypes.string })) }))
+
+
+    /*eslint-enable react/forbid-prop-types*/ };

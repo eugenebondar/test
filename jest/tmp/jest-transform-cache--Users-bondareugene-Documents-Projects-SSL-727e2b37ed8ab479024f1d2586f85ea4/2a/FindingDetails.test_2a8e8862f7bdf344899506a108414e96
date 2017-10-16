@@ -1,0 +1,122 @@
+/* istanbul ignore next */'use strict';var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_FindingDetails = require('./../Components/FindingDetails/FindingDetails'); /* istanbul ignore next */var _FindingDetails2 = _interopRequireDefault(_FindingDetails);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var defaultFields = {
+    attachments: [],
+    id_alias: '',
+    severity_reason: '',
+    finding_severity: null,
+    finding_type: 'Vulnerability',
+    published: true,
+    included: true,
+    location: '',
+    severity: null,
+    score: '0',
+    source_type: '',
+    found_date: '',
+    fixed_date: '',
+    status: 'New',
+    request: '',
+    message: '',
+    response: '',
+    cwe_id: '',
+    cve: '',
+    osvdb: '',
+    bid: '',
+    cert: '',
+    cvss_base_score: '',
+    cvss_temporal_score: '',
+    cvss_vector: '',
+    cvss_temporal_vector: '',
+    exploit_available: '',
+    exploit_ease: '',
+    classification_ssl_id: '',
+    classification_cwe_id: '',
+    vuln_publication_date: '',
+    finding_classification_id: '',
+    classification_description: '',
+    classification_impact: '',
+    classification_remediation: '',
+    port: '',
+    protocol: '',
+    svc_name: '' };
+
+
+describe('FindingDetails', function () {
+    describe('with minimal set of props', function () {
+        it('matches snapshot', function () {
+            var tree = /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)( /* istanbul ignore next */(0, _enzyme.shallow)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetails2.default, /* istanbul ignore next */{ finding: /* istanbul ignore next */_extends({}, defaultFields), isService: true, testCategoryName: 'test' })));
+
+            expect(tree).toMatchSnapshot();
+        });
+    });
+
+    describe('with empty value in additional fields', function () {
+        var component = /* istanbul ignore next */void 0;
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetails2.default, /* istanbul ignore next */{ finding: /* istanbul ignore next */_extends({}, defaultFields), isService: true, testCategoryName: 'test' }));
+
+        });
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)( /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetails2.default, /* istanbul ignore next */{ finding: /* istanbul ignore next */_extends({}, defaultFields), isService: true, testCategoryName: 'test' })))).toMatchSnapshot();
+        });
+        it('doesn\'t render additional columns', function () {
+            // render only 2 default columns
+            expect(component.find('.fd__column').length).toBe(2);
+        });
+    });
+
+    describe('with 1 additional field', function () {
+        var component = /* istanbul ignore next */void 0;
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetails2.default, /* istanbul ignore next */{ finding: /* istanbul ignore next */_extends({}, defaultFields, { classification_cwe_id: 'classification_cwe_id' }), isService: true, testCategoryName: 'test' }));
+
+        });
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)( /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetails2.default, /* istanbul ignore next */{ finding: /* istanbul ignore next */_extends({}, defaultFields), isService: true, testCategoryName: 'test' })))).toMatchSnapshot();
+        });
+        it('render 1 additional columns', function () {
+            // render 2 default columns and 1 additional
+            expect(component.find('.fd__column').length).toBe(3);
+        });
+        it('render 1 additional column with 1 field only', function () {
+            expect(component.find('.fd__column').at(2).find('.finding-details-field').length).toEqual(1);
+        });
+    });
+
+    describe('with more than 6 additional field', function () {
+        var component = /* istanbul ignore next */void 0;
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetails2.default, /* istanbul ignore next */{ testCategoryName: 'test', isService: true, finding: /* istanbul ignore next */_extends({},
+                defaultFields, {
+                    classification_cwe_id: 'classification_cwe_id',
+                    cve: 'cve',
+                    osvdb: 'osvdb',
+                    bid: 'bid',
+                    cert: 'cert',
+                    vuln_publication_date: 'vuln_publication_date',
+                    cvss_base_score: 'cvss_base_score' }) }));
+
+
+        });
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)( /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDetails2.default, /* istanbul ignore next */{ finding: /* istanbul ignore next */_extends({}, defaultFields), isService: true, testCategoryName: 'test' })))).toMatchSnapshot();
+        });
+        it('render 2 additional columns', function () {
+            // render 2 default columns and 2 additional
+            expect(component.find('.fd__column').length).toBe(4);
+        });
+        it('doesn\'t render more than 6 fields for each of additional columns', function () {
+            // render 2 default columns and 1 additional
+            expect(component.find('.fd__column').length).toBe(4);
+            expect(component.find('.fd__column').at(2).find('.finding-details-field').length).toBeLessThanOrEqual(6);
+            expect(component.find('.fd__column').at(3).find('.finding-details-field').length).toBeLessThanOrEqual(6);
+        });
+    });
+});

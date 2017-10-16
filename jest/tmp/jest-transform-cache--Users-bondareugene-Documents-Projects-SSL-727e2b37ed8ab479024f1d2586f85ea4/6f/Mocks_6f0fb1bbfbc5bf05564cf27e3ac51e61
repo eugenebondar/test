@@ -1,0 +1,16 @@
+/* istanbul ignore next */'use strict';
+
+
+
+
+
+
+
+
+
+/* istanbul ignore next */jest.mock('../../../Models/FindingAttachments/api', function () {
+    return {
+        customer: { getAttachments: getAttachments },
+        staff: { getAttachments: getAttachments } };
+
+});var getAttachmentsResult = { attachments: [], finding: {} };var getAttachments = jest.fn(function () {return Promise.resolve({ json: function /* istanbul ignore next */json() {return getAttachmentsResult;} });});

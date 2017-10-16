@@ -1,0 +1,15 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+ActivityLogsDetails;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactJsonPretty = require('react-json-pretty'); /* istanbul ignore next */var _reactJsonPretty2 = _interopRequireDefault(_reactJsonPretty);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ActivityLogsDetails( /* istanbul ignore next */_ref) {/* istanbul ignore next */var log = _ref.log;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'activity-log-details' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactJsonPretty2.default, /* istanbul ignore next */{ json: JSON.stringify(log.changeset) })));
+
+
+}
+
+ActivityLogsDetails.propTypes = {
+    /*eslint-disable react/forbid-prop-types */
+    log: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired
+    /*eslint-enable react/forbid-prop-types */ };

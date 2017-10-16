@@ -1,0 +1,120 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+createColumnConfig = createColumnConfig;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_deepEqual = require('deep-equal'); /* istanbul ignore next */var _deepEqual2 = _interopRequireDefault(_deepEqual);var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);var /* istanbul ignore next */_Table = require('./Components/Table'); /* istanbul ignore next */var _Table2 = _interopRequireDefault(_Table); /* istanbul ignore next */require('./TableBoard.less'); /* istanbul ignore next */require('./Popup.less'); /* istanbul ignore next */require('./Label.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @param {{}[]}collection
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @param {{}} sortOrder
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @param {string} sortField
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * @returns {{}[]}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           */function createColumnConfig(collection, sortOrder, sortField) {return collection.map(function (column) {var sortConfig = column.sortable ? { value: sortOrder.sort_field === column[sortField], order: sortOrder.sort_order, key: column[sortField] } :
+        null;
+        return (/* istanbul ignore next */_extends({}, column, { sortConfig: sortConfig }));
+    });
+} /* istanbul ignore next */var
+
+TableBoard = function (_Component) {_inherits(TableBoard, _Component);
+    function /* istanbul ignore next */TableBoard(props) {/* istanbul ignore next */_classCallCheck(this, TableBoard);return _possibleConstructorReturn(this, (TableBoard.__proto__ || Object.getPrototypeOf(TableBoard)).call(this,
+        props));
+    }
+
+    /**
+       * Component will be updated only when part of props ("data")
+       * @param nextProps
+       * @returns {boolean}
+       */_createClass(TableBoard, [{ key: 'shouldComponentUpdate', value: function shouldComponentUpdate(
+        nextProps, nextState, nextContext) {
+            return (
+                nextProps.isAllSelected !== this.props.isAllSelected ||
+                nextContext.currentUser !== this.context.currentUser ||
+                ! /* istanbul ignore next */(0, _deepEqual2.default)(this.props.data, nextProps.data) ||
+                ! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.columnConfig, this.props.columnConfig) ||
+                ! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.className, this.props.className));
+
+        } }, { key: 'render', value: function render()
+
+        {
+            var titleProps = this.props.title;
+            var title = this.props.title && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */null, titleProps);
+            var table =
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Table2.default, /* istanbul ignore next */{
+                data: this.props.data,
+                profileColumnsSettings: this.getProfileColumnSettings(),
+                columnConfig: this.props.columnConfig,
+                actionsTrigger: this.props.actionsTrigger,
+                selectTrigger: this.props.selectTrigger,
+                actions: this.props.actions,
+                expansion: this.props.expansion,
+                getExpansionData: this.props.getExpansionData,
+                expandId: this.props.expandId,
+                trigger: this.props.trigger,
+                selectable: this.props.selectable,
+                isAllSelected: this.props.isAllSelected,
+                emptyTableTitle: this.props.emptyTableTitle,
+                updateSortableStatus: this.props.updateSortableStatus });
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: this.props.className },
+                    title,
+                    table));
+
+
+        } }, { key: 'getProfileColumnSettings', value: function getProfileColumnSettings()
+
+        {
+            var settings = this.context.currentUser && this.context.currentUser.settings;
+            if (settings && settings[this.props.tableName] && settings[this.props.tableName].length) {
+                return settings[this.props.tableName];
+            } else if (this.props.defaultColumnsSettings) {
+                return this.props.defaultColumnsSettings;
+            }
+
+            return [];
+        } }]);return TableBoard;}(_react.Component); /* istanbul ignore next */exports.default = TableBoard;
+
+
+TableBoard.propTypes = {
+    className: /* istanbul ignore next */_react2.default.PropTypes.string,
+    tableName: /* istanbul ignore next */_react2.default.PropTypes.string,
+    emptyTableTitle: /* istanbul ignore next */_react2.default.PropTypes.string,
+    expandId: /* istanbul ignore next */_react2.default.PropTypes.string,
+    data: /* istanbul ignore next */_react2.default.PropTypes.array,
+    title: /* istanbul ignore next */_react2.default.PropTypes.string,
+    expansion: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    selectable: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isAllSelected: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    columnConfig: /* istanbul ignore next */_react2.default.PropTypes.array,
+    defaultColumnsSettings: /* istanbul ignore next */_react2.default.PropTypes.array,
+    actions: /* istanbul ignore next */_react2.default.PropTypes.array,
+    actionsTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    selectTrigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updateSortableStatus: /* istanbul ignore next */_react2.default.PropTypes.func,
+    trigger: /* istanbul ignore next */_react2.default.PropTypes.func,
+    getExpansionData: /* istanbul ignore next */_react2.default.PropTypes.func };
+
+
+TableBoard.defaultProps = {
+    className: '',
+    tableName: '',
+    title: '',
+    emptyTableTitle: '',
+    expansion: false,
+    selectable: false };
+
+
+TableBoard.contextTypes = {
+    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default) };

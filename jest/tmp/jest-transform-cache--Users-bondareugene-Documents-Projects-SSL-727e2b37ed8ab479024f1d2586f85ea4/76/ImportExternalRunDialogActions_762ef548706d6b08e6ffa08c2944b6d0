@@ -1,0 +1,48 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_api = require('../../../Models/ExternalRuns/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_FilesStore = require('../../../Stores/FilesStore'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var ImportExternalRunDialogActions = {
+    importHailstorm: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    importNessus: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    importCheckmarx: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    fetchAssessmentRuns: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    changeSource: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    changeHailstormType: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }) };
+
+
+ImportExternalRunDialogActions.importHailstorm.listen(function (data) {/* istanbul ignore next */var _this = this;
+    /* istanbul ignore next */_api2.default.importHailstorm(data).
+    then(function (response) {
+        return response.status === 422 ? response.json() : response;
+    }).
+    then(function (json) {
+        (!json.errors ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(json);
+    });
+});
+
+ImportExternalRunDialogActions.importNessus.listen(importFindingsFromFile);
+
+ImportExternalRunDialogActions.importCheckmarx.listen(importFindingsFromFile);
+
+ImportExternalRunDialogActions.fetchAssessmentRuns.listen(function (data) {/* istanbul ignore next */var _this2 = this;
+    /* istanbul ignore next */_api2.default.fetchAssessmentRuns(data).
+    then(function (json) {
+        (json.assessment_run_ids && json.assessment_run_ids.length ? /* istanbul ignore next */_this2.completed : /* istanbul ignore next */_this2.failed)(json);
+    });
+}); /* istanbul ignore next */exports.default =
+
+ImportExternalRunDialogActions;
+
+function importFindingsFromFile(data) {/* istanbul ignore next */var _this3 = this;
+    var file = /* istanbul ignore next */(0, _FilesStore.prepareImportFile)(data);
+    /* istanbul ignore next */_api2.default.importFindingsFromFile(file).
+    then(function (response) {
+        return response.status === 422 ? response.json() : response;
+    }).
+    then(function (json) {
+        (!json.errors ? /* istanbul ignore next */_this3.completed : /* istanbul ignore next */_this3.failed)(json);
+    });
+}

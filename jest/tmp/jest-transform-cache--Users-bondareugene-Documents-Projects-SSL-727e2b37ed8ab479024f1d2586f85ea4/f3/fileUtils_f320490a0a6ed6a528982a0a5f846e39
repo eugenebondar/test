@@ -1,0 +1,12 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+shouldFileOpenInNewWindow = shouldFileOpenInNewWindow; /* istanbul ignore next */exports.
+
+
+
+isImage = isImage;var /* istanbul ignore next */_fileExtension = require('file-extension'); /* istanbul ignore next */var _fileExtension2 = _interopRequireDefault(_fileExtension);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var imageExtensions = ['png', 'gif', 'jpeg', 'jpg', 'bmp'];var extensionsToOpenInNewWindow = ['pdf', 'wmv', 'avi', 'mp4', 'png', 'gif', 'jpeg', 'jpg', 'bmp'];function shouldFileOpenInNewWindow(fileName) {return extensionsToOpenInNewWindow.includes( /* istanbul ignore next */(0, _fileExtension2.default)(fileName));}function isImage(fileName) {
+    return imageExtensions.includes( /* istanbul ignore next */(0, _fileExtension2.default)(fileName));
+}

@@ -1,0 +1,59 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_SearchInput = require('../../../../Shared/Elements/SearchInput/SearchInput'); /* istanbul ignore next */var _SearchInput2 = _interopRequireDefault(_SearchInput);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+UsersField = function (_React$Component) {_inherits(UsersField, _React$Component);
+    function /* istanbul ignore next */UsersField(props) {/* istanbul ignore next */_classCallCheck(this, UsersField);var _this = _possibleConstructorReturn(this, (UsersField.__proto__ || Object.getPrototypeOf(UsersField)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            search: '' }; /* istanbul ignore next */return _this;
+
+    }_createClass(UsersField, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _this2 = this;var _props =
+            this.props,fields = _props.fields,users = _props.users,getTranslate = _props.getTranslate,getValidationError = _props.getValidationError,updateValue = _props.updateValue; /* istanbul ignore next */var
+            search = this.state.search;
+            var require = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-error required-star' }, /* istanbul ignore next */'*');
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                        getTranslate('user_ids'), /* istanbul ignore next */': ',
+                        require),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'users-list-wrap' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SearchInput2.default, /* istanbul ignore next */{ onKeyUp: function /* istanbul ignore next */onKeyUp(e) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.updateSearch(e.target.value));},
+                                placeholder: getTranslate('inputPlaceholder') }),
+
+                            getValidationError('users_array'),
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Multiselect, /* istanbul ignore next */{ onChange: updateValue },
+                                users[fields.group_type].filter(function (user) {
+                                    return user.name.toLowerCase().includes(search.toLowerCase()) && (
+                                    fields.group_type === 'staff' || fields.organization_id === user.organization_id);
+                                }).map(function (user, i) {
+                                    return (
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Checkbox, /* istanbul ignore next */{
+                                            key: i,
+                                            label: user.name,
+                                            name: user.id,
+                                            checked: fields.user_ids.indexOf(user.id) >= 0 }));
+
+
+                                }))))));
+
+
+
+
+
+        } }, { key: 'updateSearch', value: function updateSearch(
+        value) {
+            this.setState({ search: value });
+        } }]);return UsersField;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = UsersField;
+
+
+UsersField.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    getTranslate: /* istanbul ignore next */_react2.default.PropTypes.func,
+    getValidationError: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updateValue: /* istanbul ignore next */_react2.default.PropTypes.func,
+    users: /* istanbul ignore next */_react2.default.PropTypes.object };

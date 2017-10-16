@@ -1,0 +1,15 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+initSessionUserFetchStoreHook = initSessionUserFetchStoreHook;var /* istanbul ignore next */_SessionUserActions = require('./../SessionUser/SessionUserActions'); /* istanbul ignore next */var _SessionUserActions2 = _interopRequireDefault(_SessionUserActions);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var oldFetch = window.fetch;function initSessionUserFetchStoreHook() {
+    window.fetch = function () {
+        return (/* istanbul ignore next */oldFetch.apply( /* istanbul ignore next */undefined, /* istanbul ignore next */arguments).then(function (response) {
+                /* istanbul ignore next */_SessionUserActions2.default.resetSessionTimeout();
+                if (!response.url.includes('api/profile.json')) {
+                    /* istanbul ignore next */_SessionUserActions2.default.checkResponseStatus(response);
+                } // TODO remove the hook after refactoring of modal layer and catching response errors correctly
+                return response;
+            }));
+    };
+}

@@ -1,0 +1,115 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json');
+var /* istanbul ignore next */_FindingsTable = require('./FindingsTable'); /* istanbul ignore next */var _FindingsTable2 = _interopRequireDefault(_FindingsTable);
+var /* istanbul ignore next */_momentTimezone = require('moment-timezone'); /* istanbul ignore next */var _momentTimezone2 = _interopRequireDefault(_momentTimezone);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var completeFinding = {
+    "id": "dd8a4eac-8bd9-47ff-a64f-714f36f6b4ee",
+    "id_alias": 579,
+    "severity": "Medium",
+    "found_date": "2017-07-11T02:11:10.000-05:00",
+    "fixed_date": null,
+    "run_id": "cdc92e85-f0d3-4337-b97d-7d23717e76b7",
+    "status": "New",
+    "finding_type": "Vulnerability",
+    "source_type": "Checkmarx",
+    "score": 0,
+    "finding_classification_id": "c27a05d8-b390-4b92-bb86-4c7a117d6ea2",
+    "exploit_available": null,
+    "exploit_ease": null,
+    "vuln_publication_date": null,
+    "cvss_base_score": null,
+    "cvss_vector": null,
+    "cvss_temporal_score": null,
+    "cvss_temporal_vector": null,
+    "cve": null,
+    "osvdb": null,
+    "bid": null,
+    "cert": null,
+    "first_time_found": "",
+    "classification_cwe_id": "209",
+    "classification_ssl_id": "0101126efb2d38597a460521b570f256",
+    "classification_title": "Information_Exposure_Through_an_Error_Message",
+    "port": null,
+    "protocol": null,
+    "svc_name": null,
+    "severity_reason": "asdasdasd",
+    "finding_severity": "Medium",
+    "location": "\/DVWA-master\/vulnerabilities\/weak_id\/source\/medium.php",
+    "attachments": [
+    {
+        "id": "fc76a4d3-6217-4155-b89c-b563793326cf",
+        "name": "asdasdas",
+        "file_url": "\/uploads\/finding_attachment\/file\/fc76a4d3-6217-4155-b89c-b563793326cf\/zebranie_wyborcze_oraz_ETL11.03.2017.docx" }],
+
+
+    "edit_permission": true };
+
+
+describe('FindingsTable', function () {
+    beforeAll(function () {
+        /* istanbul ignore next */_momentTimezone2.default.tz.setDefault('America/Chicago');
+    });
+
+    afterAll(function () {
+        /* istanbul ignore next */_momentTimezone2.default.tz.setDefault();
+    });
+
+    describe('with default set of props', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingsTable2.default, /* istanbul ignore next */{
+                visibleColumns: Object.values( /* istanbul ignore next */_FindingsTable.cells),
+                findings: [completeFinding],
+                onViewFinding: function /* istanbul ignore next */onViewFinding() /* istanbul ignore next */{return null;},
+                onSortChange: function /* istanbul ignore next */onSortChange() /* istanbul ignore next */{return null;},
+                onDeleteFinding: function /* istanbul ignore next */onDeleteFinding() /* istanbul ignore next */{return null;},
+                embeddedTable: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null) }));
+
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('with only some visible columns', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingsTable2.default, /* istanbul ignore next */{
+                visibleColumns: [/* istanbul ignore next */_FindingsTable.cells.LOCATION, /* istanbul ignore next */_FindingsTable.cells.ID_ALIAS],
+                findings: [completeFinding],
+                onViewFinding: function /* istanbul ignore next */onViewFinding() /* istanbul ignore next */{return null;},
+                onEditFinding: function /* istanbul ignore next */onEditFinding() /* istanbul ignore next */{return null;},
+                findingEditionEnabled: true,
+                onEditAttachments: function /* istanbul ignore next */onEditAttachments() /* istanbul ignore next */{return null;},
+                onSortChange: function /* istanbul ignore next */onSortChange() /* istanbul ignore next */{return null;},
+                onDeleteFinding: function /* istanbul ignore next */onDeleteFinding() /* istanbul ignore next */{return null;},
+                embeddedTable: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null) }));
+
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

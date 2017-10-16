@@ -1,0 +1,111 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_api = require('../../Models/Findings/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_api3 = require('../../Models/ExternalRuns/api'); /* istanbul ignore next */var _api4 = _interopRequireDefault(_api3);
+var /* istanbul ignore next */_getUserType = require('../../Utils/getUserType'); /* istanbul ignore next */var _getUserType2 = _interopRequireDefault(_getUserType);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var FindingDialogActions = {
+    openCreateNewFindingDialog: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    openEditFindingDialog: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    openViewFindingDialog: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    getFindingCategories: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    getFindingClassificationsForCategory: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    getFindingClassificationsForCategoryWithoutUpdatindFinding: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    getFinding: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    publishFinding: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    unPublishFinding: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    includeFinding: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    excludeFinding: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    createFinding: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    editFinding: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    deleteFinding: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    navigate: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    updateFindingId: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    turnEditMode: /* istanbul ignore next */_reflux2.default.createAction(),
+    closeFindingDialog: /* istanbul ignore next */_reflux2.default.createAction(),
+    toggleAttachmentsDialog: /* istanbul ignore next */_reflux2.default.createAction(),
+    findingCategoryChange: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+FindingDialogActions.openCreateNewFindingDialog.listen(function () {
+    return (/* istanbul ignore next */_api2.default.getFindingCategories().then(this.completed, this.failed));
+});
+
+FindingDialogActions.openEditFindingDialog.listen(function (runId, findingId, isService) {
+    var userType = /* istanbul ignore next */(0, _getUserType2.default)(isService);
+    return Promise.all([
+    /* istanbul ignore next */_api2.default.getFindingCategories(),
+    /* istanbul ignore next */_api2.default[userType].getFinding(runId, findingId, isService)]).
+
+    then(function (json) {
+        var finding = json.filter(function (response) /* istanbul ignore next */{return response.finding;})[0].finding;
+        return (/* istanbul ignore next */_api2.default.getFindingClassifications(finding.finding_classification_category_id).
+            then(function (result) {
+                return json.concat(result);
+            }));
+    }).
+    then(function (result) {
+        return result.reduce(function (resultMap, value) {
+            return (/* istanbul ignore next */_extends({}, resultMap, value));
+        }, {});
+    }).
+    then(this.completed, this.failed);
+});
+
+FindingDialogActions.openViewFindingDialog.listen(function (runId, findingId, isService) {
+    var userType = /* istanbul ignore next */(0, _getUserType2.default)(isService);
+    return (/* istanbul ignore next */_api2.default[userType].getFinding(runId, findingId, isService).then(this.completed, this.failed));
+});
+
+FindingDialogActions.getFindingCategories.listen(function () {
+    return (/* istanbul ignore next */_api2.default.getFindingCategories().then(this.completed, this.failed));
+});
+
+FindingDialogActions.getFindingClassificationsForCategory.listen(function (categoryId) {
+    return (/* istanbul ignore next */_api2.default.getFindingClassifications(categoryId).then(this.completed, this.failed));
+});
+
+FindingDialogActions.getFindingClassificationsForCategoryWithoutUpdatindFinding.listen(function (categoryId) {
+    return (/* istanbul ignore next */_api2.default.getFindingClassifications(categoryId).then(this.completed, this.failed));
+});
+
+FindingDialogActions.getFinding.listen(function (runId, findingId, isService) {
+    var userType = /* istanbul ignore next */(0, _getUserType2.default)(isService);
+    return (/* istanbul ignore next */_api2.default[userType].getFinding(runId, findingId, isService).then(this.completed, this.failed));
+});
+
+FindingDialogActions.createFinding.listen(function (runId, data) {/* istanbul ignore next */var _this = this;
+    return (/* istanbul ignore next */_api2.default.service.addFinding(runId, data).then(function (json) {
+            (!json.errors ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(json);
+        }));
+});
+
+FindingDialogActions.editFinding.listen(function (runId, findingId, data) {/* istanbul ignore next */var _this2 = this;
+    return (/* istanbul ignore next */_api2.default.service.editFinding(runId, findingId, data).then(function (json) {
+            (!json.errors ? /* istanbul ignore next */_this2.completed : /* istanbul ignore next */_this2.failed)(json);
+        }));
+});
+
+FindingDialogActions.deleteFinding.listen(function (runId, findingId) {/* istanbul ignore next */var _this3 = this;
+    return (/* istanbul ignore next */_api2.default.service.deleteFinding(runId, findingId).then(function (json) {
+            (!json.errors ? /* istanbul ignore next */_this3.completed : /* istanbul ignore next */_this3.failed)(findingId);
+        }));
+});
+
+FindingDialogActions.publishFinding.listen(function (runId, findingId) {
+    return (/* istanbul ignore next */_api4.default.publishSelected(runId, findingId).then(this.completed, this.failed));
+});
+
+FindingDialogActions.unPublishFinding.listen(function (runId, findingId) {
+    return (/* istanbul ignore next */_api4.default.unPublishSelected(runId, findingId).then(this.completed, this.failed));
+});
+
+FindingDialogActions.includeFinding.listen(function (runId, findingId) {
+    return (/* istanbul ignore next */_api4.default.includeSelected(runId, findingId).then(this.completed, this.failed));
+});
+
+FindingDialogActions.excludeFinding.listen(function (runId, findingId) {
+    return (/* istanbul ignore next */_api4.default.excludeSelected(runId, findingId).then(this.completed, this.failed));
+}); /* istanbul ignore next */exports.default =
+
+FindingDialogActions;

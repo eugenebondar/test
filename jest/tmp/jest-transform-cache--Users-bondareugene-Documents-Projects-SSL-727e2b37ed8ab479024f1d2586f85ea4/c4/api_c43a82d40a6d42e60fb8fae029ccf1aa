@@ -1,0 +1,106 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_getNameSpacing = require('../../Utils/getNameSpacing'); /* istanbul ignore next */var _getNameSpacing2 = _interopRequireDefault(_getNameSpacing);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var TestsAPI = {
+    service: {
+        baseUrl: '/api/service',
+        fetchFullTestDetails: fetchFullTestDetails },
+
+    customer: {
+        baseUrl: '/api',
+        fetchFullTestDetails: fetchFullTestDetails } };
+
+
+
+/**
+                                                         * @param {String} [id]
+                                                         * @param {{}} [filter]
+                                                         * @return {Promise.<Response>}
+                                                         */
+function fetchFullTestDetails(id, filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull( /* istanbul ignore next */this.baseUrl + '/tests/' + id, filter));
+}
+
+TestsAPI.service.fetchTestTransitions = function (id) {
+    return (/* istanbul ignore next */_Api2.default.getFull(this.baseUrl + /* istanbul ignore next */('/tests/' + id + '/transitions.json')).
+        then(function (response) /* istanbul ignore next */{return response.ok ? response.json() : Promise.reject(response);}));
+};
+
+/**
+    * @param {String} [testRunId]
+    * @param {{}} [value]
+    * @return {Promise.<Response>}
+    */
+
+function updateTestRun(testRunId, value) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */this.baseUrl + '/runs/' + testRunId, value));
+}
+
+TestsAPI.service.updateTestRun = updateTestRun;
+
+/**
+                                                 * @return {Promise.<{}>} Returns object that is newly created test
+                                                 */
+TestsAPI.customer.addTest = function (test) {
+    return (/* istanbul ignore next */_Api2.default.post(this.baseUrl + '/tests.json', test).
+        then(function (response) /* istanbul ignore next */{return response.ok ? response.json() : Promise.reject(response);}));
+};
+
+TestsAPI.fetchTestDetails = function (id, isService, filter) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/' + nameSpacing + 'tests/' + id, filter));
+};
+
+TestsAPI.updateStatus = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'api/service/tests/' + id + '/change_state', data));
+};
+
+TestsAPI.requestTest = function (id) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'api/tests/' + id + '/request_testing'));
+};
+
+TestsAPI.respondTest = function (id) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'api/tests/' + id + '/respond'));
+};
+
+TestsAPI.abortTest = function (id) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'api/tests/' + id + '/abort'));
+};
+
+TestsAPI.stopTest = function (id) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'api/tests/' + id + '/stop'));
+};
+
+TestsAPI.updateScheduler = function (data, id) {
+    return (/* istanbul ignore next */_Api2.default.post( /* istanbul ignore next */'/api/service/schedules/test/' + id, data));
+};
+
+TestsAPI.updateTestInfo = function (data, id, isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.post( /* istanbul ignore next */'/api/' + nameSpacing + 'tests/' + id + '/configure', data));
+};
+
+/**
+    * @param {{comments: string}} data
+    * @param {string} id
+    * @param {Boolean} isService
+    * @returns {Promise.<Response>}
+    */
+TestsAPI.updateTestNote = function (data, id, isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/' + nameSpacing + 'tests/' + id + '/configure_comments', data));
+};
+
+TestsAPI.getAssessmentRuns = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/import/runs/', data));
+};
+
+TestsAPI.reportConfigurePreview = function (id, data, type) {
+    return (/* istanbul ignore next */_Api2.default.sendMultipart( /* istanbul ignore next */'/api/service/runs/' + id + '/report/preview.' + type, data));
+};
+
+TestsAPI.reportConfigureGenerate = function (id, data) {
+    return (/* istanbul ignore next */_Api2.default.sendMultipart( /* istanbul ignore next */'/api/service/runs/' + id + '/report', data));
+}; /* istanbul ignore next */exports.default =
+
+TestsAPI;

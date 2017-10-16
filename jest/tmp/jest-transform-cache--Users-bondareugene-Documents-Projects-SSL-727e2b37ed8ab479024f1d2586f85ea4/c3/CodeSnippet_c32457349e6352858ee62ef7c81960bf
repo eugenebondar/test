@@ -1,0 +1,39 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+CodeSnippet;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react); /* istanbul ignore next */require('./CodeSnippet.less');var /* istanbul ignore next */_SpaceBetweenLines = require('./SpaceBetweenLines'); /* istanbul ignore next */var _SpaceBetweenLines2 = _interopRequireDefault(_SpaceBetweenLines);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function CodeSnippet( /* istanbul ignore next */_ref) {/* istanbul ignore next */var fileName = _ref.fileName,children = _ref.children;
+    var lineOfCodesWithSpacesBetween = /* istanbul ignore next */_react2.default.Children.toArray(children).
+    reduce(function (prev, child, key) {
+        var newChild = /* istanbul ignore next */_react2.default.cloneElement(child, { key: child.props.lineNumber });
+        if (key === 0) {
+            prev.push(newChild);
+            return prev;
+        }
+
+        var lineNumberDiff = parseInt(child.props.lineNumber) - parseInt(prev[prev.length - 1].props.lineNumber);
+        if (lineNumberDiff > 1) {
+            prev.push( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SpaceBetweenLines2.default, /* istanbul ignore next */{ key: child.props.lineNumber + 'empty' }));
+        }
+
+        prev.push(newChild);
+        return prev;
+    }, []);
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'code-snippet' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'code-snippet-filename' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'pre', /* istanbul ignore next */null, fileName)),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'code-snippet-code-container' }, lineOfCodesWithSpacesBetween)));
+
+
+}
+
+CodeSnippet.propTypes = {
+    fileName: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    /**
+                                                                                      * LineOfCode components expected as children
+                                                                                      */
+    children: /* istanbul ignore next */_react2.default.PropTypes.node };

@@ -1,0 +1,113 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_TableBoard = require('../../../Shared/TableBoard'); /* istanbul ignore next */var _TableBoard2 = _interopRequireDefault(_TableBoard);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+TestRunsTable = function (_React$Component) {_inherits(TestRunsTable, _React$Component);function TestRunsTable() {_classCallCheck(this, TestRunsTable);return _possibleConstructorReturn(this, (TestRunsTable.__proto__ || Object.getPrototypeOf(TestRunsTable)).apply(this, arguments));}_createClass(TestRunsTable, [{ key: 'render', value: function render()
+        {
+            var columnConfig = [
+            {
+                source: 'shortId',
+                name: 'tableCell.externalRunId',
+                width: '155',
+                sortable: false,
+                type: 'link',
+                link: {
+                    type: 'text',
+                    url: 'test-details/' + this.props.testId + '/external-run/' + this.props.runId + '/run-details/',
+                    id: 'id' } },
+
+            {
+                source: 'source_type',
+                name: 'tableCell.source',
+                width: '85',
+                sortable: false,
+                type: 'text' },
+            {
+                source: 'completion_date',
+                name: 'tableCell.completionDate',
+                width: '225',
+                sortable: false,
+                type: 'date' },
+            {
+                source: 'created_at',
+                name: 'tableCell.importDate',
+                width: '225',
+                sortable: false,
+                type: 'date' },
+            {
+                source: 'test_targets',
+                name: 'tableCell.testTarget',
+                width: '269',
+                sortable: false,
+                type: 'array' },
+            {
+                //     source: 'aasm_state',
+                //     name: 'tableCell.status',
+                //     width: '',
+                //     sortable: true,
+                //     type: 'status'
+                // },{
+                //     source: 'test_target',
+                //     name: 'tableCell.testTarget',
+                //     width: '',
+                //     sortable: true,
+                //     type: 'text'
+                // },{
+                //     source: 'test_name',
+                //     name: 'tableCell.project',
+                //     width: '',
+                //     sortable: true,
+                //     type: 'text'
+                // },{
+                source: 'published',
+                name: 'tableCell.publ',
+                width: '60',
+                sortable: false,
+                type: 'text' },
+            {
+                source: 'vulnerabilities/Critical',
+                name: 'tableCell.critical',
+                width: '60',
+                sortable: false,
+                type: 'text' },
+            {
+                source: 'vulnerabilities/High',
+                name: 'tableCell.hight',
+                width: '60',
+                sortable: false,
+                type: 'text' },
+            {
+                source: 'vulnerabilities/Medium',
+                name: 'tableCell.med',
+                width: '60',
+                sortable: false,
+                type: 'text' },
+            {
+                source: 'vulnerabilities/Low',
+                name: 'tableCell.low',
+                width: '60',
+                sortable: false,
+                type: 'text' }];
+
+            var actions = [];
+            var data = this.props.data;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoard2.default, /* istanbul ignore next */{
+                        className: 'external-runs-table table',
+                        data: data,
+                        pagination: false,
+                        columnConfig: columnConfig,
+                        actions: actions,
+                        emptyTableTitle: /* istanbul ignore next */(0, _counterpart2.default)('externalRuns.noRuns') })));
+
+
+
+        } }]);return TestRunsTable;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = TestRunsTable;
+
+
+TestRunsTable.propTypes = {
+    data: /* istanbul ignore next */_react2.default.PropTypes.array,
+    runId: /* istanbul ignore next */_react2.default.PropTypes.string,
+    testId: /* istanbul ignore next */_react2.default.PropTypes.string };

@@ -1,0 +1,200 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_TestDetailsStore = require('../../../../Stores/TestDetailsStore'); /* istanbul ignore next */var _TestDetailsStore2 = _interopRequireDefault(_TestDetailsStore);
+var /* istanbul ignore next */_Actions = require('../../../../Actions');
+
+var /* istanbul ignore next */_BaseComponent2 = require('../../../../Shared/BaseComponent'); /* istanbul ignore next */var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+var /* istanbul ignore next */_Preloader = require('../../../../Shared/Preloader'); /* istanbul ignore next */var _Preloader2 = _interopRequireDefault(_Preloader);
+var /* istanbul ignore next */_Input = require('../../../../Shared/Elements/Input'); /* istanbul ignore next */var _Input2 = _interopRequireDefault(_Input);
+var /* istanbul ignore next */_Select = require('../../../../Shared/Elements/Select'); /* istanbul ignore next */var _Select2 = _interopRequireDefault(_Select);
+var /* istanbul ignore next */_Radio = require('../../../../Shared/Elements/Radio'); /* istanbul ignore next */var _Radio2 = _interopRequireDefault(_Radio);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ImportHailstorm = function (_BaseComponent) {_inherits(ImportHailstorm, _BaseComponent);
+    function /* istanbul ignore next */ImportHailstorm(props) {/* istanbul ignore next */_classCallCheck(this, ImportHailstorm);var _this = _possibleConstructorReturn(this, (ImportHailstorm.__proto__ || Object.getPrototypeOf(ImportHailstorm)).call(this,
+        props));
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_TestDetailsStore2.default, /* istanbul ignore next */_this._listenTestDetailsStore);
+        /* istanbul ignore next */_this.state = {
+            assessmentRunManually: false,
+            isRequestTestRuns: false,
+            assessmentRuns: null,
+            findingsData: {
+                source: 'Hailstorm',
+                application_id: '',
+                assessment_id: '',
+                assessment_run_id: '',
+                run_id: /* istanbul ignore next */_this.props.runId } };
+
+
+
+        /* istanbul ignore next */_this.updateAssessmentRunManually = /* istanbul ignore next */_this.updateAssessmentRunManually.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.getTestRunsSubmit = /* istanbul ignore next */_this.getTestRunsSubmit.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.getTestRuns = /* istanbul ignore next */_this.getTestRuns.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.requestTestRuns = /* istanbul ignore next */_this.requestTestRuns.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.handleChange = /* istanbul ignore next */_this.handleChange.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(ImportHailstorm, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _state =
+            this.state,findingsData = _state.findingsData,assessmentRuns = _state.assessmentRuns,isRequestTestRuns = _state.isRequestTestRuns,assessmentRunManually = _state.assessmentRunManually;
+            var require = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-error required-star' }, /* istanbul ignore next */'*');
+            var testRunSelect = isRequestTestRuns ?
+            assessmentRuns ?
+            assessmentRuns.length > 0 ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Select2.default, /* istanbul ignore next */{ id: 'assessment_run_id', updateValue: this.handleChange, options: assessmentRuns, value: assessmentRunManually ? 'manual' : findingsData.assessment_run_id }) :
+            'Not assessment run ids' :
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Preloader2.default, /* istanbul ignore next */{ className: 'mini-preloader' }) :
+            null;
+            var form = assessmentRunManually ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                        /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.hailApp'),
+                        require),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Input2.default, /* istanbul ignore next */{
+                            id: 'application_id',
+                            updateValue: this.handleChange,
+                            value: findingsData.application_id,
+                            onBlur: this.getTestRuns,
+                            onKeyPress: this.getTestRunsSubmit }))),
+
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                        /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.assessmentRun'),
+                        require),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Input2.default, /* istanbul ignore next */{
+                            id: 'assessment_run_id',
+                            updateValue: this.handleChange,
+                            value: findingsData.assessment_run_id })))) :
+
+
+
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                        /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.hailApp'),
+                        require),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Input2.default, /* istanbul ignore next */{
+                            id: 'application_id',
+                            updateValue: this.handleChange,
+                            value: findingsData.application_id,
+                            onBlur: this.getTestRuns,
+                            onKeyPress: this.getTestRunsSubmit }))),
+
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null,
+                        /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.assessment'),
+                        require),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Input2.default, /* istanbul ignore next */{
+                            id: 'assessment_id',
+                            updateValue: this.handleChange,
+                            value: findingsData.assessment_id,
+                            onBlur: this.getTestRuns,
+                            onKeyPress: this.getTestRunsSubmit }))),
+
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.assessmentRun')),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                        testRunSelect)));
+
+
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null, /* istanbul ignore next */' '),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Radio2.default, /* istanbul ignore next */{
+                                id: 'assessmentRunManually',
+                                updateValue: this.updateAssessmentRunManually,
+                                value: assessmentRunManually,
+                                radio: [{ title: 'Select from dropdown', value: false }, { title: 'Enter Manually', value: true }] }))),
+
+
+
+                    form));
+
+
+        } }, { key: 'updateAssessmentRunManually', value: function updateAssessmentRunManually(
+        key, value) {/* istanbul ignore next */var
+            findingsData = this.state.findingsData;
+            var status = /* istanbul ignore next */void 0; /* istanbul ignore next */var
+            updateStatus = this.props.updateStatus;
+            this.setState({ assessmentRunManually: value });
+            if (value) {
+                status = findingsData.application_id.length &&
+                findingsData.assessment_run_id.length > 0;
+            } else {
+                status = findingsData.application_id.length &&
+                findingsData.assessment_id.length &&
+                findingsData.assessment_run_id.length;
+            }
+            updateStatus(status);
+        } }, { key: 'getTestRunsSubmit', value: function getTestRunsSubmit(
+        value) {
+            if (value === 13) {
+                this.requestTestRuns();
+            }
+        } }, { key: 'getTestRuns', value: function getTestRuns()
+        {
+            this.requestTestRuns();
+        } }, { key: 'requestTestRuns', value: function requestTestRuns()
+        {
+            var findingsData = this.state.findingsData;
+            var isRequestTestRuns = /* istanbul ignore next */void 0;
+            if (findingsData.application_id.length &&
+            findingsData.assessment_id.length) {
+                isRequestTestRuns = true;
+                /* istanbul ignore next */_Actions.TestDetailsActions.getAssessmentRuns(findingsData);
+            } else {
+                isRequestTestRuns = false;
+            }
+            this.setState({ isRequestTestRuns: isRequestTestRuns });
+        } }, { key: 'handleChange', value: function handleChange(
+        id, value, type) {/* istanbul ignore next */var _state2 =
+            this.state,findingsData = _state2.findingsData,assessmentRunManually = _state2.assessmentRunManually;
+            var status = /* istanbul ignore next */void 0; /* istanbul ignore next */var _props =
+            this.props,updateStatus = _props.updateStatus,updateValue = _props.updateValue;
+            findingsData[id] = value;
+            if (assessmentRunManually) {
+                status = findingsData.assessment_run_id.length > 0;
+            } else {
+                status = findingsData.application_id.length &&
+                findingsData.assessment_id.length &&
+                findingsData.assessment_run_id.length;
+            }
+            updateStatus(status);
+            updateValue(findingsData);
+            this.setState({
+                findingsData: findingsData });
+
+        } }, { key: '_listenTestDetailsStore', value: function _listenTestDetailsStore(
+        event, data) {
+            switch (event) {
+                case 'AssessmentRunsLoaded':
+                    this.setState({ assessmentRuns: data });
+                    break;}
+
+        } }]);return ImportHailstorm;}(_BaseComponent3.default); /* istanbul ignore next */exports.default = ImportHailstorm;
+
+
+ImportHailstorm.propTypes = {
+    updateStatus: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updateValue: /* istanbul ignore next */_react2.default.PropTypes.func,
+    runId: /* istanbul ignore next */_react2.default.PropTypes.string };

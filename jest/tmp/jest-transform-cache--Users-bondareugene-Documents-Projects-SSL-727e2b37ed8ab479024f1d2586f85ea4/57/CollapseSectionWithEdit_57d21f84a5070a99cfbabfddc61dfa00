@@ -1,0 +1,43 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+CollapseSectionWithEdit;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);var /* istanbul ignore next */_reactSanfona = require('react-sanfona');var /* istanbul ignore next */_ValidationMessage = require('../../../ValidationMessage/ValidationMessage'); /* istanbul ignore next */var _ValidationMessage2 = _interopRequireDefault(_ValidationMessage);var /* istanbul ignore next */_index = require('../../../Elements/Textarea/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function CollapseSectionWithEdit( /* istanbul ignore next */_ref) {/* istanbul ignore next */var title = _ref.title,value = _ref.value,isOpen = _ref.isOpen,validation = _ref.validation,onChange = _ref.onChange,id = _ref.id;
+    function getValidationMessage() {
+        if (!validation) {
+            return null;
+        }
+
+        return validation[id];
+    }
+    function isFieldValid() {
+        return !getValidationMessage(id);
+    }
+    var slug = isOpen ? 1 : 0;
+    var accordionClassName = /* istanbul ignore next */(0, _classnames2.default)({
+        'error-input': !isFieldValid });
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 1 },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ className: accordionClassName, title: title, slug: slug },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fb-expand-content' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: id, updateValue: onChange, value: value }),
+                    !isFieldValid &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ValidationMessage2.default, /* istanbul ignore next */{ validationMessage: getValidationMessage() })))));
+
+
+
+
+
+}
+
+CollapseSectionWithEdit.propTypes = {
+    id: /* istanbul ignore next */_react2.default.PropTypes.string,
+    title: /* istanbul ignore next */_react2.default.PropTypes.string,
+    value: /* istanbul ignore next */_react2.default.PropTypes.string,
+    isOpen: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object };

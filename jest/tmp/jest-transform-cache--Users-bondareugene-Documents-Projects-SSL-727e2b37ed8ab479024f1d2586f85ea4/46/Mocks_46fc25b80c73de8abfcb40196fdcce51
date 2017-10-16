@@ -1,0 +1,13 @@
+/* istanbul ignore next */'use strict';
+
+/* istanbul ignore next */jest.mock('../../../../../Models/Session/api', function () {
+    return {
+        updatePassword: jest.fn(function () {
+            return Promise.resolve({
+                json: function /* istanbul ignore next */json() {
+                    return getUpdatePasswordResult;
+                } });
+
+        }) };
+
+});var getUpdatePasswordResult = { errors: [] };

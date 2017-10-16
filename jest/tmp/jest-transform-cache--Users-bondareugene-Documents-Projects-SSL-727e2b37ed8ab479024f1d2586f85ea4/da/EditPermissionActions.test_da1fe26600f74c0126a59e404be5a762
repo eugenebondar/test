@@ -1,0 +1,221 @@
+/* istanbul ignore next */'use strict';var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_Mocks = require('./Mocks');
+var /* istanbul ignore next */_FilterWithoutLimit = require('../../../Utils/FilterWithoutLimit'); /* istanbul ignore next */var _FilterWithoutLimit2 = _interopRequireDefault(_FilterWithoutLimit);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('EditPermissionActions', function () {
+    jest.useFakeTimers();
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
+    var editPermissionActions = require('./../EditPermissionActions').default;
+    var permissionApi = /* istanbul ignore next */require('../../../Models/Permisssion/api');
+    var testApi = /* istanbul ignore next */require('../../../Models/Tests/api');
+    var usersApi = /* istanbul ignore next */require('../../../Models/Users/api');
+    var groupsApi = /* istanbul ignore next */require('../../../Models/Groups/api');
+
+    var rethrowErrorCallback = function rethrowErrorCallback(error) {
+        if (error instanceof Error) {
+            throw error;
+        }
+        throw new Error(error);
+    };
+
+    describe('save action', function () {
+        var resourceId = 'some-unique-id';
+        var resourceType = 'test';
+        var permissions = [];
+        var isCurrentUserStaff = true;
+
+        var putByResourceTypeAndIdResponse = 'putByResourceTypeAndIdResponse';
+
+        var executeSave = function executeSave( /* istanbul ignore next */_ref) {/* istanbul ignore next */var resourceId = _ref.resourceId,resourceType = _ref.resourceType,permissions = _ref.permissions;
+            editPermissionActions.save({ resourceId: resourceId, resourceType: resourceType, permissions: permissions, isCurrentUserStaff: isCurrentUserStaff });
+            editPermissionActions.save.completed = jest.fn(function () {
+            });
+            editPermissionActions.save.failed = jest.fn(function () {
+            });
+        };
+
+        describe('when ends with success', function () {
+            beforeEach(function () {
+                permissionApi.putByResourceTypeAndId = jest.fn(function () /* istanbul ignore next */{return Promise.resolve(putByResourceTypeAndIdResponse);});
+                executeSave({ resourceId: resourceId, resourceType: resourceType, permissions: permissions, isCurrentUserStaff: isCurrentUserStaff });
+            });
+
+            it('fetches data from api.putByResouceTypeAndId', function () {
+                jest.runAllTimers();
+                expect(permissionApi.putByResourceTypeAndId.mock.calls.length).toBe(1);
+                expect(permissionApi.putByResourceTypeAndId.mock.calls[0]).toEqual([resourceType, resourceId, permissions, isCurrentUserStaff]);
+            });
+
+            it('successful fetch executes `completed` sub action', function () {
+                return new Promise(function (resolve) {
+                    editPermissionActions.save.completed = function (result) {
+                        expect(result).toEqual(putByResourceTypeAndIdResponse); //it's exact response of permissionApi.putByResourceTypeAndId method
+                        resolve();
+                    };
+                    jest.runAllTimers();
+                });
+            });
+
+            it('not successful fetch executes `failed` sub action', function () {
+                permissionApi.putByResourceTypeAndId = jest.fn(function () /* istanbul ignore next */{return Promise.reject();});
+
+                return new Promise(function (resolve) {
+                    editPermissionActions.save.failed = function () /* istanbul ignore next */{return resolve();};
+                    jest.runAllTimers();
+                });
+            });
+        });
+    });
+
+    describe('openDialog executed with example data', function () {
+        var resourceId = 'some-unique-id';
+        var resourceType = 'test';
+
+        describe('and with `isCurrentUserStaff = true`', function () {
+            var isCurrentUserStaff = true;
+
+            beforeEach(function () {
+                permissionApi.fetchByResourceTypeAndId = jest.fn(function () /* istanbul ignore next */{return Promise.resolve([]);});
+                testApi.fetchTestDetails.mockClear();
+                usersApi.fetchUsers.mockClear();
+                groupsApi.fetchGroups.mockClear();
+                editPermissionActions.openDialog({ resourceId: resourceId, resourceType: resourceType, isCurrentUserStaff: isCurrentUserStaff });
+            });
+
+            it('fetches data from API', function () {
+                jest.runAllTimers();
+                expect(permissionApi.fetchByResourceTypeAndId.mock.calls.length).toBe(1);
+                expect(permissionApi.fetchByResourceTypeAndId.mock.calls[0]).toEqual([resourceType, resourceId, isCurrentUserStaff]);
+
+                expect(testApi.fetchTestDetails.mock.calls.length).toBe(1);
+                expect(testApi.fetchTestDetails.mock.calls[0]).toEqual([resourceId, isCurrentUserStaff]);
+
+                expect(groupsApi.fetchGroups.mock.calls.length).toBe(1);
+                expect(groupsApi.fetchGroups.mock.calls[0][1]).toEqual(isCurrentUserStaff);
+
+                expect(usersApi.fetchUsers.mock.calls.length).toBe(1);
+                expect(usersApi.fetchUsers.mock.calls[0][0]).toEqual({
+                    filter: /* istanbul ignore next */_extends({
+                        user_type: 'staff' },
+                    /* istanbul ignore next */_FilterWithoutLimit2.default.filter) });
+
+
+            });
+
+            it('successful fetch executes `completed` sub action', function () {
+                return new Promise(function (resolve) {
+                    editPermissionActions.openDialog.failed = rethrowErrorCallback;
+                    editPermissionActions.openDialog.completed = function (result) {
+                        expect(result).toBeTruthy();
+                        expect(result.permissions).toBeInstanceOf(Array);
+                        expect(result.permittees).toBeInstanceOf(Array);
+                        resolve();
+                    };
+
+                    jest.runAllTimers();
+                });
+            });
+
+            it('not successful fetch executes `failed` sub action', function () {
+                permissionApi.fetchByResourceTypeAndId = jest.fn(function () /* istanbul ignore next */{return Promise.reject();});
+                return new Promise(function (resolve) {
+                    editPermissionActions.openDialog.failed = function () /* istanbul ignore next */{return resolve();};
+                    editPermissionActions.openDialog.completed = function () {
+                        throw new Error('Completed sub action should not be executed');
+                    };
+                    jest.runAllTimers();
+                });
+            });
+
+            it('fetches data from API using correct arguments', function () {
+                return new Promise(function (resolve) {
+                    editPermissionActions.openDialog.failed = rethrowErrorCallback;
+                    editPermissionActions.openDialog.completed = function () {
+                        expect(permissionApi.fetchByResourceTypeAndId.mock.calls.length).toBe(1);
+                        expect(permissionApi.fetchByResourceTypeAndId.mock.calls[0]).toEqual([resourceType, resourceId, isCurrentUserStaff]);
+
+                        expect(testApi.fetchTestDetails.mock.calls.length).toBe(1);
+                        expect(testApi.fetchTestDetails.mock.calls[0]).toEqual([resourceId, isCurrentUserStaff]);
+
+                        expect(groupsApi.fetchGroups.mock.calls.length).toBe(2);
+                        expect(groupsApi.fetchGroups.mock.calls[0]).toEqual([{
+                            filter: /* istanbul ignore next */_extends({
+                                group_type: 'staff' },
+                            /* istanbul ignore next */_FilterWithoutLimit2.default.filter) },
+
+                        isCurrentUserStaff]);
+                        expect(groupsApi.fetchGroups.mock.calls[1]).toEqual([{
+                            filter: /* istanbul ignore next */_extends({
+                                group_type: 'customer',
+                                organization_id: /* istanbul ignore next */_Mocks.testDetails.organization_id },
+                            /* istanbul ignore next */_FilterWithoutLimit2.default.filter) },
+
+                        isCurrentUserStaff]);
+
+                        expect(usersApi.fetchUsers.mock.calls.length).toBe(2);
+                        expect(usersApi.fetchUsers.mock.calls[0]).toEqual([{
+                            filter: /* istanbul ignore next */_extends({
+                                user_type: 'staff' },
+                            /* istanbul ignore next */_FilterWithoutLimit2.default.filter) }]);
+
+
+                        expect(usersApi.fetchUsers.mock.calls[1]).toEqual([{
+                            filter: /* istanbul ignore next */_extends({
+                                user_type: 'customer',
+                                organization_id: /* istanbul ignore next */_Mocks.testDetails.organization_id },
+                            /* istanbul ignore next */_FilterWithoutLimit2.default.filter) }]);
+
+
+                        resolve();
+                    };
+                    jest.runAllTimers();
+                });
+            });
+        });
+
+        describe('having `isCurrentUserStaff = false`', function () {
+            var isCurrentUserStaff = false;
+
+            beforeEach(function () {
+                testApi.fetchTestDetails.mockClear();
+                usersApi.fetchUsers.mockClear();
+                groupsApi.fetchGroups.mockClear();
+                permissionApi.fetchByResourceTypeAndId = jest.fn(function () /* istanbul ignore next */{return Promise.resolve([]);});
+                editPermissionActions.openDialog({ resourceId: resourceId, resourceType: resourceType, isCurrentUserStaff: isCurrentUserStaff });
+            });
+
+            it('fetches data from API using correct arguments', function () {
+                return new Promise(function (resolve) {
+                    editPermissionActions.openDialog.failed = rethrowErrorCallback;
+                    editPermissionActions.openDialog.completed = function () {
+                        expect(permissionApi.fetchByResourceTypeAndId.mock.calls.length).toBe(1);
+                        expect(permissionApi.fetchByResourceTypeAndId.mock.calls[0]).toEqual([resourceType, resourceId, isCurrentUserStaff]);
+
+                        expect(testApi.fetchTestDetails.mock.calls.length).toBe(1);
+                        expect(testApi.fetchTestDetails.mock.calls[0]).toEqual([resourceId, isCurrentUserStaff]);
+
+                        expect(groupsApi.fetchGroups.mock.calls.length).toBe(1);
+                        expect(groupsApi.fetchGroups.mock.calls[0]).toEqual([{
+                            filter: /* istanbul ignore next */_extends({
+                                group_type: 'customer',
+                                organization_id: /* istanbul ignore next */_Mocks.testDetails.organization_id },
+                            /* istanbul ignore next */_FilterWithoutLimit2.default.filter) },
+
+                        isCurrentUserStaff]);
+
+                        expect(usersApi.fetchUsers.mock.calls.length).toBe(1);
+                        expect(usersApi.fetchUsers.mock.calls[0][0]).toEqual({
+                            filter: /* istanbul ignore next */_extends({
+                                user_type: 'customer',
+                                organization_id: /* istanbul ignore next */_Mocks.testDetails.organization_id },
+                            /* istanbul ignore next */_FilterWithoutLimit2.default.filter) });
+
+
+                        resolve();
+                    };
+                    jest.runAllTimers();
+                });
+            });
+        });
+    });
+});

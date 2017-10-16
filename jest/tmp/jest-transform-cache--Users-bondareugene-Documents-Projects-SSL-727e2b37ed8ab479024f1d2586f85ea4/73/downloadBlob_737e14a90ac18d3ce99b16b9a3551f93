@@ -1,0 +1,10 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = downloadBlob;function downloadBlob(url, filename) {
+    var link = window.document.createElement('a');
+
+    link.href = url;
+    link.download = filename;
+
+    var clickEvent = new MouseEvent('click');
+
+    link.dispatchEvent(clickEvent);
+}

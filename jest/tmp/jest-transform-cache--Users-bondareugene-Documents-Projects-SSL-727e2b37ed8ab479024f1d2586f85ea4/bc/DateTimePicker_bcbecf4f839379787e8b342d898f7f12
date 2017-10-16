@@ -1,0 +1,36 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_moment = require('moment'); /* istanbul ignore next */var _moment2 = _interopRequireDefault(_moment);
+var /* istanbul ignore next */_reactDatetime = require('react-datetime'); /* istanbul ignore next */var _reactDatetime2 = _interopRequireDefault(_reactDatetime);
+var /* istanbul ignore next */_DateFormats = require('../../Utils/DateFormats'); /* istanbul ignore next */var _DateFormats2 = _interopRequireDefault(_DateFormats);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * It's a wrapper over 'react-datetime'. It ensures that I/O value is a String rather than instance of MomentJs
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */
+function DateTimePicker( /* istanbul ignore next */_ref) {/* istanbul ignore next */var value = _ref.value,_onChange = _ref.onChange,restOfProps = _objectWithoutProperties(_ref, ['value', 'onChange']);
+    return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactDatetime2.default, /* istanbul ignore next */_extends({ value: convertDateStringToMoment(value),
+            onChange: function /* istanbul ignore next */onChange(value) /* istanbul ignore next */{return _onChange(convertMomentToDateString(value));} },
+        restOfProps)));
+
+} /* istanbul ignore next */exports.default = DateTimePicker;
+
+DateTimePicker.propTypes = /* istanbul ignore next */_extends({},
+/* istanbul ignore next */_reactDatetime2.default.propTypes, {
+    value: /* istanbul ignore next */_react2.default.PropTypes.string,
+    /** callback where first argument is value of <String> type */
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func });
+
+
+/**
+                                                                            * @param {string} date
+                                                                            * @returns {moment}
+                                                                            */
+function convertDateStringToMoment(date) {
+    return date && date !== '' ? /* istanbul ignore next */(0, _moment2.default)(date, /* istanbul ignore next */_DateFormats2.default.sourceShortDate) : undefined;
+}
+
+/**
+   * @param {moment} momentDate
+   */
+function convertMomentToDateString(momentDate) {
+    return momentDate.format( /* istanbul ignore next */_DateFormats2.default.sourceShortDate);
+}

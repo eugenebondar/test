@@ -1,0 +1,59 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = undefined;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_DropdownWithScroll = require('../../../ApocReactDropdown/DropdownWithScroll');
+var /* istanbul ignore next */_DropdownButton = require('../../../ApocReactDropdown/DropdownButton'); /* istanbul ignore next */var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
+var /* istanbul ignore next */_FindingFormField = require('./FindingFormField'); /* istanbul ignore next */var _FindingFormField2 = _interopRequireDefault(_FindingFormField);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+function FindingDropdown( /* istanbul ignore next */_ref)
+
+
+
+
+
+
+
+
+
+{/* istanbul ignore next */var className = _ref.className,label = _ref.label,fields = _ref.fields,fieldName = _ref.fieldName,options = _ref.options,_ref$isRequired = _ref.isRequired,isRequired = _ref$isRequired === undefined ? false : _ref$isRequired,_onChange = _ref.onChange,_ref$children = _ref.children,children = _ref$children === undefined ? null : _ref$children,validation = _ref.validation;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                label: label,
+                id: fieldName,
+                validation: validation,
+                isRequired: isRequired,
+                className: /* istanbul ignore next */(0, _classnames2.default)('fd__input', /* istanbul ignore next */_defineProperty({}, className, className)) },
+
+            children,
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownWithScroll.DropdownWithScroll, /* istanbul ignore next */{
+                    key: fields[fieldName],
+                    button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null),
+                    onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return _onChange(fieldName, e.value);},
+                    name: 'dropdown' },
+
+                options.map(function (option, i) {
+                    return (
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                            key: i,
+                            value: option.value,
+                            label: option.label,
+                            selected: option.value === fields[fieldName] }));
+
+
+                }))));
+
+
+
+} /* istanbul ignore next */exports.default = FindingDropdown;
+
+FindingDropdown.propTypes = {
+    className: /* istanbul ignore next */_react2.default.PropTypes.string,
+    fieldName: /* istanbul ignore next */_react2.default.PropTypes.string,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object,
+    isRequired: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    children: /* istanbul ignore next */_react2.default.PropTypes.node,
+    label: /* istanbul ignore next */_react2.default.PropTypes.string,
+    options: /* istanbul ignore next */_react2.default.PropTypes.array };

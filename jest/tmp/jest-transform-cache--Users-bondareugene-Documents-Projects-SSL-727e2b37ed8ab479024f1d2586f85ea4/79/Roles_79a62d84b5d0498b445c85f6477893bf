@@ -1,0 +1,94 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_index = require('../../Shared/Preloader/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_index3 = require('../../Shared/ConfirmationDialog/index'); /* istanbul ignore next */var _index4 = _interopRequireDefault(_index3);
+var /* istanbul ignore next */_RoleDialogContainer = require('./RoleDialog/RoleDialogContainer'); /* istanbul ignore next */var _RoleDialogContainer2 = _interopRequireDefault(_RoleDialogContainer);
+var /* istanbul ignore next */_RolesTable = require('./RolesTable'); /* istanbul ignore next */var _RolesTable2 = _interopRequireDefault(_RolesTable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+Roles = function (_React$PureComponent) {_inherits(Roles, _React$PureComponent);
+    function /* istanbul ignore next */Roles() {/* istanbul ignore next */_classCallCheck(this, Roles);var _this = _possibleConstructorReturn(this, (Roles.__proto__ || Object.getPrototypeOf(Roles)).call(this));
+
+        /* istanbul ignore next */_this.actionTrigger = /* istanbul ignore next */ /* istanbul ignore next */_this.actionTrigger.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(Roles, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;
+            if (this.props.isLoading) {
+                return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */null));
+            }
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'roles site-content' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RolesTable2.default, /* istanbul ignore next */{
+                        data: this.props.roles,
+                        actionsTrigger: this.actionTrigger,
+                        onAddRole: function /* istanbul ignore next */onAddRole() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onOpenRoleDialog( /* istanbul ignore next */_RoleDialogContainer.ROLE_DIALOG_MODE.NEW));},
+                        paginationProps: this.props.paginationProps }),
+
+                    this.props.roleDialogConfig &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RoleDialogContainer2.default, /* istanbul ignore next */_extends({},
+                    this.props.roleDialogConfig, {
+                        onClose: this.props.onCloseRoleDialog })),
+
+
+                    this.props.confirmationDialogConfig &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index4.default, /* istanbul ignore next */_extends({},
+                    this.props.confirmationDialogConfig,
+                    this.getPropsForConfirmationDialog(), {
+                        submit: this.props.onRoleDelete,
+                        cancel: this.props.onCloseConfirmationDialog }))));
+
+
+
+
+        } }, { key: 'actionTrigger', value: function actionTrigger(
+
+        actionName, roleId) {/* istanbul ignore next */var _props =
+            this.props,onOpenRoleDialog = _props.onOpenRoleDialog,onOpenConfirmationDialog = _props.onOpenConfirmationDialog;
+            var action = {
+                'editRole': function /* istanbul ignore next */editRole() /* istanbul ignore next */{return onOpenRoleDialog( /* istanbul ignore next */_RoleDialogContainer.ROLE_DIALOG_MODE.EDIT, roleId);},
+                'deleteRole': function /* istanbul ignore next */deleteRole() /* istanbul ignore next */{return onOpenConfirmationDialog(roleId);} }[
+            actionName];
+            action();
+        } }, { key: 'getPropsForConfirmationDialog', value: function getPropsForConfirmationDialog()
+
+        {/* istanbul ignore next */var _this3 = this;
+            var role = this.props.roles.filter(function (role) /* istanbul ignore next */{return role.id === /* istanbul ignore next */_this3.props.confirmationDialogConfig.roleId;})[0];
+            var title =
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                role.user_groups_count > 0 &&
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('roles.dependentUserGroups', { count: role.user_groups_count })),
+                role.users_count > 0 && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('roles.dependentUsers', { count: role.users_count })));
+
+
+            var deleteAllowed = role.users_count + role.user_groups_count === 0;
+            return {
+                title: deleteAllowed ? /* istanbul ignore next */(0, _counterpart2.default)('general.deleteConfirmationTitle') : title,
+                isNoAction: !deleteAllowed };
+
+        } }]);return Roles;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = Roles;
+
+
+Roles.propTypes = {
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    roles: /* istanbul ignore next */_react2.default.PropTypes.array,
+    confirmationDialogConfig: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        roleId: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        returnData: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        className: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }),
+
+    roleDialogConfig: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        roleId: /* istanbul ignore next */_react2.default.PropTypes.string,
+        mode: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }),
+
+    paginationProps: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        currentPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        itemsPerPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        totalItems: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+        itemsName: /* istanbul ignore next */_react2.default.PropTypes.string }).
+    isRequired,
+    onRoleDelete: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onOpenRoleDialog: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onCloseRoleDialog: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onOpenConfirmationDialog: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onCloseConfirmationDialog: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };

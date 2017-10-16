@@ -1,0 +1,141 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.defaultState = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_UserDialogActions = require('./UserDialogActions'); /* istanbul ignore next */var _UserDialogActions2 = _interopRequireDefault(_UserDialogActions);
+
+var /* istanbul ignore next */_UserForm = require('./UserForm'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var defaultFields = {
+    first_name: '',
+    last_name: '',
+    email: '',
+    organization_id: '',
+    user_type: /* istanbul ignore next */_UserForm.USER_TYPE.CUSTOMER,
+    avatar: '',
+    role_id: '' };
+
+
+var defaultState = /* istanbul ignore next */exports.defaultState = {
+    isSaving: false,
+    isLoading: true,
+    isError: false,
+    fields: defaultFields,
+    organizationsList: null,
+    roles: null,
+    validation: null }; /* istanbul ignore next */var
+
+
+UserDialogStore = function (_Reflux$Store) {_inherits(UserDialogStore, _Reflux$Store);
+
+    function /* istanbul ignore next */UserDialogStore() {/* istanbul ignore next */_classCallCheck(this, UserDialogStore);var _this = _possibleConstructorReturn(this, (UserDialogStore.__proto__ || Object.getPrototypeOf(UserDialogStore)).call(this));
+
+
+        /* istanbul ignore next */_this.listenables = /* istanbul ignore next */_UserDialogActions2.default;
+
+        /* istanbul ignore next */_this.state = /* istanbul ignore next */_extends({}, defaultState); /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * @listens UserDialogActions.initNew.completed
+       */_createClass(UserDialogStore, [{ key: 'onInitNewCompleted', value: function onInitNewCompleted(_ref)
+        {/* istanbul ignore next */var organizationsList = _ref.organizationsList,roles = _ref.roles;
+            var organization_id = organizationsList.length > 0 ? organizationsList[0].id : '';
+            var rolesList = roles[this.state.fields.user_type].
+            filter(function (role) /* istanbul ignore next */{return !role.organization_id || role.organization_id === organization_id;});
+            var role_id = rolesList.length > 0 ? rolesList[0].id : '';
+            this.setState({
+                organizationsList: organizationsList,
+                roles: roles,
+                fields: /* istanbul ignore next */_extends({}, this.state.fields, { organization_id: organization_id, role_id: role_id }),
+                isLoading: false });
+
+        }
+
+        /**
+           * @listens UserDialogActions.initNew.failed
+           */ }, { key: 'onInitNewFailed', value: function onInitNewFailed()
+        {
+            this.setState({
+                isLoading: false,
+                isError: true });
+
+        }
+
+        /**
+           * @listens UserDialogActions.initEdit.completed
+           */ }, { key: 'onInitEditCompleted', value: function onInitEditCompleted(_ref2)
+        {/* istanbul ignore next */var organizationsList = _ref2.organizationsList,roles = _ref2.roles,user = _ref2.user;
+            this.setState({
+                organizationsList: organizationsList,
+                roles: roles,
+                fields: user,
+                isLoading: false });
+
+        }
+
+        /**
+           * @listens UserDialogActions.initEdit.failed
+           */ }, { key: 'onInitEditFailed', value: function onInitEditFailed()
+        {
+            this.setState({
+                isLoading: false,
+                isError: true });
+
+        }
+
+        /**
+           * @listens UserDialogActions.createUser
+           */ }, { key: 'onCreateUser', value: function onCreateUser()
+        {
+            this.setState({ isSaving: true });
+        }
+
+        /**
+           * @listens UserDialogActions.createUser.completed
+           */ }, { key: 'onCreateUserCompleted', value: function onCreateUserCompleted()
+        {
+            this.setState({ isSaving: false });
+        }
+
+        /**
+           * @listens UserDialogActions.createUser.failed
+           */ }, { key: 'onCreateUserFailed', value: function onCreateUserFailed(_ref3)
+        {/* istanbul ignore next */var errors = _ref3.errors;
+            this.setState({
+                isSaving: false,
+                validation: errors });
+
+        }
+
+        /**
+           * @listens UserDialogActions.editUser
+           */ }, { key: 'onEditUser', value: function onEditUser()
+        {
+            this.setState({ isSaving: true });
+        }
+
+        /**
+           * @listens AssetsGroupDialogActions.editUser.completed
+           */ }, { key: 'onEditUserCompleted', value: function onEditUserCompleted()
+        {
+            this.setState({ isSaving: false });
+        }
+
+        /**
+           * @listens UserDialogActions.editUser.failed
+           */ }, { key: 'onEditUserFailed', value: function onEditUserFailed(_ref4)
+        {/* istanbul ignore next */var errors = _ref4.errors;
+            this.setState({
+                isSaving: false,
+                validation: errors });
+
+        }
+
+        /**
+           * @listens UserDialogActions.destroy
+           */ }, { key: 'onDestroy', value: function onDestroy()
+        {
+            this.setState(defaultState);
+        } }]);return UserDialogStore;}( /* istanbul ignore next */_reflux2.default.Store); /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */_reflux2.default.initStore(UserDialogStore);

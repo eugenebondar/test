@@ -1,0 +1,28 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.actions = exports.columnConfig = undefined;var /* istanbul ignore next */_reactTranslateComponent = require('react-translate-component');
+
+var columnConfig = /* istanbul ignore next */exports.columnConfig = [{
+    source: 'name',
+    name: 'tableCell.name',
+    width: '250',
+    type: 'text' },
+{
+    source: 'organization_name',
+    name: 'tableCell.customer',
+    width: '250',
+    type: 'text' },
+{
+    source: 'role_type',
+    name: 'tableCell.roleType',
+    width: '75',
+    type: 'text' },
+{
+    source: 'permissions',
+    name: 'tableCell.permissions',
+    width: '250',
+    type: 'list',
+    translate: 'roles.' }];
+
+
+var actions = /* istanbul ignore next */exports.actions = [
+{ value: 'editRole', title: /* istanbul ignore next */(0, _reactTranslateComponent.translate)('actions.editRole'), icon: 'sc-icon-pencil' },
+{ value: 'deleteRole', title: /* istanbul ignore next */(0, _reactTranslateComponent.translate)('actions.deleteRole'), icon: 'sc-icon-trash-closed' }];

@@ -1,0 +1,87 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_DashboardActions = require('../../../../Stores/Dashboard/DashboardActions');
+
+var /* istanbul ignore next */_Array = require('../../Elements/Cells/Array'); /* istanbul ignore next */var _Array2 = _interopRequireDefault(_Array);
+var /* istanbul ignore next */_Permissions = require('../../Elements/Cells/Permissions'); /* istanbul ignore next */var _Permissions2 = _interopRequireDefault(_Permissions);
+var /* istanbul ignore next */_Reports = require('../../Elements/Cells/Reports'); /* istanbul ignore next */var _Reports2 = _interopRequireDefault(_Reports);
+var /* istanbul ignore next */_Date = require('../../Elements/Cells/Date'); /* istanbul ignore next */var _Date2 = _interopRequireDefault(_Date);
+var /* istanbul ignore next */_LinkTD = require('../../Elements/Cells/LinkTD'); /* istanbul ignore next */var _LinkTD2 = _interopRequireDefault(_LinkTD);
+var /* istanbul ignore next */_ImageLink = require('../../Elements/Cells/ImageLink'); /* istanbul ignore next */var _ImageLink2 = _interopRequireDefault(_ImageLink);
+var /* istanbul ignore next */_Blank = require('../../Elements/Cells/Blank'); /* istanbul ignore next */var _Blank2 = _interopRequireDefault(_Blank);
+var /* istanbul ignore next */_Text = require('../../Elements/Cells/Text'); /* istanbul ignore next */var _Text2 = _interopRequireDefault(_Text);
+var /* istanbul ignore next */_Input = require('../../Elements/Cells/Input'); /* istanbul ignore next */var _Input2 = _interopRequireDefault(_Input);
+var /* istanbul ignore next */_Email = require('../../Elements/Cells/Email'); /* istanbul ignore next */var _Email2 = _interopRequireDefault(_Email);
+var /* istanbul ignore next */_Trigger = require('../../Elements/Cells/Trigger'); /* istanbul ignore next */var _Trigger2 = _interopRequireDefault(_Trigger);
+var /* istanbul ignore next */_Status = require('../../Elements/Cells/Status'); /* istanbul ignore next */var _Status2 = _interopRequireDefault(_Status);
+var /* istanbul ignore next */_Severity = require('../../Elements/Cells/Severity'); /* istanbul ignore next */var _Severity2 = _interopRequireDefault(_Severity);
+var /* istanbul ignore next */_ExternalLink = require('../../Elements/Cells/ExternalLink'); /* istanbul ignore next */var _ExternalLink2 = _interopRequireDefault(_ExternalLink);
+var /* istanbul ignore next */_GroupCount = require('../../Elements/Cells/GroupCount'); /* istanbul ignore next */var _GroupCount2 = _interopRequireDefault(_GroupCount);
+var /* istanbul ignore next */_AttachmentIcon = require('../../Elements/Cells/AttachmentIcon'); /* istanbul ignore next */var _AttachmentIcon2 = _interopRequireDefault(_AttachmentIcon);
+var /* istanbul ignore next */_Translation = require('../../Elements/Cells/Translation'); /* istanbul ignore next */var _Translation2 = _interopRequireDefault(_Translation);
+var /* istanbul ignore next */_ChangesetPreview = require('../../Elements/Cells/ChangesetPreview'); /* istanbul ignore next */var _ChangesetPreview2 = _interopRequireDefault(_ChangesetPreview);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}
+
+var TableTD = /* istanbul ignore next */_react2.default.createClass({ /* istanbul ignore next */displayName: 'TableTD',
+    propTypes: {
+        test: /* istanbul ignore next */_react2.default.PropTypes.object,
+        expansion: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        type: /* istanbul ignore next */_react2.default.PropTypes.string,
+        width: /* istanbul ignore next */_react2.default.PropTypes.string,
+        selectable: /* istanbul ignore next */_react2.default.PropTypes.bool },
+
+    statics: { /* istanbul ignore next */
+        /**
+                                           * Get class object for cells.
+                                           * @static
+                                           * @param {String} cellType.
+                                           * @return {Object} cell class or null.
+                                           */
+        getCell: function getCell(cellType) {
+            var Cell = {
+                'text': /* istanbul ignore next */_Text2.default,
+                'blank': /* istanbul ignore next */_Blank2.default,
+                'link': /* istanbul ignore next */_LinkTD2.default,
+                'imageLink': /* istanbul ignore next */_ImageLink2.default,
+                'severity': /* istanbul ignore next */_Severity2.default,
+                'status': /* istanbul ignore next */_Status2.default,
+                'email': /* istanbul ignore next */_Email2.default,
+                'input': /* istanbul ignore next */_Input2.default,
+                'trigger': /* istanbul ignore next */_Trigger2.default,
+                'reports': /* istanbul ignore next */_Reports2.default,
+                'attachment': /* istanbul ignore next */_AttachmentIcon2.default,
+                'list': /* istanbul ignore next */_Permissions2.default,
+                'array': /* istanbul ignore next */_Array2.default,
+                'date': /* istanbul ignore next */_Date2.default,
+                'external_link': /* istanbul ignore next */_ExternalLink2.default,
+                'group_count': /* istanbul ignore next */_GroupCount2.default,
+                'translation': /* istanbul ignore next */_Translation2.default,
+                'json': /* istanbul ignore next */_ChangesetPreview2.default }[
+            cellType];
+            return typeof Cell === 'undefined' ? null : Cell;
+        } }, /* istanbul ignore next */
+
+    render: function render() {/* istanbul ignore next */var _props =
+        this.props,type = _props.type,width = _props.width,other = _objectWithoutProperties(_props, ['type', 'width']);
+        var style = {
+            width: width !== '' && width ? width + 'px' : '',
+            maxWidth: width !== '' && width ? width + 'px' : '' };
+
+        var Component = this.constructor.getCell(type);
+        return type !== 'hidden' ?
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */{
+                className: this.props.expansion || this.props.selectable ? 'expand-cell' : '',
+                style: style },
+
+            /* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */_extends({}, other, { openChangeStatusPopup: this.openChangeStatusPopup }))) :
+
+        null;
+    }, /* istanbul ignore next */
+    openChangeStatusPopup: function openChangeStatusPopup(value) {
+        /* istanbul ignore next */_DashboardActions.DashboardActions.updateTrigger('openChangeStatusPopup', {
+            id: this.props.test.id,
+            state: value });
+
+    } }); /* istanbul ignore next */exports.default =
+
+
+TableTD;

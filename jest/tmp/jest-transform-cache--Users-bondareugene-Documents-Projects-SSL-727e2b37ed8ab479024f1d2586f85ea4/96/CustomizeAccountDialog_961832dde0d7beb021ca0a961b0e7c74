@@ -1,0 +1,129 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_deepEqual = require('deep-equal'); /* istanbul ignore next */var _deepEqual2 = _interopRequireDefault(_deepEqual);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+
+var /* istanbul ignore next */_LoadingModalDialog = require('../../../Shared/Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+var /* istanbul ignore next */_CustomizeAccountForm = require('./CustomizeAccountForm'); /* istanbul ignore next */var _CustomizeAccountForm2 = _interopRequireDefault(_CustomizeAccountForm);
+
+/* istanbul ignore next */require('./CustomizeAccountDialog.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+CustomizeAccountDialog = function (_React$Component) {_inherits(CustomizeAccountDialog, _React$Component);
+    function /* istanbul ignore next */CustomizeAccountDialog(props) {/* istanbul ignore next */_classCallCheck(this, CustomizeAccountDialog);var _this = _possibleConstructorReturn(this, (CustomizeAccountDialog.__proto__ || Object.getPrototypeOf(CustomizeAccountDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            fields: props.fields,
+            uploadedImages: props.uploadedImages };
+
+
+        /* istanbul ignore next */_this.onChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onChange.bind(_this);
+        /* istanbul ignore next */_this.onImageChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onImageChange.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(CustomizeAccountDialog, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            if (! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.fields, this.props.fields)) {
+                this.setState({
+                    fields: nextProps.fields,
+                    fieldsCache: nextProps.fields });
+
+            }
+            if (! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.uploadedImages, this.props.uploadedImages)) {
+                this.setState({
+                    uploadedImages: nextProps.uploadedImages,
+                    uploadedImagesCache: nextProps.uploadedImages });
+
+            }
+        } }, { key: 'render', value: function render()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingModalDialog2.default, /* istanbul ignore next */{
+                        loading: this.props.isLoading || this.props.isSaving,
+                        isOpen: /* istanbul ignore next */true,
+                        className: /* istanbul ignore next */(0, _classnames2.default)('customize-account-dialog', {
+                            'customize-account-dialog-turned-off': this.state.fields && !this.state.fields.enabled }),
+
+                        header: /* istanbul ignore next */(0, _counterpart2.default)('customers.customize.title'),
+                        footer: this.getDialogFooter() },
+
+                    !this.props.isLoading && !this.props.isError &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CustomizeAccountForm2.default, /* istanbul ignore next */{
+                        fields: this.state.fields,
+                        uploadedImages: this.state.uploadedImages,
+                        onChange: this.onChange,
+                        onImageChange: this.onImageChange,
+                        validation: this.props.validation })));
+
+
+
+
+        } }, { key: 'getDialogFooter', value: function getDialogFooter()
+
+        {/* istanbul ignore next */var _this2 = this;
+            var areFieldsNotChanged = /* istanbul ignore next */(0, _deepEqual2.default)(this.state.fields, this.state.fieldsCache) &&
+            /* istanbul ignore next */(0, _deepEqual2.default)(this.state.uploadedImages, this.state.uploadedImagesCache);
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'cancel-btn sc-btn', onClick: this.props.onClose },
+                        /* istanbul ignore next */(0, _counterpart2.default)('customers.popup.cancel')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                            className: 'sc-btn sc-btn-primary',
+                            onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onSubmit({
+                                        data: /* istanbul ignore next */_this2.state.fields,
+                                        images: /* istanbul ignore next */_this2.state.uploadedImages,
+                                        organizationId: /* istanbul ignore next */_this2.props.organizationId,
+                                        brandingId: /* istanbul ignore next */_this2.state.fields.id }));},
+
+                            disabled: areFieldsNotChanged || this.props.isLoading || this.props.isSaving },
+
+                        /* istanbul ignore next */(0, _counterpart2.default)('general.save'))));
+
+
+
+        } }, { key: 'onChange', value: function onChange(
+
+        updatedField) {
+            this.setState({
+                fields: /* istanbul ignore next */_extends({}, this.state.fields, updatedField) });
+
+        } }, { key: 'onImageChange', value: function onImageChange(
+
+        uploadedImages) {
+            this.setState({
+                uploadedImages: uploadedImages });
+
+        } }]);return CustomizeAccountDialog;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = CustomizeAccountDialog;
+
+
+CustomizeAccountDialog.propTypes = {
+    isError: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object,
+    organizationId: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        enabled: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+        id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        images: /* istanbul ignore next */_react2.default.PropTypes.arrayOf(
+        /* istanbul ignore next */_react2.default.PropTypes.shape({
+            branding_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+            created_at: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+            id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+            image_file: /* istanbul ignore next */_react2.default.PropTypes.shape({
+                url: /* istanbul ignore next */_react2.default.PropTypes.string }).
+            isRequired,
+            image_type: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+            updated_at: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })),
+
+
+        main_color: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }),
+
+    uploadedImages: /* istanbul ignore next */_react2.default.PropTypes.arrayOf(
+    /* istanbul ignore next */_react2.default.PropTypes.shape({
+        image_file: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+        image_type: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })),
+
+
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };

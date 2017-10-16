@@ -1,0 +1,5 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var FILTER_WITHOUT_LIMIT = {
+    filter: { per: Number.MAX_SAFE_INTEGER } }; /* istanbul ignore next */exports.default =
+
+
+FILTER_WITHOUT_LIMIT;

@@ -1,0 +1,37 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */var _enzymeToJson2 = _interopRequireDefault(_enzymeToJson);
+var /* istanbul ignore next */_EditTestAssigneeDialog = require('./EditTestAssigneeDialog'); /* istanbul ignore next */var _EditTestAssigneeDialog2 = _interopRequireDefault(_EditTestAssigneeDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('EditTestAssigneeDialog', function () {
+    describe('with default set of props', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_EditTestAssigneeDialog2.default, /* istanbul ignore next */{
+                isLoading: false,
+                isSaving: false,
+                areFieldsChanged: false,
+                onSubmit: function /* istanbul ignore next */onSubmit() /* istanbul ignore next */{return null;},
+                onClose: function /* istanbul ignore next */onClose() /* istanbul ignore next */{return null;},
+                onChange: function /* istanbul ignore next */onChange() /* istanbul ignore next */{return null;},
+                fields: { assignee_id: 'someId' },
+                testAssigneeListOptions: [{ value: 'value', label: 'label' }] }));
+
+
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

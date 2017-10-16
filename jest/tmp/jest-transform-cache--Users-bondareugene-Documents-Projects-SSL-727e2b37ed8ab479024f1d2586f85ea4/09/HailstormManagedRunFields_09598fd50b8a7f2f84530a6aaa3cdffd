@@ -1,0 +1,112 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_DropdownButton = require('../../../../Shared/ApocReactDropdown/DropdownButton'); /* istanbul ignore next */var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
+var /* istanbul ignore next */_DropdownWithDirectionInsideDialog = require('../../../../Shared/ApocReactDropdown/DropdownWithDirectionInsideDialog'); /* istanbul ignore next */var _DropdownWithDirectionInsideDialog2 = _interopRequireDefault(_DropdownWithDirectionInsideDialog);
+var /* istanbul ignore next */_index = require('../../../../Shared/Preloader/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_FormField = require('../../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_index3 = require('../../../../Shared/Elements/Input/index'); /* istanbul ignore next */var _index4 = _interopRequireDefault(_index3);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+HailstormManagedRunFields = function (_React$Component) {_inherits(HailstormManagedRunFields, _React$Component);
+    function /* istanbul ignore next */HailstormManagedRunFields(props) {/* istanbul ignore next */_classCallCheck(this, HailstormManagedRunFields);var _this = _possibleConstructorReturn(this, (HailstormManagedRunFields.__proto__ || Object.getPrototypeOf(HailstormManagedRunFields)).call(this,
+        props));
+
+        /* istanbul ignore next */_this.ondKeyPress = /* istanbul ignore next */ /* istanbul ignore next */_this.ondKeyPress.bind(_this);
+        /* istanbul ignore next */_this.requestTestRunIfPossible = /* istanbul ignore next */ /* istanbul ignore next */_this.requestTestRunIfPossible.bind(_this);
+        /* istanbul ignore next */_this.checkReadyForRequestRun = /* istanbul ignore next */ /* istanbul ignore next */_this.checkReadyForRequestRun.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(HailstormManagedRunFields, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _this2 = this;
+            var isReadyForRequest = this.checkReadyForRequestRun();
+            var showAssessmentRuns = isReadyForRequest && this.props.assessmentRuns && this.props.assessmentRuns.length > 0;
+            var showAssessmentRunsPreloader = this.props.isAssessmentRunsLoading && isReadyForRequest && !this.props.assessmentRuns;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.hailApp'),
+                            isRequired: /* istanbul ignore next */true },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index4.default, /* istanbul ignore next */{
+                            id: 'application_id',
+                            updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onChange( /* istanbul ignore next */_defineProperty({}, key, value)));},
+                            value: this.props.fields.application_id,
+                            onBlur: this.requestTestRunIfPossible,
+                            onKeyPress: this.ondKeyPress })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.assessment'),
+                            isRequired: /* istanbul ignore next */true },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index4.default, /* istanbul ignore next */{
+                            id: 'assessment_id',
+                            updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onChange( /* istanbul ignore next */_defineProperty({}, key, value)));},
+                            value: this.props.fields.assessment_id,
+                            onBlur: this.requestTestRunIfPossible,
+                            onKeyPress: this.ondKeyPress })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.assessmentRun'),
+                            isRequired: /* istanbul ignore next */true,
+                            isValid: !this.props.assessmentRunsErrorMessage,
+                            validationMessage: this.props.assessmentRunsErrorMessage },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                            showAssessmentRuns &&
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownWithDirectionInsideDialog2.default, /* istanbul ignore next */{
+                                    button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null),
+                                    onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onChange({ assessment_run_id: e.value }));},
+                                    name: 'dropdown' },
+
+                                this.props.assessmentRuns.map(function (run) {
+                                    return (
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                                            key: run,
+                                            label: run,
+                                            value: run,
+                                            isSelected: /* istanbul ignore next */_this2.props.fields.assessment_run_id === run }));
+
+
+                                })),
+
+
+                            showAssessmentRunsPreloader &&
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ className: 'mini-preloader' })))));
+
+
+
+
+
+        } }, { key: 'ondKeyPress', value: function ondKeyPress(
+
+        value) {
+            if (value === 13) {
+                this.requestTestRunIfPossible();
+            }
+        } }, { key: 'requestTestRunIfPossible', value: function requestTestRunIfPossible()
+
+        {
+            var isReadyForRequest = this.checkReadyForRequestRun();
+            if (isReadyForRequest) {
+                this.props.onRequestTestRun(this.props.fields);
+            }
+        } }, { key: 'checkReadyForRequestRun', value: function checkReadyForRequestRun()
+
+        {
+            return Boolean(this.props.fields.application_id.length &&
+            this.props.fields.assessment_id.length);
+        } }]);return HailstormManagedRunFields;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = HailstormManagedRunFields;
+
+
+HailstormManagedRunFields.propTypes = {
+    isAssessmentRunsLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onRequestTestRun: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        application_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        assessment_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        assessment_run_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }).
+    isRequired,
+    assessmentRuns: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired),
+    assessmentRunsErrorMessage: /* istanbul ignore next */_react2.default.PropTypes.string };

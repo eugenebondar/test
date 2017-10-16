@@ -1,0 +1,53 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */var _enzymeToJson2 = _interopRequireDefault(_enzymeToJson);
+var /* istanbul ignore next */_ImportExternalRunDialogContainer = require('./ImportExternalRunDialogContainer'); /* istanbul ignore next */var _ImportExternalRunDialogContainer2 = _interopRequireDefault(_ImportExternalRunDialogContainer);
+
+var /* istanbul ignore next */_ImportForm = require('./ImportForm/ImportForm');
+var /* istanbul ignore next */_ImportHailstorm = require('./ImportForm/ImportHailstorm'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('ImportExternalRunDialog', function () {
+    describe('with default set of props', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ImportExternalRunDialogContainer2.default, /* istanbul ignore next */{
+                onClose: function /* istanbul ignore next */onClose() /* istanbul ignore next */{return null;},
+                runId: 'runId',
+                runDetails: {
+                    customer_name: 'customer_name',
+                    name: 'name',
+                    id_alias: 123123 } }));
+
+
+        });
+
+        it('matches snapshot for managed Hailstorm import', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+        });
+
+        it('matches snapshot for unmanaged Hailstorm import', function () {
+            component.setState({ hailstormType: /* istanbul ignore next */_ImportHailstorm.FORM_TYPE.UN_MANAGED_RUN });
+            expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+        });
+
+        it('matches snapshot for Nessus', function () {
+            component.setState({ importSource: /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.NESSUS });
+            expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+        });
+
+        it('matches snapshot for Checkmarx', function () {
+            component.setState({ importSource: /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.CHECKMARX });
+            expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

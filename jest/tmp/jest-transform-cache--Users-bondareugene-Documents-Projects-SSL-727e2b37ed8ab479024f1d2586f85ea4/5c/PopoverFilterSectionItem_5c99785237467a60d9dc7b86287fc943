@@ -1,0 +1,14 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+PopoverFilterSectionItem;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function PopoverFilterSectionItem(props) {
+
+}
+
+PopoverFilterSectionItem.propTypes = {
+    label: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+    /* istanbul ignore next */_react2.default.PropTypes.string,
+    /* istanbul ignore next */_react2.default.PropTypes.node]),
+
+    value: /* istanbul ignore next */_react2.default.PropTypes.string,
+    checked: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    disabled: /* istanbul ignore next */_react2.default.PropTypes.bool };

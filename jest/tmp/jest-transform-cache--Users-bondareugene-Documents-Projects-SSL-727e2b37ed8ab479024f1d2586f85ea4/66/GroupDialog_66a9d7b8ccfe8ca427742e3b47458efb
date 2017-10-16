@@ -1,0 +1,189 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_UserGroupsStore = require('../../../../Stores/UserGroups/UserGroupsStore'); /* istanbul ignore next */var _UserGroupsStore2 = _interopRequireDefault(_UserGroupsStore);
+var /* istanbul ignore next */_OrganizationsStore = require('../../../../Stores/OrganizationsStore'); /* istanbul ignore next */var _OrganizationsStore2 = _interopRequireDefault(_OrganizationsStore);
+
+var /* istanbul ignore next */_UserGroupsActions = require('../../../../Stores/UserGroups/UserGroupsActions'); /* istanbul ignore next */var _UserGroupsActions2 = _interopRequireDefault(_UserGroupsActions);
+var /* istanbul ignore next */_Actions = require('../../../../Actions');
+
+var /* istanbul ignore next */_BaseComponent2 = require('../../../../Shared/BaseComponent'); /* istanbul ignore next */var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+var /* istanbul ignore next */_GroupForm = require('./GroupForm'); /* istanbul ignore next */var _GroupForm2 = _interopRequireDefault(_GroupForm);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+GroupDialog = function (_BaseComponent) {_inherits(GroupDialog, _BaseComponent);
+    function /* istanbul ignore next */GroupDialog(props) {/* istanbul ignore next */_classCallCheck(this, GroupDialog);var _this = _possibleConstructorReturn(this, (GroupDialog.__proto__ || Object.getPrototypeOf(GroupDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_OrganizationsStore2.default, /* istanbul ignore next */_this._listenOrganizationsStore);
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_UserGroupsStore2.default, /* istanbul ignore next */_this._listenUserGroupsStore);
+
+        /* istanbul ignore next */_this.state = {
+            fields: null,
+            isDisabled: true,
+            users: null,
+            roles: null,
+            validation: null,
+            organizationsList: null };
+
+        /* istanbul ignore next */_this.updateValue = /* istanbul ignore next */_this.updateValue.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.submit = /* istanbul ignore next */_this.submit.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.closeDialog = /* istanbul ignore next */_this.closeDialog.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(GroupDialog, [{ key: 'componentWillMount', value: function componentWillMount()
+
+        {/* istanbul ignore next */var _props =
+            this.props,isEdit = _props.isEdit,id = _props.id;
+            isEdit ? /* istanbul ignore next */_UserGroupsActions2.default.fetchGroup(id) : this.setState({
+                fields: {
+                    name: '',
+                    group_type: 'customer',
+                    organization_id: '',
+                    role_id: '',
+                    user_ids: [] } });
+
+
+            /* istanbul ignore next */_Actions.OrganizationsActions.fetchCustomers({ filter: {} });
+            /* istanbul ignore next */_UserGroupsActions2.default.fetchUsers();
+            /* istanbul ignore next */_UserGroupsActions2.default.fetchListOfRoles();
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var
+            isEdit = this.props.isEdit; /* istanbul ignore next */var _state =
+            this.state,isDisabled = _state.isDisabled,fields = _state.fields,roles = _state.roles,users = _state.users,validation = _state.validation,organizationsList = _state.organizationsList;
+            var _title = isEdit ?
+            this.getTranslate('editGroup') :
+            this.getTranslate('addGroup');
+            var _button = isEdit ?
+            /* istanbul ignore next */(0, _counterpart2.default)('general.save') :
+            /* istanbul ignore next */(0, _counterpart2.default)('general.add');
+            var _dialogFooter =
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'cancel-btn sc-btn', onClick: this.closeDialog },
+                    /* istanbul ignore next */(0, _counterpart2.default)('customers.popup.cancel')),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                        className: 'sc-btn sc-btn-primary',
+                        onClick: this.submit,
+                        disabled: isDisabled },
+
+                    _button));
+
+
+
+            var readyToShowForm = fields && users && roles && organizationsList;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ModalDialog, /* istanbul ignore next */{
+                        isOpen: true,
+                        header: _title,
+                        footer: _dialogFooter,
+                        onOutsideModalClick: this.closeDialog },
+
+                    readyToShowForm &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_GroupForm2.default, /* istanbul ignore next */{
+                        updateValue: this.updateValue,
+                        getTranslate: this.getTranslate,
+                        updateSearch: this.updateSearch,
+                        fields: fields,
+                        isEdit: isEdit,
+                        users: users,
+                        roles: roles,
+                        organizationsList: organizationsList,
+                        validation: validation })));
+
+
+
+
+        } }, { key: 'closeDialog', value: function closeDialog()
+
+        {/* istanbul ignore next */var _props2 =
+            this.props,close = _props2.close,name = _props2.name;
+            close(name);
+        }
+
+        /**
+           * Get translation by passed key.
+           * @param {String} [type] passed key.
+           * @return {String} translation.
+           */ }, { key: 'getTranslate', value: function getTranslate(
+        key) {
+            return (/* istanbul ignore next */(0, _counterpart2.default)('userGroups.' + key));
+        }
+
+        /**
+           * Update fields by key.
+           * @param {String} [key] - field's key
+           * @param {String} [value] - new field value
+           * @config {Function} set fields state.
+           */ }, { key: 'updateValue', value: function updateValue(
+        key, value) {
+            var fields = this.state.fields;
+            fields[key] = value;
+            this.setState({
+                fields: fields,
+                isDisabled: false });
+
+        } }, { key: 'submit', value: function submit()
+
+        {/* istanbul ignore next */var _props3 =
+            this.props,isEdit = _props3.isEdit,id = _props3.id; /* istanbul ignore next */var
+            fields = this.state.fields;
+            this.setState({ validation: null });
+            isEdit ? /* istanbul ignore next */_UserGroupsActions2.default.editGroup(id, { user_group: fields }) : /* istanbul ignore next */_UserGroupsActions2.default.addGroup({ user_group: fields });
+        }
+
+        /**
+           * Listener for UserGroups Store.
+           * @param {String} [event] - event name.
+           * @param {*} [data] - event data.
+           */ }, { key: '_listenUserGroupsStore', value: function _listenUserGroupsStore(
+        event, data) {
+            switch (event) {
+                case 'group':
+                    this.setState({
+                        fields: data });
+
+                    break;
+                case 'groupValidation':
+                    this.setState({
+                        validation: data });
+
+                    break;
+                case 'usersList':
+                    this.setState({
+                        users: data });
+
+                    break;
+                case 'rolesList':
+                    this.setState({
+                        roles: data });
+
+                    break;}
+
+        }
+
+        /**
+           * Listener for ServiceUser Store.
+           * @param {String} [event] - event name.
+           * @param {*} [data] - event data.
+           */ }, { key: '_listenOrganizationsStore', value: function _listenOrganizationsStore(
+        event, data) {
+            switch (event) {
+                case 'customersList':
+                    if (data) {
+                        this.setState({
+                            organizationsList: data.customers.map(function (item) {
+                                return {
+                                    value: item.id,
+                                    name: item.corporation_name };
+
+                            }) });
+
+                    }
+                    break;}
+
+        } }]);return GroupDialog;}(_BaseComponent3.default); /* istanbul ignore next */exports.default = GroupDialog;
+
+
+GroupDialog.propTypes = {
+    permissionsList: /* istanbul ignore next */_react2.default.PropTypes.object,
+    closePopup: /* istanbul ignore next */_react2.default.PropTypes.func,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object };

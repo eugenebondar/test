@@ -1,0 +1,59 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+FormFourthColumn;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_index = require('../../../Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);var /* istanbul ignore next */_FindingFormField = require('./FindingFormField'); /* istanbul ignore next */var _FindingFormField2 = _interopRequireDefault(_FindingFormField);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function FormFourthColumn( /* istanbul ignore next */_ref) {/* istanbul ignore next */var validation = _ref.validation,onChange = _ref.onChange,fields = _ref.fields;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__column' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.cvssBaseScore'),
+                    id: 'cvss_base_score',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'cvss_base_score', updateValue: onChange, value: fields.cvss_base_score })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.cvssTemporalScore'),
+                    id: 'cvss_temporal_score',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'cvss_temporal_score', updateValue: onChange, value: fields.cvss_temporal_score })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.cvssVector'),
+                    id: 'cvss_vector',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'cvss_vector', updateValue: onChange, value: fields.cvss_vector })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.cvssTemporalVector'),
+                    id: 'cvss_temporal_vector',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'cvss_temporal_vector', updateValue: onChange, value: fields.cvss_temporal_vector })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.exploitAvailable'),
+                    id: 'exploit_available',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'exploit_available', updateValue: onChange, value: fields.exploit_available })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.exploitEase'),
+                    id: 'exploit_ease',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'exploit_ease', updateValue: onChange, value: fields.exploit_ease }))));
+
+
+
+}
+
+FormFourthColumn.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func };

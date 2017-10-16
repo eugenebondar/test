@@ -1,0 +1,161 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.QuickTipsActions = exports.TestScheduleEditorActions = exports.UsersActions = exports.RolesActions = exports.ClassificationsActions = exports.UserMenuActions = exports.ExternalRunsActions = exports.TestDetailsActions = exports.SettingsActions = exports.OrganizationsActions = exports.BrandingActions = exports.SessionUserActions = undefined;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_SessionUserActions = require('./Stores/SessionUser/SessionUserActions'); /* istanbul ignore next */var _SessionUserActions2 = _interopRequireDefault(_SessionUserActions);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var BrandingActions = /* istanbul ignore next */_reflux2.default.createActions([
+'editBranding',
+'fetchBranding']);
+
+
+var OrganizationsActions = /* istanbul ignore next */_reflux2.default.createActions([
+'fetchCustomers',
+'fetchCustomer',
+'deleteCustomer',
+'suspendCustomer',
+'unSuspendCustomer',
+'customerSubmitted',
+'getTestAssigneeList',
+'addNewTest',
+'fetchTest',
+'editTest',
+'addTestSettings',
+'getSettingsConfig',
+'getTestCategoriesList',
+'getTestSettings',
+'editCustomer',
+'addCustomer',
+'editBranding']);
+
+
+var SettingsActions = /* istanbul ignore next */_reflux2.default.createActions([
+'getTestCategoriesList',
+'getSettingsConfig']);
+
+
+var TestDetailsActions = /* istanbul ignore next */_reflux2.default.createActions([
+'fetchTestDetails',
+'getFindingDetails',
+'getServiceFindingDetails',
+'editFindingDetails',
+'addFinding',
+'getFindingCategories',
+'fetchFindingTypes',
+'fetchFindingClassification',
+'getFindings',
+'getFindingsCount',
+'updateStatus',
+'requestTest',
+'getAssessmentRuns',
+'updateScheduler',
+'importFile',
+'importReport',
+'multiplyImportDocuments',
+'updateTestInfo',
+'importDocument',
+'deleteAttachment',
+'deleteReport',
+'updateTestComment',
+'importFindings',
+'importNessus',
+'respondTest',
+'updateTrigger',
+'reportDownloadCoverAndTemplate',
+'reportConfigureFilePreview',
+'reportConfigureFileGenerate',
+'reportGenerationErrors']);
+
+
+var ExternalRunsActions = /* istanbul ignore next */_reflux2.default.createActions([
+'getExternalRuns',
+'getExternalFindings',
+'getExternalFindingsCount',
+'includeSelectedAndPublish',
+'excludeSelected',
+'includeSelected',
+'publishSelected',
+'unPublishSelected',
+'includedAll',
+'excludedAll',
+'publishTestRun',
+'unPublishTestRun']);
+
+
+var UserMenuActions = /* istanbul ignore next */_reflux2.default.createActions([
+'update']);
+
+
+var ClassificationsActions = /* istanbul ignore next */_reflux2.default.createActions([
+'fetchCategories',
+'addCategory',
+'deleteCategory',
+'editCategory',
+'fetchClassificationGroup',
+'addClassificationGroup',
+'editClassificationGroup',
+'deleteClassificationGroup',
+'addClassification',
+'deleteClassification',
+'editClassification',
+'fetchClassifications',
+'getClassificationsCount',
+'fetchExpandClassificationGroup',
+'editExpandClassificationGroup',
+'addExpandClassificationGroup',
+'deleteExpandClassificationGroup',
+'removeClassificationGroup',
+'fetchAllClassificationGroups',
+'importClassifications',
+'fetchClassificationsGroups',
+'fetchClassificationsGroupsChildren',
+'addClassificationGroupChild',
+'fetchClassification',
+'removeClassificationGroupChild']);
+
+
+var RolesActions = /* istanbul ignore next */_reflux2.default.createActions([
+'fetchRoles',
+'fetchRoleById',
+'addRole',
+'deleteRole',
+'editRole',
+'fetchPermissionsList',
+'fetchRolesSortedByType']);
+
+
+var UsersActions = /* istanbul ignore next */_reflux2.default.createActions([
+'addUser',
+'fetchUser',
+'fetchUsers',
+'getCustomers',
+'getCurrentCustomer',
+'editCustomer',
+'deleteUser',
+'unLockedUser',
+'suspendUser',
+'unSuspendUser',
+'editUser',
+'changePassword']);
+
+
+var TestScheduleEditorActions = /* istanbul ignore next */_reflux2.default.createActions([
+'update']);
+
+
+var QuickTipsActions = /* istanbul ignore next */_reflux2.default.createActions([
+'getQuickTip',
+'hideQuickTip']); /* istanbul ignore next */exports.
+
+
+
+SessionUserActions = _SessionUserActions2.default; /* istanbul ignore next */exports.
+BrandingActions = BrandingActions; /* istanbul ignore next */exports.
+OrganizationsActions = OrganizationsActions; /* istanbul ignore next */exports.
+SettingsActions = SettingsActions; /* istanbul ignore next */exports.
+TestDetailsActions = TestDetailsActions; /* istanbul ignore next */exports.
+ExternalRunsActions = ExternalRunsActions; /* istanbul ignore next */exports.
+UserMenuActions = UserMenuActions; /* istanbul ignore next */exports.
+ClassificationsActions = ClassificationsActions; /* istanbul ignore next */exports.
+RolesActions = RolesActions; /* istanbul ignore next */exports.
+UsersActions = UsersActions; /* istanbul ignore next */exports.
+TestScheduleEditorActions = TestScheduleEditorActions; /* istanbul ignore next */exports.
+QuickTipsActions = QuickTipsActions;

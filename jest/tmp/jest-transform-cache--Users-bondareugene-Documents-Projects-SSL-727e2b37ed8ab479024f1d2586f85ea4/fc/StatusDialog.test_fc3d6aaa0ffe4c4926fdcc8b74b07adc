@@ -1,0 +1,36 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_StatusDialog = require('./StatusDialog.jsx'); /* istanbul ignore next */var _StatusDialog2 = _interopRequireDefault(_StatusDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('<StatusDialog />', function () {
+  it('should render StatusDialog component', function () {
+    var id = '';
+    var state = 'quied';
+    var close = function close() {};
+
+    var component = /* istanbul ignore next */(0, _enzyme.shallow)(
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_StatusDialog2.default, /* istanbul ignore next */{ id: id, state: state, close: close }));
+
+
+    expect(component).toBeTruthy();
+  });
+
+  it('statuses should be in correct order', function () {
+    var id = '';
+    var state = 'quied';
+    var close = function close() {};
+
+    var component = /* istanbul ignore next */(0, _enzyme.shallow)(
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_StatusDialog2.default, /* istanbul ignore next */{ id: id, state: state, close: close }));
+
+
+    var states = component.find('StateItem');
+    var statesOrder = states.map(function (state) /* istanbul ignore next */{return state.props().value;});
+
+    expect(statesOrder).toEqual(['ready_for_testing',
+    'queued',
+    'waiting_for_info',
+    'in_progress',
+    'completed']);
+  });
+});

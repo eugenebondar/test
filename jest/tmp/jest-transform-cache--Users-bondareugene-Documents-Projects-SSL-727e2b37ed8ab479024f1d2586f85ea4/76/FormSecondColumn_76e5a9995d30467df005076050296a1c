@@ -1,0 +1,199 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_moment = require('moment'); /* istanbul ignore next */var _moment2 = _interopRequireDefault(_moment);
+var /* istanbul ignore next */_reactDatetime = require('react-datetime'); /* istanbul ignore next */var _reactDatetime2 = _interopRequireDefault(_reactDatetime);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_DropdownButton = require('../../../ApocReactDropdown/DropdownButton'); /* istanbul ignore next */var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
+var /* istanbul ignore next */_index = require('../../../Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_DateFormats = require('../../../../Utils/DateFormats'); /* istanbul ignore next */var _DateFormats2 = _interopRequireDefault(_DateFormats);
+var /* istanbul ignore next */_SeverityField = require('../FindingDetails/SeverityField'); /* istanbul ignore next */var _SeverityField2 = _interopRequireDefault(_SeverityField);
+var /* istanbul ignore next */_FindingFormField = require('./FindingFormField'); /* istanbul ignore next */var _FindingFormField2 = _interopRequireDefault(_FindingFormField);
+var /* istanbul ignore next */_FindingDropdown = require('./FindingDropdown'); /* istanbul ignore next */var _FindingDropdown2 = _interopRequireDefault(_FindingDropdown);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var severityList = [
+{ value: 'null', label: 'Inherit' },
+{ value: 'Low', label: 'Low' },
+{ value: 'Medium', label: 'Medium' },
+{ value: 'High', label: 'High' },
+{ value: 'Critical', label: 'Critical' }];
+
+
+var statusList = [
+{ value: 'New', label: 'New' },
+{ value: 'Notified', label: 'Notified' },
+{ value: 'Fixed', label: 'Fixed' }];
+
+
+function FormSecondColumn( /* istanbul ignore next */_ref) {/* istanbul ignore next */var validation = _ref.validation,_onChange = _ref.onChange,fields = _ref.fields,classificationFields = _ref.classificationFields;
+    var yesNoList = [
+    { value: 'yes', label: /* istanbul ignore next */(0, _counterpart2.default)('general.yes') },
+    { value: 'no', label: /* istanbul ignore next */(0, _counterpart2.default)('general.no') }];
+
+    function checkIncludedStatus(value) {
+        if (value) {
+            _onChange('included', true);
+        }
+        _onChange('published', value);
+    }
+
+    function checkPublishedStatus(value) {
+        if (!value) {
+            _onChange('published', false);
+        }
+        _onChange('included', value);
+    }
+
+    function getDateValue(date) {
+        return date && date !== '' ?
+        /* istanbul ignore next */(0, _moment2.default)(date, /* istanbul ignore next */_DateFormats2.default.sourceShortDate).format( /* istanbul ignore next */_DateFormats2.default.shortDate) :
+        '';
+    }
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__column' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__input' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SeverityField2.default, /* istanbul ignore next */{
+                    finding: /* istanbul ignore next */_extends({}, fields, { classification_class_severity: classificationFields.class_severity }),
+                    isService: /* istanbul ignore next */true }),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Dropdown, /* istanbul ignore next */{
+                        button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null),
+                        onChange: function /* istanbul ignore next */onChange(e) {
+                            var value = e.value === 'null' ? null : e.value;
+                            _onChange('severity', value);
+                            _onChange('finding_severity', value);
+                        },
+                        name: 'dropdown' },
+
+                    severityList.map(function (option, i) {
+                        return (
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                                key: i,
+                                value: option.value,
+                                label: option.label,
+                                selected: option.value === fields.severity + '' }));
+
+
+                    }))),
+
+
+            fields.finding_severity &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.severity_reason'),
+                    id: 'severity_reason',
+                    validation: validation,
+                    isRequired: /* istanbul ignore next */true },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'severity_reason', updateValue: _onChange, value: fields.severity_reason })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.riskScore'),
+                    id: 'score',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{ id: 'score', updateValue: _onChange, value: fields.score })),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.whenFound'),
+                    id: 'found_date',
+                    validation: validation,
+                    isRequired: /* istanbul ignore next */true },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactDatetime2.default, /* istanbul ignore next */{
+                    className: 'dt__wrap dt__only-date',
+                    closeOnSelect: /* istanbul ignore next */true,
+                    value: getDateValue(fields.found_date),
+                    inputProps: { readOnly: true },
+                    isValidDate: checkIfDateIsValid,
+                    onChange: function /* istanbul ignore next */onChange(value) /* istanbul ignore next */{return _onChange('found_date', /* istanbul ignore next */(0, _moment2.default)(value).format( /* istanbul ignore next */_DateFormats2.default.shortDate));} })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('findings.fixDate'),
+                    id: 'fixed_date',
+                    validation: validation },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactDatetime2.default, /* istanbul ignore next */{
+                    className: 'dt__wrap dt__only-date',
+                    closeOnSelect: /* istanbul ignore next */true,
+                    value: getDateValue(fields.fixed_date),
+                    inputProps: { readOnly: true },
+                    onChange: function /* istanbul ignore next */onChange(value) /* istanbul ignore next */{return _onChange('fixed_date', /* istanbul ignore next */(0, _moment2.default)(value).format( /* istanbul ignore next */_DateFormats2.default.shortDate));} })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingDropdown2.default, /* istanbul ignore next */{
+                label: /* istanbul ignore next */(0, _counterpart2.default)('findings.fixStatus'),
+                fieldName: 'status',
+                validation: validation,
+                isRequired: /* istanbul ignore next */true,
+                options: statusList,
+                fields: fields,
+                onChange: _onChange }),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__input row' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                        key: /* istanbul ignore next */'published+' + fields.published,
+                        label: /* istanbul ignore next */(0, _counterpart2.default)('findings.published'),
+                        id: 'published',
+                        validation: validation,
+                        className: 'fd__input col-6 fdi-col' },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Dropdown, /* istanbul ignore next */{
+                            button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null),
+                            onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return checkIncludedStatus(e.value === 'yes');},
+                            name: 'dropdown' },
+
+                        yesNoList.map(function (option, i) {
+                            return (
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                                    key: i,
+                                    value: option.value,
+                                    label: option.label,
+                                    selected: option.value === (fields.published ? 'yes' : 'no') }));
+
+
+                        }))),
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FindingFormField2.default, /* istanbul ignore next */{
+                        key: /* istanbul ignore next */'included+' + fields.included,
+                        label: /* istanbul ignore next */(0, _counterpart2.default)('findings.included'),
+                        id: 'include',
+                        validation: validation,
+                        className: 'fd__input col-6 fdi-col' },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Dropdown, /* istanbul ignore next */{
+                            button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null),
+                            onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return checkPublishedStatus(e.value === 'yes');},
+                            name: 'dropdown' },
+
+                        yesNoList.map(function (option, i) {
+                            return (
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                                    key: i,
+                                    value: option.value,
+                                    label: option.label,
+                                    selected: option.value === (fields.included ? 'yes' : 'no') }));
+
+
+                        }))))));
+
+
+
+
+
+} /* istanbul ignore next */exports.default = FormSecondColumn;
+
+FormSecondColumn.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object,
+    classificationFields: /* istanbul ignore next */_react2.default.PropTypes.object,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func };
+
+
+function checkIfDateIsValid(currentDate) {
+    var tomorrow = /* istanbul ignore next */(0, _moment2.default)(new Date()).add(1, 'days').startOf('day');
+    return currentDate.isBefore(tomorrow);
+}

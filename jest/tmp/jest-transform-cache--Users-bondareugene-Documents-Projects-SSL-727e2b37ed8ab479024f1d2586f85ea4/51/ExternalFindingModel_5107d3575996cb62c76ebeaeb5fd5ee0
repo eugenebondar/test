@@ -1,0 +1,39 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var ExternalFindingModel = /* istanbul ignore next */_Model2.default.New(function (finding) {
+    this.setMany({
+        status: finding.status,
+        source: finding.run_id.slice(-8),
+        bid: finding.bid,
+        cert: finding.cert,
+        classification_cwe_id: finding.classification_cwe_id,
+        classification_ssl_id: finding.classification_ssl_id,
+        classification_title: finding.classification_title,
+        cve: finding.cve,
+        cvss_base_score: finding.cvss_base_score,
+        cvss_temporal_score: finding.cvss_temporal_score,
+        cvss_temporal_vector: finding.cvss_temporal_vector,
+        cvss_vector: finding.cvss_vector,
+        exploit_available: finding.exploit_available,
+        exploit_ease: finding.exploit_ease,
+        finding_classification_id: finding.finding_classification_id,
+        finding_type: finding.finding_type,
+        first_time_found: finding.first_time_found,
+        fixed_date: finding.fixed_date,
+        found_date: finding.found_date,
+        id: finding.id,
+        id_alias: finding.id_alias,
+        included: finding.included ? 'Yes' : 'No',
+        location: finding.location,
+        osvdb: finding.osvdb,
+        published: finding.published ? 'Yes' : 'No',
+        run_id: finding.run_id,
+        score: finding.score,
+        severity: finding.severity,
+        source_type: finding.source_type,
+        vuln_publication_date: finding.vuln_publication_date,
+        isSelected: false });
+
+}); /* istanbul ignore next */exports.default =
+
+ExternalFindingModel;

@@ -1,0 +1,154 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.TEMPLATE_TYPE = undefined;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_DropdownButton = require('../../../Shared/ApocReactDropdown/DropdownButton'); /* istanbul ignore next */var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
+var /* istanbul ignore next */_reactDropzone = require('react-dropzone'); /* istanbul ignore next */var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
+var /* istanbul ignore next */_FormField = require('../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_index = require('../../../Shared/Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_RadioButton = require('../../../Shared/Elements/Radio/RadioButton'); /* istanbul ignore next */var _RadioButton2 = _interopRequireDefault(_RadioButton);
+var /* istanbul ignore next */_RadiosWithSearch = require('../../../Shared/Elements/ElementsListWithSearch/RadiosWithSearch'); /* istanbul ignore next */var _RadiosWithSearch2 = _interopRequireDefault(_RadiosWithSearch);
+var /* istanbul ignore next */_SelectedFile = require('../../../Utils/Files/SelectedFile'); /* istanbul ignore next */var _SelectedFile2 = _interopRequireDefault(_SelectedFile);
+var /* istanbul ignore next */_GlobalErrorList = require('../../../Shared/GlobalErrorList/GlobalErrorList'); /* istanbul ignore next */var _GlobalErrorList2 = _interopRequireDefault(_GlobalErrorList);
+var /* istanbul ignore next */_DropdownWithDirectionInsideDialog = require('../../../Shared/ApocReactDropdown/DropdownWithDirectionInsideDialog'); /* istanbul ignore next */var _DropdownWithDirectionInsideDialog2 = _interopRequireDefault(_DropdownWithDirectionInsideDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+var TEMPLATE_TYPE = /* istanbul ignore next */exports.TEMPLATE_TYPE = {
+    COVER: 'cover',
+    MAIN: 'main' };
+
+
+var typeOptions = [
+{ value: TEMPLATE_TYPE.COVER, name: 'Cover' },
+{ value: TEMPLATE_TYPE.MAIN, name: 'Main' }];
+
+
+var acceptedFiles = 'text/html';
+
+function ReportsTemplatesForm( /* istanbul ignore next */_ref)
+
+
+
+
+
+
+
+
+{/* istanbul ignore next */var fields = _ref.fields,_onChange2 = _ref.onChange,onDrop = _ref.onDrop,isEdit = _ref.isEdit,organizationsList = _ref.organizationsList,validation = _ref.validation,uploadedTemplateName = _ref.uploadedTemplateName,globalErrors = _ref.globalErrors;
+    /**
+                                                                                                                                                                                                                                                                                     * @param fieldKey
+                                                                                                                                                                                                                                                                                     * @return {string|undefined}
+                                                                                                                                                                                                                                                                                     */
+    function getValidationMessage(fieldKey) {
+        if (!validation) {
+            return undefined;
+        }
+        return validation[fieldKey];
+    }
+    /**
+       * Field is valid if there is no error message for it
+       * @param {string} [fieldKey]
+       * @return {boolean}
+       */
+    function isFieldValid(fieldKey) {
+        return !getValidationMessage(fieldKey);
+    }
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'report-template-dialog' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_GlobalErrorList2.default, /* istanbul ignore next */{ errors: globalErrors }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('templatesManager.name'),
+                    isValid: isFieldValid('name'),
+                    isRequired: /* istanbul ignore next */true,
+                    validationMessage: getValidationMessage('name') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                    id: 'name',
+                    updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return _onChange2( /* istanbul ignore next */_defineProperty({}, key, value.substring(0, 140)));},
+                    value: fields.name })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('templatesManager.globalTemplate') },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ToggleButton, /* istanbul ignore next */{
+                    toggleSize: 'sm',
+                    isOn: fields.isGlobal,
+                    onSwitch: function /* istanbul ignore next */onSwitch(value) {
+                        var organization_id = !value && organizationsList.length > 0 ? organizationsList[0].id : null;
+                        return _onChange2({ isGlobal: value, organization_id: organization_id });
+                    } })),
+
+
+
+            !fields.isGlobal &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('templatesManager.customer') },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RadiosWithSearch2.default, /* istanbul ignore next */null,
+                    organizationsList.map(function (organization) /* istanbul ignore next */{return (
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RadioButton2.default, /* istanbul ignore next */{
+                                key: organization.id,
+                                label: organization.corporation_name,
+                                name: organization.id,
+                                checked: organization.id === fields.organization_id,
+                                onChange: function /* istanbul ignore next */onChange(value) /* istanbul ignore next */{return _onChange2({ organization_id: value });} }));}))),
+
+
+
+
+
+            !isEdit &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('templatesManager.type') },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownWithDirectionInsideDialog2.default, /* istanbul ignore next */{
+                        button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */null),
+                        name: 'coverTemplateId',
+                        onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return _onChange2({ template_type: e.value });} },
+
+                    typeOptions.map(function (type) /* istanbul ignore next */{return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                                label: type.name,
+                                value: type.value,
+                                key: type.value,
+                                selected: type.value === fields.template_type }));}))),
+
+
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('templatesManager.template'),
+                    isRequired: /* istanbul ignore next */true,
+                    isValid: isFieldValid('template'),
+                    validationMessage: getValidationMessage('template') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactDropzone2.default, /* istanbul ignore next */{ className: 'dropzone-wrap', onDrop: onDrop, accept: acceptedFiles },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'dropzone-wrap' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'browse-btn sc-btn sc-btn-primary-outline' },
+                            /* istanbul ignore next */(0, _counterpart2.default)('general.browse')))),
+
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SelectedFile2.default, /* istanbul ignore next */{
+                    name: /* istanbul ignore next */(0, _counterpart2.default)('templatesManager.selectedTemplate'),
+                    fileName: uploadedTemplateName }))));
+
+
+
+
+} /* istanbul ignore next */exports.default = ReportsTemplatesForm;
+
+ReportsTemplatesForm.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        template_type: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        organization_id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        template: /* istanbul ignore next */_react2.default.PropTypes.object,
+        isGlobal: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired }).
+    isRequired,
+    isEdit: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    organizationsList: /* istanbul ignore next */_react2.default.PropTypes.arrayOf(
+    /* istanbul ignore next */_react2.default.PropTypes.shape({
+        corporation_name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })),
+
+
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onDrop: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    uploadedTemplateName: /* istanbul ignore next */_react2.default.PropTypes.string,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object,
+    globalErrors: /* istanbul ignore next */_react2.default.PropTypes.array };

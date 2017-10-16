@@ -1,0 +1,26 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var routes = {
+    login: '/login',
+    dashboard: '/dashboard',
+    activityLogs: '/activity-logs',
+    classificationManager: '/classification-manager',
+    assetsManager: '/assets-manager',
+    users: '/users',
+    userGroups: '/user-groups',
+    customerUsers: '/customer-users',
+    feedback: '/feedback',
+    termsOfService: '/tos',
+    testsDetails: '/test-details/:testId/:runId',
+    runsDetails: '/test-details/:testId/external-run/:runId/run-details/:id',
+    externalRuns: '/external-runs/:id',
+    rolesManager: '/roles-manager',
+    resetPassword: '/reset-password/:token',
+    confirmAccount: '/confirm-account/:token',
+    templatesManager: '/templates-manager',
+    scans: '/scans',
+    productsManager: '/products-manager',
+    transactionLogs: '/transaction-logs',
+    findingAttachments: '/runs/:runId/findings/:findingId/finding_attachments/link_to_attachments',
+    downloadFindingAttachment: '/runs/:runId/findings/:findingId/finding_attachments/:attachmentId/download' }; /* istanbul ignore next */exports.default =
+
+
+routes;

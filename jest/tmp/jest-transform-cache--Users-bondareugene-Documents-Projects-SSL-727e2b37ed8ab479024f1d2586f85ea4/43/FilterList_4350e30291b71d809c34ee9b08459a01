@@ -1,0 +1,49 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+/* istanbul ignore next */require('./FilterList.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+FilterList = function (_React$Component) {_inherits(FilterList, _React$Component);function FilterList() {_classCallCheck(this, FilterList);return _possibleConstructorReturn(this, (FilterList.__proto__ || Object.getPrototypeOf(FilterList)).apply(this, arguments));}_createClass(FilterList, [{ key: 'remove', value: function remove(
+
+        value) {
+            this.props.onChange(this.props.options.filter(function (option) /* istanbul ignore next */{return option.value !== value;}));
+        } }, { key: 'removeAll', value: function removeAll()
+
+        {
+            this.props.onChange([]);
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;var
+            options = this.props.options;
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'selected-filter-options-list' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'ul', /* istanbul ignore next */null,
+                        options.map(function ( /* istanbul ignore next */_ref) /* istanbul ignore next */{var name = _ref.name,value = _ref.value;return (
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'li', /* istanbul ignore next */{ key: value, className: 'selected-filter-options-list__option' },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, name),
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'sc-icon-filled-circle-close sc-txt-primary',
+                                        onClick: /* istanbul ignore next */_this2.remove.bind( /* istanbul ignore next */_this2, value) })));}),
+
+
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'li', /* istanbul ignore next */null,
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ onClick: this.removeAll.bind(this), className: 'clear-all sc-txt-primary' }, /* istanbul ignore next */'Clear All')))));
+
+
+
+
+        } }]);return FilterList;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = FilterList;
+
+
+FilterList.propTypes = {
+    options: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        name: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+        /* istanbul ignore next */_react2.default.PropTypes.string,
+        /* istanbul ignore next */_react2.default.PropTypes.node]),
+
+        value: /* istanbul ignore next */_react2.default.PropTypes.string })),
+
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func };
+
+
+FilterList.defaultProps = {
+    options: [] };

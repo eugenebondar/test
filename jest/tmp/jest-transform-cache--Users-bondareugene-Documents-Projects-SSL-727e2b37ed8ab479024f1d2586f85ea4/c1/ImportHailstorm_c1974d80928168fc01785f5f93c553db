@@ -1,0 +1,77 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.FORM_TYPE = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _FORM_COMPONENT_BY_TY;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_FormField = require('../../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_index = require('../../../../Shared/Elements/Radio/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_HailstormManagedRunFields = require('./HailstormManagedRunFields'); /* istanbul ignore next */var _HailstormManagedRunFields2 = _interopRequireDefault(_HailstormManagedRunFields);
+var /* istanbul ignore next */_HailstormUnManagedRunFields = require('.//HailstormUnManagedRunFields'); /* istanbul ignore next */var _HailstormUnManagedRunFields2 = _interopRequireDefault(_HailstormUnManagedRunFields);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+var FORM_TYPE = /* istanbul ignore next */exports.FORM_TYPE = {
+    MANAGED_RUN: 'MANAGED_RUN',
+    UN_MANAGED_RUN: 'UN_MANAGED_RUN' };
+
+
+var FORM_COMPONENT_BY_TYPE = /* istanbul ignore next */(_FORM_COMPONENT_BY_TY = {}, _defineProperty(_FORM_COMPONENT_BY_TY,
+FORM_TYPE.MANAGED_RUN, _HailstormManagedRunFields2.default), _defineProperty(_FORM_COMPONENT_BY_TY,
+FORM_TYPE.UN_MANAGED_RUN, _HailstormUnManagedRunFields2.default), _FORM_COMPONENT_BY_TY); /* istanbul ignore next */var
+
+
+ImportHailstorm = function (_React$Component) {_inherits(ImportHailstorm, _React$Component);function ImportHailstorm() {_classCallCheck(this, ImportHailstorm);return _possibleConstructorReturn(this, (ImportHailstorm.__proto__ || Object.getPrototypeOf(ImportHailstorm)).apply(this, arguments));}_createClass(ImportHailstorm, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _this2 = this;
+            var Component = this.getComponentNameByType();
+            var componentProps = this.getComponentPropsByType();
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: '' },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                            id: 'assessmentRunManually',
+                            updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onChangeHailstormType(value));},
+                            value: this.props.hailstormType,
+                            radio: [
+                            { title: 'Select from dropdown', value: FORM_TYPE.MANAGED_RUN },
+                            { title: 'Enter Manually', value: FORM_TYPE.UN_MANAGED_RUN }] })),
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */_extends({},
+                    componentProps, {
+                        onChange: this.props.onChange }))));
+
+
+
+        } }, { key: 'getComponentNameByType', value: function getComponentNameByType()
+
+        {
+            return FORM_COMPONENT_BY_TYPE[this.props.hailstormType];
+        } }, { key: 'getComponentPropsByType', value: function getComponentPropsByType()
+
+        {/* istanbul ignore next */var _FORM_TYPE$MANAGED_RU;
+            return (/* istanbul ignore next */(_FORM_TYPE$MANAGED_RU = {}, _defineProperty(_FORM_TYPE$MANAGED_RU,
+                FORM_TYPE.MANAGED_RUN, {
+                    fields: this.props.fields,
+                    assessmentRuns: this.props.assessmentRuns,
+                    onRequestTestRun: this.props.onRequestTestRun,
+                    isAssessmentRunsLoading: this.props.isAssessmentRunsLoading,
+                    assessmentRunsErrorMessage: this.props.assessmentRunsErrorMessage }), _defineProperty(_FORM_TYPE$MANAGED_RU,
+
+                FORM_TYPE.UN_MANAGED_RUN, {
+                    fields: this.props.fields }), _FORM_TYPE$MANAGED_RU)[
+
+                this.props.hailstormType]);
+        } }]);return ImportHailstorm;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = ImportHailstorm;
+
+
+ImportHailstorm.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        application_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        assessment_id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        assessment_run_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }).
+    isRequired,
+    assessmentRuns: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string),
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onChangeHailstormType: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onRequestTestRun: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    isAssessmentRunsLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    hailstormType: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    assessmentRunsErrorMessage: /* istanbul ignore next */_react2.default.PropTypes.string };

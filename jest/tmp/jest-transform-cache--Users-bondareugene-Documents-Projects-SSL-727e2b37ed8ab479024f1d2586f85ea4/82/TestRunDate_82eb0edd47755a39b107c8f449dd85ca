@@ -1,0 +1,54 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default = undefined;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDatetime = require('react-datetime'); /* istanbul ignore next */var _reactDatetime2 = _interopRequireDefault(_reactDatetime);
+var /* istanbul ignore next */_moment = require('moment'); /* istanbul ignore next */var _moment2 = _interopRequireDefault(_moment);
+
+var /* istanbul ignore next */_DateFormats = require('../../../../Utils/DateFormats'); /* istanbul ignore next */var _DateFormats2 = _interopRequireDefault(_DateFormats);
+
+/* istanbul ignore next */require('./TestRunDate.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function TestRunDate( /* istanbul ignore next */_ref)
+
+
+
+
+
+
+{/* istanbul ignore next */var isEditable = _ref.isEditable,value = _ref.value,_onChange = _ref.onChange,onValidationCheck = _ref.onValidationCheck,title = _ref.title,offset = _ref.offset;
+    // to use the same time like in reports
+    var date = /* istanbul ignore next */(0, _moment2.default)(value, /* istanbul ignore next */_DateFormats2.default.iso8601);
+    var dateString = value ? date.format( /* istanbul ignore next */_DateFormats2.default.fullDateUS) : '-';
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'test-run-date-container' },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, title, /* istanbul ignore next */': '),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'test-run-date' },
+                dateString,
+                isEditable &&
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'edit-run-date-container' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'edit-run-date-button' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'fa fa-calendar' })),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactDatetime2.default, /* istanbul ignore next */{
+                        className: 'edit-run-date-time-picker',
+                        closeOnSelect: /* istanbul ignore next */true,
+                        value: date,
+                        onChange: function /* istanbul ignore next */onChange(value) {
+                            var localOffset = /* istanbul ignore next */_moment2.default.parseZone(new Date()).utcOffset();
+                            _onChange(value.utcOffset(-offset + localOffset).format( /* istanbul ignore next */_DateFormats2.default.iso8601));
+                        },
+                        isValidDate: onValidationCheck,
+                        timeFormat: 'HH:mm' })))));
+
+
+
+
+
+
+} /* istanbul ignore next */exports.default = TestRunDate;
+
+TestRunDate.propTypes = {
+    title: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    value: /* istanbul ignore next */_react2.default.PropTypes.string,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onValidationCheck: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    isEditable: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    offset: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired };

@@ -1,0 +1,23 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var RunModel = /* istanbul ignore next */_Model2.default.New(function (run) {
+    this.setMany({
+        id: run.id,
+        shortId: run.id.slice(-8),
+        aasm_state: run.aasm_state,
+        completion_date: run.completion_date,
+        created_at: run.created_at,
+        external_runs_count: run.external_runs_count,
+        id_alias: run.id_alias,
+        published: run.published ? 'Yes' : 'No',
+        root: run.root,
+        source_type: run.source_type,
+        test_id: run.test_id,
+        test_name: run.test_name,
+        test_targets: run.test_targets,
+        updated_at: run.updated_at,
+        vulnerabilities: run.vulnerabilities });
+
+}); /* istanbul ignore next */exports.default =
+
+RunModel;

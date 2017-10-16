@@ -1,0 +1,44 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_rcSlider = require('rc-slider');
+
+var /* istanbul ignore next */_DateRangeConverter = require('./DateRangeConverter'); /* istanbul ignore next */var _DateRangeConverter2 = _interopRequireDefault(_DateRangeConverter);
+var /* istanbul ignore next */_moment = require('moment'); /* istanbul ignore next */var _moment2 = _interopRequireDefault(_moment);
+/* istanbul ignore next */require('rc-slider/assets/index.css'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+DateTimePeriodRangeController = function (_React$Component) {_inherits(DateTimePeriodRangeController, _React$Component);
+    function /* istanbul ignore next */DateTimePeriodRangeController(props) {/* istanbul ignore next */_classCallCheck(this, DateTimePeriodRangeController);var _this = _possibleConstructorReturn(this, (DateTimePeriodRangeController.__proto__ || Object.getPrototypeOf(DateTimePeriodRangeController)).call(this,
+        props));
+
+        /* istanbul ignore next */_this.rangeConverter = new /* istanbul ignore next */_DateRangeConverter2.default(props.minStart, props.maxEnd); /* istanbul ignore next */return _this;
+    }_createClass(DateTimePeriodRangeController, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            if (
+            nextProps.minStart.diff(this.props.minStart, 'minutes') !== 0 ||
+            nextProps.maxEnd.diff(this.props.maxEnd, 'minutes') !== 0)
+            {
+                this.rangeConverter = new /* istanbul ignore next */_DateRangeConverter2.default(nextProps.minStart, nextProps.maxEnd);
+            }
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;
+            /**
+                                                       * @type {Number[]}
+                                                       */
+            var selectedRange = this.rangeConverter.toSelectedRange(this.props.start, this.props.end);
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_rcSlider.Range, /* istanbul ignore next */{ min: 0, max: this.rangeConverter.toMaxNumberRange(), value: selectedRange,
+                    onChange: function /* istanbul ignore next */onChange( /* istanbul ignore next */_ref) {/* istanbul ignore next */var _ref2 = _slicedToArray(_ref, 2),newSelectedStart = _ref2[0],newSelectedEnd = _ref2[1];
+                        /* istanbul ignore next */_this2.props.onChange( /* istanbul ignore next */_this2.rangeConverter.toDateRange(newSelectedStart, newSelectedEnd));
+                    } }));
+
+
+        } }]);return DateTimePeriodRangeController;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = DateTimePeriodRangeController;
+
+
+DateTimePeriodRangeController.propTypes = {
+    start: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_moment2.default),
+    end: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_moment2.default),
+    minStart: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_moment2.default),
+    maxEnd: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_moment2.default),
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func };

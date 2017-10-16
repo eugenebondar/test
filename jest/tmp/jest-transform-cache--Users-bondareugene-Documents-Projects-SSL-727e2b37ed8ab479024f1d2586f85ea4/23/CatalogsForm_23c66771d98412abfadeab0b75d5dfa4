@@ -1,0 +1,96 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_index = require('../../../Shared/Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_FormField = require('../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_MultiselectWithSearch = require('../../../Shared/Elements/ElementsListWithSearch/MultiselectWithSearch'); /* istanbul ignore next */var _MultiselectWithSearch2 = _interopRequireDefault(_MultiselectWithSearch);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+CatalogsForm = function (_Component) {_inherits(CatalogsForm, _Component);function CatalogsForm() {_classCallCheck(this, CatalogsForm);return _possibleConstructorReturn(this, (CatalogsForm.__proto__ || Object.getPrototypeOf(CatalogsForm)).apply(this, arguments));}_createClass(CatalogsForm, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _this2 = this;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'catalogs-dialog' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)('catalogsManager.name'),
+                            isRequired: /* istanbul ignore next */true,
+                            isValid: this.isFieldValid('name'),
+                            validationMessage: this.getValidationMessage('name') },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                            id: 'name',
+                            value: this.props.catalog.name,
+                            updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onUpdateInput(key, value));} })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)('catalogsManager.products'),
+                            isRequired: /* istanbul ignore next */true,
+                            isValid: this.isFieldValid('products'),
+                            validationMessage: this.getValidationMessage('products') },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_MultiselectWithSearch2.default, /* istanbul ignore next */{ onChange: function /* istanbul ignore next */onChange() /* istanbul ignore next */{return null;} },
+
+                            this.props.allProducts.map(function (product) {
+                                return (
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Checkbox, /* istanbul ignore next */{
+                                        key: product.id,
+                                        label: product.name,
+                                        name: product.id,
+                                        checked: /* istanbul ignore next */_this2.props.catalog_products.some(function (p) /* istanbul ignore next */{return p.id === product.id;}),
+                                        onChange: function /* istanbul ignore next */onChange() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onUpdateCheckbox(product));} }));
+
+
+                            })))));
+
+
+
+
+
+        }
+
+        /**
+           * Field is valid if there is no error message for it
+           * @param {string} [fieldKey]
+           * @return {boolean}
+           */ }, { key: 'isFieldValid', value: function isFieldValid(
+        fieldKey) {
+            return !this.getValidationMessage(fieldKey);
+        }
+
+        /**
+           * @param fieldKey
+           * @return {string|undefined}
+           */ }, { key: 'getValidationMessage', value: function getValidationMessage(
+        fieldKey) {
+            if (!this.props.errors) {
+                return null;
+            }
+
+            return this.props.errors[fieldKey];
+        } }]);return CatalogsForm;}(_react.Component);
+
+
+CatalogsForm.propTypes = {
+    allProducts: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string,
+        price: /* istanbul ignore next */_react2.default.PropTypes.number })),
+
+    catalog_products: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string,
+        price: /* istanbul ignore next */_react2.default.PropTypes.number })),
+
+    catalog: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }),
+
+    errors: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        name: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string),
+        products: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string) }),
+
+    onUpdateCheckbox: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onUpdateInput: /* istanbul ignore next */_react2.default.PropTypes.func }; /* istanbul ignore next */exports.default =
+
+
+CatalogsForm;

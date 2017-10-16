@@ -1,0 +1,80 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.testRunsActions = exports.testRunsColumns = undefined;var /* istanbul ignore next */_reactTranslateComponent = require('react-translate-component');
+
+var /* istanbul ignore next */_User = require('../../../Stores/SessionUser/User');
+
+var testRunsColumns = /* istanbul ignore next */exports.testRunsColumns = [
+{
+    source: 'shortId',
+    name: 'tableCell.externalRunId',
+    width: '155',
+    sortable: false,
+    type: 'link',
+    link: {
+        url: '',
+        id: 'external_run_url' } },
+
+{
+    source: 'source_type',
+    name: 'tableCell.source',
+    width: '85',
+    sortable: false,
+    type: 'text' },
+{
+    source: 'finished_at',
+    name: 'tableCell.completionDate',
+    width: '225',
+    sortable: false,
+    type: 'date' },
+{
+    source: 'created_at',
+    name: 'tableCell.importDate',
+    width: '225',
+    sortable: false,
+    type: 'date' },
+{
+    source: 'test_targets',
+    name: 'tableCell.testTarget',
+    width: '269',
+    sortable: false,
+    type: 'array' },
+{
+    source: 'published',
+    name: 'tableCell.publ',
+    width: '60',
+    sortable: false,
+    type: 'text' },
+{
+    source: 'vulnerabilities/Critical',
+    name: 'tableCell.critical',
+    width: '60',
+    sortable: false,
+    type: 'text' },
+{
+    source: 'vulnerabilities/High',
+    name: 'tableCell.hight',
+    width: '60',
+    sortable: false,
+    type: 'text' },
+{
+    source: 'vulnerabilities/Medium',
+    name: 'tableCell.med',
+    width: '60',
+    sortable: false,
+    type: 'text' },
+{
+    source: 'vulnerabilities/Low',
+    name: 'tableCell.low',
+    width: '60',
+    sortable: false,
+    type: 'text' }];
+
+
+
+var testRunsActions = /* istanbul ignore next */exports.testRunsActions = [
+{
+    value: 'deleteExternalRun',
+    title: /* istanbul ignore next */(0, _reactTranslateComponent.translate)('actions.deleteExternalRun'),
+    icon: 'sc-icon-trash-closed',
+    getIsVisibleCallback: function /* istanbul ignore next */getIsVisibleCallback(run, user) {
+        return function () /* istanbul ignore next */{return run.source_type && user.hasPermission( /* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_EXTERNAL_RUNS);};
+    } }];

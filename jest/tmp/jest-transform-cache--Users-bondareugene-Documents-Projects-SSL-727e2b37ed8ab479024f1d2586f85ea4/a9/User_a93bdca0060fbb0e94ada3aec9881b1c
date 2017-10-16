@@ -1,0 +1,206 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var User = function () {_createClass(User, [{ key: 'isStaff',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * Return true if user's type is 'staff'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @return {boolean}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */value: function isStaff()
+        {
+            return this.user_type === USER_TYPE.staff;
+        }
+
+        /**
+           * Return true if user's type is 'customer'
+           * @return {boolean}
+           */ }, { key: 'isCustomer', value: function isCustomer()
+        {
+            return this.user_type === USER_TYPE.customer;
+        }
+
+        /**
+           * Return true if has either or more of passed permissions
+           * @param {array} [p] - list of passed permissions
+           * @return {boolean}
+           */ }, { key: 'hasOneOfPermissions', value: function hasOneOfPermissions(
+        p) {
+            if (!this.isEmpty) {
+                for (var i = 0; i < p.length; i++) {
+                    if (this.permissions[p[i]]) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /**
+           * Return true if has all of passed permissions
+           * @param {array} [p] - list of passed permissions
+           * @return {boolean}
+           */ }, { key: 'hasPermissions', value: function hasPermissions(
+        p) {
+            if (!this.isEmpty) {
+                for (var i = 0; i < p.length; i++) {
+                    if (!this.permissions[p[i]]) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+
+        /**
+           * Return true if has passed permission
+           * @param {string} [p] - passed permissions
+           * @return {boolean}
+           */ }, { key: 'hasPermission', value: function hasPermission(
+        p) {
+            if (!this.isEmpty && this.permissions[p]) {
+                return true;
+            }
+            return false;
+        } }, { key: 'isLoggedIn', /**
+                                   * @type {Boolean}
+                                   */ /**
+                                       * @type {Boolean}
+                                       */ /**
+                                           * @type {number}
+                                           */ /**
+                                               * @type {string}
+                                               */ /**
+                                                   * @type {string}
+                                                   */ /**
+                                                       * @type {string}
+                                                       */get: function get() {return !this.isEmpty;} /**
+                                                                                                      * @type {Boolean}
+                                                                                                      */ /**
+                                                                                                          * @type {string}
+                                                                                                          */ /**
+                                                                                                              * @type {object}
+                                                                                                              */ /**
+                                                                                                                  * @type {object}
+                                                                                                                  */ /**
+                                                                                                                      * @type {string}
+                                                                                                                      */ /**
+                                                                                                                          * @type {Boolean}
+                                                                                                                          */ }]);function /* istanbul ignore next */User(profile) {/* istanbul ignore next */_classCallCheck(this, User);this.email = ''; /* istanbul ignore next */this.first_login = true; /* istanbul ignore next */this.full_name = ''; /* istanbul ignore next */this.id = ''; /* istanbul ignore next */this.organization_name = ''; /* istanbul ignore next */this.permissions = null; /* istanbul ignore next */this.session_timeout = 900000; /* istanbul ignore next */this.settings = {}; /* istanbul ignore next */this.two_fa_auth = false; /* istanbul ignore next */this.user_type = ''; /* istanbul ignore next */this.isEmpty = true; /* istanbul ignore next */this.isSevice = false;if (profile) {Object.assign(this, profile);if (profile.permissions) {this.permissions = profile.permissions.reduce(function (permissionMap, item) {permissionMap[item] = true;return permissionMap;}, {});}this.isEmpty = false;this.isService = profile.user_type === 'staff';} else {this.isEmpty = true;}} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * @return {[]}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */_createClass(User, [{ key: 'findingsTableVisibleColumns', get: function get() {return this.settings.findings_table;} }]);return User;}(); /* istanbul ignore next */exports.default = User;var USER_TYPE = /* istanbul ignore next */exports.USER_TYPE = {
+    staff: 'staff',
+    customer: 'customer' };
+
+
+var CUSTOMER_PERMISSIONS = /* istanbul ignore next */exports.CUSTOMER_PERMISSIONS = {
+    VIEW_COMPANY_TESTS: 'view_company_tests',
+    EDIT_COMPANY_TESTS: 'edit_company_tests',
+    CHANGE_COMPANY_TESTS_STATUS: 'change_company_tests_status',
+    REQUEST_RUNS: 'request_runs',
+    VIEW_COMPANY_USERS: 'view_company_users',
+    MANAGE_COMPANY_USERS: 'manage_company_users',
+    MANAGE_COMPANY_ASSET_GROUPS: 'manage_company_asset_groups',
+    MANAGE_COMPANY_USER_GROUPS: 'manage_company_user_groups',
+    VIEW_USER_ROLES: 'view_user_roles',
+    MANAGE_COMPANY_SETTINGS: 'manage_company_settings',
+    MANAGE_COMPANY_PERMISSIONS: 'manage_company_permissions',
+    REQUEST_TESTS: 'request_tests',
+    VIEW_COMPANY_ATTACHMENTS: 'view_company_attachments',
+    MANAGE_COMPANY_ATTACHMENTS: 'manage_company_attachments',
+    MANAGE_TEST_SCHEDULE: 'manage_test_schedule',
+    VIEW_TEST_SCHEDULE: 'view_test_schedule' };
+
+
+var STAFF_PERMISSIONS = /* istanbul ignore next */exports.STAFF_PERMISSIONS = {
+    VIEW_ALL_TESTS: 'view_all_tests',
+    EDIT_ALL_TESTS: 'edit_all_tests',
+    CHANGE_TESTS_STATUS: 'change_tests_status',
+    VIEW_EXTERNAL_RUNS: 'view_external_runs',
+    IMPORT_EXTERNAL_RUNS: 'import_external_runs',
+    MANAGE_EXTERNAL_RUNS: 'runs:manage',
+    ADD_FINDINGS: 'add_findings',
+    GENERATE_REPORTS: 'generate_reports',
+    VIEW_ALL_USERS: 'view_all_users',
+    MANAGE_ALL_USERS: 'manage_all_users',
+    VIEW_COMPANIES: 'view_companies',
+    MANAGE_COMPANIES: 'manage_companies',
+    VIEW_CLASSIFICATIONS: 'view_classifications',
+    MANAGE_CLASSIFICATIONS: 'manage_classifications',
+    MANAGE_ROLES: 'manage_roles',
+    VIEW_CATEGORIES: 'view_categories',
+    MANAGE_CATEGORIES: 'manage_categories',
+    EDIT_BRANDING: 'edit_branding',
+    MANAGE_USER_GROUPS: 'manage_user_groups',
+    MANAGE_ASSET_GROUPS: 'manage_asset_groups',
+    VIEW_CLASSIFICATION_GROUPS: 'view_classification_groups',
+    MANAGE_CLASSIFICATION_GROUPS: 'manage_classification_groups',
+    MANAGE_PRODUCTS: 'products:manage',
+    VIEW_PRODUCTS: 'products:view',
+    MANAGE_TEMPLATES: 'manage_templates',
+    VIEW_TRANSACTION_LOGS: 'transaction_logs:view',
+    VIEW_ACTIVITY_LOGS: 'view_activity_logs',
+    VIEW_ROLES: 'view_roles',
+    VIEW_ATTACHMENTS: 'view_attachments',
+    MANAGE_ATTACHMENTS: 'manage_attachments',
+    EDIT_ASSIGNEE: 'edit_assignee' };

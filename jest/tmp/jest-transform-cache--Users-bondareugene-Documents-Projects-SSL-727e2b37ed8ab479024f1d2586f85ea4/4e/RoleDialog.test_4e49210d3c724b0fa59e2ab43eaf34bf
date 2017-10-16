@@ -1,0 +1,20 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_RoleDialog = require('./RoleDialog.jsx'); /* istanbul ignore next */var _RoleDialog2 = _interopRequireDefault(_RoleDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('<RoleDialog />', function () {
+  it('should render RoleDialog component', function () {
+    var rolesConfig = {};
+    var permissionsList = {};
+    var closePopup = function closePopup() {};
+    var validation = {};
+
+    // act
+    var component = /* istanbul ignore next */(0, _enzyme.shallow)(
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RoleDialog2.default, /* istanbul ignore next */{ rolesConfig: rolesConfig, permissionsList: permissionsList, closePopup: closePopup, validation: validation }));
+
+
+    // assert
+    expect(component).toBeTruthy();
+  });
+});

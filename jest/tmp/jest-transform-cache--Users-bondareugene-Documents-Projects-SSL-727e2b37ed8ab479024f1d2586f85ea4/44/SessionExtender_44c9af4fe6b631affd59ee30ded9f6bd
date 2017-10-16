@@ -1,0 +1,98 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_lodash = require('lodash.throttle'); /* istanbul ignore next */var _lodash2 = _interopRequireDefault(_lodash);
+var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);
+var /* istanbul ignore next */_SessionExpirationAlert = require('./SessionExpirationAlert'); /* istanbul ignore next */var _SessionExpirationAlert2 = _interopRequireDefault(_SessionExpirationAlert);
+var /* istanbul ignore next */_SessionExtenderStore = require('./SessionExtenderStore'); /* istanbul ignore next */var _SessionExtenderStore2 = _interopRequireDefault(_SessionExtenderStore);
+var /* istanbul ignore next */_SessionExtenderActions = require('./SessionExtenderActions'); /* istanbul ignore next */var _SessionExtenderActions2 = _interopRequireDefault(_SessionExtenderActions);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+SessionExtender = function (_Reflux$Component) {_inherits(SessionExtender, _Reflux$Component);
+
+
+
+
+
+
+
+
+
+
+
+    function /* istanbul ignore next */SessionExtender(props) {/* istanbul ignore next */_classCallCheck(this, SessionExtender);var _this = _possibleConstructorReturn(this, (SessionExtender.__proto__ || Object.getPrototypeOf(SessionExtender)).call(this,
+        props)); /* istanbul ignore next */_this.sessionExpirationTimeout = 0;
+
+        /* istanbul ignore next */_this.context = {
+            currentUser: new /* istanbul ignore next */_User2.default() };
+
+
+        /* istanbul ignore next */_this.mapStoreToState( /* istanbul ignore next */_SessionExtenderStore2.default, function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var extended = _ref.extended,expired = _ref.expired;
+            if (extended || expired) {
+                /* istanbul ignore next */_this.forceUpdate();
+            }
+        }); /* istanbul ignore next */return _this;
+    }_createClass(SessionExtender, [{ key: 'shouldComponentUpdate', value: function shouldComponentUpdate(
+
+        nextProps, nextState, nextContext) {
+            return nextContext.currentUser !== this.context.currentUser;
+        } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps, nextContext) {
+            if (this.context.currentUser.isLoggedIn && !nextContext.currentUser.isLoggedIn) {
+                stopSessionExtender();
+                this.stopSessionExpirationTimeout();
+            }
+        } }, { key: 'componentWillUnmount', value: function componentWillUnmount()
+
+        {
+            /* istanbul ignore next */_SessionExtenderActions2.default.destroy();
+            throttledListener.cancel();
+            this.stopSessionExpirationTimeout();
+            stopSessionExtender();
+        } }, { key: 'startSessionExpirationTimeout', value: function startSessionExpirationTimeout(
+
+        sessionTimeout) {/* istanbul ignore next */var _this2 = this;
+            this.stopSessionExpirationTimeout();
+            this.sessionExpirationTimeout = setTimeout(function () {
+                /* Expire action calls API for _some data_, if response have 401 (session timeout) one of
+                                                                     * customFetch middlewares (handleUnauthorized) will logout the user. If response returns user
+                                                                     * it means the session was extended somewhere else, and no need to logout the user. */
+                //todo FIX: Multitab session expiration notification handling is still buggy: even if API call will not logout user, the notification expiration will not reappear with updated timeout.
+                /* istanbul ignore next */_SessionExtenderActions2.default.expire( /* istanbul ignore next */_this2.context.currentUser.isService);
+            }, sessionTimeout);
+        } }, { key: 'stopSessionExpirationTimeout', value: function stopSessionExpirationTimeout()
+
+        {
+            this.sessionExpirationTimeout && clearTimeout(this.sessionExpirationTimeout);
+            this.sessionExpirationTimeout = 0;
+        } }, { key: 'render', value: function render()
+
+        {
+            if (this.context.currentUser.isLoggedIn) {
+                startSessionExtender();
+                this.startSessionExpirationTimeout(this.context.currentUser.session_timeout);
+                return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SessionExpirationAlert2.default, /* istanbul ignore next */{ millisecondsToLogout: this.context.currentUser.session_timeout,
+                        onActionClick: forceSessionExtend }));
+            }
+            return null;
+        } }]);return SessionExtender;}( /* istanbul ignore next */_reflux2.default.Component); /* istanbul ignore next */SessionExtender.propTypes = { onSessionExtend: /* istanbul ignore next */_react2.default.PropTypes.func }; /* istanbul ignore next */SessionExtender.contextTypes = { currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default) }; /* istanbul ignore next */exports.default = SessionExtender;
+
+
+var throttledListener = /* istanbul ignore next */(0, _lodash2.default)(function () {
+    //setTimeout here is a workaround for a race condition for end and extend sessions request
+    //todo remove setTimeout when end session can kill all the requests
+    setTimeout( /* istanbul ignore next */_SessionExtenderActions2.default.extend(), 500);
+}, 15 * 1000 /*15 seconds*/, true);
+
+function forceSessionExtend() {
+    throttledListener.cancel();
+    /* istanbul ignore next */_SessionExtenderActions2.default.extend();
+}
+
+function startSessionExtender() {
+    stopSessionExtender(); //make sure that we don't add same listener more than once
+    document.addEventListener('click', throttledListener, { capture: true });
+}
+
+function stopSessionExtender() {
+    document.removeEventListener('click', throttledListener, { capture: true });
+}

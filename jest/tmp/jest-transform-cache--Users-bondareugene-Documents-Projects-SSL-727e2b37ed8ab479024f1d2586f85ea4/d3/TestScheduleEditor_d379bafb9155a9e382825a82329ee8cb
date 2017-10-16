@@ -1,0 +1,337 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_GlobalErrorList = require('../../GlobalErrorList/GlobalErrorList'); /* istanbul ignore next */var _GlobalErrorList2 = _interopRequireDefault(_GlobalErrorList);
+var /* istanbul ignore next */_index = require('../../Elements/Checkbox/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_DropdownWithDirectionInsideDialog = require('../../ApocReactDropdown/DropdownWithDirectionInsideDialog'); /* istanbul ignore next */var _DropdownWithDirectionInsideDialog2 = _interopRequireDefault(_DropdownWithDirectionInsideDialog);
+var /* istanbul ignore next */_DropdownButton = require('../../ApocReactDropdown/DropdownButton'); /* istanbul ignore next */var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
+var /* istanbul ignore next */_TimeZoneLocalTimeComparer = require('./TimeZoneLocalTimeComparer'); /* istanbul ignore next */var _TimeZoneLocalTimeComparer2 = _interopRequireDefault(_TimeZoneLocalTimeComparer);
+var /* istanbul ignore next */_FormField = require('../../Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_TimeZoneLabel = require('./TimeZoneLabel'); /* istanbul ignore next */var _TimeZoneLabel2 = _interopRequireDefault(_TimeZoneLabel);
+var /* istanbul ignore next */_HoursInput = require('./HoursInput'); /* istanbul ignore next */var _HoursInput2 = _interopRequireDefault(_HoursInput);
+var /* istanbul ignore next */_DateTimePicker = require('../../Elements/DateTimePicker'); /* istanbul ignore next */var _DateTimePicker2 = _interopRequireDefault(_DateTimePicker);
+
+/* istanbul ignore next */require('./DateTimePicker.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+TestScheduleEditor = function (_React$Component) {_inherits(TestScheduleEditor, _React$Component);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function /* istanbul ignore next */TestScheduleEditor(props) {/* istanbul ignore next */_classCallCheck(this, TestScheduleEditor);var _this = _possibleConstructorReturn(this, (TestScheduleEditor.__proto__ || Object.getPrototypeOf(TestScheduleEditor)).call(this,
+        props));
+
+        /* istanbul ignore next */_this.setHours = /* istanbul ignore next */_this.setHours.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.updateStartDate = /* istanbul ignore next */_this.updateStartDate.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.updateDueDate = /* istanbul ignore next */_this.updateDueDate.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.onMeridiemChange = /* istanbul ignore next */_this.onMeridiemChange.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.onDaysChange = /* istanbul ignore next */_this.onDaysChange.bind( /* istanbul ignore next */_this);
+
+        /* istanbul ignore next */_this.WEEK_DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']; /* istanbul ignore next */return _this;
+    }_createClass(TestScheduleEditor, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;var
+            scheduleData = this.props.scheduleData;
+            var currentTimezone = this.props.timezones.find(function (timezone) /* istanbul ignore next */{return timezone.time_zone === scheduleData.time_zone;});
+
+            var noneOfWeekdayIsSet = this.WEEK_DAYS.every(function (weekday) /* istanbul ignore next */{return ! /* istanbul ignore next */_this2.props.scheduleData[weekday];});
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_GlobalErrorList2.default, /* istanbul ignore next */{ errors: this.props.errors }),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.earliestStartDate') },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DateTimePicker2.default, /* istanbul ignore next */{
+                            className: 'dt__wrap dt__schedule',
+                            closeOnSelect: /* istanbul ignore next */true,
+                            value: scheduleData.start_date,
+                            inputProps: { readOnly: true },
+                            onChange: this.updateStartDate,
+                            timeFormat: false })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.dueDate') },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DateTimePicker2.default, /* istanbul ignore next */{
+                            className: 'dt__wrap dt__schedule',
+                            closeOnSelect: /* istanbul ignore next */true,
+                            value: scheduleData.due_date,
+                            inputProps: { readOnly: true, disabled: !scheduleData.start_date },
+                            onChange: this.updateDueDate,
+                            timeFormat: false }),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-date__notice' },
+                            /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.dateNotice'))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.allowedTestingDays') },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'sl-form__checkbox' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                id: 'monday',
+                                onChange: this.onDaysChange,
+                                value: scheduleData.monday }),
+
+                            /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.Mon')),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'sl-form__checkbox' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                id: 'tuesday',
+                                onChange: this.onDaysChange,
+                                value: scheduleData.tuesday }),
+
+                            /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.Tue')),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'sl-form__checkbox' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                id: 'wednesday',
+                                onChange: this.onDaysChange,
+                                value: scheduleData.wednesday }),
+
+                            /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.Wed')),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'sl-form__checkbox' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                id: 'thursday',
+                                onChange: this.onDaysChange,
+                                value: scheduleData.thursday }),
+
+                            /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.Thu')),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'sl-form__checkbox' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                id: 'friday',
+                                onChange: this.onDaysChange,
+                                value: scheduleData.friday }),
+
+                            /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.Fri')),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'sl-form__checkbox' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                id: 'saturday',
+                                onChange: this.onDaysChange,
+                                value: scheduleData.saturday }),
+
+                            /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.Sat')),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'sl-form__checkbox' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                id: 'sunday',
+                                onChange: this.onDaysChange,
+                                value: scheduleData.sunday }),
+
+                            /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.Sun')),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'sl-form__checkbox all-week__checkbox' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                id: 'allWeek',
+                                onChange: this.onDaysChange,
+                                value: this.WEEK_DAYS.every(function (weekday) /* istanbul ignore next */{return scheduleData[weekday];}) }),
+
+                            /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.allWeek'))),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.allowedTestingHours') },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ disabled: noneOfWeekdayIsSet },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                                id: 'allday',
+                                onChange: function /* istanbul ignore next */onChange(id, isChecked) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onAreTestingHoursAllowedChange(!isChecked));},
+                                value: !this.props.areTestingHoursAllowed,
+                                disabled: noneOfWeekdayIsSet }),
+
+                            /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.allDay')),
+
+
+                        this.props.areTestingHoursAllowed &&
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-time__wrap' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-time____item' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-time__label' },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'sl-form__label' }, /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.From'))),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-time__input' },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_HoursInput2.default, /* istanbul ignore next */{
+                                            id: 'time_from',
+                                            updateValue: this.setHours,
+                                            value: getHoursPart(scheduleData.time_from),
+                                            validationType: 'number',
+                                            isDisabled: noneOfWeekdayIsSet }),
+
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'select', /* istanbul ignore next */{
+                                                onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.onMeridiemChange(e.target.value, e.target.name));},
+                                                name: 'time_from',
+                                                className: 'sc-form-ele',
+                                                value: getMeridiemPart(scheduleData.time_from),
+                                                disabled: noneOfWeekdayIsSet },
+
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'option', /* istanbul ignore next */{ value: 'AM' }, /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.AM')),
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'option', /* istanbul ignore next */{ value: 'PM' }, /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.PM')))))),
+
+
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-time____item' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-time__label' },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */{ className: 'sl-form__label' }, /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.To'))),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-time__input' },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_HoursInput2.default, /* istanbul ignore next */{
+                                            id: 'time_to',
+                                            updateValue: this.setHours,
+                                            value: getHoursPart(scheduleData.time_to),
+                                            validationType: 'number',
+                                            isDisabled: noneOfWeekdayIsSet }),
+
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'select', /* istanbul ignore next */{
+                                                onChange: function /* istanbul ignore next */onChange(e) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.onMeridiemChange(e.target.value, e.target.name));},
+                                                name: 'time_to',
+                                                className: 'sc-form-ele',
+                                                value: getMeridiemPart(scheduleData.time_to),
+                                                disabled: noneOfWeekdayIsSet },
+
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'option', /* istanbul ignore next */{ value: 'AM' }, /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.AM')),
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'option', /* istanbul ignore next */{ value: 'PM' }, /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.PM')))))),
+
+
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-time__notice' },
+                                /* istanbul ignore next */(0, _counterpart2.default)('testScheduleEditor.timeNotice')))),
+
+
+
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('general.timezone') },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownWithDirectionInsideDialog2.default, /* istanbul ignore next */{ button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DropdownButton2.default, /* istanbul ignore next */{ disabled: noneOfWeekdayIsSet }),
+                                className: 'schedule-wrap__timezones',
+                                name: 'timezones',
+                                onChange: function /* istanbul ignore next */onChange(optionProps) {
+                                    var time_zone = optionProps.value;
+                                    /* istanbul ignore next */_this2.props.updateSchedule( /* istanbul ignore next */_extends({},
+                                    /* istanbul ignore next */_this2.props.scheduleData, {
+                                        time_zone: time_zone }));
+
+                                } },
+
+                            this.props.timezones.map(function (timezone) /* istanbul ignore next */{return (
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                                        value: timezone.time_zone,
+                                        key: timezone.time_zone + timezone.display_name,
+                                        label: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TimeZoneLabel2.default, /* istanbul ignore next */{
+                                            utcOffset: timezone.utc_offset,
+                                            displayName: timezone.display_name }),
+
+                                        selected: timezone.time_zone === scheduleData.time_zone }));})),
+
+
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'schedule-time__notice' },
+
+                            currentTimezone &&
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TimeZoneLocalTimeComparer2.default, /* istanbul ignore next */{
+                                currentUtcOffset:
+                                currentTimezone.current_utc_offset })))));
+
+
+
+
+
+
+
+
+        } }, { key: 'setHours', value: function setHours(
+
+        key, value) {/* istanbul ignore next */var _props =
+            this.props,scheduleData = _props.scheduleData,updateSchedule = _props.updateSchedule;
+            scheduleData[key] = value + ':00' + ' ' + getMeridiemPart(scheduleData[key]);
+            updateSchedule(scheduleData);
+        } }, { key: 'updateStartDate', value: function updateStartDate(
+
+        value) {
+            var dueDateShouldBeUpdated = this.props.scheduleData.due_date && this.props.scheduleData.due_date < value;
+            var changes = {};
+            if (dueDateShouldBeUpdated) {
+                changes.due_date = value;
+            }
+            changes.start_date = value;
+
+            this.props.updateSchedule( /* istanbul ignore next */_extends({},
+            this.props.scheduleData,
+            changes));
+
+        } }, { key: 'updateDueDate', value: function updateDueDate(
+
+        value) {
+            this.props.updateSchedule( /* istanbul ignore next */_extends({},
+            this.props.scheduleData, {
+                due_date: value }));
+
+        } }, { key: 'onMeridiemChange', value: function onMeridiemChange(
+
+        value, name) {/* istanbul ignore next */var _props2 =
+            this.props,scheduleData = _props2.scheduleData,updateSchedule = _props2.updateSchedule;
+
+            scheduleData[name] = scheduleData[name] ?
+            scheduleData[name].substring(0, 5) + ' ' + value :
+            '00:00 ' + value;
+            updateSchedule(scheduleData);
+        } }, { key: 'onDaysChange', value: function onDaysChange(
+
+        id, value) {/* istanbul ignore next */var _props3 =
+            this.props,scheduleData = _props3.scheduleData,updateSchedule = _props3.updateSchedule;
+            if (id === 'allWeek') {
+                this.WEEK_DAYS.forEach(function (weekday) /* istanbul ignore next */{return scheduleData[weekday] = value;});
+            }
+            scheduleData[id] = value;
+            updateSchedule(scheduleData);
+        } }]);return TestScheduleEditor;}( /* istanbul ignore next */_react2.default.Component);
+
+
+/**
+                                                                                                  * Gets Meridiem part - AM/PM - from time representation in format of e.g. '10:10 AM';
+                                                                                                  * @param timeAndMeridiem
+                                                                                                  * @returns {string}
+                                                                                                  */ /* istanbul ignore next */TestScheduleEditor.propTypes = { scheduleData: /* istanbul ignore next */_react2.default.PropTypes.shape({ start_date: /* istanbul ignore next */_react2.default.PropTypes.string, due_date: /* istanbul ignore next */_react2.default.PropTypes.string, time_from: /* istanbul ignore next */_react2.default.PropTypes.string, time_to: /* istanbul ignore next */_react2.default.PropTypes.string, monday: /* istanbul ignore next */_react2.default.PropTypes.bool, tuesday: /* istanbul ignore next */_react2.default.PropTypes.bool, wednesday: /* istanbul ignore next */_react2.default.PropTypes.bool, thursday: /* istanbul ignore next */_react2.default.PropTypes.bool, friday: /* istanbul ignore next */_react2.default.PropTypes.bool, saturday: /* istanbul ignore next */_react2.default.PropTypes.bool, sunday: /* istanbul ignore next */_react2.default.PropTypes.bool, allWeek: /* istanbul ignore next */_react2.default.PropTypes.bool, time_zone: /* istanbul ignore next */_react2.default.PropTypes.string }), errors: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string), areTestingHoursAllowed: /* istanbul ignore next */_react2.default.PropTypes.bool, onAreTestingHoursAllowedChange: /* istanbul ignore next */_react2.default.PropTypes.func, /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * first argument is an object of the same structure as propTypes.scheduleData
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */updateSchedule: /* istanbul ignore next */_react2.default.PropTypes.func, timezones: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({ time_zone: /* istanbul ignore next */_react2.default.PropTypes.string, display_name: /* istanbul ignore next */_react2.default.PropTypes.string, utc_offset: /* istanbul ignore next */_react2.default.PropTypes.string, current_utc_offset: /* istanbul ignore next */_react2.default.PropTypes.number })) }; /* istanbul ignore next */exports.default = TestScheduleEditor;function getMeridiemPart(timeAndMeridiem) {return timeAndMeridiem ? timeAndMeridiem.slice(-2) : 'AM';
+}
+
+/**
+   * Gets hours part - 10 - from time representation in format of e.g. '12:45 AM';
+   * @param timeAndMeridiem
+   * @returns {string}
+   */
+function getHoursPart(timeAndMeridiem) {
+    return timeAndMeridiem ? timeAndMeridiem.substring(0, 2) : '01';
+}

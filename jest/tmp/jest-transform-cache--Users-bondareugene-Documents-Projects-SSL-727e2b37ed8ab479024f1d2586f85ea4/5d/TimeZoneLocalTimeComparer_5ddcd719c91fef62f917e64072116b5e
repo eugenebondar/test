@@ -1,0 +1,41 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+TimeZoneLocalTimeComparer;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function translate(key) {/* istanbul ignore next */var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return (/* istanbul ignore next */(0, _counterpart2.default)('utils.time.' + key, options));}function TimeZoneLocalTimeComparer( /* istanbul ignore next */_ref) {/* istanbul ignore next */var currentUtcOffset = _ref.currentUtcOffset;
+    var comparedOffset = compareOffsets(currentUtcOffset);
+    var hours = Math.abs(Math.floor(comparedOffset / 3600));
+    var minutes = Math.abs(Math.floor(comparedOffset % 3600 / 60));
+    var isAhead = comparedOffset > 0;
+    if (comparedOffset === 0) {
+        return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, translate('sameAsYourLocalTime')));
+    }
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null,
+            Boolean(hours) && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, translate('hours', { count: hours })),
+            Boolean(hours) && Boolean(minutes) && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, /* istanbul ignore next */' ', translate('and'), /* istanbul ignore next */' '),
+            Boolean(minutes) && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, minutes, /* istanbul ignore next */' ', translate('minutes')),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null, /* istanbul ignore next */' ', isAhead ? translate('ahead') : translate('behind'), /* istanbul ignore next */' ', translate('yourLocalTime'))));
+
+
+}
+
+TimeZoneLocalTimeComparer.propTypes = {
+    /**
+                                         * offset in seconds
+                                         */
+    currentUtcOffset: /* istanbul ignore next */_react2.default.PropTypes.number };
+
+
+/**
+                                                                                     * Compares two offsets. Returns positive number if session's offset is ahead, negative if behind.
+                                                                                     * @param {number} offsetInSeconds
+                                                                                     * @return {number}
+                                                                                     */
+function compareOffsets(offsetInSeconds) {
+    var sessionOffsetInSeconds = new Date().getTimezoneOffset() * -1 * 60;
+    return -sessionOffsetInSeconds + offsetInSeconds;
+}

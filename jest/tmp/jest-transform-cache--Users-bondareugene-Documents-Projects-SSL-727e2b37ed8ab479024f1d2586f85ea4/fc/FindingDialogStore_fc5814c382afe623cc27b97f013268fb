@@ -1,0 +1,349 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.defaultState = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_FindingDialogActions = require('./FindingDialogActions'); /* istanbul ignore next */var _FindingDialogActions2 = _interopRequireDefault(_FindingDialogActions);
+var /* istanbul ignore next */_defaultFields = require('./defaultFields'); /* istanbul ignore next */var _defaultFields2 = _interopRequireDefault(_defaultFields);
+var /* istanbul ignore next */_FindingDialogContainer = require('./FindingDialogContainer'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var defaultState = /* istanbul ignore next */exports.defaultState = {
+    isSaving: false,
+    isDeleting: false,
+    isDialogOpen: false,
+    isAttachmentsDialogOpen: false,
+    mode: null,
+    isLoading: true,
+    finding: null,
+    findingsTotal: null,
+    findingCategories: null,
+    findingClassifications: null,
+    validation: null,
+    findingCategoriesId: null,
+    isFindingCreated: null,
+    findingId: null,
+    classificationFields: {} }; /* istanbul ignore next */var
+
+
+FindingDialogStore = function (_Reflux$Store) {_inherits(FindingDialogStore, _Reflux$Store);
+    function /* istanbul ignore next */FindingDialogStore() {/* istanbul ignore next */_classCallCheck(this, FindingDialogStore);var _this = _possibleConstructorReturn(this, (FindingDialogStore.__proto__ || Object.getPrototypeOf(FindingDialogStore)).call(this));
+
+
+        /* istanbul ignore next */_this.listenables = /* istanbul ignore next */_FindingDialogActions2.default;
+        /* istanbul ignore next */_this.state = Object.assign({}, defaultState); /* istanbul ignore next */return _this;
+    }_createClass(FindingDialogStore, [{ key: 'openFindingDialog', value: function openFindingDialog()
+
+        {
+            this.setState({ isDialogOpen: true });
+        } }, { key: 'setIsSavingState', value: function setIsSavingState()
+
+        {
+            this.setState({ isSaving: true });
+        }
+
+        /**
+           * @listenss FindingDialogActions.openCreateNewFindingDialog
+           */ }, { key: 'onOpenCreateNewFindingDialog', value: function onOpenCreateNewFindingDialog()
+        {
+            this.openFindingDialog();
+        }
+        /**
+           * @listenss FindingDialogActions.openEditFindingDialog
+           */ }, { key: 'onOpenEditFindingDialog', value: function onOpenEditFindingDialog()
+        {
+            this.openFindingDialog();
+        }
+        /**
+           * @listenss FindingDialogActions.openViewFindingDialog
+           */ }, { key: 'onOpenViewFindingDialog', value: function onOpenViewFindingDialog()
+        {
+            this.openFindingDialog();
+        }
+        /**
+           * @listens FindingDialogActions.openCreateNewFindingDialog.completed
+           * @param {array} [finding_classification_categories]
+           */ }, { key: 'onOpenCreateNewFindingDialogCompleted', value: function onOpenCreateNewFindingDialogCompleted(_ref)
+        {/* istanbul ignore next */var finding_classification_categories = _ref.finding_classification_categories;
+            var findingCategoriesWithClassification = finding_classification_categories.filter(hasCategorySomeClassifications);
+            var finding_classification_category_id = findingCategoriesWithClassification[0].id;
+            this.setState({
+                findingCategories: findingCategoriesWithClassification,
+                findingCategoriesId: finding_classification_category_id,
+                finding: /* istanbul ignore next */_extends({}, _defaultFields2.default, { finding_classification_category_id: finding_classification_category_id }),
+                mode: /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.NEW });
+
+        }
+        /**
+           * @listens FindingDialogActions.openEditFindingDialog.completed
+           * @param {array} [finding_classification_categories]
+           * @param {object} [finding]
+           */ }, { key: 'onOpenEditFindingDialogCompleted', value: function onOpenEditFindingDialogCompleted(_ref2)
+        {/* istanbul ignore next */var finding_classification_categories = _ref2.finding_classification_categories,finding = _ref2.finding,classifications = _ref2.classifications;
+            var findingCategoriesWithClassification = finding_classification_categories.filter(hasCategorySomeClassifications);
+            this.setState({
+                findingCategories: findingCategoriesWithClassification,
+                finding: /* istanbul ignore next */_extends({}, finding),
+                findingId: finding.id,
+                findingClassifications: classifications,
+                isLoading: false,
+                mode: /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.EDIT });
+
+        }
+        /**
+           * @listens FindingDialogActions.openViewFindingDialog.completed
+           * @param {object} [finding]
+           */ }, { key: 'onOpenViewFindingDialogCompleted', value: function onOpenViewFindingDialogCompleted(_ref3)
+        {/* istanbul ignore next */var finding = _ref3.finding;
+            this.setState({
+                finding: /* istanbul ignore next */_extends({}, finding),
+                findingId: finding.id,
+                isLoading: false,
+                mode: /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.VIEW });
+
+        }
+
+        /**
+           * @listens FindingDialogActions.navigate
+           * @param {string} [nextFindingId]
+           */ }, { key: 'onNavigate', value: function onNavigate(
+        nextFindingId) {
+            this.setState({
+                findingId: nextFindingId });
+
+        }
+
+        /**
+           * @listens FindingDialogActions.updateFindingId
+           * @param {string} [nextFindingIds]
+           * @param {string[]} [findingIds]
+           * @param {string[]} [findingId]
+           */ }, { key: 'onUpdateFindingId', value: function onUpdateFindingId(_ref4)
+        {/* istanbul ignore next */var nextFindingIds = _ref4.nextFindingIds,findingIds = _ref4.findingIds,findingId = _ref4.findingId;
+            var previousFindingIdIndex = findingIds.indexOf(findingId);
+            var newFindingIdIndex = Math.min(previousFindingIdIndex, nextFindingIds.length - 1);
+            var nextFindingId = nextFindingIds[newFindingIdIndex];
+            this.setState({ findingId: nextFindingId });
+        }
+
+        /**
+           * @listens FindingDialogActions.getFindingClassificationsForCategory.completed
+           * @param {array} [classifications]
+           */ }, { key: 'onGetFindingClassificationsForCategoryCompleted', value: function onGetFindingClassificationsForCategoryCompleted(_ref5)
+        {/* istanbul ignore next */var classifications = _ref5.classifications;
+            var sortedClassifications = classifications.sort(function (a, b) /* istanbul ignore next */{return a.title.toLowerCase().localeCompare(b.title.toLowerCase());});
+            var classification = sortedClassifications[0];
+            var finding_classification_id = classification.id;
+            var score = classification.base_score;
+            var classification_class_severity = sortedClassifications[0].class_severity;
+            var isViewMode = this.state.mode === /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.VIEW;
+            this.setState({
+                findingClassifications: sortedClassifications,
+                classificationFields: /* istanbul ignore next */_extends({
+                    classification_class_severity: classification_class_severity,
+                    score: score },
+                isViewMode ? {} : { finding_classification_id: finding_classification_id }),
+
+                isLoading: false });
+
+        }
+        /**
+           * @listens FindingDialogActions.getFindingClassificationsForCategoryWithoutUpdatindFinding.completed
+           * @param {array} [classifications]
+           */ }, { key: 'onGetFindingClassificationsForCategoryWithoutUpdatindFindingCompleted', value: function onGetFindingClassificationsForCategoryWithoutUpdatindFindingCompleted(_ref6)
+        {/* istanbul ignore next */var classifications = _ref6.classifications;
+            this.setState({
+                findingClassifications: classifications,
+                isLoading: false });
+
+        }
+        /**
+           * @listens FindingDialogActions.getFinding
+           */ }, { key: 'onGetFinding', value: function onGetFinding()
+        {
+            this.setState({ isLoading: true });
+        }
+        /**
+           * @listens FindingDialogActions.getFinding.completed
+           * @param {object} [finding]
+           */ }, { key: 'onGetFindingCompleted', value: function onGetFindingCompleted(_ref7)
+        {/* istanbul ignore next */var finding = _ref7.finding;
+            this.setState({
+                finding: finding,
+                isLoading: false,
+                isSaving: false,
+                isDeleting: false });
+
+        }
+        /**
+           * @listens FindingDialogActions.excludeFinding
+           */ }, { key: 'onExcludeFinding', value: function onExcludeFinding()
+        {
+            this.setIsSavingState();
+        }
+        /**
+           * @listens FindingDialogActions.excludeFinding.completed
+           */ }, { key: 'onExcludeFindingCompleted', value: function onExcludeFindingCompleted()
+        {
+            this.setState({ findingId: this.state.findingId });
+        }
+        /**
+           * @listens FindingDialogActions.includeFinding
+           */ }, { key: 'onIncludeFindingd', value: function onIncludeFindingd()
+        {
+            this.setState({ findingId: this.state.findingId });
+        }
+        /**
+           * @listens FindingDialogActions.includeFinding.completed
+           */ }, { key: 'onIncludeFindingCompleted', value: function onIncludeFindingCompleted()
+        {
+            this.setState({ findingId: this.state.findingId });
+        }
+        /**
+           * @listens FindingDialogActions.PublishFinding
+           */ }, { key: 'onPublishFinding', value: function onPublishFinding()
+        {
+            this.setIsSavingState();
+        }
+        /**
+           * @listens FindingDialogActions.PublishFinding.completed
+           */ }, { key: 'onPublishFindingCompleted', value: function onPublishFindingCompleted()
+        {
+            this.setState({ findingId: this.state.findingId });
+        }
+        /**
+           * @listens FindingDialogActions.unPublishFinding
+           */ }, { key: 'onUnPublishFinding', value: function onUnPublishFinding()
+        {
+            this.setIsSavingState();
+        }
+        /**
+           * @listens FindingDialogActions.unPublishFinding.completed
+           */ }, { key: 'onUnPublishFindingCompleted', value: function onUnPublishFindingCompleted()
+        {
+            this.setState({ findingId: this.state.findingId });
+        }
+        /**
+           * @listens FindingDialogActions.turnEditMode
+           */ }, { key: 'onTurnEditMode', value: function onTurnEditMode()
+        {
+            this.setState({
+                mode: /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.EDIT });
+
+        }
+        /**
+           * @listens FindingDialogActions.getFindingCategories.completed
+           * @param {array} [finding_classification_categories]
+           */ }, { key: 'onGetFindingCategoriesCompleted', value: function onGetFindingCategoriesCompleted(_ref8)
+        {/* istanbul ignore next */var finding_classification_categories = _ref8.finding_classification_categories;
+            var findingCategoriesWithClassification = finding_classification_categories.filter(hasCategorySomeClassifications);
+            this.setState({ findingCategories: findingCategoriesWithClassification });
+        }
+        /**
+           * @listens FindingDialogActions.closeFindingDialog
+           */ }, { key: 'onCloseFindingDialog', value: function onCloseFindingDialog()
+        {
+            this.setState(defaultState);
+        }
+        /**
+           * @listens FindingDialogActions.findingCategoryChange
+           * @param {string} [value]
+           * @param {{}} [finding]
+           */ }, { key: 'onFindingCategoryChange', value: function onFindingCategoryChange(
+        value, finding) {
+            this.setState({
+                findingCategoriesId: value,
+                finding: finding });
+
+        }
+        /**
+           * @listens FindingDialogActions.сreateFinding
+           */ }, { key: 'onCreateFinding', value: function onCreateFinding()
+        {
+            this.setState({
+                validation: null,
+                isSaving: true });
+
+        }
+        /**
+           * @listens FindingDialogActions.сreateFinding.completed
+           */ }, { key: 'onCreateFindingCompleted', value: function onCreateFindingCompleted()
+        {
+            this.setState({ isFindingCreated: true });
+        }
+        /**
+           * @listens FindingDialogActions.createFinding.failed
+           * @param {object} [errors]
+           */ }, { key: 'onCreateFindingFailed', value: function onCreateFindingFailed(_ref9)
+        {/* istanbul ignore next */var errors = _ref9.errors;
+            this.setState({
+                validation: errors,
+                isSaving: false });
+
+        }
+
+        /**
+           * @listens FindingDialogActions.deleteFinding
+           */ }, { key: 'onDeleteFinding', value: function onDeleteFinding()
+        {
+            this.setState({
+                isDeleting: true });
+
+        }
+
+        /**
+           * @listens FindingDialogActions.deleteFinding.completed
+           */ }, { key: 'onDeleteFindingCompleted', value: function onDeleteFindingCompleted()
+        {
+            this.setState({
+                isDeleting: false });
+
+        }
+
+        /**
+           * @listens FindingDialogActions.deleteFinding.failed
+           */ }, { key: 'onDeleteFindingFailed', value: function onDeleteFindingFailed()
+        {
+            this.setState({
+                isDeleting: false });
+
+        }
+
+        /**
+           * @listens FindingDialogActions.editFinding
+           */ }, { key: 'onEditFinding', value: function onEditFinding()
+        {
+            this.setState({
+                validation: null,
+                isSaving: true });
+
+        }
+        /**
+           * @listens FindingDialogActions.editFinding.completed
+           */ }, { key: 'onEditFindingCompleted', value: function onEditFindingCompleted()
+        {
+            this.setState({
+                findingId: this.state.findingId,
+                mode: /* istanbul ignore next */_FindingDialogContainer.FINDING_DETAILS_MODE.VIEW });
+
+        }
+        /**
+           * @listens FindingDialogActions.editFinding.failed
+           * @param {object} [errors]
+           */ }, { key: 'onEditFindingFailed', value: function onEditFindingFailed(_ref10)
+        {/* istanbul ignore next */var errors = _ref10.errors;
+            this.setState({
+                validation: errors,
+                isSaving: false });
+
+        }
+        /**
+           * @listens FindingDialogActions.toggleAttachmentsDialog
+           * @param {object} [errors]
+           */ }, { key: 'onToggleAttachmentsDialog', value: function onToggleAttachmentsDialog()
+        {
+            this.setState({ isAttachmentsDialogOpen: !this.state.isAttachmentsDialogOpen });
+        } }]);return FindingDialogStore;}( /* istanbul ignore next */_reflux2.default.Store); /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */_reflux2.default.initStore(FindingDialogStore);
+
+function hasCategorySomeClassifications(category) {
+    return category.finding_classifications_count > 0;
+}

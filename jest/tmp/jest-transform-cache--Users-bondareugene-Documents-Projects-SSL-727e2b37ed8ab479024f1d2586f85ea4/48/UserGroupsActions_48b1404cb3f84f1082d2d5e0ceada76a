@@ -1,0 +1,72 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_api = require('../../Models/Groups/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_api3 = require('../../Models/Users/api'); /* istanbul ignore next */var _api4 = _interopRequireDefault(_api3);
+var /* istanbul ignore next */_api5 = require('../../Models/Roles/api'); /* istanbul ignore next */var _api6 = _interopRequireDefault(_api5);
+var /* istanbul ignore next */_api7 = require('../../Models/ServiceUser/api'); /* istanbul ignore next */var _api8 = _interopRequireDefault(_api7);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var UserGroupsActions = {
+    init: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    fetchGroups: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    addGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    editGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchUsers: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchListOfRoles: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+var defaultFields = {
+    name: '',
+    group_type: 'customer',
+    organization_id: '',
+    role_id: null,
+    user_ids: [] };
+
+Object.freeze(defaultFields);
+
+UserGroupsActions.init.listen(function (groupId, isService, isEdit) {
+    var userListPromise = /* istanbul ignore next */_api4.default.fetchUsersList(this.isService).then(function (data) /* istanbul ignore next */{return data.users;});
+    var rolesListPromise = /* istanbul ignore next */_api6.default.fetchRolesList(this.isService).
+    then(function (json) /* istanbul ignore next */{return json.roles.reduce(function (rolesMap, item) {
+            rolesMap[item.role_type].push({
+                value: item.id,
+                title: item.name,
+                organizationId: item.organization_id });
+
+            return rolesMap;
+        }, { customer: [], staff: [] });});
+
+    var organizationList = isService ?
+    /* istanbul ignore next */_api8.default.fetchOrganizationsList().then(function (json) /* istanbul ignore next */{return json.organizations;}) :
+    Promise.resolve();
+    var userGroupPromise = isEdit ?
+    /* istanbul ignore next */_api2.default.fetchGroup(groupId, isService) :
+    Promise.resolve();
+
+    return Promise.all([userListPromise, rolesListPromise, organizationList, userGroupPromise]).
+    then(function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var _ref2 = _slicedToArray(_ref, 4),usersList = _ref2[0],roles = _ref2[1],organizations = _ref2[2],group = _ref2[3];
+        var organizationsWithUsers = usersList.
+        map(function (user) /* istanbul ignore next */{return user.organization_id;}) // get array of organization ids
+        .filter(function (organization_id) /* istanbul ignore next */{return organization_id;}); // get array organizations with users
+        var organizationsList = isService ? organizations.
+        filter(function (organization) /* istanbul ignore next */{return organizationsWithUsers.includes(organization.id);}).
+        map(function (organization) /* istanbul ignore next */{return { value: organization.id, name: organization.corporation_name };}) :
+        '';
+        var users = usersList.reduce(function (userMap, item) {
+            userMap[item.user_type].push({
+                id: item.id,
+                organization_id: item.organization_id,
+                name: item.first_name + ' ' + item.last_name });
+
+            return userMap;
+        }, { customer: [], staff: [] });
+        var organization_id = organizationsList.length ? organizationsList[0].value : '';
+        var fields = isEdit ? group : /* istanbul ignore next */_extends({}, defaultFields, { organization_id: organization_id });
+
+        return { users: users, organizationsList: organizationsList, roles: roles, fields: fields };
+    }).
+    then(this.completed, this.failed);
+}); /* istanbul ignore next */exports.default =
+
+UserGroupsActions;

@@ -1,0 +1,61 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_api = require('../../../Models/Users/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_api3 = require('../../../Models/ServiceUser/api'); /* istanbul ignore next */var _api4 = _interopRequireDefault(_api3);
+var /* istanbul ignore next */_api5 = require('../../../Models/Roles/api'); /* istanbul ignore next */var _api6 = _interopRequireDefault(_api5);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var UserDialogActions = {
+    initNew: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    initEdit: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    createUser: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    editUser: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }) };
+
+
+UserDialogActions.initNew.listen(function (isService) {
+    var organizationsListPromise = isService ?
+    /* istanbul ignore next */_api4.default.fetchOrganizationsList().then(function (json) /* istanbul ignore next */{return json.organizations;}) : [];
+    var rolesListPromise = fetchRolesList(isService);
+
+    return Promise.all([organizationsListPromise, rolesListPromise]).
+    then(function ( /* istanbul ignore next */_ref) /* istanbul ignore next */{var _ref2 = _slicedToArray(_ref, 2),organizationsList = _ref2[0],roles = _ref2[1];return { organizationsList: organizationsList, roles: roles };}).
+    then(this.completed, this.failed);
+});
+
+UserDialogActions.initEdit.listen(function (userId, isService) {
+    var organizationsListPromise = isService ?
+    /* istanbul ignore next */_api4.default.fetchOrganizationsList().then(function (json) /* istanbul ignore next */{return json.organizations;}) : [];
+    var rolesListPromise = fetchRolesList(isService);
+    var userPromise = /* istanbul ignore next */_api2.default.fetchUser(userId, isService);
+
+    return Promise.all([organizationsListPromise, rolesListPromise, userPromise]).
+    then(function ( /* istanbul ignore next */_ref3) /* istanbul ignore next */{var _ref4 = _slicedToArray(_ref3, 3),organizationsList = _ref4[0],roles = _ref4[1],user = _ref4[2];return { organizationsList: organizationsList, roles: roles, user: user };}).
+    then(this.completed, this.failed);
+});
+
+UserDialogActions.createUser.listen(function (data, isService) {/* istanbul ignore next */var _this = this;
+    /* istanbul ignore next */_api2.default.addUser({ user: data }, isService).
+    then(function (response) /* istanbul ignore next */{return response.json();}).
+    then(function (json) {
+        (!json.errors ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(json);
+    });
+});
+
+UserDialogActions.editUser.listen(function (userId, data, isService) {/* istanbul ignore next */var _this2 = this;
+    /* istanbul ignore next */_api2.default.editUser(userId, { user: data }, isService).
+    then(function (response) /* istanbul ignore next */{return response.json();}).
+    then(function (json) {
+        (!json.errors ? /* istanbul ignore next */_this2.completed : /* istanbul ignore next */_this2.failed)(json);
+    });
+}); /* istanbul ignore next */exports.default =
+UserDialogActions;
+
+function fetchRolesList(isService) {
+    return (/* istanbul ignore next */_api6.default.fetchRolesList(isService).
+        then(function (json) {
+            return json.roles.reduce(function (rolesMap, item) {
+                rolesMap[item.role_type].push(item);
+                return rolesMap;
+            }, { customer: [], staff: [] });
+        }));
+}

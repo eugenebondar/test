@@ -1,0 +1,37 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */var _enzymeToJson2 = _interopRequireDefault(_enzymeToJson);
+var /* istanbul ignore next */_ReportsTemplateDialogContainer = require('./ReportsTemplateDialogContainer'); /* istanbul ignore next */var _ReportsTemplateDialogContainer2 = _interopRequireDefault(_ReportsTemplateDialogContainer);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('ReportsTemplateDialog', function () {
+    describe('with default set of props', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)(
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ReportsTemplateDialogContainer2.default, /* istanbul ignore next */{
+                mode: /* istanbul ignore next */_ReportsTemplateDialogContainer.REPORTS_TEMPLATE_DIALOG_MODE.NEW,
+                templateId: 'templateId',
+                onClose: function /* istanbul ignore next */onClose() /* istanbul ignore next */{return null;} }));
+
+
+        });
+
+        it('matches snapshot for New mode', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+        });
+
+        it('matches snapshot for Edit mode', function () {
+            component.setProps({ mode: /* istanbul ignore next */_ReportsTemplateDialogContainer.REPORTS_TEMPLATE_DIALOG_MODE.EDIT });
+            expect( /* istanbul ignore next */(0, _enzymeToJson2.default)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

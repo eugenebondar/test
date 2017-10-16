@@ -1,0 +1,31 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_api = require('../../Models/TransactionLogs/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var TransactionLogsActions = {
+    initPage: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    refreshData: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    fetchLog: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    clearExpandedData: /* istanbul ignore next */_reflux2.default.createAction(),
+    changeRequestParams: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+TransactionLogsActions.initPage.listen(function (filter) {
+    return Promise.all([
+    /* istanbul ignore next */_api2.default.getLogsCount({ count_type: 'provider' }),
+    /* istanbul ignore next */_api2.default.getLogs(filter)]).
+    then(function (result) /* istanbul ignore next */{return result.reduce(function (resultMap, value) {
+            return (/* istanbul ignore next */_extends({}, resultMap, value));
+        }, {});}).then(this.completed, this.failed);
+});
+
+TransactionLogsActions.refreshData.listen(function (filter) {
+    /* istanbul ignore next */_api2.default.getLogs(filter).
+    then(this.completed, this.failed);
+});
+
+TransactionLogsActions.fetchLog.listen(function (id) {
+    /* istanbul ignore next */_api2.default.getLog(id).
+    then(this.completed, this.failed);
+}); /* istanbul ignore next */exports.default =
+
+TransactionLogsActions;

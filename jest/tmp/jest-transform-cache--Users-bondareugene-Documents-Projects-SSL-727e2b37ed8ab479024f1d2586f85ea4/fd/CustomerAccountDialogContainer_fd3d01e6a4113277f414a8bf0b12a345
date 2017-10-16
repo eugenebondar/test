@@ -1,0 +1,59 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.CUSTOMER_ACCOUNT_DIALOG_MODE = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _get = function get(object, property, receiver) {if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {var parent = Object.getPrototypeOf(object);if (parent === null) {return undefined;} else {return get(parent, property, receiver);}} else if ("value" in desc) {return desc.value;} else {var getter = desc.get;if (getter === undefined) {return undefined;}return getter.call(receiver);}};var /* istanbul ignore next */_reflux = require('reflux');
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_CustomerAccountDialogStore = require('./CustomerAccountDialogStore'); /* istanbul ignore next */var _CustomerAccountDialogStore2 = _interopRequireDefault(_CustomerAccountDialogStore);
+var /* istanbul ignore next */_CustomerAccountDialogActions = require('./CustomerAccountDialogActions'); /* istanbul ignore next */var _CustomerAccountDialogActions2 = _interopRequireDefault(_CustomerAccountDialogActions);
+
+var /* istanbul ignore next */_CustomerAccountDialog = require('./CustomerAccountDialog'); /* istanbul ignore next */var _CustomerAccountDialog2 = _interopRequireDefault(_CustomerAccountDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var CUSTOMER_ACCOUNT_DIALOG_MODE = /* istanbul ignore next */exports.CUSTOMER_ACCOUNT_DIALOG_MODE = {
+    NEW: 'NEW',
+    EDIT: 'EDIT' }; /* istanbul ignore next */var
+
+
+CustomerAccountDialogContainer = function (_Component) {_inherits(CustomerAccountDialogContainer, _Component);
+    function /* istanbul ignore next */CustomerAccountDialogContainer() {/* istanbul ignore next */_classCallCheck(this, CustomerAccountDialogContainer);var _this = _possibleConstructorReturn(this, (CustomerAccountDialogContainer.__proto__ || Object.getPrototypeOf(CustomerAccountDialogContainer)).call(this));
+
+
+        /* istanbul ignore next */_this.store = /* istanbul ignore next */_CustomerAccountDialogStore2.default;
+
+        /* istanbul ignore next */_this.onSubmit = /* istanbul ignore next */ /* istanbul ignore next */_this.onSubmit.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(CustomerAccountDialogContainer, [{ key: 'componentDidMount', value: function componentDidMount()
+
+        {/* istanbul ignore next */var _this2 = this,_CUSTOMER_ACCOUNT_DIA;
+            var initAction = /* istanbul ignore next */(_CUSTOMER_ACCOUNT_DIA = {}, _defineProperty(_CUSTOMER_ACCOUNT_DIA,
+            CUSTOMER_ACCOUNT_DIALOG_MODE.NEW, function () /* istanbul ignore next */{return (/* istanbul ignore next */_CustomerAccountDialogActions2.default.initNew());}), _defineProperty(_CUSTOMER_ACCOUNT_DIA,
+            CUSTOMER_ACCOUNT_DIALOG_MODE.EDIT, function () /* istanbul ignore next */{return (/* istanbul ignore next */_CustomerAccountDialogActions2.default.initEdit( /* istanbul ignore next */_this2.props.customerId));}), _CUSTOMER_ACCOUNT_DIA)[
+            this.props.mode];
+            initAction();
+        } }, { key: 'componentWillUnmount', value: function componentWillUnmount()
+
+        {
+            /* istanbul ignore next */_get(CustomerAccountDialogContainer.prototype.__proto__ || Object.getPrototypeOf(CustomerAccountDialogContainer.prototype), 'componentWillUnmount', this).call(this);
+            /* istanbul ignore next */_CustomerAccountDialogActions2.default.destroy();
+        } }, { key: 'render', value: function render()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CustomerAccountDialog2.default, /* istanbul ignore next */_extends({},
+                this.state, {
+                    isEdit: this.props.mode === CUSTOMER_ACCOUNT_DIALOG_MODE.EDIT,
+                    onClose: this.props.onClose,
+                    onSubmit: this.onSubmit })));
+
+
+        } }, { key: 'onSubmit', value: function onSubmit(
+
+        fields) {
+            if (this.props.mode === CUSTOMER_ACCOUNT_DIALOG_MODE.NEW) {
+                /* istanbul ignore next */_CustomerAccountDialogActions2.default.createCustomer(fields);
+            } else {
+                /* istanbul ignore next */_CustomerAccountDialogActions2.default.updateCustomer(fields.id, fields);
+            }
+        } }]);return CustomerAccountDialogContainer;}(_reflux.Component); /* istanbul ignore next */exports.default = CustomerAccountDialogContainer;
+
+
+CustomerAccountDialogContainer.propTypes = {
+    mode: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    customerId: /* istanbul ignore next */_react2.default.PropTypes.string };

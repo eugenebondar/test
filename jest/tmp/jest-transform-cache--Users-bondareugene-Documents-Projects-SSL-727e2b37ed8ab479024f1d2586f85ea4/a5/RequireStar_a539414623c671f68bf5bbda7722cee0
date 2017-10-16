@@ -1,0 +1,5 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var RequireStar = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"span", /* istanbul ignore next */{ className: "sc-error required-star" }, /* istanbul ignore next */"*"); /* istanbul ignore next */exports.default =
+
+RequireStar;

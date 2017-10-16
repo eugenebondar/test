@@ -1,0 +1,72 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_api = require('../../../Models/Branding/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}
+
+var CustomizeAccountDialogActions = {
+    init: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    updateBranding: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }) };
+
+
+CustomizeAccountDialogActions.init.listen(function (brandingId) {
+    /* istanbul ignore next */_api2.default.fetchBranding(brandingId).
+    then(this.completed, this.failed);
+});
+
+CustomizeAccountDialogActions.updateBranding.listen(function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var _this = this;var data = _ref.data,images = _ref.images,organizationId = _ref.organizationId,brandingId = _ref.brandingId;
+    var updateBrandingPromise = /* istanbul ignore next */_api2.default.editBranding(organizationId, data).
+    then(checkForValidationErrors);
+
+    var updateImagesPromises = images.map(function (image) {
+        var form = new FormData();
+        for (var key in image) {
+            form.append(key, image[key]);
+        }
+        return (/* istanbul ignore next */_api2.default.uploadImage(brandingId, form).
+            then(checkForValidationErrors));
+    });
+
+    var deleteImagesPromises = data.images.filter(function (image) /* istanbul ignore next */{return image.waitingForDelete;}).
+    map(function (image) {
+        return (/* istanbul ignore next */_api2.default.deleteImage(brandingId, image.id).
+            then(checkForValidationErrors));
+    });
+
+    Promise.all( /* istanbul ignore next */[updateBrandingPromise].concat(_toConsumableArray(updateImagesPromises), _toConsumableArray(deleteImagesPromises))).
+    then(function (responses) {
+        var result = prepareValidation(responses);
+        (result.success ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(result);
+    });
+}); /* istanbul ignore next */exports.default =
+
+CustomizeAccountDialogActions;
+
+function checkForValidationErrors(response) {
+    return new Promise(function (resolve) {
+        if (response.ok) {
+            resolve({ success: true });
+        } else {
+            if (response.status === 422) {
+                response.json().then(function (json) /* istanbul ignore next */{return resolve(json);}).
+                catch({ success: false });
+            } else {
+                resolve({ success: false });
+            }
+        }
+    });
+}
+
+function prepareValidation(responses) {
+    return responses.reduce(function (result, response) {
+        if (!response.success) {
+            result.success = false;
+        }
+        if (response.errors) {
+            result.errors = /* istanbul ignore next */_extends({},
+            result.errors,
+            response.errors);
+
+        }
+        return result;
+    }, { success: true, errors: {} });
+}

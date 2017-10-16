@@ -1,0 +1,89 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_FormField = require('./../FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('FormField', function () {
+    describe('with minimal set of props', function () {
+        it('matches snapshot', function () {
+            var tree = /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)( /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: 'Some label' },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ name: 'x' }))));
+
+
+            expect(tree).toMatchSnapshot();
+        });
+    });
+
+    describe('with single error passed as primitive string and custom error class', function () {
+        var component = /* istanbul ignore next */void 0;
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: 'Some label',
+                    isValid: false,
+                    validationMessage: 'Error message',
+                    validationClass: 'custom-error-class' },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ name: 'x' })));
+
+
+        });
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)(component)).toMatchSnapshot();
+        });
+        it('renders form field container having custom error class', function () {
+            var formFieldContainer = component.find('.form__input');
+            expect(formFieldContainer).toBePresent();
+            expect(formFieldContainer).toHaveClassName('custom-error-class');
+        });
+    });
+
+    describe('with single error in lower case', function () {
+        var component = /* istanbul ignore next */void 0;
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: 'Some label',
+                    isValid: false,
+                    validationMessage: 'error message' },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ name: 'x' })));
+
+
+        });
+    });
+
+    describe('with single error as an array', function () {
+        var component = /* istanbul ignore next */void 0;
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: 'Some label',
+                    isValid: false,
+                    validationMessage: ['Error message'] },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ name: 'x' })));
+
+
+        });
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)(component)).toMatchSnapshot();
+        });
+    });
+
+    describe('with few errors as an array', function () {
+        var component = /* istanbul ignore next */void 0;
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: 'Some label',
+                    isValid: false,
+                    validationMessage: ['Error message', 'Another error message'] },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{ name: 'x' })));
+
+
+        });
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)(component)).toMatchSnapshot();
+        });
+    });
+});

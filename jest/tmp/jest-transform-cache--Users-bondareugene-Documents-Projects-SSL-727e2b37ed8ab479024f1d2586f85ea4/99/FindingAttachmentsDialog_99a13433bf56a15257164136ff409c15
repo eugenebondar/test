@@ -1,0 +1,281 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reflux = require('reflux');
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_FilesStore = require('../../../../Stores/FilesStore'); /* istanbul ignore next */var _FilesStore2 = _interopRequireDefault(_FilesStore);
+var /* istanbul ignore next */_TestDetailsStore = require('../../../../Stores/TestDetailsStore'); /* istanbul ignore next */var _TestDetailsStore2 = _interopRequireDefault(_TestDetailsStore);
+var /* istanbul ignore next */_Actions = require('../../../../Actions');
+
+var /* istanbul ignore next */_ImportForm = require('../../TestRun/Dialogs/ImportForm'); /* istanbul ignore next */var _ImportForm2 = _interopRequireDefault(_ImportForm);
+var /* istanbul ignore next */_RemoveReportConfirmationDialog = require('../../TestRun/Dialogs/RemoveReportConfirmationDialog'); /* istanbul ignore next */var _RemoveReportConfirmationDialog2 = _interopRequireDefault(_RemoveReportConfirmationDialog);
+var /* istanbul ignore next */_isEmptyObject = require('is-empty-object'); /* istanbul ignore next */var _isEmptyObject2 = _interopRequireDefault(_isEmptyObject);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+FindingAttachmentsDialog = function (_Component) {_inherits(FindingAttachmentsDialog, _Component);
+    function /* istanbul ignore next */FindingAttachmentsDialog(props) {/* istanbul ignore next */_classCallCheck(this, FindingAttachmentsDialog);var _this = _possibleConstructorReturn(this, (FindingAttachmentsDialog.__proto__ || Object.getPrototypeOf(FindingAttachmentsDialog)).call(this,
+        props));
+        /* istanbul ignore next */_this.mapStoreToState( /* istanbul ignore next */_FilesStore2.default, /* istanbul ignore next */_this.listenFilesStore);
+        /* istanbul ignore next */_this.mapStoreToState( /* istanbul ignore next */_TestDetailsStore2.default, /* istanbul ignore next */_this.listenTestDetailsStore);
+
+        /* istanbul ignore next */_this.state = {
+            fileName: null,
+            isLoading: false,
+            isDeleting: false,
+            isBrowseDisabled: false,
+            validation: {},
+            attachment: {
+                attachable_type: 'Run',
+                attachable_id: /* istanbul ignore next */_this.props.runId,
+                name: '',
+                file: null,
+                override: false },
+
+            attachmentToRemove: null,
+            isOverrideAndImport: false }; /* istanbul ignore next */return _this;
+
+    }_createClass(FindingAttachmentsDialog, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;var _state =
+
+
+
+            this.state,fileName = _state.fileName,attachment = _state.attachment,isBrowseDisabled = _state.isBrowseDisabled,isLoading = _state.isLoading,isDeleting = _state.isDeleting,isOverrideAndImport = _state.isOverrideAndImport;
+
+            var dialogFooter =
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'sc-btn sc-btn-primary-outline', onClick: /* istanbul ignore next */this.closeDialog.bind(this) },
+                    /* istanbul ignore next */(0, _counterpart2.default)('general.close')),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                        className: 'sc-btn sc-btn-primary',
+                        disabled: this.isImportButtonDisabled() || isLoading,
+                        onClick: /* istanbul ignore next */this.importFile.bind(this) },
+
+                    isOverrideAndImport ?
+                    /* istanbul ignore next */(0, _counterpart2.default)('dashboard_test_run_element.importAndOverwrite') : /* istanbul ignore next */(0, _counterpart2.default)('general.import')));
+
+
+
+
+            var Component = this.props.withBackground ? /* istanbul ignore next */_apocReact.ModalWithBackdrop : /* istanbul ignore next */_apocReact.Modal;
+            return (
+                /* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */{
+                        isOpen: /* istanbul ignore next */true,
+                        header: /* istanbul ignore next */(0, _counterpart2.default)('dashboard_test_run_element.editAttachments'),
+                        footer: dialogFooter },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ImportForm2.default, /* istanbul ignore next */{
+                        updateValue: /* istanbul ignore next */this.trackName.bind(this),
+                        attachment: attachment,
+                        onDrop: /* istanbul ignore next */this.onDrop.bind(this),
+                        isBrowseDisabled: isBrowseDisabled,
+                        fileName: fileName,
+                        attachments: this.props.attachments,
+                        isLoading: isLoading,
+                        validation: this.state.validation,
+                        removeFile: function /* istanbul ignore next */removeFile(attachmentToRemove) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.setState({ attachmentToRemove: attachmentToRemove }));} }),
+
+
+                    this.state.attachmentToRemove &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RemoveReportConfirmationDialog2.default, /* istanbul ignore next */{
+                        onSubmit: /* istanbul ignore next */this.removeFile.bind(this),
+                        onCancel: function /* istanbul ignore next */onCancel() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.setState({ attachmentToRemove: null }));},
+                        isDeleting: isDeleting,
+                        type: 'attachment',
+                        reportItem: this.state.attachmentToRemove })));
+
+
+
+
+        } }, { key: 'closeDialog', value: function closeDialog()
+
+        {/* istanbul ignore next */var _props =
+            this.props,closeDialog = _props.closeDialog,name = _props.name;
+            closeDialog(name);
+        } }, { key: 'onDrop', value: function onDrop(
+
+        files) {/* istanbul ignore next */var
+            attachment = this.state.attachment;
+            this.deleteValidationKey('file');
+
+            attachment.file = files[0];
+            attachment.type = 'Document';
+
+            this.setState({
+                attachment: attachment,
+                fileName: files[0].name });
+
+        } }, { key: 'trackName', value: function trackName(
+
+        key, value) {
+            if (!this.state.isLoading) {
+                this.deleteValidationKey(key); /* istanbul ignore next */var
+                attachment = this.state.attachment;
+                var isNameExist = this.isNameExist(value);
+
+                attachment.name = value;
+                attachment.override = isNameExist;
+
+                this.setState({
+                    attachment: attachment,
+                    isOverrideAndImport: isNameExist });
+
+            }
+        } }, { key: 'deleteValidationKey', value: function deleteValidationKey(
+
+        key) {/* istanbul ignore next */var
+            validation = this.state.validation;
+
+            if (validation[key]) {
+                var newValidation = validation;delete newValidation[key];
+                this.setState({ validation: newValidation });
+            }
+        } }, { key: 'isNameExist', value: function isNameExist(
+
+        name) {/* istanbul ignore next */var
+            attachments = this.props.attachments;
+
+            for (var k in attachments) {
+                if (attachments[k].name === name) {
+                    this.setState({
+                        validation: /* istanbul ignore next */_extends({},
+                        this.state.validation, { name: /* istanbul ignore next */(0, _counterpart2.default)('errors.attachmentWithSameName') }) });
+
+
+                    return true;
+                }
+            }
+            return false;
+        } }, { key: 'importFile', value: function importFile()
+
+        {/* istanbul ignore next */var
+            attachment = this.state.attachment; /* istanbul ignore next */var _props2 =
+            this.props,runId = _props2.runId,findingId = _props2.findingId;
+            this.setState({
+                isLoading: true,
+                isBrowseDisabled: true,
+                validation: {} });
+
+            /* istanbul ignore next */_Actions.FilesActions.importFindingFile(runId, findingId, attachment);
+        } }, { key: 'isImportButtonDisabled', value: function isImportButtonDisabled()
+
+        {/* istanbul ignore next */var _state2 =
+            this.state,attachment = _state2.attachment,validation = _state2.validation;
+            var isNameExist = attachment.name && attachment.name.length > 0;
+
+            if (attachment.override) {
+                return !isNameExist || !attachment.file || validation.file;
+            }
+
+            return !isNameExist || !attachment.file || ! /* istanbul ignore next */(0, _isEmptyObject2.default)(validation);
+        } }, { key: 'removeFile', value: function removeFile(
+
+        values) {/* istanbul ignore next */var
+            id = values.id; /* istanbul ignore next */var _props3 =
+            this.props,runId = _props3.runId,findingId = _props3.findingId;
+            /* istanbul ignore next */_Actions.FilesActions.deleteFindingFile(runId, findingId, id);
+            this.setState({
+                isDeleting: true });
+
+        }
+
+        /**
+           * Listener for TestDetails Store.
+           * @param {Object} [e.event, e.data] - event name and data response.
+           */ }, { key: 'listenTestDetailsStore', value: function listenTestDetailsStore()
+        {/* istanbul ignore next */var e = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { event: '', data: null }; /* istanbul ignore next */var
+            event = e.event,data = e.data;
+            switch (event) {
+                case 'findingsList':
+                    if (data && data.array && data.array.findings) {/* istanbul ignore next */var
+                        validation = this.state.validation; /* istanbul ignore next */var
+                        findingId = this.props.findingId;
+                        var attachments = data.array.findings.find(function (item) /* istanbul ignore next */{return item.id === findingId;}).attachments;
+
+                        if (validation) {
+                            this.setState({
+                                attachments: attachments });
+
+                        } else {/* istanbul ignore next */var
+                            attachment = this.state.attachment;
+                            attachment.name = '';
+                            attachment.file = null;
+                            this.setState({
+                                attachments: attachments,
+                                attachment: attachment,
+                                fileName: null,
+                                isLoading: false,
+                                isBrowseDisabled: false,
+                                isOverrideAndImport: false,
+                                validation: {} });
+
+                        }
+                    }
+                    break;}
+
+        }
+
+        /**
+           * Listener for Files Store.
+           * @param {Object} [e.event, e.data] - event name and data response.
+           */ }, { key: 'listenFilesStore', value: function listenFilesStore()
+        {/* istanbul ignore next */var e = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { event: '', data: null }; /* istanbul ignore next */var
+            event = e.event,data = e.data;
+            switch (event) {
+                case 'findingFileImported':
+                    if (data) {
+                        this.setState({
+                            attachment: /* istanbul ignore next */_extends({},
+                            this.state.attachment, {
+                                name: '',
+                                override: false,
+                                file: null }),
+
+                            isLoading: false,
+                            isBrowseDisabled: false,
+                            isOverrideAndImport: false,
+                            validation: {} });
+
+                    }
+                    break;
+                case 'importFileValidation':
+                    this.setState({
+                        validation: data,
+                        isLoading: false,
+                        isBrowseDisabled: false });
+
+
+                    if (data.name === 'Attachment with the same name exists') {
+                        this.setState({
+                            attachment: /* istanbul ignore next */_extends({}, this.state.attachment, { override: true }),
+                            isOverrideAndImport: true });
+
+                    }
+                    break;
+                case 'findingFileDeleted':
+                    if (data) {
+                        this.setState({
+                            isDeleting: false,
+                            attachmentToRemove: null });
+
+                    }
+                    break;}
+
+        } }]);return FindingAttachmentsDialog;}(_reflux.Component); /* istanbul ignore next */exports.default = FindingAttachmentsDialog;
+
+
+FindingAttachmentsDialog.propTypes = {
+    name: /* istanbul ignore next */_react2.default.PropTypes.string,
+    runId: /* istanbul ignore next */_react2.default.PropTypes.string,
+    findingId: /* istanbul ignore next */_react2.default.PropTypes.string,
+    attachments: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string,
+        file_url: /* istanbul ignore next */_react2.default.PropTypes.string })),
+
+    closeDialog: /* istanbul ignore next */_react2.default.PropTypes.func,
+    withBackground: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+
+FindingAttachmentsDialog.defaultProps = {
+    withBackground: true };

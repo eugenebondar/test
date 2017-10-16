@@ -1,0 +1,55 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+FlatListOptionsCollectionFilter;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_FilterList = require('./FilterList'); /* istanbul ignore next */var _FilterList2 = _interopRequireDefault(_FilterList);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function FlatListOptionsCollectionFilter( /* istanbul ignore next */_ref) {/* istanbul ignore next */var filterOptionsBySection = _ref.filterOptionsBySection,filter = _ref.filter,onChange = _ref.onChange;
+    var flatFilterOptions = filterOptionsBySection.map(function (optionsSection) /* istanbul ignore next */{return optionsSection.name;}).
+    reduce(function (prev, filterName) {
+        if (filter[filterName] === null || filter[filterName] === undefined) {
+            return prev;
+        }
+        return prev.concat(filter[filterName]);
+    }, []).
+    map(getFilterOptionByValue);
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FilterList2.default, /* istanbul ignore next */{ options: flatFilterOptions, onChange: updateFilterState }));
+
+
+    function updateFilterState(newFilterOptions) {
+        var values = newFilterOptions.map(function (filterOption) /* istanbul ignore next */{return filterOption.value;});
+        var newFilter = filterOptionsBySection.reduce(function (prev, currentSection) {
+            prev[currentSection.name] = currentSection.options.
+            filter(function (option) /* istanbul ignore next */{return values.includes(option.value);}).
+            map(function (option) /* istanbul ignore next */{return option.value;});
+            return prev;
+        }, {});
+        if (onChange) {
+            onChange(newFilter);
+        }
+    }
+
+    function getFilterOptionByValue(value) {
+        var option = filterOptionsBySection.reduce(function (prev, current) {
+            if (prev) {
+                return prev;
+            }
+            return current.options.find(function (option) /* istanbul ignore next */{return option.value === value;});
+        }, null);
+        if (!option) {
+            throw new Error( /* istanbul ignore next */'option with value: ' + value + ' could not be found');
+        }
+        return option;
+    }
+}
+
+FlatListOptionsCollectionFilter.propTypes = {
+    filter: /* istanbul ignore next */_react2.default.PropTypes.object,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    filterOptionsBySection: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        name: /* istanbul ignore next */_react2.default.PropTypes.string,
+        options: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+            name: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+            /* istanbul ignore next */_react2.default.PropTypes.string,
+            /* istanbul ignore next */_react2.default.PropTypes.node]),
+
+            value: /* istanbul ignore next */_react2.default.PropTypes.string })) })) };

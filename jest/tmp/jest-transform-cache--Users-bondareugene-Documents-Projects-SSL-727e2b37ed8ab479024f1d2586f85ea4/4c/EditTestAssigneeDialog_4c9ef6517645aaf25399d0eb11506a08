@@ -1,0 +1,65 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_LoadingModalDialog = require('../../../Shared/Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+var /* istanbul ignore next */_modalWithOverflowVisibleHOC = require('../../../Shared/ApocReactModal/modalWithOverflowVisibleHOC'); /* istanbul ignore next */var _modalWithOverflowVisibleHOC2 = _interopRequireDefault(_modalWithOverflowVisibleHOC);
+var /* istanbul ignore next */_EditTestAssigneeForm = require('./EditTestAssigneeForm'); /* istanbul ignore next */var _EditTestAssigneeForm2 = _interopRequireDefault(_EditTestAssigneeForm);
+
+/* istanbul ignore next */require('./EditTestAssigneeDialog.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var ModalDialog = /* istanbul ignore next */(0, _modalWithOverflowVisibleHOC2.default)( /* istanbul ignore next */_LoadingModalDialog2.default); /* istanbul ignore next */var
+
+EditTestAssigneeDialog = function (_React$PureComponent) {_inherits(EditTestAssigneeDialog, _React$PureComponent);function EditTestAssigneeDialog() {_classCallCheck(this, EditTestAssigneeDialog);return _possibleConstructorReturn(this, (EditTestAssigneeDialog.__proto__ || Object.getPrototypeOf(EditTestAssigneeDialog)).apply(this, arguments));}_createClass(EditTestAssigneeDialog, [{ key: 'render', value: function render()
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement(ModalDialog, /* istanbul ignore next */{
+                        loading: this.props.isLoading || this.props.isSaving,
+                        isOpen: /* istanbul ignore next */true,
+                        header: /* istanbul ignore next */(0, _counterpart2.default)('assigneeDialog.editAssignee'),
+                        footer: this.getDialogFooter(),
+                        className: 'edit-test-assignee-dialog' },
+
+                    !this.props.isLoading &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_EditTestAssigneeForm2.default, /* istanbul ignore next */{
+                        fields: this.props.fields,
+                        onChange: this.props.onChange,
+                        testAssigneeListOptions: this.props.testAssigneeListOptions })));
+
+
+
+
+        } }, { key: 'getDialogFooter', value: function getDialogFooter()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'cancel-btn sc-btn', onClick: this.props.onClose },
+                        /* istanbul ignore next */(0, _counterpart2.default)('general.cancel')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                            className: 'sc-btn sc-btn-primary',
+                            onClick: this.props.onSubmit,
+                            disabled: !this.props.areFieldsChanged || this.props.isLoading || this.props.isSaving },
+
+                        /* istanbul ignore next */(0, _counterpart2.default)('general.save'))));
+
+
+
+        } }]);return EditTestAssigneeDialog;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = EditTestAssigneeDialog;
+
+
+EditTestAssigneeDialog.propTypes = {
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    areFieldsChanged: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    testAssigneeListOptions: /* istanbul ignore next */_react2.default.PropTypes.arrayOf(
+    /* istanbul ignore next */_react2.default.PropTypes.shape({
+        value: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        label: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })),
+
+
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        assignee_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }) };

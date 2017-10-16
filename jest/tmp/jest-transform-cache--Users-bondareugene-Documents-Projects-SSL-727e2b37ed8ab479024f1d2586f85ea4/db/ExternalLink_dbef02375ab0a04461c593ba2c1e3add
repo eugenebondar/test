@@ -1,0 +1,22 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+ExternalLink;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_index = require('../../../Elements/Link/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ExternalLink(props) {/* istanbul ignore next */var
+    object = props.test,source = props.source,url_source = props.url_source;
+    var name = object[source];
+    var value = object[url_source] || name;
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+            className: 'test-table-cell-wrap',
+            target: '_blank',
+            name: name,
+            value: value }));
+
+
+}
+
+ExternalLink.propTypes = {
+    test: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    source: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    url_source: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired };

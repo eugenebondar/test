@@ -1,0 +1,10 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var DateFormats = {
+    fullDate: 'YYYY/MM/DD hh:mm A',
+    fullDateWithSeconds: 'YYYY/MM/DD hh:mm:ss A',
+    shortDate: 'YYYY/MM/DD',
+    shortDateUS: 'MM/DD/YYYY',
+    sourceShortDate: 'YYYY-MM-DD',
+    iso8601: 'YYYY-MM-DD[T]HH:mm:ssz' }; /* istanbul ignore next */exports.default =
+
+
+DateFormats;

@@ -1,0 +1,22 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+NextButton;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function NextButton( /* istanbul ignore next */_ref) {/* istanbul ignore next */var total = _ref.total,onClick = _ref.onClick,disabled = _ref.disabled;
+    if (total < 2) {
+        return null;
+    }
+    var buttonClassName = /* istanbul ignore next */(0, _classnames2.default)('fd__nav fd__next sc-btn-primary', {
+        'fd__nav-disabled': disabled });
+
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ disabled: disabled, onClick: onClick, className: buttonClassName },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-icon-caret-right' })));
+
+
+}
+
+NextButton.propTypes = {
+    disabled: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    total: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+    onClick: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };

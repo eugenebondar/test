@@ -1,0 +1,75 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_getNameSpacing = require('../../Utils/getNameSpacing'); /* istanbul ignore next */var _getNameSpacing2 = _interopRequireDefault(_getNameSpacing);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var ServiceAPI = {};
+
+ServiceAPI.fetchCustomers = function (filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull('/api/service/organizations.json', filter));
+};
+
+ServiceAPI.fetchOrganizationsList = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/organizations/list.json'));
+};
+
+ServiceAPI.fetchCustomer = function (customerId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/organizations/' + customerId));
+};
+
+ServiceAPI.fetchTemplates = function (customerId, type) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/organizations/' + customerId + '/templates/' + type));
+};
+
+ServiceAPI.setCustomerDefaultTemplates = function (customerId, data) {
+    return (/* istanbul ignore next */_Api2.default.post( /* istanbul ignore next */'/api/service/organizations/' + customerId + '/templates', data));
+};
+
+ServiceAPI.addCustomer = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/service/organizations', data));
+};
+
+ServiceAPI.updateCustomer = function (data, customerId) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/organizations/' + customerId + '.json', data));
+};
+
+ServiceAPI.deleteCustomer = function (customerId) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/organizations/' + customerId + '.json', customerId));
+};
+
+ServiceAPI.suspendCustomer = function (customerId, data) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/organizations/' + customerId + '.json', data));
+};
+
+ServiceAPI.editBranding = function (customerId, data) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/organizations/' + customerId + '.json', data));
+};
+
+ServiceAPI.editBrandingFile = function (customerId, data) {
+    return (/* istanbul ignore next */_Api2.default.updateForm( /* istanbul ignore next */'/api/service/organizations/' + customerId + '.json', data));
+};
+
+ServiceAPI.getTestAssigneeList = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/users/service.json'));
+};
+
+ServiceAPI.addNewTest = function (test) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/service/tests.json', test));
+};
+
+ServiceAPI.editTest = function (test, id) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/tests/' + id, test));
+};
+
+ServiceAPI.fetchTest = function (id) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/tests/' + id));
+};
+
+ServiceAPI.deleteTest = function (id) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/tests/' + id));
+};
+
+ServiceAPI.addTestSettings = function (id, isService, data, isClaim) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.post( /* istanbul ignore next */'/api/' + nameSpacing + 'tests/' + id + '/configure' + (isClaim ? '_and_claim' : '') + '.json', data));
+}; /* istanbul ignore next */exports.default =
+
+ServiceAPI;

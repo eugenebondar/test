@@ -1,0 +1,32 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_getNameSpacing = require('../../Utils/getNameSpacing'); /* istanbul ignore next */var _getNameSpacing2 = _interopRequireDefault(_getNameSpacing);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var RolesAPI = {};
+
+RolesAPI.fetchRoles = function (filter, isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.getFull( /* istanbul ignore next */'/api/' + nameSpacing + 'roles.json', filter));
+};
+
+RolesAPI.fetchRolesList = function (isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/' + nameSpacing + 'roles/list.json'));
+};
+
+RolesAPI.fetchRole = function (roleId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/roles/' + roleId));
+};
+
+RolesAPI.createRole = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/service/roles', data));
+};
+
+RolesAPI.deleteRole = function (roleId) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/roles/' + roleId));
+};
+
+RolesAPI.editRole = function (roleId, data) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/roles/' + roleId, data));
+}; /* istanbul ignore next */exports.default =
+
+RolesAPI;

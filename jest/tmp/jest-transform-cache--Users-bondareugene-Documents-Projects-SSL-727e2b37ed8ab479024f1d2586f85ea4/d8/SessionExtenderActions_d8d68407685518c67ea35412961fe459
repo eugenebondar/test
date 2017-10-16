@@ -1,0 +1,20 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_api = require('../../Models/Session/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_api3 = require('../../Models/Dashboard/api'); /* istanbul ignore next */var _api4 = _interopRequireDefault(_api3);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var SessionExtenderActions = {
+    extend: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    expire: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+SessionExtenderActions.extend.listen(function () {/* istanbul ignore next */var _this = this;
+    /* istanbul ignore next */_api2.default.getActiveSession().
+    then(function (userSession) /* istanbul ignore next */{return (/* istanbul ignore next */_this.completed(userSession));});
+});
+
+SessionExtenderActions.expire.listen(function (isService) {/* istanbul ignore next */var _this2 = this;
+    /* istanbul ignore next */_api4.default.getCompletedTests(isService, {}).then(function () /* istanbul ignore next */{return (/* istanbul ignore next */_this2.completed());});
+}); /* istanbul ignore next */exports.default =
+
+SessionExtenderActions;

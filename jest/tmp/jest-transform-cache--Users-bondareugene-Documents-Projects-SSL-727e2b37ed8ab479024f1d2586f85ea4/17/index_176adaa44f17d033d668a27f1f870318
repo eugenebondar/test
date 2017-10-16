@@ -1,0 +1,137 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+var /* istanbul ignore next */_deepEqual = require('deep-equal'); /* istanbul ignore next */var _deepEqual2 = _interopRequireDefault(_deepEqual);
+var /* istanbul ignore next */_apocReact = require('apoc-react'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * Select.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @module Shared/Elements/Select
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @version 1.0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @requires React
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @author Yevhen Bondar
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @copyright (c) 2016 SoftServe.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   */var Select = function (_React$Component) {_inherits(Select, _React$Component);function /* istanbul ignore next */Select(props) {/* istanbul ignore next */_classCallCheck(this, Select);var _this = _possibleConstructorReturn(this, (Select.__proto__ || Object.getPrototypeOf(Select)).call(this, props)); /* istanbul ignore next */_this.state = { key: 0 }; /* istanbul ignore next */_this.onChange = /* istanbul ignore next */_this.onChange.bind( /* istanbul ignore next */_this); /* istanbul ignore next */_this.checkDefaultValue = /* istanbul ignore next */_this.checkDefaultValue.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;}_createClass(Select, [{ key: 'componentWillMount', value: function componentWillMount()
+        {
+            this.checkDefaultValue(this.props);
+        } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+        nextProps) {
+            if (! /* istanbul ignore next */(0, _deepEqual2.default)(nextProps.options, this.props.options) ||
+            nextProps.value !== this.props.value) {
+                this.setState({ key: ++this.state.key });
+            }
+            this.checkDefaultValue(nextProps);
+        } }, { key: 'render', value: function render()
+        {/* istanbul ignore next */var _this2 = this;var _props =
+            this.props,value = _props.value,isDisabled = _props.isDisabled,options = _props.options;
+            var optionsList = options.map(function (option, i) {
+                var check = 'undefined' !== typeof option.value;
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownOption, /* istanbul ignore next */{
+                        key: i,
+                        value: /* istanbul ignore next */_this2.toString(check ? option.value : option),
+                        label: check ? option.name : option,
+                        isSelected: check ? option.value === value : option === value }));
+
+
+            });
+            var labelClasses = /* istanbul ignore next */(0, _classnames2.default)(
+            'sc-btn sc-btn-primary-outline', {
+                'disabled-btn': isDisabled });
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Dropdown, /* istanbul ignore next */{
+                            key: this.state.key,
+                            button: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.DropdownButton, /* istanbul ignore next */{ className: labelClasses }),
+                            onChange: this.onChange,
+                            name: 'dropdown' },
+
+                        optionsList)));
+
+
+
+
+        } }, { key: 'checkDefaultValue', value: function checkDefaultValue(
+        props) {/* istanbul ignore next */var
+            options = props.options,value = props.value,id = props.id,updateValue = props.updateValue;
+            var isOptionsListHasPassedValue = false;
+            options.forEach(function (option) {
+                var optionValue = 'undefined' !== typeof option.value ? option.value : option;
+                if (optionValue === value) {
+                    isOptionsListHasPassedValue = true;
+                }
+            });
+            if (!isOptionsListHasPassedValue) {
+                var defaultValue = options[0].value ? options[0].value : options[0];
+                updateValue(id, defaultValue, 'select');
+            }
+        } }, { key: 'onChange', value: function onChange(
+
+        data) {/* istanbul ignore next */var _props2 =
+            this.props,id = _props2.id,updateValue = _props2.updateValue;
+            var value = 'undefined' !== typeof data.value.value ? data.value.value : data.value;
+            updateValue(id, this.toCorrectValue(value), 'select');
+        } }, { key: 'toString', value: function toString(
+
+        val) {
+            if (arguments.length === 0) {
+                return '';
+            } else if (typeof val === 'undefined') {
+                return 'undefined';
+            } else if (val === null) {
+                return 'null';
+            } else if (typeof val === 'boolean') {
+                return val ? 'true' : 'false';
+            } else {
+                return val + '';
+            }
+        } }, { key: 'toCorrectValue', value: function toCorrectValue(
+
+        val) {
+            if (arguments.length === 0) {
+                return '';
+            } else if (val === 'undefined') {
+                return 'undefined';
+            } else if (val === 'null') {
+                return null;
+            } else if (val === 'true') {
+                return true;
+            } else if (val === 'false') {
+                return false;
+            } else {
+                return val;
+            }
+        } }]);return Select;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = Select;
+
+
+Select.propTypes = {
+    id: /* istanbul ignore next */_react2.default.PropTypes.string,
+    updateValue: /* istanbul ignore next */_react2.default.PropTypes.func,
+    options: /* istanbul ignore next */_react2.default.PropTypes.array,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    value: /* istanbul ignore next */_react2.default.PropTypes.any,
+    isHide: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    className: /* istanbul ignore next */_react2.default.PropTypes.string,
+    getEvent: /* istanbul ignore next */_react2.default.PropTypes.func,
+    reactOnHoverEvent: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    closeOnClick: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isDisabled: /* istanbul ignore next */_react2.default.PropTypes.bool };
+
+
+Select.defaultProps = {
+    className: '',
+    closeOnClick: false,
+    isHide: false,
+    value: '',
+    isDisabled: false,
+    options: [] };

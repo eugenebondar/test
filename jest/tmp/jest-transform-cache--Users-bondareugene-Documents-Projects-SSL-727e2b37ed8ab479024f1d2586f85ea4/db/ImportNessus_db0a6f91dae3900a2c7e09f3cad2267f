@@ -1,0 +1,53 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDropzone = require('react-dropzone'); /* istanbul ignore next */var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ImportNessus = function (_React$Component) {_inherits(ImportNessus, _React$Component);
+    function /* istanbul ignore next */ImportNessus(props) {/* istanbul ignore next */_classCallCheck(this, ImportNessus);var _this = _possibleConstructorReturn(this, (ImportNessus.__proto__ || Object.getPrototypeOf(ImportNessus)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            assessmentRunManually: false,
+            isRequestTestRuns: false,
+            assessmentRuns: null,
+            findingsData: {
+                source: 'Nessus',
+                file: null,
+                run_id: /* istanbul ignore next */_this.props.runId } };
+
+
+
+        /* istanbul ignore next */_this.onDrop = /* istanbul ignore next */_this.onDrop.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(ImportNessus, [{ key: 'render', value: function render()
+        {
+            var file = this.state.findingsData.file;
+            var fileName = file ? '(' + file.name + ')' : null;
+            var require = /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'sc-error required-star' }, /* istanbul ignore next */'*');
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__field' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'label', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.browse'), /* istanbul ignore next */' ', require),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'form__input' },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactDropzone2.default, /* istanbul ignore next */{ className: 'dropzone-wrap', onDrop: this.onDrop },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'browse-btn sc-btn sc-btn-primary-outline' },
+                                    /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.browse'))),
+
+
+                            fileName))));
+
+
+
+
+        } }, { key: 'onDrop', value: function onDrop(
+        files) {
+            var findingsData = this.state.findingsData;
+            findingsData.file = files[0];
+            this.props.updateValue(findingsData);
+            this.props.updateStatus(true);
+            this.setState({ findingsData: findingsData });
+        } }]);return ImportNessus;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = ImportNessus;
+
+
+ImportNessus.propTypes = {
+    updateStatus: /* istanbul ignore next */_react2.default.PropTypes.func,
+    updateValue: /* istanbul ignore next */_react2.default.PropTypes.func,
+    runId: /* istanbul ignore next */_react2.default.PropTypes.string };

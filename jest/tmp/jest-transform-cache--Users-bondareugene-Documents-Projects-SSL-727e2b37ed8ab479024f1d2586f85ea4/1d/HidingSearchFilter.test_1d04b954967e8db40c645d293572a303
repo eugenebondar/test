@@ -1,0 +1,26 @@
+/* istanbul ignore next */'use strict';var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json');
+
+var /* istanbul ignore next */_HidingSearchFilter = require('./HidingSearchFilter'); /* istanbul ignore next */var _HidingSearchFilter2 = _interopRequireDefault(_HidingSearchFilter);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('HidingSearchFilter', function () {
+
+    var searchFilterProps = {
+        filter: "test",
+        id: "id",
+        placeholder: "Search",
+        isDisabled: false,
+        updateFilter: function /* istanbul ignore next */updateFilter() {} };
+
+
+    it('does not render if total is 0', function () {
+        var node = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_HidingSearchFilter2.default, /* istanbul ignore next */_extends({ totalResults: 0 }, searchFilterProps)));
+        expect(node.type()).toBeNull();
+    });
+
+    it('renders SearchFilter if total is greater than 0', function () {
+        var node = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_HidingSearchFilter2.default, /* istanbul ignore next */_extends({ totalResults: 1 }, searchFilterProps)));
+        expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)(node)).toMatchSnapshot();
+    });
+});

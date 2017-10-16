@@ -1,0 +1,71 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_FormFirstColumn = require('./FormFirstColumn'); /* istanbul ignore next */var _FormFirstColumn2 = _interopRequireDefault(_FormFirstColumn);
+var /* istanbul ignore next */_FormSecondColumn = require('./FormSecondColumn'); /* istanbul ignore next */var _FormSecondColumn2 = _interopRequireDefault(_FormSecondColumn);
+var /* istanbul ignore next */_FormThirdColumn = require('./FormThirdColumn'); /* istanbul ignore next */var _FormThirdColumn2 = _interopRequireDefault(_FormThirdColumn);
+var /* istanbul ignore next */_FormFourthColumn = require('./FormFourthColumn'); /* istanbul ignore next */var _FormFourthColumn2 = _interopRequireDefault(_FormFourthColumn);
+var /* istanbul ignore next */_ClassificationDetailsSection = require('./ClassificationDetailsSection'); /* istanbul ignore next */var _ClassificationDetailsSection2 = _interopRequireDefault(_ClassificationDetailsSection);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+FindingForm = function (_React$Component) {_inherits(FindingForm, _React$Component);function FindingForm() {_classCallCheck(this, FindingForm);return _possibleConstructorReturn(this, (FindingForm.__proto__ || Object.getPrototypeOf(FindingForm)).apply(this, arguments));}_createClass(FindingForm, [{ key: 'render', value: function render()
+        {
+            var classificationFields = this.getClassificationFields();
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__finding-content' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.summary')),
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'fd__findings-header row' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormFirstColumn2.default, /* istanbul ignore next */{
+                            validation: this.props.validation,
+                            fields: this.props.fields,
+                            classificationFields: classificationFields,
+                            findingTypes: this.props.findingTypes,
+                            findingCategories: this.props.findingCategories,
+                            findingClassifications: this.props.findingClassifications,
+                            onFindingCategoryChange: this.props.onFindingCategoryChange,
+                            onChange: this.props.onChange }),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormSecondColumn2.default, /* istanbul ignore next */{
+                            validation: this.props.validation,
+                            fields: this.props.fields,
+                            onChange: this.props.onChange,
+                            classificationFields: classificationFields }),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormThirdColumn2.default, /* istanbul ignore next */{
+                            validation: this.props.validation,
+                            fields: this.props.fields,
+                            classificationFields: classificationFields,
+                            onChange: this.props.onChange }),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormFourthColumn2.default, /* istanbul ignore next */{
+                            validation: this.props.validation,
+                            fields: this.props.fields,
+                            onChange: this.props.onChange })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ClassificationDetailsSection2.default, /* istanbul ignore next */{
+                        fields: this.props.fields,
+                        isEdit: this.props.isEdit,
+                        onChange: this.props.onChange,
+                        validation: this.props.validation })));
+
+
+
+        } }, { key: 'getClassificationFields', value: function getClassificationFields()
+
+        {/* istanbul ignore next */var _this2 = this;
+            var classificationIndex = this.props.findingClassifications.findIndex(function (classification) {
+                return classification.id === /* istanbul ignore next */_this2.props.fields.finding_classification_id;
+            });
+            return this.props.findingClassifications[classificationIndex < 0 ? 0 : classificationIndex];
+        } }]);return FindingForm;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = FindingForm;
+
+
+FindingForm.propTypes = {
+    isEdit: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    findingCategories: /* istanbul ignore next */_react2.default.PropTypes.array,
+    findingClassifications: /* istanbul ignore next */_react2.default.PropTypes.array,
+    findingTypes: /* istanbul ignore next */_react2.default.PropTypes.array,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onFindingCategoryChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.object,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object };

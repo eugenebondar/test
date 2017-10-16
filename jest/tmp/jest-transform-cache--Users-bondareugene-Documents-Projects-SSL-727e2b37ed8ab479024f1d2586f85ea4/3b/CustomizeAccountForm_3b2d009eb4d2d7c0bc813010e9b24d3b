@@ -1,0 +1,158 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_reactColor = require('react-color');
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_FormField = require('../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+
+var /* istanbul ignore next */_customizeAccountConfig = require('./customizeAccountConfig');
+var /* istanbul ignore next */_CustomizeAccountImage = require('./CustomizeAccountImage'); /* istanbul ignore next */var _CustomizeAccountImage2 = _interopRequireDefault(_CustomizeAccountImage);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+CustomizeAccountForm = function (_React$Component) {_inherits(CustomizeAccountForm, _React$Component);function CustomizeAccountForm() {_classCallCheck(this, CustomizeAccountForm);return _possibleConstructorReturn(this, (CustomizeAccountForm.__proto__ || Object.getPrototypeOf(CustomizeAccountForm)).apply(this, arguments));}_createClass(CustomizeAccountForm, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _this2 = this;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{ label: /* istanbul ignore next */(0, _counterpart2.default)('customers.customize.customizationStatus') },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ToggleButton, /* istanbul ignore next */{
+                            toggleSize: 'md',
+                            toggleId: 'toggleId',
+                            isOn: this.props.fields.enabled,
+                            onSwitch: function /* istanbul ignore next */onSwitch(value) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onChange({ enabled: value }));} })),
+
+
+                    this.props.fields.enabled &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                        /* istanbul ignore next */_customizeAccountConfig.IMAGE_TYPES_ARRAY.map( /* istanbul ignore next */this.renderBrandingImages.bind(this)),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                                label: /* istanbul ignore next */(0, _counterpart2.default)('customers.customize.mainColor'),
+                                isValid: /* istanbul ignore next */this.isFieldValid.call(this, 'main_color'),
+                                validationMessage: /* istanbul ignore next */this.getValidationMessage.call(this, 'main_color'),
+                                className: 'color-picker' },
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactColor.CompactPicker, /* istanbul ignore next */{
+                                colors: /* istanbul ignore next */_customizeAccountConfig.LIST_OF_COLOURS,
+                                color: this.props.fields.main_color,
+                                onChangeComplete: function /* istanbul ignore next */onChangeComplete(color) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onChange({ main_color: color.hex }));} })))));
+
+
+
+
+
+
+        } }, { key: 'renderBrandingImages', value: function renderBrandingImages(
+
+        type, key) {
+            var fields = /* istanbul ignore next */_extends({}, this.props.fields);
+            var uploadedImages = /* istanbul ignore next */[].concat(_toConsumableArray(this.props.uploadedImages));
+
+            var uploadedImageIndex = this.findImageIndex(uploadedImages, type);
+            var defaultImageIndex = this.findImageIndex(fields.images, type);
+            var imageSource = this.getImageSource(uploadedImageIndex, defaultImageIndex);
+            var imageStatus = this.getImageStatus(uploadedImageIndex, defaultImageIndex);
+            var markAsDeleted = this.getDeleteStatus(imageStatus, defaultImageIndex);
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CustomizeAccountImage2.default, /* istanbul ignore next */{
+                    key: key,
+                    onChange: this.props.onChange,
+                    onImageChange: this.props.onImageChange,
+                    uploadedImages: uploadedImages,
+                    fields: fields,
+                    validationMessage: this.getValidationMessage(type),
+                    isFieldValid: this.isFieldValid(type),
+                    type: type,
+                    imageSrc: imageSource,
+                    imageStatus: imageStatus,
+                    markAsDeleted: markAsDeleted,
+                    uploadedImageIndex: uploadedImageIndex,
+                    defaultImageIndex: defaultImageIndex }));
+
+
+        } }, { key: 'getDeleteStatus', value: function getDeleteStatus(
+
+        imageStatus, defaultImageIndex) {/* istanbul ignore next */var _actions;var
+            fields = this.props.fields;
+            var actions = /* istanbul ignore next */(_actions = {}, _defineProperty(_actions,
+            /* istanbul ignore next */_customizeAccountConfig.IMAGE_STATUS.UPLOADED, defaultImageIndex > -1), _defineProperty(_actions,
+            /* istanbul ignore next */_customizeAccountConfig.IMAGE_STATUS.DEFAULT, defaultImageIndex > -1 && fields.images[defaultImageIndex].waitingForDelete), _actions);
+
+            return !!actions[imageStatus];
+        } }, { key: 'getImageSource', value: function getImageSource(
+
+        uploadedImageIndex, defaultImageIndex) {/* istanbul ignore next */var _props =
+            this.props,fields = _props.fields,uploadedImages = _props.uploadedImages;
+
+            if (uploadedImageIndex > -1) {
+                return uploadedImages[uploadedImageIndex].image_file.preview;
+            }
+
+            if (defaultImageIndex > -1) {
+                return fields.images[defaultImageIndex].image_file.url;
+            }
+            return null;
+        } }, { key: 'getImageStatus', value: function getImageStatus(
+
+        uploadedImageIndex, defaultImageIndex) {
+            if (uploadedImageIndex > -1) {
+                return (/* istanbul ignore next */_customizeAccountConfig.IMAGE_STATUS.UPLOADED);
+            }
+            if (defaultImageIndex > -1) {
+                return (/* istanbul ignore next */_customizeAccountConfig.IMAGE_STATUS.DEFAULT);
+            }
+            return null;
+        } }, { key: 'findImageIndex', value: function findImageIndex(
+
+        source, type) {
+            return source.findIndex(function (item) {
+                return item.image_type === type;
+            });
+        }
+
+        /**
+           * @param fieldKey
+           * @return {string|undefined}
+           */ }, { key: 'getValidationMessage', value: function getValidationMessage(
+        fieldKey) {
+            if (!this.props.validation) {
+                return undefined;
+            }
+            return this.props.validation[fieldKey];
+        }
+
+        /**
+           * Field is valid if there is no error message for it
+           * @param {string} [fieldKey]
+           * @return {boolean}
+           */ }, { key: 'isFieldValid', value: function isFieldValid(
+        fieldKey) {
+            return !this.getValidationMessage(fieldKey);
+        } }]);return CustomizeAccountForm;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = CustomizeAccountForm;
+
+
+CustomizeAccountForm.propTypes = {
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    uploadedImages: /* istanbul ignore next */_react2.default.PropTypes.arrayOf(
+    /* istanbul ignore next */_react2.default.PropTypes.shape({
+        image_file: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+        image_type: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })).
+
+    isRequired,
+    onImageChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        enabled: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+        id: /* istanbul ignore next */_react2.default.PropTypes.stringv,
+        images: /* istanbul ignore next */_react2.default.PropTypes.arrayOf(
+        /* istanbul ignore next */_react2.default.PropTypes.shape({
+            branding_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+            created_at: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+            id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+            image_file: /* istanbul ignore next */_react2.default.PropTypes.shape({
+                url: /* istanbul ignore next */_react2.default.PropTypes.string }).
+            isRequired,
+            image_type: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+            updated_at: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })),
+
+
+        main_color: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }).
+    isRequired,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object };

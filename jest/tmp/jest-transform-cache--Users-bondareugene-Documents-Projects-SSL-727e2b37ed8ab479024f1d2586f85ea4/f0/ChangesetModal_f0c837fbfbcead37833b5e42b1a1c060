@@ -1,0 +1,35 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+ChangesetModal;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_apocReact = require('apoc-react');var /* istanbul ignore next */_reactJsonPretty = require('react-json-pretty'); /* istanbul ignore next */var _reactJsonPretty2 = _interopRequireDefault(_reactJsonPretty);var /* istanbul ignore next */_DateTimeFormat = require('../../Shared/Configuration/DateTimeFormat'); /* istanbul ignore next */var _DateTimeFormat2 = _interopRequireDefault(_DateTimeFormat);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ChangesetModal( /* istanbul ignore next */_ref) {/* istanbul ignore next */var log = _ref.log,onClose = _ref.onClose;
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ModalWithBackdrop, /* istanbul ignore next */{
+                isOpen: /* istanbul ignore next */true,
+                className: 'changeset-modal',
+                header: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DateTimeFormat2.default, /* istanbul ignore next */{ dateFormat: 'fullDate', date: log.created_at })),
+
+                footer:
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                            className: 'sc-btn sc-btn-primary',
+                            onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return onClose();} },
+
+                        /* istanbul ignore next */(0, _counterpart2.default)('general.close'))) },
+
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactJsonPretty2.default, /* istanbul ignore next */{ json: JSON.stringify(log.changeset) })));
+
+
+}
+
+ChangesetModal.propTypes = {
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func,
+    /*eslint-disable react/forbid-prop-types */
+    log: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired
+    /*eslint-enable react/forbid-prop-types */ };

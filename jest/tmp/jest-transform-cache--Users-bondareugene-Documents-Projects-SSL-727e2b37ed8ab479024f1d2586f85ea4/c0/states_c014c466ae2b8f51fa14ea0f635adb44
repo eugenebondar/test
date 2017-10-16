@@ -1,0 +1,14 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var STATES = {
+    NEEDS_CONFIGURATION: 'needs_configuration',
+    READY_FOR_TESTING: 'ready_for_testing',
+    QUEUED: 'queued',
+    IN_PROGRESS: 'in_progress',
+    ON_HOLD: 'on_hold',
+    WAITING_FOR_INFO: 'waiting_for_info',
+    RESPONSE_PROVIDED: 'response_provided',
+    STOPPING: 'stopping',
+    COMPLETED: 'completed',
+    EXPIRED: 'expired_state' }; /* istanbul ignore next */exports.default =
+
+
+STATES;

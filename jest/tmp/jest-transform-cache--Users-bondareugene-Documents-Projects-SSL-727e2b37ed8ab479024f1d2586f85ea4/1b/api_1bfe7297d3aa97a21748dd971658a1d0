@@ -1,0 +1,40 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);
+var /* istanbul ignore next */_getNameSpacing = require('../../Utils/getNameSpacing'); /* istanbul ignore next */var _getNameSpacing2 = _interopRequireDefault(_getNameSpacing);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var DashboardAPI = /* istanbul ignore next */_Model2.default.New();
+
+DashboardAPI.getActiveTests = function (isService, filter) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.getFull( /* istanbul ignore next */'/api/' + nameSpacing + 'tests/active.json', filter));
+};
+
+DashboardAPI.getActiveTestsList = function (isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/' + nameSpacing + 'tests/active_list.json'));
+};
+
+DashboardAPI.getTestsCount = function (isService, count_type, tests_status) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/' + nameSpacing + 'tests/tests_count.json', count_type, tests_status));
+};
+
+DashboardAPI.getCompletedTests = function (isService, filter) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.getFull( /* istanbul ignore next */'/api/' + nameSpacing + 'tests/completed.json', filter));
+};
+
+DashboardAPI.getCompletedTestsList = function (isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/' + nameSpacing + 'tests/completed_list.json'));
+};
+
+DashboardAPI.getSeverityChart = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/findings/total.json'));
+};
+
+DashboardAPI.getTrendsChart = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/findings/trends.json'));
+}; /* istanbul ignore next */exports.default =
+
+DashboardAPI;

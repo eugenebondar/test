@@ -1,0 +1,62 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _get = function get(object, property, receiver) {if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {var parent = Object.getPrototypeOf(object);if (parent === null) {return undefined;} else {return get(parent, property, receiver);}} else if ("value" in desc) {return desc.value;} else {var getter = desc.get;if (getter === undefined) {return undefined;}return getter.call(receiver);}};var /* istanbul ignore next */_reflux = require('reflux');
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_LinkToDownloadableStore = require('./LinkToDownloadableStore'); /* istanbul ignore next */var _LinkToDownloadableStore2 = _interopRequireDefault(_LinkToDownloadableStore);
+var /* istanbul ignore next */_LinkToDownloadable = require('./LinkToDownloadable'); /* istanbul ignore next */var _LinkToDownloadable2 = _interopRequireDefault(_LinkToDownloadable);
+var /* istanbul ignore next */_linkToDownloadableActions = require('./linkToDownloadableActions'); /* istanbul ignore next */var _linkToDownloadableActions2 = _interopRequireDefault(_linkToDownloadableActions);
+var /* istanbul ignore next */_uuid = require('uuid'); /* istanbul ignore next */var _uuid2 = _interopRequireDefault(_uuid);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+LinkToDownloadableContainer = function (_Component) {_inherits(LinkToDownloadableContainer, _Component);
+
+
+
+
+
+
+
+
+
+
+
+
+    function /* istanbul ignore next */LinkToDownloadableContainer() {/* istanbul ignore next */_classCallCheck(this, LinkToDownloadableContainer);var _this = _possibleConstructorReturn(this, (LinkToDownloadableContainer.__proto__ || Object.getPrototypeOf(LinkToDownloadableContainer)).call(this));_this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        onClick = function () {
+            if (! /* istanbul ignore next */_this.state.isBeingDownloaded) {
+                /* istanbul ignore next */_linkToDownloadableActions2.default.download( /* istanbul ignore next */_uuid2.default, /* istanbul ignore next */_this.props.href);
+            }
+            /* istanbul ignore next */_this.props.onClick();
+        }; /* istanbul ignore next */_this.uuid = /* istanbul ignore next */_uuid2.default.v4(); /* istanbul ignore next */_this.state = { isBeingDownloaded: false }; /* istanbul ignore next */_this.mapStoreToState( /* istanbul ignore next */_LinkToDownloadableStore2.default, function (perUUID) {if (!perUUID) {return {};}return perUUID[/* istanbul ignore next */_this.uuid];}); /* istanbul ignore next */return _this;}_createClass(LinkToDownloadableContainer, [{ key: 'componentDidMount', value: function componentDidMount() {/* istanbul ignore next */_linkToDownloadableActions2.default.init(this.uuid);} }, { key: 'componentWillUnmount', value: function componentWillUnmount() {/* istanbul ignore next */_get(LinkToDownloadableContainer.prototype.__proto__ || Object.getPrototypeOf(LinkToDownloadableContainer.prototype), 'componentWillUnmount', this).call(this); /* istanbul ignore next */_linkToDownloadableActions2.default.destroy(this.uuid);} }, { key: 'render', value: function render()
+
+        {
+            return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LinkToDownloadable2.default, /* istanbul ignore next */{
+                    href: this.props.href,
+                    className: this.props.className,
+                    onClick: this.onClick,
+                    children: this.props.children }));
+
+        } }]);return LinkToDownloadableContainer;}(_reflux.Component); /* istanbul ignore next */LinkToDownloadableContainer.propTypes = { href: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired, onClick: /* istanbul ignore next */_react2.default.PropTypes.func, className: /* istanbul ignore next */_react2.default.PropTypes.string, children: /* istanbul ignore next */_react2.default.PropTypes.node }; /* istanbul ignore next */LinkToDownloadableContainer.defaultProps = { onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return null;} }; /* istanbul ignore next */exports.default = LinkToDownloadableContainer;

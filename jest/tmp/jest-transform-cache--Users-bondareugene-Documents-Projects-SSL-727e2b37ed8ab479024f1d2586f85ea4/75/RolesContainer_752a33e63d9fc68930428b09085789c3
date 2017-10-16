@@ -1,0 +1,63 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _get = function get(object, property, receiver) {if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {var parent = Object.getPrototypeOf(object);if (parent === null) {return undefined;} else {return get(parent, property, receiver);}} else if ("value" in desc) {return desc.value;} else {var getter = desc.get;if (getter === undefined) {return undefined;}return getter.call(receiver);}};var /* istanbul ignore next */_reflux = require('reflux');
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_debounce = require('debounce'); /* istanbul ignore next */var _debounce2 = _interopRequireDefault(_debounce);
+
+var /* istanbul ignore next */_RolesStore = require('./RolesStore'); /* istanbul ignore next */var _RolesStore2 = _interopRequireDefault(_RolesStore);
+var /* istanbul ignore next */_RolesActions = require('./RolesActions'); /* istanbul ignore next */var _RolesActions2 = _interopRequireDefault(_RolesActions);
+
+var /* istanbul ignore next */_Roles = require('./Roles'); /* istanbul ignore next */var _Roles2 = _interopRequireDefault(_Roles);
+var /* istanbul ignore next */_configuration = require('../../configuration'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+RolesContainer = function (_Component) {_inherits(RolesContainer, _Component);
+    function /* istanbul ignore next */RolesContainer() {/* istanbul ignore next */_classCallCheck(this, RolesContainer);var _this = _possibleConstructorReturn(this, (RolesContainer.__proto__ || Object.getPrototypeOf(RolesContainer)).call(this));
+
+
+        /* istanbul ignore next */_this.store = /* istanbul ignore next */_RolesStore2.default;
+
+        /* istanbul ignore next */_this.mapStoreToState( /* istanbul ignore next */_RolesStore2.default, function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var requestParams = _ref.requestParams;
+            /* istanbul ignore next */_this.state && requestParams && /* istanbul ignore next */_this.debouncedFetch(requestParams);
+        });
+
+        /* istanbul ignore next */_this.debouncedFetch = /* istanbul ignore next */(0, _debounce2.default)( /* istanbul ignore next */ /* istanbul ignore next */_this.updateRoles.bind(_this), /* istanbul ignore next */_configuration.DEFAULT_DEBOUNCED_FILTER_DELAY); /* istanbul ignore next */return _this;
+    }_createClass(RolesContainer, [{ key: 'componentDidMount', value: function componentDidMount()
+
+        {
+            /* istanbul ignore next */_RolesActions2.default.init(this.store.defaultState.requestParams);
+        } }, { key: 'componentWillUnmount', value: function componentWillUnmount()
+
+        {
+            /* istanbul ignore next */_get(RolesContainer.prototype.__proto__ || Object.getPrototypeOf(RolesContainer.prototype), 'componentWillUnmount', this).call(this);
+            /* istanbul ignore next */_RolesActions2.default.destroy();
+        } }, { key: 'render', value: function render()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Roles2.default, /* istanbul ignore next */_extends({},
+                this.state, {
+                    paginationProps: this.getPaginationProps(),
+                    onRoleDelete: /* istanbul ignore next */_RolesActions2.default.deleteRole,
+                    onOpenRoleDialog: /* istanbul ignore next */_RolesActions2.default.openRoleDialog,
+                    onCloseRoleDialog: /* istanbul ignore next */_RolesActions2.default.closeRoleDialog,
+                    onOpenConfirmationDialog: /* istanbul ignore next */_RolesActions2.default.openConfirmationDialog,
+                    onCloseConfirmationDialog: /* istanbul ignore next */_RolesActions2.default.closeConfirmationDialog })));
+
+
+        } }, { key: 'getPaginationProps', value: function getPaginationProps()
+
+        {
+            return {
+                currentPage: this.state.requestParams.page,
+                itemsPerPage: this.state.requestParams.per,
+                totalItems: this.state.rolesTotal,
+                onChange: function /* istanbul ignore next */onChange(value) /* istanbul ignore next */{return (/* istanbul ignore next */_RolesActions2.default.changeRequestParams({ page: value }));},
+                itemsName: /* istanbul ignore next */(0, _counterpart2.default)('general.recordsName', {
+                    count: this.state.rolesTotal,
+                    name: /* istanbul ignore next */(0, _counterpart2.default)('roles.role') }) };
+
+
+        } }, { key: 'updateRoles', value: function updateRoles(
+
+        requestParams) {
+            /* istanbul ignore next */_RolesActions2.default.updateRoles(requestParams);
+        } }]);return RolesContainer;}(_reflux.Component); /* istanbul ignore next */exports.default = RolesContainer;

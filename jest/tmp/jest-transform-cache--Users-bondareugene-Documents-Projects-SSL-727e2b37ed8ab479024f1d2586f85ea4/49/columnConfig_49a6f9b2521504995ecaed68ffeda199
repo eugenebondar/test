@@ -1,0 +1,17 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });function getName(suffix) {
+    return 'activityLogs.table.' + suffix;
+}
+var names = [
+'created_at',
+'event',
+'item_type',
+'item_id',
+'user_full_name',
+'user_agent',
+'changeset',
+'ip_address'].
+map(function (name) /* istanbul ignore next */{return getName(name);}); /* istanbul ignore next */exports.default =
+
+{
+    staff: names,
+    customer: names.filter(function (name) /* istanbul ignore next */{return name !== getName('user_agent');}) };

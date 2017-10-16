@@ -1,0 +1,26 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+DisabledEditDueTestStateAlert;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_ApocReactAlert = require('../ApocReactAlert/ApocReactAlert'); /* istanbul ignore next */var _ApocReactAlert2 = _interopRequireDefault(_ApocReactAlert);var /* istanbul ignore next */_AlertType = require('../../Utils/AlertType'); /* istanbul ignore next */var _AlertType2 = _interopRequireDefault(_AlertType);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function DisabledEditDueTestStateAlert( /* istanbul ignore next */_ref) {/* istanbul ignore next */var isShown = _ref.isShown,testState = _ref.testState;
+    if (!isShown) {
+        return null;
+    }
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ApocReactAlert2.default, /* istanbul ignore next */{ type: /* istanbul ignore next */_AlertType2.default.WARNING, isClosable: false, closeTimeout: 0 },
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ dangerouslySetInnerHTML: {
+                    __html: /* istanbul ignore next */(0, _counterpart2.default)('customers.settings.editSaveDisabledDueTestState', {
+                        state: /* istanbul ignore next */'<i>' + testState + '</i>' }) } })));
+
+
+
+
+
+}
+
+DisabledEditDueTestStateAlert.propTypes = {
+    isShown: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    testState: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired };

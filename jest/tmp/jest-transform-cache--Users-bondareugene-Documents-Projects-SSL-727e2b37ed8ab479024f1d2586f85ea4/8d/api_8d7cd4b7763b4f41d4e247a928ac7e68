@@ -1,0 +1,38 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var SessionAPI = /* istanbul ignore next */_Model2.default.New();
+
+SessionAPI.getActiveSession = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/profile.json'));
+};
+
+SessionAPI.signOut = function () {
+    return (/* istanbul ignore next */_Api2.default.delete('/api/logout.json'));
+};
+
+SessionAPI.signIn = function (data) {
+    return (/* istanbul ignore next */_Api2.default.getWithoutCheck('/api/login.json', data));
+};
+
+SessionAPI.saveConfig = function (data) {
+    return (/* istanbul ignore next */_Api2.default.put('/api/settings/', data));
+};
+
+SessionAPI.updateAuth = function (data) {
+    return (/* istanbul ignore next */_Api2.default.put('/api/profile/two_factor_authentication', data));
+};
+
+SessionAPI.configureAuth = function () {
+    return (/* istanbul ignore next */_Api2.default.post('/api/profile/two_factor_authentication/app'));
+};
+
+SessionAPI.resetPassword = function (data) {
+    return (/* istanbul ignore next */_Api2.default.putWithoutCheck('/api/profile/password/reset', data));
+};
+
+SessionAPI.updatePassword = function (data) {
+    return (/* istanbul ignore next */_Api2.default.put('/api/profile/password/update_expired_password', data).then(function (response) /* istanbul ignore next */{return response.json();}));
+}; /* istanbul ignore next */exports.default =
+
+SessionAPI;

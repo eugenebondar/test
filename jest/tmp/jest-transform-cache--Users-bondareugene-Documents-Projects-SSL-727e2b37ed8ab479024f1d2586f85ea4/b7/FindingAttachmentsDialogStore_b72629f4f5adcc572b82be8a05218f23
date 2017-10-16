@@ -1,0 +1,196 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.defaultState = undefined;var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_omit = require('lodash/object/omit'); /* istanbul ignore next */var _omit2 = _interopRequireDefault(_omit);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_findingAttachmentsDialogActions = require('./findingAttachmentsDialogActions'); /* istanbul ignore next */var _findingAttachmentsDialogActions2 = _interopRequireDefault(_findingAttachmentsDialogActions);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var defaultState = /* istanbul ignore next */exports.defaultState = {
+    fileName: null,
+    isLoading: true,
+    isSaving: false,
+    isDeleting: false,
+    isBrowseDisabled: false,
+    validation: {},
+    shouldAttachmentsBeUpdated: false,
+    attachments: [],
+    attachment: {
+        name: '',
+        /** @type {File} */
+        file: null,
+        override: false },
+
+    attachmentToRemove: null,
+    isOverrideAndImport: false }; /* istanbul ignore next */var
+
+
+FindingAttachmentsDialogStore = function (_Reflux$Store) {_inherits(FindingAttachmentsDialogStore, _Reflux$Store);
+
+    function /* istanbul ignore next */FindingAttachmentsDialogStore() {/* istanbul ignore next */_classCallCheck(this, FindingAttachmentsDialogStore);var _this = _possibleConstructorReturn(this, (FindingAttachmentsDialogStore.__proto__ || Object.getPrototypeOf(FindingAttachmentsDialogStore)).call(this));
+
+
+        /* istanbul ignore next */_this.listenables = /* istanbul ignore next */_findingAttachmentsDialogActions2.default;
+
+        /* istanbul ignore next */_this.state = /* istanbul ignore next */_extends({}, defaultState); /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * @listens findingAttachmentsDialogActions.init.completed
+       * @param {{}[]} [attachments]
+       */_createClass(FindingAttachmentsDialogStore, [{ key: 'onInitCompleted', value: function onInitCompleted(
+        attachments) {
+            this.setState({
+                isLoading: false,
+                attachments: attachments });
+
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.init.failed
+           */ }, { key: 'onInitFailed', value: function onInitFailed()
+        {
+            this.setState({ isLoading: false });
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.updateAttachmentsList.completed
+           * @param {{}[]} [attachments]
+           */ }, { key: 'onUpdateAttachmentsListCompleted', value: function onUpdateAttachmentsListCompleted(
+        attachments) {
+            this.setState({
+                isSaving: false,
+                attachments: attachments });
+
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.updateAttachmentsList.failed
+           */ }, { key: 'onUpdateAttachmentsListFailed', value: function onUpdateAttachmentsListFailed()
+        {
+            this.setState({
+                isSaving: false,
+                attachments: [] });
+
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.submit
+           */ }, { key: 'onSubmit', value: function onSubmit()
+        {
+            this.setState({
+                isSaving: true,
+                validation: {} });
+
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.submit.completed
+           */ }, { key: 'onSubmitCompleted', value: function onSubmitCompleted()
+        {
+            this.setState({
+                isLoading: false,
+                shouldAttachmentsBeUpdated: true,
+                attachment: /* istanbul ignore next */_extends({},
+                this.state.attachment, {
+                    name: '',
+                    override: false,
+                    file: null }),
+
+                isBrowseDisabled: false,
+                fileName: '',
+                isOverrideAndImport: false,
+                validation: {} });
+
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.submit.failed
+           * @param {Object} [errors]
+           */ }, { key: 'onSubmitFailed', value: function onSubmitFailed(_ref)
+        {/* istanbul ignore next */var errors = _ref.errors;
+            this.setState({
+                validation: errors,
+                isSaving: false,
+                isBrowseDisabled: false });
+
+            if (errors.name === 'Attachment with the same name exists') {
+                this.setState({
+                    attachment: /* istanbul ignore next */_extends({}, this.state.attachment, { override: true }),
+                    isOverrideAndImport: true });
+
+            }
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.deleteAttachment.completed
+           */ }, { key: 'onDeleteAttachmentCompleted', value: function onDeleteAttachmentCompleted()
+        {
+            this.setState({
+                isDeleting: false,
+                attachmentToRemove: null,
+                shouldAttachmentsBeUpdated: true });
+
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.onUploadAttachment
+           * @param {File[]} file
+           */ }, { key: 'onUploadAttachment', value: function onUploadAttachment(_ref2)
+        {/* istanbul ignore next */var _ref3 = _slicedToArray(_ref2, 1),file = _ref3[0];
+            this.setState({
+                attachment: /* istanbul ignore next */_extends({},
+                this.state.attachment, {
+                    file: file }),
+
+                fileName: file.name,
+                validation: /* istanbul ignore next */_extends({}, /* istanbul ignore next */(0, _omit2.default)(this.state.validation, 'file')) });
+
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.onChangeName
+           * @param {string} [key]
+           * @param {string} [name]
+           */ }, { key: 'onChangeName', value: function onChangeName(
+        key, name) {
+            if (!this.state.isSaving) {
+                var isNameExist = Object.values(this.state.attachments).some(function (attachment) /* istanbul ignore next */{return attachment.name === name;});
+                var validation = /* istanbul ignore next */_extends({}, /* istanbul ignore next */(0, _omit2.default)(this.state.validation, key));
+                if (isNameExist) {
+                    validation.name = /* istanbul ignore next */(0, _counterpart2.default)('errors.attachmentWithSameName');
+                }
+                this.setState({
+                    attachment: /* istanbul ignore next */_extends({},
+                    this.state.attachment, {
+                        name: name,
+                        override: isNameExist }),
+
+                    isOverrideAndImport: isNameExist,
+                    validation: validation });
+
+            }
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.onOpenConfirmationDialog
+           * @param {string} [attachmentToRemove]
+           */ }, { key: 'onOpenConfirmationDialog', value: function onOpenConfirmationDialog(
+        attachmentToRemove) {
+            this.setState({ attachmentToRemove: attachmentToRemove });
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.onCloseConfirmationDialog
+           */ }, { key: 'onCloseConfirmationDialog', value: function onCloseConfirmationDialog()
+        {
+            this.setState({ attachmentToRemove: null });
+        }
+
+        /**
+           * @listens findingAttachmentsDialogActions.destroy
+           */ }, { key: 'onDestroy', value: function onDestroy()
+        {
+            this.setState(defaultState);
+        } }]);return FindingAttachmentsDialogStore;}( /* istanbul ignore next */_reflux2.default.Store); /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */_reflux2.default.initStore(FindingAttachmentsDialogStore);

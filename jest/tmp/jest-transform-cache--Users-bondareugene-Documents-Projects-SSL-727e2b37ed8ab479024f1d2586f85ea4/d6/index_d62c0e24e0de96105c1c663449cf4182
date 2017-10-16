@@ -1,0 +1,170 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}(); /* istanbul ignore next */require('./index.less');
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_UserGroupsActions = require('../../Stores/UserGroups/UserGroupsActions'); /* istanbul ignore next */var _UserGroupsActions2 = _interopRequireDefault(_UserGroupsActions);
+
+var /* istanbul ignore next */_UserGroupsStore = require('../../Stores/UserGroups/UserGroupsStore'); /* istanbul ignore next */var _UserGroupsStore2 = _interopRequireDefault(_UserGroupsStore);
+var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);
+
+var /* istanbul ignore next */_BaseComponent2 = require('../../Shared/BaseComponent'); /* istanbul ignore next */var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+var /* istanbul ignore next */_ConfirmationDialog = require('../../Shared/ConfirmationDialog'); /* istanbul ignore next */var _ConfirmationDialog2 = _interopRequireDefault(_ConfirmationDialog);
+var /* istanbul ignore next */_Preloader = require('../../Shared/Preloader'); /* istanbul ignore next */var _Preloader2 = _interopRequireDefault(_Preloader);
+var /* istanbul ignore next */_GroupsTable = require('./Components/GroupsTable'); /* istanbul ignore next */var _GroupsTable2 = _interopRequireDefault(_GroupsTable);
+var /* istanbul ignore next */_GroupDialog = require('./Components/Dialogs/GroupDialog'); /* istanbul ignore next */var _GroupDialog2 = _interopRequireDefault(_GroupDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+UserGroups = function (_BaseComponent) {_inherits(UserGroups, _BaseComponent);
+    function /* istanbul ignore next */UserGroups(props) {/* istanbul ignore next */_classCallCheck(this, UserGroups);var _this = _possibleConstructorReturn(this, (UserGroups.__proto__ || Object.getPrototypeOf(UserGroups)).call(this,
+        props));
+        /* istanbul ignore next */_this.listenTo( /* istanbul ignore next */_UserGroupsStore2.default, /* istanbul ignore next */_this._listenUserGroupsStore);
+        /* istanbul ignore next */_this.state = {
+            groups: null,
+            groupDialogConfig: null,
+            confirmationDialogConfig: null };
+
+
+        /* istanbul ignore next */_this.actionsTrigger = /* istanbul ignore next */_this.actionsTrigger.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.addGroup = /* istanbul ignore next */_this.addGroup.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.openGroupDialog = /* istanbul ignore next */_this.openGroupDialog.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.deleteUserConfirmation = /* istanbul ignore next */_this.deleteUserConfirmation.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.fetchGroupsList = /* istanbul ignore next */_this.fetchGroupsList.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.closeDialog = /* istanbul ignore next */_this.closeDialog.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(UserGroups, [{ key: 'componentWillMount', value: function componentWillMount()
+
+        {
+            this.checkPossibilityToView(this.context);
+        } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextContext) {
+            this.checkPossibilityToView(nextContext);
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _state =
+            this.state,groups = _state.groups,groupDialogConfig = _state.groupDialogConfig,confirmationDialogConfig = _state.confirmationDialogConfig;
+            if (groups) {
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'site-content' },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_GroupsTable2.default, /* istanbul ignore next */{
+                            data: groups,
+                            addGroup: this.addGroup,
+                            actionsTrigger: this.actionsTrigger }),
+
+                        groupDialogConfig &&
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_GroupDialog2.default, groupDialogConfig),
+
+                        confirmationDialogConfig &&
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ConfirmationDialog2.default, confirmationDialogConfig)));
+
+
+
+            }
+            return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Preloader2.default, /* istanbul ignore next */null));
+        } }, { key: 'actionsTrigger', value: function actionsTrigger(
+
+        action, id) {
+            switch (action) {
+                case 'editGroup':
+                    this.openGroupDialog(true, id);
+                    break;
+                case 'deleteGroup':
+                    this.deleteUserConfirmation(id);
+                    break;}
+
+        } }, { key: 'closeDialog', value: function closeDialog(
+
+        key) {
+            if (key) {
+                var state = this.state;
+                state[key] = null;
+                this.setState(state);
+            }
+        } }, { key: 'addGroup', value: function addGroup()
+
+        {
+            this.openGroupDialog();
+        } }, { key: 'openGroupDialog', value: function openGroupDialog()
+
+        {/* istanbul ignore next */var isEdit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false; /* istanbul ignore next */var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+            this.setState({
+                groupDialogConfig: {
+                    name: 'groupDialogConfig',
+                    isEdit: isEdit,
+                    id: id,
+                    close: this.closeDialog } });
+
+
+        } }, { key: 'deleteUserConfirmation', value: function deleteUserConfirmation(
+
+        userId) {
+            this.setState({
+                confirmationDialogConfig: {
+                    name: 'confirmationDialogConfig',
+                    title: /* istanbul ignore next */(0, _counterpart2.default)('general.deleteConfirmationTitle'),
+                    returnData: userId,
+                    submit: this.deleteGroup,
+                    cancel: this.closeDialog,
+                    className: 'small-dialog' } });
+
+
+        } }, { key: 'deleteGroup', value: function deleteGroup(
+
+        id) {
+            /* istanbul ignore next */_UserGroupsActions2.default.deleteGroup(id);
+        }
+
+        /**
+           * Fetch user groups list.
+           * Invoke UserGroup's action - fetchUserGroups
+           */ }, { key: 'fetchGroupsList', value: function fetchGroupsList()
+        {
+            /* istanbul ignore next */_UserGroupsActions2.default.fetchGroups();
+        }
+
+        /**
+           * Redirect to home page.
+           */ }, { key: 'redirectToHome', value: function redirectToHome()
+        {
+            this.context.router.push('/#/');
+        } }, { key: 'checkPossibilityToView', value: function checkPossibilityToView(
+
+        context) {
+            var currentUser = context.currentUser;
+            var isPossibleToView = currentUser.hasOneOfPermissions([
+            /* istanbul ignore next */_User.STAFF_PERMISSIONS.MANAGE_USER_GROUPS]);
+
+            if (isPossibleToView) {
+                this.fetchGroupsList();
+            } else {
+                this.redirectToHome();
+            }
+        } }, { key: '_listenUserGroupsStore', value: function _listenUserGroupsStore(
+
+        event, data) {
+            switch (event) {
+                case 'groups':
+                    if (data) {
+                        this.setState({
+                            groups: data });
+
+                    }
+                    break;
+                case 'groupAdded':
+                case 'groupEdited':
+                    if (data.status) {
+                        this.closeDialog('groupDialogConfig');
+                        this.fetchGroupsList();
+                    }
+                    break;
+                case 'groupDeleted':
+                    if (data.status) {
+                        this.closeDialog('confirmationDialogConfig');
+                        this.fetchGroupsList();
+                    }
+                    break;}
+
+        } }]);return UserGroups;}(_BaseComponent3.default); /* istanbul ignore next */exports.default = UserGroups;
+
+
+UserGroups.contextTypes = {
+    router: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default) };

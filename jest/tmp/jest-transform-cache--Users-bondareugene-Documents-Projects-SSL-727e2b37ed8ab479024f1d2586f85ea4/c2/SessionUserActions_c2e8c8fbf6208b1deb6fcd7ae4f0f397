@@ -1,0 +1,33 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_api = require('../../Models/Session/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var SessionUserActions = {
+    getActiveSession: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    signOut: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    signIn: /* istanbul ignore next */_reflux2.default.createAction(),
+    extendUserSession: /* istanbul ignore next */_reflux2.default.createAction(),
+    setUnauthorized: /* istanbul ignore next */_reflux2.default.createAction(),
+    updateAuth: /* istanbul ignore next */_reflux2.default.createAction(),
+    saveTableConfig: /* istanbul ignore next */_reflux2.default.createAction(),
+    configureAuth: /* istanbul ignore next */_reflux2.default.createAction(),
+    resetPassword: /* istanbul ignore next */_reflux2.default.createAction() }; /* istanbul ignore next */exports.default =
+
+
+SessionUserActions;
+
+/**
+                     * Extends user session simply by making a request to API. It has to be request to BE, as session on the BE side needs to be extended.
+                     */
+SessionUserActions.extendUserSession.listen(function () {
+    /* istanbul ignore next */_api2.default.getActiveSession();
+});
+
+SessionUserActions.getActiveSession.listen(function () {
+    /* istanbul ignore next */_api2.default.getActiveSession().then(this.completed, this.failed);
+});
+
+SessionUserActions.signOut.listen(function () {/* istanbul ignore next */var _this = this;var notAuthorizedMessage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    /* istanbul ignore next */_api2.default.signOut().then(function (response) {
+        (response.ok ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(notAuthorizedMessage);
+    });
+});

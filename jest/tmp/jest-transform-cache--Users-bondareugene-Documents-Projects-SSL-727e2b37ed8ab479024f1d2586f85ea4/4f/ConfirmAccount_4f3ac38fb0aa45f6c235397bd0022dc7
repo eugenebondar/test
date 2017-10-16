@@ -1,0 +1,139 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_ApocReactAlert = require('../../Shared/ApocReactAlert/ApocReactAlert'); /* istanbul ignore next */var _ApocReactAlert2 = _interopRequireDefault(_ApocReactAlert);
+var /* istanbul ignore next */_CancelButton = require('../../Shared/Elements/Buttons/CancelButton'); /* istanbul ignore next */var _CancelButton2 = _interopRequireDefault(_CancelButton);
+var /* istanbul ignore next */_PrimaryButton = require('../../Shared/Elements/Buttons/PrimaryButton'); /* istanbul ignore next */var _PrimaryButton2 = _interopRequireDefault(_PrimaryButton);
+var /* istanbul ignore next */_FormField = require('../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);
+var /* istanbul ignore next */_index = require('../../Shared/Elements/PasswordInput/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_AlertType = require('../../Utils/AlertType'); /* istanbul ignore next */var _AlertType2 = _interopRequireDefault(_AlertType);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ConfirmAccount = function (_React$Component) {_inherits(ConfirmAccount, _React$Component);
+    function /* istanbul ignore next */ConfirmAccount(props) {/* istanbul ignore next */_classCallCheck(this, ConfirmAccount);var _this = _possibleConstructorReturn(this, (ConfirmAccount.__proto__ || Object.getPrototypeOf(ConfirmAccount)).call(this,
+        props));
+        /* istanbul ignore next */_this.state = {
+            password: '',
+            password_confirmation: '' };
+
+        /* istanbul ignore next */_this.updateValue = /* istanbul ignore next */ /* istanbul ignore next */_this.updateValue.bind(_this);
+        /* istanbul ignore next */_this.submit = /* istanbul ignore next */ /* istanbul ignore next */_this.submit.bind(_this);
+        /* istanbul ignore next */_this.goToLogin = /* istanbul ignore next */ /* istanbul ignore next */_this.goToLogin.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(ConfirmAccount, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            if (nextProps.confirmed) {
+                this.goToLogin();
+            }
+        } }, { key: 'render', value: function render()
+
+        {
+            var canSubmit = !this.props.pending && this.state.password && this.state.password_confirmation;
+
+            var footer =
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CancelButton2.default, /* istanbul ignore next */{ onClick: this.goToLogin }),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_PrimaryButton2.default, /* istanbul ignore next */{ disabled: !canSubmit, onClick: this.submit },
+                    /* istanbul ignore next */(0, _counterpart2.default)('confirmAccount.submit')));
+
+
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.ModalWithBackdrop, /* istanbul ignore next */{
+                        header: /* istanbul ignore next */(0, _counterpart2.default)('confirmAccount.title'),
+                        footer: footer,
+                        isOpen: /* istanbul ignore next */true },
+
+                    this.generalErrors() || this.form()));
+
+
+        } }, { key: 'form', value: function form()
+
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)('users.password'),
+                            isValid: this.isFieldValid('password'),
+                            isRequired: /* istanbul ignore next */true,
+                            validationMessage: this.getErrorMessages('password') },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                            id: 'password',
+                            isDisabled: this.props.pending,
+                            type: 'password',
+                            updateValue: this.updateValue,
+                            value: this.state.password })),
+
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                            label: /* istanbul ignore next */(0, _counterpart2.default)('users.passwordConfirmation'),
+                            isValid: this.isFieldValid('password_confirmation'),
+                            isRequired: /* istanbul ignore next */true,
+                            validationMessage: this.getErrorMessages('password_confirmation') },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                            id: 'password_confirmation',
+                            isDisabled: this.props.pending,
+                            type: 'password',
+                            updateValue: this.updateValue,
+                            value: this.state.password_confirmation }))));
+
+
+
+
+        } }, { key: 'generalErrors', value: function generalErrors()
+
+        {
+            var prefix = function prefix(p) /* istanbul ignore next */{return function (v) /* istanbul ignore next */{return p + ' ' + v;};};
+
+            var errors =
+            this.getErrorMessages('email').map(prefix('Email')).
+            concat(this.getErrorMessages('confirmation_token').map(prefix('Token')));
+
+            return Boolean(errors.length) &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ApocReactAlert2.default, /* istanbul ignore next */{ key: 'error', type: /* istanbul ignore next */_AlertType2.default.ERROR, isClosable: false, closeTimeout: 0 },
+                    errors.map(function (error) /* istanbul ignore next */{return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ key: error }, error));})),
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'center' }, /* istanbul ignore next */(0, _counterpart2.default)('confirmAccount.errorNote')));
+
+
+        } }, { key: 'updateValue', value: function updateValue(
+
+        key, value) {
+            this.setState( /* istanbul ignore next */_defineProperty({}, key, value));
+        } }, { key: 'submit', value: function submit()
+
+        {
+            this.props.onSubmit( /* istanbul ignore next */_extends({}, this.state));
+        } }, { key: 'goToLogin', value: function goToLogin()
+
+        {
+            this.context.router.push('/login');
+        } }, { key: 'getErrorMessages', value: function getErrorMessages(
+
+        field) {
+            return this.props.errors[field] || [];
+        } }, { key: 'isFieldValid', value: function isFieldValid(
+
+        field) {
+            return 0 === this.getErrorMessages(field).length;
+        } }]);return ConfirmAccount;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = ConfirmAccount;
+
+
+ConfirmAccount.propTypes = {
+    pending: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    errors: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        confirmation_token: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired),
+        email: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired),
+        password: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired),
+        password_confirmation: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired) }).
+    isRequired,
+    onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };
+
+
+ConfirmAccount.contextTypes = {
+    router: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired };

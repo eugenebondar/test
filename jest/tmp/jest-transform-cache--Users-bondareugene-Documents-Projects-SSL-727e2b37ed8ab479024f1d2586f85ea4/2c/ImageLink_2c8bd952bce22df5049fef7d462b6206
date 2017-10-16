@@ -1,0 +1,20 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+
+/* istanbul ignore next */require('./ImageLink.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+ImageLink = function (_React$Component) {_inherits(ImageLink, _React$Component);function ImageLink() {_classCallCheck(this, ImageLink);return _possibleConstructorReturn(this, (ImageLink.__proto__ || Object.getPrototypeOf(ImageLink)).apply(this, arguments));}_createClass(ImageLink, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _props =
+            this.props,image = _props.image,value = _props.value;
+            var url = value.url;
+            var image_url = value.image_url;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'a', /* istanbul ignore next */{ href: url, target: '_blank', className: 'td-image-link-value-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'img', /* istanbul ignore next */{ src: image_url, className: 'td-image-wrap', width: image.width, height: image.height })));
+
+
+        } }]);return ImageLink;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = ImageLink;
+
+
+ImageLink.propTypes = {
+    image: /* istanbul ignore next */_react2.default.PropTypes.object,
+    value: /* istanbul ignore next */_react2.default.PropTypes.object };

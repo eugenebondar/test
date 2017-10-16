@@ -1,0 +1,52 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_index = require('../../Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_leftPad = require('left-pad'); /* istanbul ignore next */var _leftPad2 = _interopRequireDefault(_leftPad);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+HoursInput = function (_React$Component) {_inherits(HoursInput, _React$Component);
+
+
+
+
+
+
+
+    function /* istanbul ignore next */HoursInput(props) {/* istanbul ignore next */_classCallCheck(this, HoursInput);var _this = _possibleConstructorReturn(this, (HoursInput.__proto__ || Object.getPrototypeOf(HoursInput)).call(this,
+        props));
+
+        /* istanbul ignore next */_this.state = {
+            value: /* istanbul ignore next */_this.getSafePresentationalValue(props.value) };
+
+
+        /* istanbul ignore next */_this.updateValue = /* istanbul ignore next */ /* istanbul ignore next */_this.updateValue.bind(_this);
+        /* istanbul ignore next */_this.onBlur = /* istanbul ignore next */ /* istanbul ignore next */_this.onBlur.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(HoursInput, [{ key: 'getSafeValue', value: function getSafeValue(
+
+        notSafeValue) {
+            return Math.min(Math.max(parseInt(notSafeValue), 1), 12);
+        } }, { key: 'getSafePresentationalValue', value: function getSafePresentationalValue(
+
+        safeValue) {
+            return (/* istanbul ignore next */(0, _leftPad2.default)(this.getSafeValue(safeValue), 2, '0'));
+        } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            this.setState({
+                value: this.getSafePresentationalValue(nextProps.value) });
+
+        } }, { key: 'updateValue', value: function updateValue(
+
+        id, value) {
+            this.setState({ value: value });
+        } }, { key: 'onBlur', value: function onBlur()
+
+        {
+            var safeValue = this.getSafeValue(this.state.value);
+            var safePresentationalValue = this.getSafePresentationalValue(this.state.value);
+            this.setState({ value: safePresentationalValue });
+            this.props.updateValue(this.props.id, safeValue);
+        } }, { key: 'render', value: function render()
+
+        {
+            return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */_extends({}, this.props, { value: this.state.value, updateValue: this.updateValue,
+                    onBlur: this.onBlur })));
+        } }]);return HoursInput;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */HoursInput.propTypes = { id: /* istanbul ignore next */_react2.default.PropTypes.string, value: /* istanbul ignore next */_react2.default.PropTypes.string, updateValue: /* istanbul ignore next */_react2.default.PropTypes.func }; /* istanbul ignore next */exports.default = HoursInput;

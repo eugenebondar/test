@@ -1,0 +1,76 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);
+var /* istanbul ignore next */_getNameSpacing = require('../../Utils/getNameSpacing'); /* istanbul ignore next */var _getNameSpacing2 = _interopRequireDefault(_getNameSpacing);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var UsersAPI = /* istanbul ignore next */_Model2.default.New();
+
+UsersAPI.fetchUsers = function (filter, isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.getFull( /* istanbul ignore next */'/api/' + nameSpacing + 'users.json', filter));
+};
+
+UsersAPI.fetchUsersList = function (isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/' + nameSpacing + 'users/list.json'));
+};
+
+UsersAPI.fetchUser = function (id, isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/' + nameSpacing + 'users/' + id + '.json'));
+};
+
+UsersAPI.addUser = function (data, isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.post( /* istanbul ignore next */'/api/' + nameSpacing + 'users.json', data));
+};
+
+UsersAPI.deleteUser = function (id, isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/' + nameSpacing + 'users/' + id + '.json', id));
+};
+
+UsersAPI.editUser = function (id, data, isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/' + nameSpacing + 'users/' + id + '.json', data));
+};
+
+UsersAPI.getCurrentCustomer = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/organization/show.json'));
+};
+
+UsersAPI.editCustomer = function (data) {
+    return (/* istanbul ignore next */_Api2.default.put('/api/organization/update.json', data));
+};
+
+UsersAPI.changePassword = function (data) {
+    return (/* istanbul ignore next */_Api2.default.put('/api/profile/password', data));
+};
+
+UsersAPI.unLockedUser = function (id, isService) {
+    var nameSpacing = /* istanbul ignore next */(0, _getNameSpacing2.default)(isService);
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/' + nameSpacing + 'users/' + id + '/unlock'));
+};
+
+UsersAPI.checkConfirmToken = function (data) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/profile/confirm', data));
+};
+
+UsersAPI.confirmAccount = function (data) {
+    return (/* istanbul ignore next */_Api2.default.putWithoutCheck('/api/profile/confirm', data));
+};
+
+UsersAPI.customer = {
+    baseUrl: '/api',
+    resendConfirmation: resendConfirmation };
+
+
+UsersAPI.staff = {
+    baseUrl: '/api/service',
+    resendConfirmation: resendConfirmation };
+
+
+function resendConfirmation(id) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */this.baseUrl + '/users/' + id + '/resend_confirmation'));
+} /* istanbul ignore next */exports.default =
+
+UsersAPI;

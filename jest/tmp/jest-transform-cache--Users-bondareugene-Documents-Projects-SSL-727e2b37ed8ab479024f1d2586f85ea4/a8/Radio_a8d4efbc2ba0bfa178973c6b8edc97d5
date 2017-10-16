@@ -1,0 +1,46 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require("react"); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+Radio = function (_React$Component) {_inherits(Radio, _React$Component);
+    function /* istanbul ignore next */Radio(props) {/* istanbul ignore next */_classCallCheck(this, Radio);var _this = _possibleConstructorReturn(this, (Radio.__proto__ || Object.getPrototypeOf(Radio)).call(this,
+        props));
+        /* istanbul ignore next */_this.onClick = /* istanbul ignore next */_this.onClick.bind( /* istanbul ignore next */_this);
+        /* istanbul ignore next */_this.onChange = /* istanbul ignore next */_this.onChange.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+    }_createClass(Radio, [{ key: "render", value: function render()
+
+        {/* istanbul ignore next */var _props =
+            this.props,name = _props.name,value = _props.value,currentValue = _props.currentValue,title = _props.title;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"div", /* istanbul ignore next */{ className: "input-radio__item" },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"input", /* istanbul ignore next */{
+                        type: "radio",
+                        name: name,
+                        value: value,
+                        checked: currentValue === value,
+                        onChange: this.onChange }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */"span", /* istanbul ignore next */{ onClick: this.onClick }, title)));
+
+
+        } }, { key: "onChange", value: function onChange(
+
+        e) {/* istanbul ignore next */var _props2 =
+            this.props,onChange = _props2.onChange,value = _props2.value;
+            var checked = e.target.checked;
+
+            if (checked) {
+                onChange(value);
+            }
+        } }, { key: "onClick", value: function onClick()
+
+        {/* istanbul ignore next */var _props3 =
+            this.props,onChange = _props3.onChange,value = _props3.value;
+            onChange(value);
+        } }]);return Radio;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = Radio;
+
+
+Radio.propTypes = {
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func,
+    value: /* istanbul ignore next */_react2.default.PropTypes.any,
+    title: /* istanbul ignore next */_react2.default.PropTypes.string,
+    currentValue: /* istanbul ignore next */_react2.default.PropTypes.any,
+    name: /* istanbul ignore next */_react2.default.PropTypes.string };

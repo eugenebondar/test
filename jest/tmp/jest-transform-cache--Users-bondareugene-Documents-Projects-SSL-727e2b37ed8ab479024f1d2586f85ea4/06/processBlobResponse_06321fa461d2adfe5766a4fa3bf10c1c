@@ -1,0 +1,22 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+processBlobResponse; /**
+                      * @param {Response} response
+                      */function processBlobResponse(response) {if (!response.ok) {throw new Error(response.statusText);
+    }
+    return response.blob().then(function (blob) {
+        var url = window.URL.createObjectURL(blob);
+        var filename = getFilenameFromHeaders(response.headers) || getFileNameFromUrl(response.url);
+        return { url: url, filename: filename };
+    });
+}
+
+function getFilenameFromHeaders(headers) {
+    var contentDispositionHeader = headers.get('Content-Disposition');
+    return contentDispositionHeader && contentDispositionHeader.match(/filename="(.+)"/)[1];
+}
+
+function getFileNameFromUrl(url) {
+    return url.split('/').pop();
+}

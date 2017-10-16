@@ -1,0 +1,120 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _resourceTypeToFetchO;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_api = require('../../Models/Permisssion/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_api3 = require('../../Models/Users/api'); /* istanbul ignore next */var _api4 = _interopRequireDefault(_api3);
+var /* istanbul ignore next */_api5 = require('../../Models/Tests/api'); /* istanbul ignore next */var _api6 = _interopRequireDefault(_api5);
+var /* istanbul ignore next */_api7 = require('../../Models/AssetsGroups/api'); /* istanbul ignore next */var _api8 = _interopRequireDefault(_api7);
+var /* istanbul ignore next */_api9 = require('../../Models/Groups/api'); /* istanbul ignore next */var _api10 = _interopRequireDefault(_api9);
+var /* istanbul ignore next */_FilterWithoutLimit = require('../../Utils/FilterWithoutLimit'); /* istanbul ignore next */var _FilterWithoutLimit2 = _interopRequireDefault(_FilterWithoutLimit);
+var /* istanbul ignore next */_resourceType = require('./resourceType'); /* istanbul ignore next */var _resourceType2 = _interopRequireDefault(_resourceType);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+var EditPermissionActions = {
+    addPermission: /* istanbul ignore next */_reflux2.default.createAction(),
+    modifyPermission: /* istanbul ignore next */_reflux2.default.createAction(),
+    removePermission: /* istanbul ignore next */_reflux2.default.createAction(),
+    save: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    openDialog: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    closeDialog: /* istanbul ignore next */_reflux2.default.createAction(),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction(),
+    updateSearchPhrase: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }) };
+
+
+var resourceTypeToFetchOrganizationId = /* istanbul ignore next */(_resourceTypeToFetchO = {}, _defineProperty(_resourceTypeToFetchO,
+/* istanbul ignore next */_resourceType2.default.test, function (resourceId, isCurrentUserStaff) {
+    return (/* istanbul ignore next */_api6.default.
+        fetchTestDetails(resourceId, isCurrentUserStaff).
+        then(function (test) /* istanbul ignore next */{return test.organization_id;}));
+}), _defineProperty(_resourceTypeToFetchO,
+/* istanbul ignore next */_resourceType2.default.assetGroup, function (resourceId, isCurrentUserStaff) {
+    var userTypeAssetGroupApi = isCurrentUserStaff ? /* istanbul ignore next */_api8.default.service : /* istanbul ignore next */_api8.default.customer;
+    return userTypeAssetGroupApi.
+    fetchAssetsGroup(resourceId).
+    then(function (assetGroup) /* istanbul ignore next */{return assetGroup.organization_id;});
+}), _resourceTypeToFetchO);
+
+
+EditPermissionActions.save.listen(function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var resourceType = _ref.resourceType,resourceId = _ref.resourceId,permissions = _ref.permissions,isCurrentUserStaff = _ref.isCurrentUserStaff;
+    /* istanbul ignore next */_api2.default.putByResourceTypeAndId(resourceType, resourceId, permissions, isCurrentUserStaff).
+    then(function (response) /* istanbul ignore next */{return { id: resourceId };}).
+    then(this.completed, this.failed);
+});
+
+EditPermissionActions.openDialog.listen(function ( /* istanbul ignore next */_ref2) {/* istanbul ignore next */var _context;var resourceId = _ref2.resourceId,resourceType = _ref2.resourceType,isCurrentUserStaff = _ref2.isCurrentUserStaff;
+    var organizationIdPromise = resourceTypeToFetchOrganizationId[resourceType](resourceId, isCurrentUserStaff);
+
+    var customerUsersPromise = organizationIdPromise.then(function (organizationId) /* istanbul ignore next */{return fetchCustomerUsers(organizationId);});
+    var customerUserGroupsPromise = organizationIdPromise.then(function (organizationId) /* istanbul ignore next */{return fetchCustomerUserGroups(isCurrentUserStaff, organizationId);});
+    var staffUsersPromise = isCurrentUserStaff ? fetchStaffUsers() : [];
+    var staffGroupsPromise = isCurrentUserStaff ? fetchStaffUsersGroup(isCurrentUserStaff) : [];
+    var permissionsPromise = /* istanbul ignore next */_api2.default.fetchByResourceTypeAndId(resourceType, resourceId, isCurrentUserStaff);
+
+    Promise.all([customerUsersPromise, customerUserGroupsPromise, staffUsersPromise, staffGroupsPromise, permissionsPromise]).
+    then(function (response) {
+        var permittees = /* istanbul ignore next */[].concat(_toConsumableArray(response[0]), _toConsumableArray(response[1]), _toConsumableArray(response[2]), _toConsumableArray(response[3]));
+        var permissions = response[4];
+        //this is necessary due the fact that backend is filtering staff users and staff user groups from response
+        //when customer user is asking for it, but it's not doing that for permissions
+        var permissionsThatHavePermittees = permissions.filter(function (permission) {
+            return permittees.some(function (permittee) /* istanbul ignore next */{return permittee.id === permission.permittee_id;});
+        });
+
+        return { permittees: permittees, permissions: permissionsThatHavePermittees };
+    }).
+    then(this.completed, this.failed).
+    catch( /* istanbul ignore next */ /* istanbul ignore next */(_context = console).error.bind(_context));
+}); /* istanbul ignore next */exports.default =
+
+EditPermissionActions;
+
+function fetchStaffUsers() {
+    return (/* istanbul ignore next */_api4.default.fetchUsers({
+            filter: /* istanbul ignore next */_extends({
+                user_type: 'staff' },
+            /* istanbul ignore next */_FilterWithoutLimit2.default.filter) }).
+
+        then(function (response) /* istanbul ignore next */{return response.json();}).then(function (response) /* istanbul ignore next */{return response.users;}));
+}
+
+/**
+   * @param {String} organization_id
+   * @returns {Promise.<[]>|[]}
+   */
+function fetchCustomerUsers(organization_id) {
+    if (!organization_id) {
+        return [];
+    }
+    return (/* istanbul ignore next */_api4.default.fetchUsers({
+            filter: /* istanbul ignore next */_extends({
+                user_type: 'customer',
+                organization_id: organization_id },
+            /* istanbul ignore next */_FilterWithoutLimit2.default.filter) }).
+
+        then(function (response) /* istanbul ignore next */{return response.json();}).then(function (response) /* istanbul ignore next */{return response.users;}));
+}
+
+function fetchStaffUsersGroup(isCurrentUserStaff) {
+    var filter = /* istanbul ignore next */_extends({
+        group_type: 'staff' },
+    /* istanbul ignore next */_FilterWithoutLimit2.default.filter);
+
+
+    return (/* istanbul ignore next */_api10.default.fetchGroups({ filter: filter }, isCurrentUserStaff).then(function (response) /* istanbul ignore next */{return response.user_groups;}));
+}
+
+/**
+   * @param {Boolean} isCurrentUserStaff
+   * @param {String} organization_id
+   * @returns {Promise.<[]>|[]}
+   */
+function fetchCustomerUserGroups(isCurrentUserStaff, organization_id) {/* istanbul ignore next */var _context2;
+    if (!organization_id) {
+        return [];
+    }
+    var filter = /* istanbul ignore next */_extends({
+        group_type: 'customer',
+        organization_id: organization_id },
+    /* istanbul ignore next */_FilterWithoutLimit2.default.filter);
+
+
+    return (/* istanbul ignore next */_api10.default.fetchGroups({ filter: filter }, isCurrentUserStaff).then(function (response) /* istanbul ignore next */{return response.user_groups;}).
+        catch( /* istanbul ignore next */ /* istanbul ignore next */(_context2 = console).error.bind(_context2)));
+}

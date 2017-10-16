@@ -1,0 +1,24 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+checkFileSize;var MEGABYTE = Math.pow(1024, 2);var maxFileSizeMB = /* istanbul ignore next */exports.maxFileSizeMB = 100;var maxFileSize = /* istanbul ignore next */exports.maxFileSize = maxFileSizeMB * MEGABYTE;var minFileSize = /* istanbul ignore next */exports.minFileSize = 1;var FILE_SIZE_RESULT = /* istanbul ignore next */exports.FILE_SIZE_RESULT = { TOO_SMALL: 'fileIsTooSmall', TOO_BIG: 'fileIsTooBig', FINE: 'fileIsFine' }; /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @param {File} [file] - file.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                   * @returns {string}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                   */function checkFileSize(file) {if (file.size > maxFileSize) {return FILE_SIZE_RESULT.TOO_BIG;}
+    if (file.size < minFileSize) {
+        return FILE_SIZE_RESULT.TOO_BIG;
+    }
+    return FILE_SIZE_RESULT.FINE;
+}

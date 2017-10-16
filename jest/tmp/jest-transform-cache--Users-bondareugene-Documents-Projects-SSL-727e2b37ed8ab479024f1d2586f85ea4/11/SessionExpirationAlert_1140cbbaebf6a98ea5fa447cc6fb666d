@@ -1,0 +1,107 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_AlertType = require('../../Utils/AlertType'); /* istanbul ignore next */var _AlertType2 = _interopRequireDefault(_AlertType);
+var /* istanbul ignore next */_TimeConversion = require('../../Utils/TimeConversion/TimeConversion');
+var /* istanbul ignore next */_ApocReactAlert = require('../../Shared/ApocReactAlert/ApocReactAlert'); /* istanbul ignore next */var _ApocReactAlert2 = _interopRequireDefault(_ApocReactAlert);
+
+/* istanbul ignore next */require('./SessionExpirationAlert.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+
+SessionExpirationAlert = function (_React$Component) {_inherits(SessionExpirationAlert, _React$Component);
+
+
+
+    function /* istanbul ignore next */SessionExpirationAlert(props) {/* istanbul ignore next */_classCallCheck(this, SessionExpirationAlert);var _this = _possibleConstructorReturn(this, (SessionExpirationAlert.__proto__ || Object.getPrototypeOf(SessionExpirationAlert)).call(this,
+        props)); /* istanbul ignore next */_this.countdownHandle = null;
+
+        /* istanbul ignore next */_this.state = {
+            millisecondsToLogout: props.millisecondsToLogout,
+            isError: false,
+            isWarning: false }; /* istanbul ignore next */return _this;
+
+    }_createClass(SessionExpirationAlert, [{ key: 'componentDidMount', value: function componentDidMount()
+
+        {
+            this.startCountdown();
+        } }, { key: 'componentWillUnmount', value: function componentWillUnmount()
+
+        {
+            window.clearInterval(this.countdownHandle);
+        } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+
+        nextProps) {
+            this.setState({
+                millisecondsToLogout: nextProps.millisecondsToLogout,
+                isError: false,
+                isWarning: false });
+
+            this.startCountdown();
+        } }, { key: 'startCountdown', value: function startCountdown()
+
+        {/* istanbul ignore next */var _this2 = this;
+            window.clearInterval(this.countdownHandle);
+            this.countdownHandle = setInterval(function () {
+                var millisecondsToLogout = /* istanbul ignore next */_this2.state.millisecondsToLogout - COUNTDOWN_INTERVAL;
+                var isError = millisecondsToLogout < ERROR_START_IN_MILLISECONDS;
+                var isWarning = !isError && millisecondsToLogout < WARNING_START_IN_MILLISECONDS;
+                /* istanbul ignore next */_this2.setState({
+                    millisecondsToLogout: millisecondsToLogout,
+                    isWarning: isWarning,
+                    isError: isError });
+
+                if (millisecondsToLogout <= 0) {
+                    window.clearInterval( /* istanbul ignore next */_this2.countdownHandle);
+                }
+            }, COUNTDOWN_INTERVAL);
+        } }, { key: 'currentAlertType', value: function currentAlertType()
+
+        {
+            if (this.state.isWarning) {
+                return (/* istanbul ignore next */_AlertType2.default.WARNING);
+            }
+            if (this.state.isError) {
+                return (/* istanbul ignore next */_AlertType2.default.ERROR);
+            }
+            throw new Error('Alert Type can be get only when alert is in Error or Warning state');
+        } }, { key: 'render', value: function render()
+
+        {
+            var isErrorOrWarning = this.state.isError || this.state.isWarning;
+            var isVisible = this.state.millisecondsToLogout > 0 && isErrorOrWarning;
+            if (!isVisible) {
+                return null;
+            }
+            var message = createSessionExpirationMessage(this.state.millisecondsToLogout);
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'session-expiration-alert-container' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ApocReactAlert2.default, /* istanbul ignore next */{
+                            type: this.currentAlertType(),
+                            isClosable: false,
+                            className: 'session-expiration-alert sticky',
+                            closeTimeout: 0 },
+
+                        message, /* istanbul ignore next */'\xA0',
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{
+                                onClick: this.props.onActionClick }, /* istanbul ignore next */(0, _counterpart2.default)('notification.sessionExpiration.action')))));
+
+
+
+        } }]);return SessionExpirationAlert;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = SessionExpirationAlert;
+
+
+SessionExpirationAlert.propTypes = {
+    millisecondsToLogout: /* istanbul ignore next */_react2.default.PropTypes.number,
+    onActionClick: /* istanbul ignore next */_react2.default.PropTypes.func };
+
+
+function createSessionExpirationMessage(millisecondsToLogout) {
+    var prettyTimeToLogout = /* istanbul ignore next */(0, _TimeConversion.millisecondsToPrettyMinutesAndSeconds)(millisecondsToLogout);
+    return (/* istanbul ignore next */(0, _counterpart2.default)('notification.sessionExpiration.message', { time: prettyTimeToLogout }));
+}
+
+var COUNTDOWN_INTERVAL = 1000;
+
+var WARNING_START_IN_MILLISECONDS = 60000 * 5; // 5 minutes
+var ERROR_START_IN_MILLISECONDS = 60000; // one minute

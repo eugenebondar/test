@@ -1,0 +1,106 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_TableBoardPagination = require('../../../Shared/TableBoardPagination/TableBoardPagination'); /* istanbul ignore next */var _TableBoardPagination2 = _interopRequireDefault(_TableBoardPagination);
+var /* istanbul ignore next */_CatalogDetailsContainer = require('./CatalogDetails/CatalogDetailsContainer'); /* istanbul ignore next */var _CatalogDetailsContainer2 = _interopRequireDefault(_CatalogDetailsContainer);
+var /* istanbul ignore next */_TableActionContextOption = require('../../../Shared/TableActionContextOption/TableActionContextOption'); /* istanbul ignore next */var _TableActionContextOption2 = _interopRequireDefault(_TableActionContextOption);
+var /* istanbul ignore next */_TdTextEllipsis = require('../../../Shared/TdTextEllipsis/TdTextEllipsis'); /* istanbul ignore next */var _TdTextEllipsis2 = _interopRequireDefault(_TdTextEllipsis);
+var /* istanbul ignore next */_Td = require('../../../Shared/Td/Td'); /* istanbul ignore next */var _Td2 = _interopRequireDefault(_Td);
+var /* istanbul ignore next */_TableActionContextMenu = require('../../../Shared/TableActionContextMenu/TableActionContextMenu'); /* istanbul ignore next */var _TableActionContextMenu2 = _interopRequireDefault(_TableActionContextMenu);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+
+function t(key) {
+    return (/* istanbul ignore next */(0, _counterpart2.default)(key, { scope: 'tableCell' }));
+}
+
+var cells = {
+    NAME: 'catalogName',
+    CUSTOMER: 'customers',
+    ACTIONS: 'actions' }; /* istanbul ignore next */var
+
+
+CatalogsManagerTable = function (_React$PureComponent) {_inherits(CatalogsManagerTable, _React$PureComponent);function CatalogsManagerTable() {_classCallCheck(this, CatalogsManagerTable);return _possibleConstructorReturn(this, (CatalogsManagerTable.__proto__ || Object.getPrototypeOf(CatalogsManagerTable)).apply(this, arguments));}_createClass(CatalogsManagerTable, [{ key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;
+            var getOrganizationsNames = function getOrganizationsNames(organizations) /* istanbul ignore next */{return (
+                    organizations.map(function (organization) /* istanbul ignore next */{return (
+                            organization.corporation_name);}).join(', '));};
+
+            var catalogsList = this.props.catalogs.map(function (catalog, i) /* istanbul ignore next */{return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableRowWithExpandContent, /* istanbul ignore next */{
+                            key: catalog.id,
+                            id: /* istanbul ignore next */'id-' + i,
+                            isExpanded: /* istanbul ignore next */true,
+                            expandContent: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CatalogDetailsContainer2.default, /* istanbul ignore next */{ catalogId: catalog.id }) },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 500 }, catalog.name),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 618 }, getOrganizationsNames(catalog.organizations) || '–'),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Td2.default, /* istanbul ignore next */{ width: 110 },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableActionContextMenu2.default, /* istanbul ignore next */{
+                                    disabled: catalog.default_catalog },
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableActionContextOption2.default, /* istanbul ignore next */{
+                                    onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.handleEditCatalog(catalog.id));},
+                                    iconClassName: 'sc-icon-pencil',
+                                    label: /* istanbul ignore next */(0, _counterpart2.default)('actions.editCatalog') }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableActionContextOption2.default, /* istanbul ignore next */{
+                                    onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.handleDeleteCatalog(catalog));},
+                                    iconClassName: 'sc-icon-trash-closed',
+                                    label: /* istanbul ignore next */(0, _counterpart2.default)('actions.deleteCatalog') })))));});
+
+
+
+
+
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'tests-expand-content' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: this.props.paginationProps },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Table, /* istanbul ignore next */{
+                                isRowsStriped: /* istanbul ignore next */true },
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableHeadRow, /* istanbul ignore next */null,
+                                Object.values(cells).map(function (cell) /* istanbul ignore next */{return (
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableHeadCell, /* istanbul ignore next */{ key: cell },
+                                            t(cell)));})),
+
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableBodyWithExpandRows, /* istanbul ignore next */null,
+                                catalogsList)))));
+
+
+
+
+
+        } }, { key: 'handleEditCatalog', value: function handleEditCatalog(
+
+        catalogId) {
+            this.props.onEditCatalog(catalogId);
+        } }, { key: 'handleDeleteCatalog', value: function handleDeleteCatalog(
+
+        catalog) {
+            this.props.onDeleteCatalog(catalog);
+        } }]);return CatalogsManagerTable;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = CatalogsManagerTable;
+
+
+CatalogsManagerTable.propTypes = {
+    catalogs: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        default_catalog: /* istanbul ignore next */_react2.default.PropTypes.bool,
+        id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string,
+        organizations: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+            corporation_name: /* istanbul ignore next */_react2.default.PropTypes.string,
+            id: /* istanbul ignore next */_react2.default.PropTypes.string })) })),
+
+
+    paginationProps: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        currentPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        itemsPerPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        totalItems: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+        itemsName: /* istanbul ignore next */_react2.default.PropTypes.string }),
+
+    onEditCatalog: /* istanbul ignore next */_react2.default.PropTypes.func,
+    onDeleteCatalog: /* istanbul ignore next */_react2.default.PropTypes.func };

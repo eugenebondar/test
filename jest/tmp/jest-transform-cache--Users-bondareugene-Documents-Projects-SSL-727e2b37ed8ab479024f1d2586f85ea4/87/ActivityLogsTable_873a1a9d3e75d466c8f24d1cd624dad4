@@ -1,0 +1,92 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+
+var /* istanbul ignore next */_TdTextEllipsis = require('../../Shared/TdTextEllipsis/TdTextEllipsis'); /* istanbul ignore next */var _TdTextEllipsis2 = _interopRequireDefault(_TdTextEllipsis);
+var /* istanbul ignore next */_Td = require('../../Shared/Td/Td'); /* istanbul ignore next */var _Td2 = _interopRequireDefault(_Td);
+var /* istanbul ignore next */_Translation = require('../../Shared/TableBoard/Elements/Cells/Translation'); /* istanbul ignore next */var _Translation2 = _interopRequireDefault(_Translation);
+var /* istanbul ignore next */_ChangesetPreview = require('../../Shared/TableBoard/Elements/Cells/ChangesetPreview'); /* istanbul ignore next */var _ChangesetPreview2 = _interopRequireDefault(_ChangesetPreview);
+var /* istanbul ignore next */_DateTimeFormat = require('../../Shared/Configuration/DateTimeFormat'); /* istanbul ignore next */var _DateTimeFormat2 = _interopRequireDefault(_DateTimeFormat);
+var /* istanbul ignore next */_TableActionContextOption = require('../../Shared/TableActionContextOption/TableActionContextOption'); /* istanbul ignore next */var _TableActionContextOption2 = _interopRequireDefault(_TableActionContextOption);
+var /* istanbul ignore next */_TableActionContextMenu = require('../../Shared/TableActionContextMenu/TableActionContextMenu'); /* istanbul ignore next */var _TableActionContextMenu2 = _interopRequireDefault(_TableActionContextMenu);
+
+var /* istanbul ignore next */_columnConfig = require('./columnConfig'); /* istanbul ignore next */var _columnConfig2 = _interopRequireDefault(_columnConfig);
+var /* istanbul ignore next */_loadingHoc = require('../../Shared/LoadingHoc/loadingHoc'); /* istanbul ignore next */var _loadingHoc2 = _interopRequireDefault(_loadingHoc);
+
+/* istanbul ignore next */require('./ActivityLogs.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+var LoadingTable = /* istanbul ignore next */(0, _loadingHoc2.default)( /* istanbul ignore next */_apocReact.Table); /* istanbul ignore next */var
+
+ActivityLogsTable = function (_React$PureComponent) {_inherits(ActivityLogsTable, _React$PureComponent);function ActivityLogsTable() {_classCallCheck(this, ActivityLogsTable);return _possibleConstructorReturn(this, (ActivityLogsTable.__proto__ || Object.getPrototypeOf(ActivityLogsTable)).apply(this, arguments));}_createClass(ActivityLogsTable, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _this2 = this;
+            var tableClassName = /* istanbul ignore next */(0, _classnames2.default)('activity-logs-table table');
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement(LoadingTable, /* istanbul ignore next */{
+                        className: tableClassName,
+                        isRowsStriped: /* istanbul ignore next */true,
+                        isLoading: this.props.isLoading,
+                        emptyTableMessage: this.props.emptyTableMessage },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableHeadRow, /* istanbul ignore next */null,
+                        /* istanbul ignore next */_columnConfig2.default.map(function (cell, i) /* istanbul ignore next */{return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableHeadCell, /* istanbul ignore next */{ key: i }, /* istanbul ignore next */(0, _counterpart2.default)(cell.name)));}),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableHeadCell, /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('tableCell.actions'))),
+
+                    this.props.activityLogs &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tbody', /* istanbul ignore next */null,
+                        this.props.activityLogs.map(function (row) /* istanbul ignore next */{return (
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tr', /* istanbul ignore next */{ key: row.id },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 80 },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DateTimeFormat2.default, /* istanbul ignore next */{ dateFormat: 'fullDateWithSeconds', date: row.created_at })),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 80 },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Translation2.default, /* istanbul ignore next */{
+                                            value: row.event,
+                                            counterPartOptions: { scope: 'activityLogs.values' },
+                                            useOriginalTextAsFallback: /* istanbul ignore next */true })),
+
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 80 },
+                                        row.item_type),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 80 },
+                                        row.item_id),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 80 },
+                                        [
+                                        row.user_full_name,
+                                        row.user_email].
+                                        join(' ')),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 80 },
+                                        row.user_agent),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 90 },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ChangesetPreview2.default, /* istanbul ignore next */{ value: row.changeset })),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TdTextEllipsis2.default, /* istanbul ignore next */{ width: 50 },
+                                        row.ip_address),
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Td2.default, /* istanbul ignore next */{ width: 56 },
+                                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableActionContextMenu2.default, /* istanbul ignore next */{ disabled: JSON.stringify(row.changeset) === '{}' },
+                                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableActionContextOption2.default, /* istanbul ignore next */{ onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onViewChangsetClick(row.id));},
+                                                iconClassName: 'sc-icon-invisible',
+                                                label: /* istanbul ignore next */(0, _counterpart2.default)('activityLogs.actions.viewFullChangeset') })))));}))));
+
+
+
+
+
+
+
+
+
+
+        } }]);return ActivityLogsTable;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = ActivityLogsTable;
+
+
+ActivityLogsTable.propTypes = {
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    emptyTableMessage: /* istanbul ignore next */_react2.default.PropTypes.string,
+    activityLogs: /* istanbul ignore next */_react2.default.PropTypes.array,
+    onViewChangsetClick: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired };

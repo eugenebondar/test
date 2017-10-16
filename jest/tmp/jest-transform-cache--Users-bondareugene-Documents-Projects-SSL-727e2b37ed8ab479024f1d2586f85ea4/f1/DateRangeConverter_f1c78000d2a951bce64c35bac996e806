@@ -1,0 +1,82 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var maximumRangeEnd = 100;
+var precision = 'minutes';
+
+/**
+                            * Converts date range into number range
+                            */ /* istanbul ignore next */var
+DateRangeConverter = function () {
+    /**
+                                   * @param {Moment} [maxStart] start
+                                   * @param {Moment} [maxEnd] end
+                                   */
+    function /* istanbul ignore next */DateRangeConverter(maxStart, maxEnd) {/* istanbul ignore next */_classCallCheck(this, DateRangeConverter);
+        this.minStart = maxStart;
+        this.maxEnd = maxEnd;
+        this.minutesDiff = this.maxEnd.diff(this.minStart, precision);
+        if (this.minutesDiff < 0) {
+            throw new Error('Invalid argument: start date is later than end.');
+        }
+    }
+
+    /**
+       * @returns {number}
+       */_createClass(DateRangeConverter, [{ key: 'toMaxNumberRange', value: function toMaxNumberRange()
+        {
+            return Math.min(Math.max(1, this.minutesDiff), maximumRangeEnd);
+        }
+
+        /**
+           * @param {Number} rangeStart
+           * @param {Number} rangeEnd
+           * @return {{start:Moment, end:Moment}}
+           */ }, { key: 'toDateRange', value: function toDateRange(
+        rangeStart, rangeEnd) {
+            var minutesDiff = this.maxEnd.diff(this.minStart, precision);
+
+            if (minutesDiff === 0) {
+                return { start: this.minStart, end: this.maxEnd };
+            }
+
+            var start = this.convertShortRangePositionIntoOriginalPosition(rangeStart);
+            var end = this.convertShortRangePositionIntoOriginalPosition(rangeEnd);
+
+            return { start: start, end: end };
+        }
+
+        /**
+           * @param {Moment} [start]
+           * @param {Moment} [end]
+           */ }, { key: 'toSelectedRange', value: function toSelectedRange(
+        start, end) {
+            var minutesDiff = this.maxEnd.diff(this.minStart, precision);
+
+            if (minutesDiff === 0) {
+                return [0, 1];
+            }
+
+            return [
+            this.convertOirignalPositionIntoShortRangePosition(start),
+            this.convertOirignalPositionIntoShortRangePosition(end)];
+
+        }
+
+        /**
+           * @private
+           * @param {Moment} date
+           */ }, { key: 'convertOirignalPositionIntoShortRangePosition', value: function convertOirignalPositionIntoShortRangePosition(
+        date) {
+            var minutesFromMinStart = date.diff(this.minStart, precision);
+            var positionInPercents = minutesFromMinStart / this.minutesDiff;
+            return Math.min(Math.max(0, Math.round(positionInPercents * this.toMaxNumberRange())), this.toMaxNumberRange());
+        }
+
+        /**
+           * @private
+           * @param {Number} rangePosition
+           * @return {Moment}
+           */ }, { key: 'convertShortRangePositionIntoOriginalPosition', value: function convertShortRangePositionIntoOriginalPosition(
+        rangePosition) {
+            var positionInPercent = rangePosition / this.toMaxNumberRange();
+            var originalRangePosition = Math.round(positionInPercent * this.minutesDiff);
+            return this.minStart.clone().add(originalRangePosition, precision);
+        } }]);return DateRangeConverter;}(); /* istanbul ignore next */exports.default = DateRangeConverter;

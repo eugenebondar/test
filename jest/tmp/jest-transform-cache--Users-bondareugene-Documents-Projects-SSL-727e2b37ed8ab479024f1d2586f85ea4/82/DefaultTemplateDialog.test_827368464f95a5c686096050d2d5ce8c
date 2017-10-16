@@ -1,0 +1,127 @@
+/* istanbul ignore next */'use strict';var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json');
+var /* istanbul ignore next */_DefaultTemplateDialog = require('./DefaultTemplateDialog'); /* istanbul ignore next */var _DefaultTemplateDialog2 = _interopRequireDefault(_DefaultTemplateDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var COMPONENT_PROPS = {
+    isLoading: false,
+    isSaving: false,
+    isError: null,
+    fields: {
+        main_id: null,
+        cover_id: '22' },
+
+    mainTemplates: [
+    { id: '11', name: '44' }],
+
+    coverTemplates: [] };
+
+
+
+var getDefaultTemplateDialog = function getDefaultTemplateDialog() {/* istanbul ignore next */var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {}; /* istanbul ignore next */var renderer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _enzyme.mount;
+    return renderer(
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DefaultTemplateDialog2.default, /* istanbul ignore next */_extends({},
+    COMPONENT_PROPS, {
+        onUpdateValue: function /* istanbul ignore next */onUpdateValue() {},
+        onSetDefaultTemplates: function /* istanbul ignore next */onSetDefaultTemplates() {},
+        onClose: function /* istanbul ignore next */onClose() {} },
+    params)));
+
+
+};
+
+describe('Customer DefaultTemplateDialog ', function () {
+    var component = /* istanbul ignore next */void 0;
+
+    beforeEach(function () {
+        component = getDefaultTemplateDialog({}, /* istanbul ignore next */_enzyme.shallow);
+    });
+
+    it('matches snapshot', function () {
+        expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)(component)).toMatchSnapshot();
+    });
+
+    describe('save button ', function () {
+        var component = /* istanbul ignore next */void 0;
+
+        it('should be disabled during loading', function () {
+            component = getDefaultTemplateDialog({ isLoading: true });
+            expect(component.find('.sc-btn-primary').prop('disabled')).toBeTruthy();
+        });
+
+        it('should be disabled during saving', function () {
+            component = getDefaultTemplateDialog({ isSaving: true });
+            expect(component.find('.sc-btn-primary').prop('disabled')).toBeTruthy();
+        });
+
+        it('should be enabled after loading and saving', function () {
+            component = getDefaultTemplateDialog();
+            expect(component.find('.sc-btn-primary').prop('disabled')).toBeFalsy();
+        });
+
+        it('should be disabled when `this.props.mainTemplates` and `this.props.coverTemplates have no items` ', function () {
+            component = getDefaultTemplateDialog({ mainTemplates: [] });
+            expect(component.find('.sc-btn-primary').prop('disabled')).toBeTruthy();
+        });
+    });
+    describe('error message ', function () {
+        var component = /* istanbul ignore next */void 0;
+
+        it('should be shown and contain error text', function () {
+            var errorMessage = { isError: 'error' };
+            component = getDefaultTemplateDialog(errorMessage);
+            expect(component.find('.ssl-alert').length).toBe(1);
+            expect(component.find('.ssl-alert').text()).toContain(errorMessage.isError);
+        });
+
+        it('should not be shown', function () {
+            component = getDefaultTemplateDialog();
+            expect(component.find('.ssl-alert').length).toBe(0);
+        });
+    });
+    describe('props function ', function () {
+        var component = /* istanbul ignore next */void 0;
+
+        it('cancel `onClose` works', function () {
+            var onClose = jasmine.createSpy('onClose');
+            component = getDefaultTemplateDialog({ onClose: onClose });
+            component.find('.cancel-btn').simulate('click');
+            expect(onClose).toHaveBeenCalledTimes(1);
+        });
+
+        it('save `onSetDefaultTemplates` works', function () {
+            var onSetDefaultTemplates = jasmine.createSpy('onSetDefaultTemplates');
+            component = getDefaultTemplateDialog({ onSetDefaultTemplates: onSetDefaultTemplates });
+            component.find('.sc-btn-primary').simulate('click');
+            expect(onSetDefaultTemplates).toHaveBeenCalledTimes(1);
+        });
+    });
+    describe('dialog form ', function () {
+        var component = /* istanbul ignore next */void 0;
+
+        beforeEach(function () {
+            component = getDefaultTemplateDialog();
+        });
+
+        it('Select Cover Templete dropdown has no items when `this.props.coverTemplates` has length equal 0 ', function () {
+            var covertemplates = component.find('.default-template-form .form__field .form__input').at(0);
+            expect(covertemplates.text()).toContain( /* istanbul ignore next */(0, _counterpart2.default)('customers.defaultTemplate.noCustomerCoverTemplates'));
+        });
+
+        it('Select Main templete dropdown has 2 items: one default `not selected` and one from array `this.props.mainTemplates`', function () {
+            var maintemplates = component.find('.default-template-form .form__field .form__input').at(1);
+            expect(maintemplates.find('.sc-dropdown-menus li').length).toBe(2);
+        });
+
+        it('`onUpdateValue` function works after selecting some template from dropdown', function () {
+            var onUpdateValue = jasmine.createSpy('onUpdateValue');
+            component = getDefaultTemplateDialog({ onUpdateValue: onUpdateValue });
+            var maintemplates = component.find('.default-template-form .form__field .form__input').at(1);
+            maintemplates.find('.sc-btn-dropdown').simulate('click');
+            maintemplates.find('.sc-dropdown-menus li').at(1).find('input').simulate('click');
+            expect(onUpdateValue).toHaveBeenCalledTimes(1);
+        });
+    });
+
+});

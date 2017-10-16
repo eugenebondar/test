@@ -1,0 +1,22 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var FilesAPI = /* istanbul ignore next */_Model2.default.New();
+
+FilesAPI.importFindingFile = function (runId, findingId, file) {
+    return (/* istanbul ignore next */_Api2.default.sendFile( /* istanbul ignore next */'/api/service/runs/' + runId + '/findings/' + findingId + '/finding_attachments', file));
+};
+
+FilesAPI.deleteFindingFile = function (runId, findingId, id) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/runs/' + runId + '/findings/' + findingId + '/finding_attachments/' + id));
+};
+
+FilesAPI.importFile = function (file, isService) {
+    return (/* istanbul ignore next */_Api2.default.sendFile( /* istanbul ignore next */'/api/' + (isService ? 'service/' : '') + 'attachments', file));
+};
+
+FilesAPI.deleteFile = function (id, data, isService) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/' + (isService ? 'service/' : '') + 'attachments/' + id, data));
+}; /* istanbul ignore next */exports.default =
+
+FilesAPI;

@@ -1,0 +1,162 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.FilesActions = exports.QuickTipsActions = exports.TestScheduleEditorActions = exports.ProductsActions = exports.UsersActions = exports.ClassificationsActions = exports.UserMenuActions = exports.ExternalRunsActions = exports.TestDetailsActions = exports.SettingsActions = exports.OrganizationsActions = exports.SessionUserActions = undefined;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+
+var /* istanbul ignore next */_SessionUserActions = require('./Stores/SessionUser/SessionUserActions'); /* istanbul ignore next */var _SessionUserActions2 = _interopRequireDefault(_SessionUserActions);
+var /* istanbul ignore next */_api = require('./Models/Manager/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var OrganizationsActions = {
+    fetchCustomers: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchOrganizationsList: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchCustomer: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteCustomer: /* istanbul ignore next */_reflux2.default.createAction(),
+    suspendCustomer: /* istanbul ignore next */_reflux2.default.createAction(),
+    unSuspendCustomer: /* istanbul ignore next */_reflux2.default.createAction(),
+    customerSubmitted: /* istanbul ignore next */_reflux2.default.createAction(),
+    getTestAssigneeList: /* istanbul ignore next */_reflux2.default.createAction(),
+    addNewTest: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchTest: /* istanbul ignore next */_reflux2.default.createAction(),
+    editTest: /* istanbul ignore next */_reflux2.default.createAction(),
+    addTestSettings: /* istanbul ignore next */_reflux2.default.createAction(),
+    getSettingsConfig: /* istanbul ignore next */_reflux2.default.createAction(),
+    getTestSettings: /* istanbul ignore next */_reflux2.default.createAction(),
+    editBranding: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+var SettingsActions = {
+    getTestCategoriesList: /* istanbul ignore next */_reflux2.default.createAction(),
+    getSettingsConfig: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+var TestDetailsActions = {
+    fetchTestDetails: /* istanbul ignore next */_reflux2.default.createAction(),
+    getServiceFindingDetails: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchFindingTypes: /* istanbul ignore next */_reflux2.default.createAction(),
+    getFindings: /* istanbul ignore next */_reflux2.default.createAction(),
+    getFindingsCount: /* istanbul ignore next */_reflux2.default.createAction(),
+    exportFindings: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    updateStatus: /* istanbul ignore next */_reflux2.default.createAction(),
+    requestTest: /* istanbul ignore next */_reflux2.default.createAction(),
+    getAssessmentRuns: /* istanbul ignore next */_reflux2.default.createAction(),
+    updateTestInfo: /* istanbul ignore next */_reflux2.default.createAction(),
+    importFindings: /* istanbul ignore next */_reflux2.default.createAction(),
+    respondTest: /* istanbul ignore next */_reflux2.default.createAction(),
+    reportDownloadCoverAndTemplate: /* istanbul ignore next */_reflux2.default.createAction(),
+    reportConfigureFilePreview: /* istanbul ignore next */_reflux2.default.createAction(),
+    reportConfigureFileGenerate: /* istanbul ignore next */_reflux2.default.createAction(),
+    reportGenerationErrors: /* istanbul ignore next */_reflux2.default.createAction(),
+    stopTest: /* istanbul ignore next */_reflux2.default.createAction(),
+    abortTest: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+var ExternalRunsActions = {
+    getExternalRuns: /* istanbul ignore next */_reflux2.default.createAction(),
+    getExternalFindings: /* istanbul ignore next */_reflux2.default.createAction(),
+    getExternalFindingsCount: /* istanbul ignore next */_reflux2.default.createAction(),
+    includeSelectedAndPublish: /* istanbul ignore next */_reflux2.default.createAction(),
+    excludeSelected: /* istanbul ignore next */_reflux2.default.createAction(),
+    includeSelected: /* istanbul ignore next */_reflux2.default.createAction(),
+    publishSelected: /* istanbul ignore next */_reflux2.default.createAction(),
+    unPublishSelected: /* istanbul ignore next */_reflux2.default.createAction(),
+    includedAll: /* istanbul ignore next */_reflux2.default.createAction(),
+    excludedAll: /* istanbul ignore next */_reflux2.default.createAction(),
+    publishTestRun: /* istanbul ignore next */_reflux2.default.createAction(),
+    unPublishTestRun: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteExternalRun: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchRunDetails: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+var UserMenuActions = {
+    update: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+var ClassificationsActions = {
+    fetchCategories: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchClassificationsGroupsList: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchAllCategories: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteCategory: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchClassificationGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    addClassificationGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    editClassificationGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteClassificationGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    addClassification: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteClassification: /* istanbul ignore next */_reflux2.default.createAction(),
+    editClassification: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchClassifications: /* istanbul ignore next */_reflux2.default.createAction(),
+    getClassificationsCount: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchExpandClassificationGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    editExpandClassificationGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    addExpandClassificationGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteExpandClassificationGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    removeClassificationGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchAllClassificationGroups: /* istanbul ignore next */_reflux2.default.createAction(),
+    importClassifications: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    fetchClassificationsGroups: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchClassificationsGroupsChildren: /* istanbul ignore next */_reflux2.default.createAction(),
+    addClassificationGroupChild: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchClassification: /* istanbul ignore next */_reflux2.default.createAction(),
+    removeClassificationGroupChild: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+ClassificationsActions.importClassifications.listen(function (data) {/* istanbul ignore next */var _this = this;
+    var file = new FormData();
+    file.append('file', data);
+    /* istanbul ignore next */_api2.default.importClassifications(file).
+    then(function (response) {
+        return response.status === 422 ? response.json() : response;
+    }).
+    then(function (json) {
+        (!json.errors ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(json);
+    });
+});
+
+var UsersActions = {
+    fetchUsers: /* istanbul ignore next */_reflux2.default.createAction(),
+    getCustomers: /* istanbul ignore next */_reflux2.default.createAction(),
+    getCurrentCustomer: /* istanbul ignore next */_reflux2.default.createAction(),
+    editCustomer: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteUser: /* istanbul ignore next */_reflux2.default.createAction(),
+    unLockedUser: /* istanbul ignore next */_reflux2.default.createAction(),
+    suspendUser: /* istanbul ignore next */_reflux2.default.createAction(),
+    unSuspendUser: /* istanbul ignore next */_reflux2.default.createAction(),
+    changePassword: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+var ProductsActions = {
+    addProduct: /* istanbul ignore next */_reflux2.default.createAction(),
+    editProduct: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteProduct: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchProducts: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchProductsList: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchProductTypes: /* istanbul ignore next */_reflux2.default.createAction(),
+    getProductsCount: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+var TestScheduleEditorActions = {
+    update: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+var QuickTipsActions = {
+    getQuickTip: /* istanbul ignore next */_reflux2.default.createAction(),
+    hideQuickTip: /* istanbul ignore next */_reflux2.default.createAction() };
+
+
+var FilesActions = {
+    importFindingFile: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteFindingFile: /* istanbul ignore next */_reflux2.default.createAction(),
+    importFile: /* istanbul ignore next */_reflux2.default.createAction(),
+    importMultipleFiles: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteFile: /* istanbul ignore next */_reflux2.default.createAction() }; /* istanbul ignore next */exports.
+
+
+
+SessionUserActions = _SessionUserActions2.default; /* istanbul ignore next */exports.
+OrganizationsActions = OrganizationsActions; /* istanbul ignore next */exports.
+SettingsActions = SettingsActions; /* istanbul ignore next */exports.
+TestDetailsActions = TestDetailsActions; /* istanbul ignore next */exports.
+ExternalRunsActions = ExternalRunsActions; /* istanbul ignore next */exports.
+UserMenuActions = UserMenuActions; /* istanbul ignore next */exports.
+ClassificationsActions = ClassificationsActions; /* istanbul ignore next */exports.
+UsersActions = UsersActions; /* istanbul ignore next */exports.
+ProductsActions = ProductsActions; /* istanbul ignore next */exports.
+TestScheduleEditorActions = TestScheduleEditorActions; /* istanbul ignore next */exports.
+QuickTipsActions = QuickTipsActions; /* istanbul ignore next */exports.
+FilesActions = FilesActions;

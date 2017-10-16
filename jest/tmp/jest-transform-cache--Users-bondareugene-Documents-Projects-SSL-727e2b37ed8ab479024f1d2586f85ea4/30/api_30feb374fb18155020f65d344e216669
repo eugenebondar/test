@@ -1,0 +1,61 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var ExternalRunsAPI = {};
+
+ExternalRunsAPI.getExternalRuns = function (externalRunId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/external_runs/' + externalRunId + '/runs.json'));
+};
+
+ExternalRunsAPI.getExternalFindings = function (externalRunId, filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull( /* istanbul ignore next */'/api/service/external_runs/' + externalRunId + '/findings.json', filter));
+};
+
+ExternalRunsAPI.getExternalFindingsCount = function (externalRunId, countType) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/external_runs/' + externalRunId + '/findings_count.json', countType));
+};
+
+ExternalRunsAPI.publishTestRun = function (runId) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/runs/' + runId + '/publish'));
+};
+
+ExternalRunsAPI.unPublishTestRun = function (runId) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/runs/' + runId + '/unpublish'));
+};
+
+ExternalRunsAPI.publishSelected = function (runId, ids) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/runs/' + runId + '/findings/publish', { ids: ids }));
+};
+
+ExternalRunsAPI.unPublishSelected = function (runId, ids) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/runs/' + runId + '/findings/unpublish', { ids: ids }));
+};
+
+ExternalRunsAPI.excludeSelected = function (runId, ids) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/runs/' + runId + '/findings/make_excluded', { ids: ids }));
+};
+
+ExternalRunsAPI.includeSelected = function (runId, ids) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/runs/' + runId + '/findings/make_included', { ids: ids }));
+};
+
+ExternalRunsAPI.deleteExternalRun = function (runId, externalRunId) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/external_runs/' + externalRunId));
+};
+
+ExternalRunsAPI.includeSelectedAndPublish = function (runId, ids) {
+    return (/* istanbul ignore next */_Api2.default.put('/api/service/runs/' + runId + '/findings/include_and_publish', { ids: ids }));
+};
+
+ExternalRunsAPI.importHailstorm = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/import/findings/', data));
+};
+
+ExternalRunsAPI.importFindingsFromFile = function (data) {
+    return (/* istanbul ignore next */_Api2.default.sendFile('/api/import/upload', data));
+};
+
+ExternalRunsAPI.fetchAssessmentRuns = function (data) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/import/runs/', data).then(function (response) /* istanbul ignore next */{return response.json();}));
+}; /* istanbul ignore next */exports.default =
+
+ExternalRunsAPI;

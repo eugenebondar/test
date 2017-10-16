@@ -1,0 +1,65 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.defaultFields = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json');
+var /* istanbul ignore next */_NotesDialog = require('./NotesDialog'); /* istanbul ignore next */var _NotesDialog2 = _interopRequireDefault(_NotesDialog);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var defaultFields = /* istanbul ignore next */exports.defaultFields = {
+    comment: '',
+    onClose: function /* istanbul ignore next */onClose() /* istanbul ignore next */{return null;},
+    onSubmit: function /* istanbul ignore next */onSubmit() /* istanbul ignore next */{return null;},
+    isLoading: false,
+    isEditDisabledDueTestState: false,
+    testState: 'queued' };
+
+
+describe('NotesDialog', function () {
+    describe('with EMPTY note field', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_NotesDialog2.default,
+            defaultFields));
+
+        });
+
+        it('matches snapshot', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('with FILLED note field', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+
+        beforeAll(function () {
+            errorConsole = spyOn(console, 'error');
+        });
+
+        beforeEach(function () {
+            component = /* istanbul ignore next */(0, _enzyme.mount)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_NotesDialog2.default, /* istanbul ignore next */_extends({},
+            defaultFields, {
+                comment: 'With simple note' })));
+
+        });
+
+        it('matches snapshot without alert', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+
+        it('matches snapshot with alert', function () {
+            component.setProps({ isEditDisabledDueTestState: true });
+            expect( /* istanbul ignore next */(0, _enzymeToJson.mountToJson)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

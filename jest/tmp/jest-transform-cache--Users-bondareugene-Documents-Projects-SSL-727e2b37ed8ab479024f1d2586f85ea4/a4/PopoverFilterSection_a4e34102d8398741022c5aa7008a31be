@@ -1,0 +1,28 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+PopoverFilterSection;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_apocReact = require('apoc-react'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function PopoverFilterSection(props) {
+    /**
+                                                                                                                                                                                                                                                                                                                                                                                     * @type {{label:string, value:string, checked:boolean}[]}
+                                                                                                                                                                                                                                                                                                                                                                                     */
+    var filters = /* istanbul ignore next */_react2.default.Children.map(props.children, function (child) /* istanbul ignore next */{return child.props;});
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Collapse, /* istanbul ignore next */{ onToggled: function /* istanbul ignore next */onToggled() /* istanbul ignore next */{return null;}, title: props.label, isPanelButton: /* istanbul ignore next */true, isCollapsed: false },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Multiselect, /* istanbul ignore next */{ onChange: props.onChange },
+                filters.map(function (filter) /* istanbul ignore next */{return (
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Checkbox, /* istanbul ignore next */{ label: filter.label,
+                            name: filter.value,
+                            key: filter.value,
+                            checked: filter.checked,
+                            disabled: filter.disabled }));}))));
+
+
+
+
+
+}
+
+PopoverFilterSection.propTypes = {
+    label: /* istanbul ignore next */_react2.default.PropTypes.node,
+    children: /* istanbul ignore next */_react2.default.PropTypes.node,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func };

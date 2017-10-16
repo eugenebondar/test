@@ -1,0 +1,41 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var TemplatesAPI = {};
+
+TemplatesAPI.getTemplateUrl = function (templateId) {
+    return (/* istanbul ignore next */'/api/service/templates/' + templateId + '/download');
+};
+
+TemplatesAPI.fetchTemplates = function (filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull('/api/service/templates', filter));
+};
+
+TemplatesAPI.fetchTemplate = function (templateId) {
+    return (/* istanbul ignore next */_Api2.default.get( /* istanbul ignore next */'/api/service/templates/' + templateId));
+};
+
+TemplatesAPI.addTemplate = function (data) {
+    return (/* istanbul ignore next */_Api2.default.sendMultipart('/api/service/templates', data));
+};
+
+TemplatesAPI.editTemplate = function (templateId, data) {
+    return (/* istanbul ignore next */_Api2.default.updateMultipart( /* istanbul ignore next */'/api/service/templates/' + templateId + '.json', data));
+};
+
+TemplatesAPI.deleteTemplate = function (templateId) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/templates/' + templateId + '.json'));
+};
+
+TemplatesAPI.getTemplatesCount = function (count_type) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/templates/templates_count.json', count_type));
+};
+
+TemplatesAPI.setTemplateAsDefault = function (templateId) {
+    return (/* istanbul ignore next */_Api2.default.put( /* istanbul ignore next */'/api/service/templates/' + templateId + '/default'));
+};
+
+TemplatesAPI.clearTemplateDefault = function (templateId) {
+    return (/* istanbul ignore next */_Api2.default.delete( /* istanbul ignore next */'/api/service/templates/' + templateId + '/default'));
+}; /* istanbul ignore next */exports.default =
+
+TemplatesAPI;

@@ -1,0 +1,222 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_nodeQsSerialization = require('node-qs-serialization');
+var /* istanbul ignore next */_SessionUserActions = require('../Stores/SessionUser/SessionUserActions'); /* istanbul ignore next */var _SessionUserActions2 = _interopRequireDefault(_SessionUserActions);
+
+var /* istanbul ignore next */_es6Promise = require('es6-promise');
+var /* istanbul ignore next */_browserCookies = require('browser-cookies'); /* istanbul ignore next */var _browserCookies2 = _interopRequireDefault(_browserCookies);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var rootUrl = window.location.origin;
+
+var Api = { /* istanbul ignore next */
+    get: function get(apiUrl, par) {
+        var url = rootUrl + apiUrl;
+        if ('undefined' !== typeof par) {
+            url += '?' + /* istanbul ignore next */(0, _nodeQsSerialization.param)(par);
+        }
+        return fetch(url, {
+            credentials: 'same-origin' }).
+        then(function (response) {
+            if (response.status === 401) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_SessionUserActions2.default.setUnauthorized(json.error);
+                    return null;
+                });
+            } else {
+                return response.json();
+            }
+        });
+    }, /* istanbul ignore next */
+    getFull: function getFull(apiUrl, par) {
+        var url = rootUrl + apiUrl;
+        if ('undefined' !== typeof par) {
+            url += '?' + /* istanbul ignore next */(0, _nodeQsSerialization.param)(par);
+        }
+        return fetch(url, {
+            credentials: 'same-origin' }).
+        then(function (response) {
+            if (response.status === 401) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_SessionUserActions2.default.setUnauthorized(json.error);
+                    return null;
+                });
+            } else {
+                return new /* istanbul ignore next */_es6Promise.Promise(function (resolve) {
+                    resolve(response);
+                });
+            }
+        });
+    }, /* istanbul ignore next */
+    post: function post(url, json) {
+        return fetch(url, {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: JSON.stringify(json),
+            headers: {
+                'Content-type': 'application/json',
+                'X-CSRF-TOKEN': getToken() } }).
+
+        then(function (response) {
+            if (response.status === 401) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_SessionUserActions2.default.setUnauthorized(json.error);
+                    return null;
+                });
+            } else {
+                return new /* istanbul ignore next */_es6Promise.Promise(function (resolve) {
+                    resolve(response);
+                });
+            }
+        });
+    }, /* istanbul ignore next */
+    login: function login(url, json) {
+        return fetch(url, {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: JSON.stringify(json),
+            headers: {
+                'Content-type': 'application/json',
+                'X-CSRF-TOKEN': getToken() } }).
+
+
+        then(json);
+    }, /* istanbul ignore next */
+    putWithoutCheck: function putWithoutCheck(url, json) {
+        return fetch(url, {
+            method: 'PUT',
+            credentials: 'same-origin',
+            body: JSON.stringify(json),
+            headers: {
+                'Content-type': 'application/json',
+                'X-CSRF-TOKEN': getToken() } }).
+
+
+        then(json);
+    }, /* istanbul ignore next */
+    sendFile: function sendFile(url, data) {
+        return fetch(url, {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: data,
+            headers: {
+                'X-CSRF-TOKEN': getToken() } }).
+
+        then(function (response) {
+            if (response.status === 401) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_SessionUserActions2.default.setUnauthorized(json.error);
+                    return null;
+                });
+            } else {
+                return new /* istanbul ignore next */_es6Promise.Promise(function (resolve) {
+                    resolve(response);
+                });
+            }
+        });
+    }, /* istanbul ignore next */
+    sendMultipart: function sendMultipart(url, data) {
+        var formData = new FormData();
+        var isDataEmpty = true;
+
+        for (name in data) {
+            if (data[name]) {
+                isDataEmpty = false;
+                formData.append(name, data[name]);
+            }
+        }
+
+        if (isDataEmpty) {
+            formData = {};
+        }
+
+        return fetch(url, {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': getToken() } }).
+
+        then(function (response) {
+            if (response.status === 401) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_SessionUserActions2.default.setUnauthorized(json.error);
+                    return null;
+                });
+            } else {
+                return new /* istanbul ignore next */_es6Promise.Promise(function (resolve) {
+                    resolve(response);
+                });
+            }
+        });
+    }, /* istanbul ignore next */
+    updateForm: function updateForm(url, data) {
+        return fetch(url, {
+            method: 'PUT',
+            credentials: 'same-origin',
+            body: data,
+            headers: {
+                'X-CSRF-TOKEN': getToken() } }).
+
+        then(function (response) {
+            if (response.status === 401) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_SessionUserActions2.default.setUnauthorized(json.error);
+                    return null;
+                });
+            } else {
+                return new /* istanbul ignore next */_es6Promise.Promise(function (resolve) {
+                    resolve(response);
+                });
+            }
+        });
+    }, /* istanbul ignore next */
+    put: function put(url, json) {
+        return fetch(url, {
+            method: 'PUT',
+            credentials: 'same-origin',
+            body: JSON.stringify(json),
+            headers: {
+                'Content-type': 'application/json',
+                'X-CSRF-TOKEN': getToken() } }).
+
+        then(function (response) {
+            if (response.status === 401) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_SessionUserActions2.default.setUnauthorized(json.error);
+                    return null;
+                });
+            } else {
+                return new /* istanbul ignore next */_es6Promise.Promise(function (resolve) {
+                    resolve(response);
+                });
+            }
+        });
+    }, /* istanbul ignore next */
+    delete: function _delete(url, json) {
+        return fetch(url, {
+            method: 'DELETE',
+            credentials: 'same-origin',
+            body: JSON.stringify(json),
+            headers: {
+                'Content-type': 'application/json',
+                'X-CSRF-TOKEN': getToken() } }).
+
+        then(function (response) {
+            if (response.status === 401) {
+                response.json().then(function (json) {
+                    /* istanbul ignore next */_SessionUserActions2.default.setUnauthorized(json.error);
+                    return null;
+                });
+            } else {
+                return new /* istanbul ignore next */_es6Promise.Promise(function (resolve) {
+                    resolve(response);
+                });
+            }
+        });
+    } };
+
+
+function getToken() {
+    var token = /* istanbul ignore next */_browserCookies2.default.get('XSRF-TOKEN');
+    return token ? token : '';
+} /* istanbul ignore next */exports.default =
+
+Api;

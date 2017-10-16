@@ -1,0 +1,10 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.closeEditor = exports.areTestingHoursAllowedChange = exports.openTestScheduleEditor = undefined;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_timezones = require('../../../Models/timezones'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var openTestScheduleEditor = /* istanbul ignore next */exports.openTestScheduleEditor = /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true });
+var areTestingHoursAllowedChange = /* istanbul ignore next */exports.areTestingHoursAllowedChange = /* istanbul ignore next */_reflux2.default.createAction({ sync: true });
+var closeEditor = /* istanbul ignore next */exports.closeEditor = /* istanbul ignore next */_reflux2.default.createAction({ sync: true });
+
+openTestScheduleEditor.listen(function () {
+    /* istanbul ignore next */(0, _timezones.getTimezones)().then(this.completed, this.failed);
+});

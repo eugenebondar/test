@@ -1,0 +1,50 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_enzymeToJson = require('enzyme-to-json');
+
+var /* istanbul ignore next */_RolesContainer = require('./RolesContainer'); /* istanbul ignore next */var _RolesContainer2 = _interopRequireDefault(_RolesContainer);
+var /* istanbul ignore next */_User = require('../../Stores/SessionUser/User'); /* istanbul ignore next */var _User2 = _interopRequireDefault(_User);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('Roles', function () {
+    describe('with default set of props', function () {
+        var component = /* istanbul ignore next */void 0,errorConsole = /* istanbul ignore next */void 0;
+        var context = { currentUser: new /* istanbul ignore next */_User2.default({ user_type: 'staff' }) };
+
+        beforeEach(function () {
+            errorConsole = spyOn(console, 'error');
+            component = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RolesContainer2.default, /* istanbul ignore next */null), {
+                context: context,
+                childContextTypes: {
+                    currentUser: /* istanbul ignore next */_react2.default.PropTypes.instanceOf( /* istanbul ignore next */_User2.default) } });
+
+
+        });
+
+        it('matches snapshot with Preloader', function () {
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)(component)).toMatchSnapshot();
+        });
+
+        it('matches snapshot with Table', function () {
+            component.setState({
+                isLoading: false,
+                rolesTotal: 1,
+                roles: [{
+                    id: "dc09053e-76b8-4bba-a7d9-689b6e83098a",
+                    name: "Basic staff viewer",
+                    organization_id: null,
+                    organization_name: null,
+                    permissions: [],
+                    role_type: "staff",
+                    user_groups_count: 0,
+                    users_count: 0 }] });
+
+
+
+            expect( /* istanbul ignore next */(0, _enzymeToJson.shallowToJson)(component)).toMatchSnapshot();
+        });
+
+        it('prints no errors from propTypes validation', function () {
+            expect(errorConsole).not.toHaveBeenCalled();
+        });
+    });
+});

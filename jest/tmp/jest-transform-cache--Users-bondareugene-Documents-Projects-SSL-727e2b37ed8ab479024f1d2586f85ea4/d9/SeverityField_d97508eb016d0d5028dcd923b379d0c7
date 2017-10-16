@@ -1,0 +1,48 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+SeverityField;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);var /* istanbul ignore next */_apocReact = require('apoc-react');var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_SeverityValue = require('./SeverityValue'); /* istanbul ignore next */var _SeverityValue2 = _interopRequireDefault(_SeverityValue);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var SEVERITY_CLASS = { 'Low': 'severity--low', 'Medium': 'severity--medium', 'High': 'severity--high', 'Critical': 'severity--critical' };function SeverityField( /* istanbul ignore next */_ref) {/* istanbul ignore next */var finding = _ref.finding,isService = _ref.isService;
+    function getSeverityClass() {
+        var severityClass = SEVERITY_CLASS[finding.severity || finding.classification_class_severity];
+        return severityClass || 'severity--none';
+    }
+    var tooltip = finding.finding_severity && finding.severity_reason && isService &&
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.Popover, /* istanbul ignore next */{
+            placement: 'topLeft',
+            title: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'fa fa-info-circle fsw__icon' }) },
+
+        finding.severity_reason);
+
+
+    var severityContainerClassName = /* istanbul ignore next */(0, _classnames2.default)('finding-form-label label', getSeverityClass());
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'strong', /* istanbul ignore next */null, /* istanbul ignore next */(0, _counterpart2.default)('findings.severity'), /* istanbul ignore next */': '),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: severityContainerClassName },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SeverityValue2.default, /* istanbul ignore next */{ finding: finding })),
+
+            tooltip));
+
+
+}
+
+SeverityField.propTypes = {
+    finding: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        severity: /* istanbul ignore next */_react2.default.PropTypes.string,
+        classification_class_severity: /* istanbul ignore next */_react2.default.PropTypes.string,
+        finding_severity: /* istanbul ignore next */_react2.default.PropTypes.string,
+        severity_reason: /* istanbul ignore next */_react2.default.PropTypes.string }),
+
+    isService: /* istanbul ignore next */_react2.default.PropTypes.bool };

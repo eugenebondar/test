@@ -1,0 +1,97 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+CustomerAccountFrom;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);var /* istanbul ignore next */_FormField = require('../../../Shared/Elements/Form/FormField'); /* istanbul ignore next */var _FormField2 = _interopRequireDefault(_FormField);var /* istanbul ignore next */_NotificationPreferencesForm = require('../../../Shared/NotificationPreferencesForm/NotificationPreferencesForm'); /* istanbul ignore next */var _NotificationPreferencesForm2 = _interopRequireDefault(_NotificationPreferencesForm);var /* istanbul ignore next */_index = require('../../../Shared/Elements/Input/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function CustomerAccountFrom( /* istanbul ignore next */_ref) {/* istanbul ignore next */var fields = _ref.fields,onChange = _ref.onChange,validation = _ref.validation;
+    /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @param fieldKey
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * @return {string|undefined}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */
+    function getValidationMessage(fieldKey) {
+        if (!validation) {
+            return undefined;
+        }
+        return validation[fieldKey];
+    }
+    /**
+       * Field is valid if there is no error message for it
+       * @param {string} [fieldKey]
+       * @return {boolean}
+       */
+    function isFieldValid(fieldKey) {
+        return !getValidationMessage(fieldKey);
+    }
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */null,
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('customers.addEditCustomer.company'),
+                    isValid: isFieldValid('corporation_name'),
+                    isRequired: /* istanbul ignore next */true,
+                    validationMessage: getValidationMessage('corporation_name') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                    id: 'corporation_name',
+                    updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return onChange( /* istanbul ignore next */_defineProperty({}, key, value));},
+                    value: fields.corporation_name })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('customers.addEditCustomer.primaryContact'),
+                    isValid: isFieldValid('name'),
+                    isRequired: /* istanbul ignore next */true,
+                    validationMessage: getValidationMessage('name') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                    id: 'name',
+                    updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return onChange( /* istanbul ignore next */_defineProperty({}, key, value));},
+                    value: fields.name })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('customers.addEditCustomer.phone'),
+                    isValid: isFieldValid('phone'),
+                    validationMessage: getValidationMessage('phone') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                    id: 'phone',
+                    updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return onChange( /* istanbul ignore next */_defineProperty({}, key, value));},
+                    validationType: 'phone',
+                    value: fields.phone })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FormField2.default, /* istanbul ignore next */{
+                    label: /* istanbul ignore next */(0, _counterpart2.default)('customers.addEditCustomer.email'),
+                    isValid: isFieldValid('email'),
+                    isRequired: /* istanbul ignore next */true,
+                    validationMessage: getValidationMessage('email') },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */{
+                    id: 'email',
+                    updateValue: function /* istanbul ignore next */updateValue(key, value) /* istanbul ignore next */{return onChange( /* istanbul ignore next */_defineProperty({}, key, value));},
+                    value: fields.email })),
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_NotificationPreferencesForm2.default, /* istanbul ignore next */{ fields: fields.notification_setting, onChange: onChange })));
+
+
+}
+
+CustomerAccountFrom.propTypes = {
+    fields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        corporation_name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        email: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        phone: /* istanbul ignore next */_react2.default.PropTypes.string,
+        notification_setting: /* istanbul ignore next */_react2.default.PropTypes.shape({
+            test_created: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+            test_changed_state_company: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+            test_changed_state_primary: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+            test_assigned_company: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+            test_assigned_primary: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired }) }).
+
+    isRequired,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.object };

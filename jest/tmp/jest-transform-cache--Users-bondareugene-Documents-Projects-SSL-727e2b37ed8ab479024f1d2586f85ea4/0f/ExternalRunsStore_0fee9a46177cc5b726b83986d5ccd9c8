@@ -1,0 +1,228 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_BaseStore2 = require('./BaseStore'); /* istanbul ignore next */var _BaseStore3 = _interopRequireDefault(_BaseStore2);
+
+var /* istanbul ignore next */_Actions = require('../Actions');
+
+var /* istanbul ignore next */_api = require('../Models/ExternalRuns/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_ExternalFindingModel = require('../Models/ExternalRuns/ExternalFindingModel'); /* istanbul ignore next */var _ExternalFindingModel2 = _interopRequireDefault(_ExternalFindingModel);
+var /* istanbul ignore next */_RunModel = require('../Models/ExternalRuns/RunModel'); /* istanbul ignore next */var _RunModel2 = _interopRequireDefault(_RunModel);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @classdesc Class representing a External Runs Store.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * @class
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */var
+
+ExternalRunsStore = function (_BaseStore) {_inherits(ExternalRunsStore, _BaseStore);
+    function /* istanbul ignore next */ExternalRunsStore() {/* istanbul ignore next */_classCallCheck(this, ExternalRunsStore);var _this = _possibleConstructorReturn(this, (ExternalRunsStore.__proto__ || Object.getPrototypeOf(ExternalRunsStore)).call(this,
+        [/* istanbul ignore next */_Actions.ExternalRunsActions]));
+        /* istanbul ignore next */_this.externalRuns = null;
+        /* istanbul ignore next */_this.externalFindings = null;
+        /* istanbul ignore next */_this.publishedTestRun = false;
+        /* istanbul ignore next */_this.unPublishedTestRun = false;
+        /* istanbul ignore next */_this.publishedSelected = false;
+        /* istanbul ignore next */_this.unPublishedSelected = false;
+        /* istanbul ignore next */_this.includedSelected = false;
+        /* istanbul ignore next */_this.excludedSelected = false;
+        /* istanbul ignore next */_this.includedSelectedAndPublished = false; /* istanbul ignore next */return _this;
+    }
+
+    /**
+       * Fetch external runs by run's ID.
+       * @param {String} [id] - run's ID.
+       * @config {Array} - set externalRuns.
+       * @trigger {Array} - external runs.
+       */_createClass(ExternalRunsStore, [{ key: 'getExternalRuns', value: function getExternalRuns(
+        id) {/* istanbul ignore next */var _this2 = this;
+            /* istanbul ignore next */_api2.default.getExternalRuns(id).
+            then(function (json) {
+                /* istanbul ignore next */_this2.externalRuns = json.runs.map(function (item) {
+                    return new /* istanbul ignore next */_RunModel2.default(item).data;
+                });
+                /* istanbul ignore next */_this2.trigger('externalRuns', /* istanbul ignore next */_this2.externalRuns);
+            });
+        }
+        /**
+           * Fetch findings by external run's ID according with passed filter.
+           * @param {String} [id] - run's ID.
+           * @param {Object} [filter] - filter.
+           * @config {Array} - set externalFindings.
+           * @trigger {Object} - array of filtered external findings and total finding amount.
+           */ }, { key: 'getExternalFindings', value: function getExternalFindings(
+        id, filter) {/* istanbul ignore next */var _this3 = this;
+            /* istanbul ignore next */_api2.default.getExternalFindings(id, { filter: filter }).
+            then(function (response) {
+                var total = parseInt(response.headers.get('Total'));
+                return response.json().then(function (json) /* istanbul ignore next */{return [json, total];});
+            }).
+            then(function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var _ref2 = _slicedToArray(_ref, 2),json = _ref2[0],total = _ref2[1];
+                /* istanbul ignore next */_this3.externalFindings = null;
+                var findings = json.findings.map(function (item) {
+                    return new /* istanbul ignore next */_ExternalFindingModel2.default(item).data;
+                });
+                /* istanbul ignore next */_this3.externalFindings = {
+                    findings: findings,
+                    finding_ids: json.finding_ids };
+
+                var result = {
+                    array: /* istanbul ignore next */_this3.externalFindings,
+                    total: total || -1,
+                    totalFiltered: total };
+
+                /* istanbul ignore next */_this3.trigger('externalFindings', result);
+            });
+        }
+        /**
+           * Fetch findings count by external run's ID.
+           * @param {String} [count_type] - count type (severity or type).
+           * @trigger {Object} - hash of numbers that represent findings count by each category.
+           */ }, { key: 'getExternalFindingsCount', value: function getExternalFindingsCount(
+        runId, count_type) {/* istanbul ignore next */var _this4 = this;
+            /* istanbul ignore next */_api2.default.getExternalFindingsCount(runId, { count_type: count_type }).
+            then(function (response) {
+                /* istanbul ignore next */_this4.trigger('externalFindingsCountUpdated', { count_type: count_type, runId: runId, count: response.count });
+            });
+        }
+        /**
+           * Make included all passed findings.
+           * @param {String} [runId] - run's ID.
+           * @param {Array} [findIds] - array of findIds's ID.
+           * @config {Bool} - set includedSelected.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'includeSelected', value: function includeSelected(
+        runId, findIds) {/* istanbul ignore next */var _this5 = this;
+            this.includedSelected = false;
+            /* istanbul ignore next */_api2.default.includeSelected(runId, findIds).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this5.includedSelected = true;
+                    /* istanbul ignore next */_this5.trigger('includedSelected', /* istanbul ignore next */_this5.includedSelected);
+                }
+            }).
+            catch(function (error) {
+            });
+        }
+        /**
+           * Make excluded all passed findings.
+           * @param {String} [runId] - run's ID.
+           * @param {Array} [findIds] - array of findIds's ID.
+           * @config {Bool} - set excludedSelected.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'excludeSelected', value: function excludeSelected(
+        runId, findIds) {/* istanbul ignore next */var _this6 = this;
+            this.excludedSelected = false;
+            /* istanbul ignore next */_api2.default.excludeSelected(runId, findIds).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this6.excludedSelected = true;
+                    /* istanbul ignore next */_this6.trigger('excludedSelected', /* istanbul ignore next */_this6.excludedSelected);
+                }
+            }).
+            catch(function (error) {
+            });
+        }
+        /**
+           * Publish all run's findings.
+           * @param {String} [id] - run's ID.
+           * @config {Bool} set publishedTestRun.
+           * @trigger {Bool} response status.
+           */ }, { key: 'publishTestRun', value: function publishTestRun(
+        id) {/* istanbul ignore next */var _this7 = this;
+            this.publishedTestRun = false;
+            /* istanbul ignore next */_api2.default.publishTestRun(id).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this7.publishedTestRun = true;
+                    /* istanbul ignore next */_this7.trigger('publishedTestRun', /* istanbul ignore next */_this7.publishedTestRun);
+                }
+            }).
+            catch(function (error) {
+            });
+        }
+        /**
+           * Unpublish all run's findings.
+           * @param {String} [id] - run's ID.
+           * @config {Bool} - set unPublishedTestRun.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'unPublishTestRun', value: function unPublishTestRun(
+        id) {/* istanbul ignore next */var _this8 = this;
+            this.unPublishedTestRun = false;
+            /* istanbul ignore next */_api2.default.unPublishTestRun(id).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this8.unPublishedTestRun = true;
+                    /* istanbul ignore next */_this8.trigger('unPublishedTestRun', /* istanbul ignore next */_this8.unPublishedTestRun);
+                }
+            }).
+            catch(function (error) {
+            });
+        }
+        /**
+           * Make published all passed findings.
+           * @param {String} [runId] - run's ID.
+           * @param {Array} [findIds] - array of findIds's ID.
+           * @config {Bool} - set publishedSelected.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'publishSelected', value: function publishSelected(
+        runId, findIds) {/* istanbul ignore next */var _this9 = this;
+            this.publishedSelected = false;
+            /* istanbul ignore next */_api2.default.publishSelected(runId, findIds).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this9.publishedSelected = true;
+                    /* istanbul ignore next */_this9.trigger('publishedSelected', /* istanbul ignore next */_this9.publishedSelected);
+                }
+            }).
+            catch(function (error) {
+            });
+        }
+        /**
+           * Make unpublished all passed findings.
+           * @param {String} [runId] - run's ID.
+           * @param {Array} [findIds] - array of findIds's ID.
+           * @config {Bool} - set unPublishedSelected.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'unPublishSelected', value: function unPublishSelected(
+        runId, findIds) {/* istanbul ignore next */var _this10 = this;
+            this.unPublishedSelected = false;
+            /* istanbul ignore next */_api2.default.unPublishSelected(runId, findIds).
+            then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this10.unPublishedSelected = true;
+                    /* istanbul ignore next */_this10.trigger('unPublishedSelected', /* istanbul ignore next */_this10.unPublishedSelected);
+                }
+            }).
+            catch(function (error) {
+            });
+        }
+        /**
+           * Make published and included all passed findings.
+           * @param {String} [runId] - run's ID.
+           * @param {Array} [findIds] - array of findIds's ID.
+           * @config {Bool} set includedSelectedAndPublished.
+           * @trigger {Bool} response status.
+           */ }, { key: 'includeSelectedAndPublish', value: function includeSelectedAndPublish(
+        runId, findIds) {/* istanbul ignore next */var _this11 = this;
+            this.includedSelectedAndPublished = false;
+            var promises = [
+            new Promise(function (resolve, reject) {
+                /* istanbul ignore next */_api2.default.includeSelected(runId, findIds).then(function (response) {
+                    response.statusText === 'OK' ? resolve() : reject();
+                }).catch(function (error) {
+                    reject();
+                });
+            }),
+            new Promise(function (resolve, reject) {
+                /* istanbul ignore next */_api2.default.publishSelected(runId, findIds).then(function (response) {
+                    response.statusText === 'OK' ? resolve() : reject();
+                }).catch(function (error) {
+                    reject();
+                });
+            })];
+
+            Promise.all(promises).then(function (data) {
+                /* istanbul ignore next */_this11.includedSelectedAndPublished = true;
+                /* istanbul ignore next */_this11.trigger('includedSelectedAndPublished', /* istanbul ignore next */_this11.includedSelectedAndPublished);
+            });
+        } }]);return ExternalRunsStore;}(_BaseStore3.default); /* istanbul ignore next */exports.default =
+
+
+new ExternalRunsStore();

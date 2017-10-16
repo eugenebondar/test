@@ -1,0 +1,149 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactSanfona = require('react-sanfona');
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);
+
+var /* istanbul ignore next */_TableBoardPagination = require('../../Shared/TableBoardPagination/TableBoardPagination'); /* istanbul ignore next */var _TableBoardPagination2 = _interopRequireDefault(_TableBoardPagination);
+var /* istanbul ignore next */_PopoverOptionsCollectionFilter = require('../../Shared/PopoverFilter/PopoverOptionsCollectionFilter'); /* istanbul ignore next */var _PopoverOptionsCollectionFilter2 = _interopRequireDefault(_PopoverOptionsCollectionFilter);
+var /* istanbul ignore next */_AccordionItemSubSection = require('../../Shared/AcordionItemSubSection/AccordionItemSubSection'); /* istanbul ignore next */var _AccordionItemSubSection2 = _interopRequireDefault(_AccordionItemSubSection);
+var /* istanbul ignore next */_FlatListOptionsCollectionFilter = require('../../Shared/FilterList/FlatListOptionsCollectionFilter'); /* istanbul ignore next */var _FlatListOptionsCollectionFilter2 = _interopRequireDefault(_FlatListOptionsCollectionFilter);
+var /* istanbul ignore next */_DateTimePeriod = require('../../Shared/DateTimePeriod/DateTimePeriod'); /* istanbul ignore next */var _DateTimePeriod2 = _interopRequireDefault(_DateTimePeriod);
+var /* istanbul ignore next */_createFilterChangeDebouncer = require('../../Shared/FilterChangeDebouncer/createFilterChangeDebouncer'); /* istanbul ignore next */var _createFilterChangeDebouncer2 = _interopRequireDefault(_createFilterChangeDebouncer);
+
+var /* istanbul ignore next */_index = require('../../Shared/Preloader/index'); /* istanbul ignore next */var _index2 = _interopRequireDefault(_index);
+var /* istanbul ignore next */_ChangesetModal = require('./ChangesetModal'); /* istanbul ignore next */var _ChangesetModal2 = _interopRequireDefault(_ChangesetModal);
+var /* istanbul ignore next */_ActivityLogsTable = require('./ActivityLogsTable'); /* istanbul ignore next */var _ActivityLogsTable2 = _interopRequireDefault(_ActivityLogsTable);
+
+/* istanbul ignore next */require('./ActivityLogs.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var DebouncedDateTimePeriod = /* istanbul ignore next */(0, _createFilterChangeDebouncer2.default)({ Component: /* istanbul ignore next */_DateTimePeriod2.default, valuePropName: 'filter' }); /* istanbul ignore next */var
+
+ActivityLogs = function (_React$PureComponent) {_inherits(ActivityLogs, _React$PureComponent);
+    function /* istanbul ignore next */ActivityLogs() {/* istanbul ignore next */_classCallCheck(this, ActivityLogs);var _this = _possibleConstructorReturn(this, (ActivityLogs.__proto__ || Object.getPrototypeOf(ActivityLogs)).call(this));
+
+        /* istanbul ignore next */_this.onFiltersChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onFiltersChange.bind(_this);
+        /* istanbul ignore next */_this.onPaginationFiltersChange = /* istanbul ignore next */ /* istanbul ignore next */_this.onPaginationFiltersChange.bind(_this); /* istanbul ignore next */return _this;
+    }_createClass(ActivityLogs, [{ key: 'onFiltersChange', value: function onFiltersChange(
+
+        filterChange) {
+            this.props.onFiltersChange( /* istanbul ignore next */_extends({},
+            this.props.filter,
+            filterChange));
+
+        } }, { key: 'onPaginationFiltersChange', value: function onPaginationFiltersChange(
+
+        pageNumber) {
+            this.onFiltersChange({
+                page: pageNumber,
+                per: this.props.paginationInfo.itemsPerPage });
+
+        } }, { key: 'render', value: function render()
+
+        {/* istanbul ignore next */var _this2 = this;
+            if (this.props.activityLogs === null) {
+                return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_index2.default, /* istanbul ignore next */null));
+            }
+
+            var tableClassName = /* istanbul ignore next */(0, _classnames2.default)('activity-logs-table table');
+
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'site-content activity-logs' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.Accordion, /* istanbul ignore next */{ activeItems: 1 },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactSanfona.AccordionItem, /* istanbul ignore next */{ title: /* istanbul ignore next */(0, _counterpart2.default)('activityLogs.title'), slug: 1 },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'users-controls-wrap' },
+                                /* istanbul ignore next */_react2.default.createElement(DebouncedDateTimePeriod, /* istanbul ignore next */{
+                                    oldestRecord: this.props.timeRangeStart,
+                                    youngestRecord: this.props.timeRangeEnd,
+                                    onChange: function /* istanbul ignore next */onChange( /* istanbul ignore next */_ref) /* istanbul ignore next */{var search_by_datetime = _ref.search_by_datetime;return (/* istanbul ignore next */_this2.onFiltersChange({
+                                                time_range: search_by_datetime && [search_by_datetime.start, search_by_datetime.end] }));},
+
+                                    isDisabled: this.props.totalCount === 0,
+                                    debounceTime: 500 }),
+
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_PopoverOptionsCollectionFilter2.default, /* istanbul ignore next */{
+                                    isLoading: this.props.isLoading,
+                                    filter: this.props.filter,
+                                    updateFilter: function /* istanbul ignore next */updateFilter(key, value) /* istanbul ignore next */{return (/* istanbul ignore next */_this2.onFiltersChange( /* istanbul ignore next */_defineProperty({}, key, value)));},
+                                    isDisabled: this.props.totalCount === 0,
+                                    filterOptionsBySection: this.props.filterOptionsCollection,
+                                    counts: this.props.filterOptionsCounts })),
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_AccordionItemSubSection2.default, /* istanbul ignore next */{ isHidden: this.props.hasFiltersSelected },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: 'selected-filter-options-list-label' }, /* istanbul ignore next */'Filtering by:'),
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FlatListOptionsCollectionFilter2.default, /* istanbul ignore next */{
+                                    filter: this.props.filter,
+                                    filterOptionsBySection: this.props.filterOptionsCollection,
+                                    onChange: this.onFiltersChange })),
+
+
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'tests-expand-content' },
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TableBoardPagination2.default, /* istanbul ignore next */{ pagination: /* istanbul ignore next */_extends({},
+                                        this.props.paginationInfo, {
+                                            itemsName: /* istanbul ignore next */(0, _counterpart2.default)('general.recordsName', {
+                                                count: this.props.paginationInfo.totalItems,
+                                                name: /* istanbul ignore next */(0, _counterpart2.default)('activityLogs.recordName') }),
+
+                                            onChange: this.onPaginationFiltersChange }) },
+
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ActivityLogsTable2.default, /* istanbul ignore next */{
+                                        emptyTableMessage: this.props.totalCount === 0 ? /* istanbul ignore next */(0, _counterpart2.default)('transactionLogs.noTransactionLogs') : /* istanbul ignore next */(0, _counterpart2.default)('dashboard.tables.emptySearchResult'),
+                                        activityLogs: this.props.activityLogs,
+                                        isLoading: this.props.isLoading,
+                                        onViewChangsetClick: this.props.onViewChangsetClick }))))),
+
+
+
+
+
+
+                    this.props.changesetModalLog &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ChangesetModal2.default, /* istanbul ignore next */{
+                        onClose: this.props.onChangesetModalClose,
+                        log: this.props.changesetModalLog })));
+
+
+
+
+        } }]);return ActivityLogs;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = ActivityLogs;
+
+
+ActivityLogs.defaultProps = {
+    activityLogs: null,
+    changesetModalLog: null,
+    isLoading: false,
+    hasFiltersSelected: false,
+    paginationInfo: {
+        totalItems: 0,
+        currentPage: 0,
+        itemsPerPage: 0 } };
+
+
+
+ActivityLogs.propTypes = {
+    filter: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    filterOptionsCounts: /* istanbul ignore next */_react2.default.PropTypes.object.isRequired,
+    filterOptionsCollection: /* istanbul ignore next */_react2.default.PropTypes.arrayOf(
+    /* istanbul ignore next */_react2.default.PropTypes.shape({
+        title: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        options: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+            name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+            value: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired })) })).
+
+
+    isRequired,
+    timeRangeStart: /* istanbul ignore next */_react2.default.PropTypes.string,
+    timeRangeEnd: /* istanbul ignore next */_react2.default.PropTypes.string,
+    hasFiltersSelected: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    activityLogs: /* istanbul ignore next */_react2.default.PropTypes.array,
+    totalCount: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+    paginationInfo: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        totalItems: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        currentPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+        itemsPerPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired }),
+
+    onFiltersChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onChangesetModalClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    /** instance of log */
+    changesetModalLog: /* istanbul ignore next */_react2.default.PropTypes.object,
+    onViewChangsetClick: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    isLoading: /* istanbul ignore next */_react2.default.PropTypes.bool };

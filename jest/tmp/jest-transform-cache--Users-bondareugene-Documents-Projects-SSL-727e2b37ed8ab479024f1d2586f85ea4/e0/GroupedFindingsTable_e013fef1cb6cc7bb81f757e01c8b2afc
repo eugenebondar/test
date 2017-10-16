@@ -1,0 +1,79 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _headerTitleByGroupin, _titleFieldByGrouping;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactTranslateComponent = require('react-translate-component'); /* istanbul ignore next */var _reactTranslateComponent2 = _interopRequireDefault(_reactTranslateComponent);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+var /* istanbul ignore next */_apocReact = require('apoc-react');
+var /* istanbul ignore next */_groupingValues = require('./../groupingValues'); /* istanbul ignore next */var _groupingValues2 = _interopRequireDefault(_groupingValues);
+
+var /* istanbul ignore next */_loadingHoc = require('../../../../Shared/LoadingHoc/loadingHoc'); /* istanbul ignore next */var _loadingHoc2 = _interopRequireDefault(_loadingHoc);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+var LoadingTable = /* istanbul ignore next */(0, _loadingHoc2.default)( /* istanbul ignore next */_apocReact.Table);
+
+var headerTitleByGroupingValue = /* istanbul ignore next */(_headerTitleByGroupin = {}, _defineProperty(_headerTitleByGroupin,
+/* istanbul ignore next */_groupingValues2.default.BY_LOCATION, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactTranslateComponent2.default, /* istanbul ignore next */{ content: 'findings.locationFound' })), _defineProperty(_headerTitleByGroupin,
+/* istanbul ignore next */_groupingValues2.default.BY_CLASSIFICATION, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactTranslateComponent2.default, /* istanbul ignore next */{ content: 'findings.classification' })), _headerTitleByGroupin);
+
+
+var titleFieldByGroupingValue = /* istanbul ignore next */(_titleFieldByGrouping = {}, _defineProperty(_titleFieldByGrouping,
+/* istanbul ignore next */_groupingValues2.default.BY_LOCATION, 'location'), _defineProperty(_titleFieldByGrouping,
+/* istanbul ignore next */_groupingValues2.default.BY_CLASSIFICATION, 'title'), _titleFieldByGrouping); /* istanbul ignore next */var
+
+
+GroupedFindingsTable = function (_React$PureComponent) {_inherits(GroupedFindingsTable, _React$PureComponent);function GroupedFindingsTable() {_classCallCheck(this, GroupedFindingsTable);return _possibleConstructorReturn(this, (GroupedFindingsTable.__proto__ || Object.getPrototypeOf(GroupedFindingsTable)).apply(this, arguments));}_createClass(GroupedFindingsTable, [{ key: 'render', value: function render()
+        {/* istanbul ignore next */var _this2 = this;
+            var groupingValue = this.props.groupingValue;
+            return (
+                /* istanbul ignore next */_react2.default.createElement(LoadingTable, /* istanbul ignore next */{ isRowsStriped: /* istanbul ignore next */true, isLoading: this.props.loading },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableHeadRow, /* istanbul ignore next */null,
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'th', /* istanbul ignore next */null, headerTitleByGroupingValue[groupingValue])),
+
+                    this.props.findingsGroups.length === 0 &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tbody', /* istanbul ignore next */null,
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'tr', /* istanbul ignore next */null,
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */{ colSpan: 1, className: 'empty-table' },
+                                this.props.hasAnyFindingGroups && /* istanbul ignore next */(0, _counterpart2.default)('findings.emptySearchResult'),
+                                !this.props.hasAnyFindingGroups && /* istanbul ignore next */(0, _counterpart2.default)('findings.noFindings')))),
+
+
+
+
+                    this.props.findingsGroups.length !== 0 &&
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableBodyWithExpandRows, /* istanbul ignore next */null,
+                        this.props.findingsGroups.map(function (group) /* istanbul ignore next */{return (
+                                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_apocReact.TableRowWithExpandContent, /* istanbul ignore next */{
+                                        id: group[/* istanbul ignore next */_groupingValues.fieldNameByGroupingValue[groupingValue]],
+                                        key: group[/* istanbul ignore next */_groupingValues.fieldNameByGroupingValue[groupingValue]],
+                                        isExpanded: /* istanbul ignore next */_this2.props.expandedGroupId === group[/* istanbul ignore next */_groupingValues.fieldNameByGroupingValue[groupingValue]],
+                                        onExpand: function /* istanbul ignore next */onExpand() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onGroupExpand(group[/* istanbul ignore next */_groupingValues.fieldNameByGroupingValue[groupingValue]]));},
+                                        expandContent: /* istanbul ignore next */_this2.props.embeddedTable },
+                                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'td', /* istanbul ignore next */null, group[titleFieldByGroupingValue[groupingValue]], /* istanbul ignore next */' (', group.count, /* istanbul ignore next */')')));}))));
+
+
+
+
+
+
+        } }]);return GroupedFindingsTable;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = GroupedFindingsTable;
+
+
+GroupedFindingsTable.defaultProps = {
+    expandedGroupId: '' };
+
+
+GroupedFindingsTable.propTypes = {
+    groupingValue: /* istanbul ignore next */_react2.default.PropTypes.oneOf(Object.values( /* istanbul ignore next */_groupingValues2.default)).isRequired,
+    expandedGroupId: /* istanbul ignore next */_react2.default.PropTypes.string,
+    loading: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    onGroupExpand: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    findingsGroups: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+    /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        title: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        classification_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        count: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired })),
+
+    /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.shape({
+        location: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        count: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired }))]).
+
+    isRequired,
+    hasAnyFindingGroups: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    embeddedTable: /* istanbul ignore next */_react2.default.PropTypes.node.isRequired };

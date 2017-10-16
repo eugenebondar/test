@@ -1,0 +1,141 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_BaseStore2 = require('./BaseStore'); /* istanbul ignore next */var _BaseStore3 = _interopRequireDefault(_BaseStore2);
+
+var /* istanbul ignore next */_Actions = require('../Actions');
+
+var /* istanbul ignore next */_api = require('../Models/Branding/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var mainColorStyle = '.sc-btn-primary, .sc-bg-primary, .sc-btn-toggle, .toggle-button.is-on, ' +
+'.toggle-button.is-on:hover, .popover-title--visible .tests-filter-btn {background-color: main_color !important}' +
+' .sc-txt-primary, .sc-btn-primary-outline, .site-content a {color: main_color !important}' +
+' .site-content a:hover, .sc-txt-primary-darker, a.sc-txt-primary:hover {color: main_color_darker !important}' +
+' .site-content a:active, .sc-txt-primary-hover:hover, ' +
+'sc-txt-primary:active {color: main_color_darkest !important}' +
+' .sc-btn-primary-outline, .st__container::after {border-color: main_color !important}' +
+' .sc-border-primary-darker, .sc-form-ele:focus {border-color: main_color_darker !important}' +
+' .sc-btn-primary:hover, .sc-open > .sc-dropdown-toggle.sc-btn-primary, .sc-btn-primary-outline:hover,' +
+' .sc-bg-primary-children-hover > *:hover {background-color: main_color_darker !important}' +
+' .main-menu a.active, .sc-btn-primary.sc-active, .sc-btn-primary:active, .sc-btn-primary-outline:active, ' +
+'.sc-bg-primary-onlyhover:hover {background-color: main_color_darkest !important}' +
+' .sc-border-lighter {border-color: main_color_lighter !important}' +
+' .sc-bg-primary-children-hover > *:hover, .site-content .sc-btn-primary-outline:hover,' +
+' .sc-btn-primary-outline:hover, .site-content a.sc-btn-primary, .popover-title--visible ' +
+'.tests-filter-btn {color: #ffffff !important}';
+
+var logoStyle = '.main-logo a {background: url(\'LOGO\') no-repeat 50% 50% / contain}';
+
+/**
+                                                                                         * @classdesc Class representing a Branding Store.
+                                                                                         * @class
+                                                                                         */ /* istanbul ignore next */var
+
+BrandingStore = function (_BaseStore) {_inherits(BrandingStore, _BaseStore);
+    function /* istanbul ignore next */BrandingStore() {/* istanbul ignore next */_classCallCheck(this, BrandingStore);return _possibleConstructorReturn(this, (BrandingStore.__proto__ || Object.getPrototypeOf(BrandingStore)).call(this,
+        [/* istanbul ignore next */_Actions.BrandingActions]));
+    }_createClass(BrandingStore, [{ key: 'addBrandingStyles', value: function addBrandingStyles(
+
+        branding) {/* istanbul ignore next */var _this2 = this;
+            return new Promise(function (resolve) {
+                if (branding) {
+                    var BRANDING_ID = 'branding-style';
+                    var BRANDING_STYLES = document.getElementById(BRANDING_ID);
+                    var head = document.head || document.getElementsByTagName('head')[0];
+                    var css = '';
+                    var style = document.createElement('style');
+                    style.type = 'text/css';
+                    style.id = BRANDING_ID;
+                    for (var key in branding) {
+                        css += /* istanbul ignore next */_this2.getStylesForBranding(branding[key], key);
+                    }
+                    if (style.styleSheet) {
+                        style.styleSheet.cssText = css;
+                    } else {
+                        style.appendChild(document.createTextNode(css));
+                    }
+                    if (!BRANDING_STYLES) {
+                        head.appendChild(style);
+                    }
+                    resolve();
+                } else {
+                    resolve();
+                }
+            });
+        } }, { key: 'getStylesForBranding', value: function getStylesForBranding(
+
+        value, key) {
+            switch (key) {
+                case 'logo':
+                    return this.getLogoStyles(value);
+                    break;
+                case 'main_color':
+                    return this.getMainColorStyles(value);
+                    break;
+                default:
+                    return '';}
+
+        } }, { key: 'getLogoStyles', value: function getLogoStyles(
+
+        value) {
+            if (value.logo.url) {
+                var tempCss = logoStyle;
+                return tempCss.replace(/LOGO/g, value.logo.url);
+            }
+        } }, { key: 'getMainColorStyles', value: function getMainColorStyles(
+
+        value) {
+            if (value) {
+                var tempCss = mainColorStyle;
+                tempCss = tempCss.replace(/main_color_lighter/g, this.shadeRGBColor(value, 0.3));
+                tempCss = tempCss.replace(/main_color_darkest/g, this.shadeRGBColor(value, -0.3));
+                tempCss = tempCss.replace(/main_color_darker/g, this.shadeRGBColor(value, -0.2));
+                tempCss = tempCss.replace(/main_color/g, value);
+                return tempCss;
+            }
+        } }, { key: 'shadeRGBColor', value: function shadeRGBColor(
+
+        color, percent) {
+            var rgaColor = this.hexToRgb(color);
+            var f = rgaColor.split(',');
+            var t = percent < 0 ? 0 : 255;
+            var p = percent < 0 ? percent * -1 : percent;
+            var R = parseInt(f[0].slice(4));
+            var G = parseInt(f[1]);
+            var B = parseInt(f[2]);
+            return 'rgb(' + (Math.round((t - R) * p) + R) + ',' + (Math.round((t - G) * p) + G) + ',' + (Math.round((t - B) * p) + B) + ')';
+        } }, { key: 'hexToRgb', value: function hexToRgb(
+
+        h) {
+            var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+            var hex = h.replace(shorthandRegex, function (m, r, g, b) {
+                return r + r + g + g + b + b;
+            });
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? 'rgb(' + parseInt(result[1], 16) + ',' + parseInt(result[2], 16) + ',' + parseInt(result[3], 16) + ')' : null;
+        } }, { key: 'fetchBranding', value: function fetchBranding(
+
+        id) {/* istanbul ignore next */var _this3 = this;
+            /* istanbul ignore next */_api2.default.fetchBranding(id).
+            then(function (json) {
+                /* istanbul ignore next */_this3.trigger('branding', json);
+            });
+        }
+
+        /**
+           * Update customer branding by customer id.
+           * @param {Object} [data] - customer's fields values.
+           * @param {String} [id] - customer's id.
+           * @trigger {Bool} - response status.
+           */ }, { key: 'editBranding', value: function editBranding(
+        data, logo, id) {/* istanbul ignore next */var _this4 = this;
+            var form = new FormData();
+            logo ? form.append('logo', logo) : null;
+            form.append('main_color', data.main_color);
+            form.append('enabled', data.enabled);
+            /* istanbul ignore next */_api2.default.editBrandingFile(id, form).then(function (response) {
+                if (response.statusText === 'OK') {
+                    /* istanbul ignore next */_this4.trigger('brandingSubmitted', true);
+                }
+            });
+        } }]);return BrandingStore;}(_BaseStore3.default); /* istanbul ignore next */exports.default =
+
+
+new BrandingStore();

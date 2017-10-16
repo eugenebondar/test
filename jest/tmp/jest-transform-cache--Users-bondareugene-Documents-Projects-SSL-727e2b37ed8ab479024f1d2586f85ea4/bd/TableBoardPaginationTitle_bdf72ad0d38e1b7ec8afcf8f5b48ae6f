@@ -1,0 +1,19 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+TableBoardPaginationTitle;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function TableBoardPaginationTitle( /* istanbul ignore next */_ref) {/* istanbul ignore next */var currentPage = _ref.currentPage,itemsPerPage = _ref.itemsPerPage,totalItems = _ref.totalItems,_ref$itemsName = _ref.itemsName,itemsName = _ref$itemsName === undefined ? 'Items' : _ref$itemsName;
+    var firstInRow = currentPage * itemsPerPage - itemsPerPage;
+    var lasInRow = firstInRow + itemsPerPage < totalItems ? firstInRow + itemsPerPage : totalItems;
+    var period = totalItems > 0 && /* istanbul ignore next */firstInRow + 1 + '-' + lasInRow + ' of ';
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'table-pagination-title' },
+            period, /* istanbul ignore next */
+            totalItems + ' ' + itemsName));
+
+
+}
+
+TableBoardPaginationTitle.propTypes = {
+    currentPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+    itemsPerPage: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+    totalItems: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired,
+    itemsName: /* istanbul ignore next */_react2.default.PropTypes.string };

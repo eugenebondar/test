@@ -1,0 +1,50 @@
+/* istanbul ignore next */'use strict'; /* istanbul ignore next */require('./Mocks');
+
+describe('FindingAttachmentsActions', function () {
+    jest.useFakeTimers();
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
+    var findingAttachmetsActions = require('../FindingAttachmentsActions').default;
+    var findingAttachmetsApi = /* istanbul ignore next */require('../../../Models/FindingAttachments/api');
+
+    describe('initPage action', function () {
+        beforeEach(function () {
+            findingAttachmetsApi.customer.getAttachments = jest.fn(function () /* istanbul ignore next */{return Promise.resolve(getFindingAttachmentsResponse);});
+            executeInitPage();
+        });
+
+        var executeInitPage = function executeInitPage() {
+            findingAttachmetsActions.initPage(0, 0, false);
+            findingAttachmetsActions.initPage.completed = jest.fn(function () {
+            });
+            findingAttachmetsActions.initPage.failed = jest.fn(function () {
+            });
+        };
+
+        var getFindingAttachmentsResponse = 'getFindingAttachmentsResponse';
+
+        it('fetches data from api.initPage', function () {
+            jest.runAllTimers();
+            expect(findingAttachmetsApi.customer.getAttachments.mock.calls.length).toBe(1);
+        });
+
+        it('successful fetch executes `completed` sub action', function () {
+            return new Promise(function (resolve) {
+                findingAttachmetsActions.initPage.completed = function (result) {
+                    expect(result).toBeTruthy();
+                    expect(result).toEqual(getFindingAttachmentsResponse);
+                    resolve();
+                };
+                jest.runAllTimers();
+            });
+        });
+
+        it('not successful fetch executes `failed` sub action', function () {
+            findingAttachmetsApi.customer.getAttachments = jest.fn(function () /* istanbul ignore next */{return Promise.resolve({ error: 'error' });});
+            return new Promise(function (resolve) {
+                findingAttachmetsActions.initPage.failed = function () /* istanbul ignore next */{return resolve();};
+                jest.runAllTimers();
+            });
+        });
+    });
+});

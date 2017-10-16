@@ -1,0 +1,8 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var ALERT_TYPE = {
+    WARNING: 'warning',
+    ERROR: 'error',
+    SUCCESS: 'success' };
+
+Object.freeze(ALERT_TYPE); /* istanbul ignore next */exports.default =
+
+ALERT_TYPE;

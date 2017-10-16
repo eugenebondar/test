@@ -1,0 +1,43 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+FormField;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_classnames = require('classnames'); /* istanbul ignore next */var _classnames2 = _interopRequireDefault(_classnames);var /* istanbul ignore next */_Label = require('./components/Label'); /* istanbul ignore next */var _Label2 = _interopRequireDefault(_Label);var /* istanbul ignore next */_ValidationMessage = require('../../ValidationMessage/ValidationMessage'); /* istanbul ignore next */var _ValidationMessage2 = _interopRequireDefault(_ValidationMessage); /* istanbul ignore next */require('./FormField.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function FormField( /* istanbul ignore next */_ref)
+
+
+
+
+
+
+
+{/* istanbul ignore next */var className = _ref.className,label = _ref.label,children = _ref.children,_ref$validationClass = _ref.validationClass,validationClass = _ref$validationClass === undefined ? 'error-input' : _ref$validationClass,validationMessage = _ref.validationMessage,_ref$isValid = _ref.isValid,isValid = _ref$isValid === undefined ? true : _ref$isValid,_ref$isRequired = _ref.isRequired,isRequired = _ref$isRequired === undefined ? false : _ref$isRequired;
+    var childrenWrapperClassName = /* istanbul ignore next */(0, _classnames2.default)('form__input', /* istanbul ignore next */_defineProperty({},
+    validationClass, !isValid));
+
+
+    var mainContainerClassNames = /* istanbul ignore next */(0, _classnames2.default)('form__field', className);
+
+    return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: mainContainerClassNames },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Label2.default, /* istanbul ignore next */{ isRequired: isRequired }, label),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: childrenWrapperClassName },
+                children,
+                !isValid && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ValidationMessage2.default, /* istanbul ignore next */{ validationMessage: validationMessage }))));
+
+
+
+}
+
+FormField.propTypes = {
+    className: /* istanbul ignore next */_react2.default.PropTypes.string,
+    label: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    children: /* istanbul ignore next */_react2.default.PropTypes.node,
+    validationClass: /* istanbul ignore next */_react2.default.PropTypes.string,
+    validationMessage: /* istanbul ignore next */_react2.default.PropTypes.oneOfType([
+    /* istanbul ignore next */_react2.default.PropTypes.string,
+    /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string)]),
+
+    isValid: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isRequired: /* istanbul ignore next */_react2.default.PropTypes.bool };

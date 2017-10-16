@@ -1,0 +1,13 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var UserGroupsActions = {
+    fetchGroups: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    addGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    editGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    deleteGroup: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchUsers: /* istanbul ignore next */_reflux2.default.createAction(),
+    fetchListOfRoles: /* istanbul ignore next */_reflux2.default.createAction() }; /* istanbul ignore next */exports.default =
+
+
+UserGroupsActions;

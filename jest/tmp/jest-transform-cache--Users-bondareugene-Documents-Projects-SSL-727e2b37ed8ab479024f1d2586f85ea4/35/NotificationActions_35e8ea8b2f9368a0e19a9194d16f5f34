@@ -1,0 +1,6 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.NotificationActions = undefined;var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var NotificationActions = /* istanbul ignore next */exports.NotificationActions = {
+    addSuccessNotification: /* istanbul ignore next */_reflux2.default.createAction(),
+    createForbiddenAccessNotification: /* istanbul ignore next */_reflux2.default.createAction(),
+    removeNotification: /* istanbul ignore next */_reflux2.default.createAction() };

@@ -1,0 +1,58 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_Api = require('../../Utils/Api'); /* istanbul ignore next */var _Api2 = _interopRequireDefault(_Api);
+var /* istanbul ignore next */_Model = require('../Model'); /* istanbul ignore next */var _Model2 = _interopRequireDefault(_Model);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var FindingsAPI = /* istanbul ignore next */_Model2.default.New();
+
+FindingsAPI.getFindings = function (id, isService, filter) {
+    return (/* istanbul ignore next */_Api2.default.getFull('/api/' + (isService ? 'service/' : '') + 'runs/' + id + '/findings.json', filter));
+};
+
+FindingsAPI.exportFindings = function (id, isService) {
+    return (/* istanbul ignore next */_Api2.default.getFull('/api/' + (isService ? 'service/' : '') + 'runs/' + id + '/findings.csv'));
+};
+
+FindingsAPI.addFinding = function (runId, newData) {
+    return (/* istanbul ignore next */_Api2.default.post('/api/service/runs/' + runId + '/findings.json', newData));
+};
+
+FindingsAPI.getFindingDetails = function (runId, findingId, isService) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/' + (isService ? 'service/' : '') + 'runs/' + runId + '/findings/' + findingId + '.json'));
+};
+
+FindingsAPI.editFindingDetails = function (runId, findingId, newData) {
+    return (/* istanbul ignore next */_Api2.default.put('/api/service/runs/' + runId + '/findings/' + findingId + '.json', newData));
+};
+
+FindingsAPI.getFindingCategories = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/dictionary/finding/categories.json'));
+};
+
+FindingsAPI.fetchFindingClassification = function (id) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/categories/' + id + '/classifications.json'));
+};
+
+FindingsAPI.fetchFindingTypes = function () {
+    return (/* istanbul ignore next */_Api2.default.get('/api/dictionary/finding_types'));
+};
+
+FindingsAPI.getFindingsCount = function (isService, runId, count_type) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/' + (isService ? 'service/' : '') + 'runs/' + runId + '/findings/findings_count.json', count_type));
+};
+
+FindingsAPI.makeExcluded = function (runId, id) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/runs/' + runId + '/findings/' + id + '/make_excluded'));
+};
+
+FindingsAPI.makeIncluded = function (runId, id) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/runs/' + runId + '/findings/' + id + '/make_included'));
+};
+
+FindingsAPI.publish = function (runId, id) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/runs/' + runId + '/findings/' + id + '/publish'));
+};
+
+FindingsAPI.unpublish = function (runId, id) {
+    return (/* istanbul ignore next */_Api2.default.get('/api/service/runs/' + runId + '/findings/' + id + '/unpublish'));
+}; /* istanbul ignore next */exports.default =
+
+FindingsAPI;

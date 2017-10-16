@@ -1,0 +1,143 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _fieldsListForHailsto;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_ImportFromFile = require('./ImportForm/ImportFromFile'); /* istanbul ignore next */var _ImportFromFile2 = _interopRequireDefault(_ImportFromFile);
+var /* istanbul ignore next */_ImportHailstorm = require('./ImportForm/ImportHailstorm'); /* istanbul ignore next */var _ImportHailstorm2 = _interopRequireDefault(_ImportHailstorm);
+var /* istanbul ignore next */_LoadingModalDialog = require('../../../Shared/Elements/LoadingModalDialog/LoadingModalDialog'); /* istanbul ignore next */var _LoadingModalDialog2 = _interopRequireDefault(_LoadingModalDialog);
+var /* istanbul ignore next */_ImportForm = require('./ImportForm/ImportForm'); /* istanbul ignore next */var _ImportForm2 = _interopRequireDefault(_ImportForm);
+
+
+/* istanbul ignore next */require('./ImportExternalRunDialog.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+var fieldsListForHailstormByType = /* istanbul ignore next */(_fieldsListForHailsto = {}, _defineProperty(_fieldsListForHailsto,
+/* istanbul ignore next */_ImportHailstorm.FORM_TYPE.MANAGED_RUN, [
+'application_id', 'assessment_id', 'assessment_run_id']), _defineProperty(_fieldsListForHailsto,
+
+/* istanbul ignore next */_ImportHailstorm.FORM_TYPE.UN_MANAGED_RUN, [
+'application_id',
+'assessment_run_id']), _fieldsListForHailsto); /* istanbul ignore next */var
+
+
+
+ImportExternalRunDialog = function (_React$PureComponent) {_inherits(ImportExternalRunDialog, _React$PureComponent);function ImportExternalRunDialog() {_classCallCheck(this, ImportExternalRunDialog);return _possibleConstructorReturn(this, (ImportExternalRunDialog.__proto__ || Object.getPrototypeOf(ImportExternalRunDialog)).apply(this, arguments));}_createClass(ImportExternalRunDialog, [{ key: 'render', value: function render()
+        {
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_LoadingModalDialog2.default, /* istanbul ignore next */{
+                        loading: this.props.isSaving,
+                        isOpen: /* istanbul ignore next */true,
+                        header: /* istanbul ignore next */(0, _counterpart2.default)('testDetails.importFindingsPopUp.title'),
+                        footer: this.getDialogFooter(),
+                        className: 'import-external-run-dialog' },
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ImportForm2.default, /* istanbul ignore next */{
+                        hailstormType: this.props.hailstormType,
+                        validation: this.props.validation,
+                        onRequestTestRun: this.props.onRequestTestRun,
+                        assessmentRuns: this.props.assessmentRuns,
+                        runDetails: this.props.runDetails,
+                        onSourceChange: this.props.onSourceChange,
+                        importSource: this.props.importSource,
+                        nessusFields: this.props.nessusFields,
+                        hailstormFields: this.props.hailstormFields,
+                        onChangeHailstormType: this.props.onChangeHailstormType,
+                        formSorce: this.getFormBySource() })));
+
+
+
+        } }, { key: 'getDialogFooter', value: function getDialogFooter()
+
+        {/* istanbul ignore next */var _this2 = this;
+            return (
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'modal-btn-wrap' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'cancel-btn sc-btn', onClick: this.props.onClose },
+                        /* istanbul ignore next */(0, _counterpart2.default)('general.cancel')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ className: 'sc-btn sc-btn-primary', disabled: this.props.isSaving || this.checkIsButtonDisabled(),
+                            onClick: function /* istanbul ignore next */onClick() /* istanbul ignore next */{return (/* istanbul ignore next */_this2.props.onSubmit( /* istanbul ignore next */_this2.getFieldsBySource()));} },
+                        /* istanbul ignore next */(0, _counterpart2.default)('general.import'))));
+
+
+
+        } }, { key: 'checkIsButtonDisabled', value: function checkIsButtonDisabled()
+
+        {
+            return Object.values(this.getFieldsBySource()).some(function (value) /* istanbul ignore next */{return !value;});
+        } }, { key: 'getFormBySource', value: function getFormBySource()
+
+        {/* istanbul ignore next */var _this3 = this,_EXTERNAL_RUN_IMPORT_;
+            return (/* istanbul ignore next */(_EXTERNAL_RUN_IMPORT_ = {}, _defineProperty(_EXTERNAL_RUN_IMPORT_,
+                /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.NESSUS,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ImportFromFile2.default, /* istanbul ignore next */{
+                    fields: this.props.nessusFields,
+                    onChange: function /* istanbul ignore next */onChange(value) /* istanbul ignore next */{return (/* istanbul ignore next */_this3.props.onChange({ nessusFields: value }));} })), _defineProperty(_EXTERNAL_RUN_IMPORT_,
+
+
+                /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.CHECKMARX,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ImportFromFile2.default, /* istanbul ignore next */{
+                    fields: this.props.checkmarxFields,
+                    onChange: function /* istanbul ignore next */onChange(value) /* istanbul ignore next */{return (/* istanbul ignore next */_this3.props.onChange({ checkmarxFields: value }));} })), _defineProperty(_EXTERNAL_RUN_IMPORT_,
+
+
+                /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.HAILSTORM,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ImportHailstorm2.default, /* istanbul ignore next */{
+                    fields: this.getHailstormFields(),
+                    isAssessmentRunsLoading: this.props.isAssessmentRunsLoading,
+                    assessmentRuns: this.props.assessmentRuns,
+                    onRequestTestRun: this.props.onRequestTestRun,
+                    hailstormType: this.props.hailstormType,
+                    assessmentRunsErrorMessage: this.props.assessmentRunsErrorMessage,
+                    onChangeHailstormType: this.props.onChangeHailstormType,
+                    onChange: function /* istanbul ignore next */onChange(value) /* istanbul ignore next */{return (/* istanbul ignore next */_this3.props.onChange({ hailstormFields: /* istanbul ignore next */_extends({},
+                                /* istanbul ignore next */_this3.props.hailstormFields,
+                                value) }));} })), _EXTERNAL_RUN_IMPORT_)[
+
+
+
+                this.props.importSource]);
+        } }, { key: 'getFieldsBySource', value: function getFieldsBySource()
+
+        {/* istanbul ignore next */var _EXTERNAL_RUN_IMPORT_2;
+            return (/* istanbul ignore next */(_EXTERNAL_RUN_IMPORT_2 = {}, _defineProperty(_EXTERNAL_RUN_IMPORT_2,
+                /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.NESSUS, this.props.nessusFields), _defineProperty(_EXTERNAL_RUN_IMPORT_2,
+                /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.CHECKMARX, this.props.checkmarxFields), _defineProperty(_EXTERNAL_RUN_IMPORT_2,
+                /* istanbul ignore next */_ImportForm.EXTERNAL_RUN_IMPORT_SOURCE.HAILSTORM, this.getHailstormFields()), _EXTERNAL_RUN_IMPORT_2)[
+                this.props.importSource]);
+        } }, { key: 'getHailstormFields', value: function getHailstormFields()
+
+        {/* istanbul ignore next */var _this4 = this;
+            return fieldsListForHailstormByType[this.props.hailstormType].reduce(function (fieldsMap, key) {
+                fieldsMap[key] = /* istanbul ignore next */_this4.props.hailstormFields[key];
+                return fieldsMap;
+            }, {});
+        } }]);return ImportExternalRunDialog;}( /* istanbul ignore next */_react2.default.PureComponent); /* istanbul ignore next */exports.default = ImportExternalRunDialog;
+
+
+ImportExternalRunDialog.propTypes = {
+    isSaving: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    isAssessmentRunsLoading: /* istanbul ignore next */_react2.default.PropTypes.bool.isRequired,
+    importSource: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    onSourceChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onChange: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onClose: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onSubmit: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onChangeHailstormType: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    onRequestTestRun: /* istanbul ignore next */_react2.default.PropTypes.func.isRequired,
+    hailstormType: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+    validation: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired),
+    assessmentRuns: /* istanbul ignore next */_react2.default.PropTypes.arrayOf( /* istanbul ignore next */_react2.default.PropTypes.string.isRequired),
+    assessmentRunsErrorMessage: /* istanbul ignore next */_react2.default.PropTypes.string,
+    nessusFields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        file: /* istanbul ignore next */_react2.default.PropTypes.object }).
+    isRequired,
+    checkmarxFields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        file: /* istanbul ignore next */_react2.default.PropTypes.object }).
+    isRequired,
+    hailstormFields: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        application_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        assessment_id: /* istanbul ignore next */_react2.default.PropTypes.string,
+        assessment_run_id: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired }).
+    isRequired,
+    runDetails: /* istanbul ignore next */_react2.default.PropTypes.shape({
+        customer_name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        name: /* istanbul ignore next */_react2.default.PropTypes.string.isRequired,
+        id_alias: /* istanbul ignore next */_react2.default.PropTypes.number.isRequired }) };

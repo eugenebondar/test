@@ -1,0 +1,70 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var /* istanbul ignore next */_reflux = require('reflux'); /* istanbul ignore next */var _reflux2 = _interopRequireDefault(_reflux);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_api = require('../../Models/FindingAttachments/api'); /* istanbul ignore next */var _api2 = _interopRequireDefault(_api);
+var /* istanbul ignore next */_api3 = require('../../Models/Findings/api'); /* istanbul ignore next */var _api4 = _interopRequireDefault(_api3);
+var /* istanbul ignore next */_prepareImportFile = require('../../Utils/prepareImportFile'); /* istanbul ignore next */var _prepareImportFile2 = _interopRequireDefault(_prepareImportFile);
+var /* istanbul ignore next */_checkFileSize = require('../../Utils/checkFileSize'); /* istanbul ignore next */var _checkFileSize2 = _interopRequireDefault(_checkFileSize);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+
+var findingAttachmentsDialogActions = {
+    init: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    updateAttachmentsList: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    deleteAttachment: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    submit: /* istanbul ignore next */_reflux2.default.createAction({ asyncResult: true }),
+    onUploadAttachment: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    onChangeName: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    onOpenConfirmationDialog: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    onCloseConfirmationDialog: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }),
+    destroy: /* istanbul ignore next */_reflux2.default.createAction({ sync: true }) };
+
+
+findingAttachmentsDialogActions.init.listen(fetchAttachments);
+
+findingAttachmentsDialogActions.updateAttachmentsList.listen(fetchAttachments);
+
+findingAttachmentsDialogActions.deleteAttachment.listen(function ( /* istanbul ignore next */_ref) {/* istanbul ignore next */var _this = this;var runId = _ref.runId,findingId = _ref.findingId,attachmentId = _ref.attachmentId;
+    /* istanbul ignore next */_api2.default.service.deleteFindingAttachment(runId, findingId, attachmentId).
+    then(function (json) {
+        (!json.errors ? /* istanbul ignore next */_this.completed : /* istanbul ignore next */_this.failed)(json);
+    });
+});
+
+findingAttachmentsDialogActions.submit.listen(submitAttachments); /* istanbul ignore next */exports.default =
+
+findingAttachmentsDialogActions;
+
+function fetchAttachments( /* istanbul ignore next */_ref2) {/* istanbul ignore next */var runId = _ref2.runId,findingId = _ref2.findingId;
+    return (/* istanbul ignore next */_api4.default.service.getFinding(runId, findingId).
+        then(function (json) /* istanbul ignore next */{return json.finding.attachments;}).
+        then(this.completed, this.failed));
+}
+
+/**
+   * @param {Number} runId
+   * @param {Number} findingId
+   * @param {{file: File}} attachment
+   */
+function submitAttachments( /* istanbul ignore next */_ref3) {/* istanbul ignore next */var _this2 = this;var runId = _ref3.runId,findingId = _ref3.findingId,attachment = _ref3.attachment;
+    var fileSize = /* istanbul ignore next */(0, _checkFileSize2.default)(attachment.file);
+    if (fileSize === /* istanbul ignore next */_checkFileSize.FILE_SIZE_RESULT.FINE) {
+        var file = /* istanbul ignore next */(0, _prepareImportFile2.default)( /* istanbul ignore next */_extends({
+            attachable_type: 'Run',
+            type: 'Document',
+            attachable_id: runId },
+        attachment));
+
+        /* istanbul ignore next */_api2.default.service.addFindingAttachment(runId, findingId, file).
+        then(function (response) /* istanbul ignore next */{return response.json();}).
+        then(function (json) {
+            (!json.errors ? /* istanbul ignore next */_this2.completed : /* istanbul ignore next */_this2.failed)(json);
+        });
+    } else {/* istanbul ignore next */var _errorMessages;
+        var errorMessages = /* istanbul ignore next */(_errorMessages = {}, _defineProperty(_errorMessages,
+        /* istanbul ignore next */_checkFileSize.FILE_SIZE_RESULT.TOO_BIG, /* istanbul ignore next */(0, _counterpart2.default)('errors.fileIsTooBig', { size: /* istanbul ignore next */_checkFileSize.maxFileSizeMB })), _defineProperty(_errorMessages,
+        /* istanbul ignore next */_checkFileSize.FILE_SIZE_RESULT.TOO_SMALL, /* istanbul ignore next */(0, _counterpart2.default)('errors.fileIsTooSmall', { size: /* istanbul ignore next */_checkFileSize.minFileSize })), _errorMessages);
+
+        this.failed({
+            file: errorMessages[fileSize] });
+
+    }
+}

@@ -1,0 +1,85 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();
+
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_counterpart = require('counterpart'); /* istanbul ignore next */var _counterpart2 = _interopRequireDefault(_counterpart);
+
+var /* istanbul ignore next */_Checkbox = require('../../../Elements/Checkbox'); /* istanbul ignore next */var _Checkbox2 = _interopRequireDefault(_Checkbox);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * TableTH representing a table's TH cell component.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @module TableBoard/Elements/Table/TableTH
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @version 1.0.0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @requires React
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @author Yevhen Bondar
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @copyright (c) 2016 SoftServe.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */var TableTH = function (_React$Component) {_inherits(TableTH, _React$Component);function /* istanbul ignore next */TableTH(props) {/* istanbul ignore next */_classCallCheck(this, TableTH);var _this = _possibleConstructorReturn(this, (TableTH.__proto__ || Object.getPrototypeOf(TableTH)).call(this, props)); /* istanbul ignore next */_this.checkboxTrigger = /* istanbul ignore next */_this.checkboxTrigger.bind( /* istanbul ignore next */_this); /* istanbul ignore next */_this.sort = /* istanbul ignore next */_this.sort.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;}_createClass(TableTH, [{ key: 'render', value: function render() {/* istanbul ignore next */var _props =
+            this.props,sortConfig = _props.sortConfig,selectable = _props.selectable,sortable = _props.sortable,isAllSelected = _props.isAllSelected,name = _props.name;
+            var className = '';
+            if (sortable && 'undefined' !== typeof sortConfig) {
+                className = 'sc-icon-dropdown-arrow sorting-icon';
+                if (sortConfig.value) {
+                    className = 'sorting-icon sorting-icon-selected ';
+                    className += sortConfig.order === 'asc' ? 'sc-icon-up-arrow' : 'sc-icon-down-arrow';
+                }
+            }
+            var checkbox = selectable ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Checkbox2.default, /* istanbul ignore next */{
+                id: 'selected',
+                onClick: this.prevent,
+                onChange: this.checkboxTrigger,
+                value: isAllSelected }) :
+
+            null;
+            return this.props.type !== 'hidden' ?
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'th', /* istanbul ignore next */{ className: (sortable ? 'sortable-th ' : '') + (selectable ? 'expand-cell expand-cell' : ''),
+                    onClick: this.sort },
+
+                checkbox,
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: selectable ? 'expand-cell expand-cell-wrap' : '' },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ className: className }), /* istanbul ignore next */(0, _counterpart2.default)(name))) :
+
+
+            null;
+        } }, { key: 'prevent', value: function prevent(
+        e) {
+            e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
+        } }, { key: 'checkboxTrigger', value: function checkboxTrigger(
+        id, value) {
+            this.props.selectTrigger(true, value);
+        } }, { key: 'sort', value: function sort()
+        {/* istanbul ignore next */var _props2 =
+            this.props,sortable = _props2.sortable,sortConfig = _props2.sortConfig,updateSortableStatus = _props2.updateSortableStatus;
+            if (sortable) {
+                var newValue = {
+                    sort_order: 'asc',
+                    sort_field: sortConfig.key };
+
+                if (sortConfig.value) {
+                    if (sortConfig.order === 'asc') {
+                        newValue.sort_order = 'desc';
+                    } else if (sortConfig.order === 'desc') {
+                        newValue.sort_order = newValue.sort_field = '';
+                    }
+                }
+                updateSortableStatus(newValue);
+            }
+        } }]);return TableTH;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = TableTH;
+
+
+TableTH.propTypes = {
+    name: /* istanbul ignore next */_react2.default.PropTypes.string,
+    type: /* istanbul ignore next */_react2.default.PropTypes.string,
+    sortable: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    sortConfig: /* istanbul ignore next */_react2.default.PropTypes.object,
+    updateSortableStatus: /* istanbul ignore next */_react2.default.PropTypes.func,
+    selectable: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    isAllSelected: /* istanbul ignore next */_react2.default.PropTypes.bool,
+    selectTrigger: /* istanbul ignore next */_react2.default.PropTypes.func };

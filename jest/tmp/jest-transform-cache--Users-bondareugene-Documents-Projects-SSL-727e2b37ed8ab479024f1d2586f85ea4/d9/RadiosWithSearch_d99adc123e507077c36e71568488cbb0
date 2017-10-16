@@ -1,0 +1,9 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_createListOfElementsWithSearch = require('./createListOfElementsWithSearch'); /* istanbul ignore next */var _createListOfElementsWithSearch2 = _interopRequireDefault(_createListOfElementsWithSearch);
+/* istanbul ignore next */require('./RadiosWithSearch.less'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var RadiosWithSearch = /* istanbul ignore next */(0, _createListOfElementsWithSearch2.default)({
+    className: 'radios-with-search',
+    shouldItemBeVisibleCallback: function /* istanbul ignore next */shouldItemBeVisibleCallback(itemProps, searchPhrase) /* istanbul ignore next */{return itemProps.label.toLowerCase().includes(searchPhrase.toLowerCase());} }); /* istanbul ignore next */exports.default =
+
+
+RadiosWithSearch;

@@ -1,0 +1,46 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.defaultTimezone = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+createDefaultSchedule = createDefaultSchedule; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+isScheduleEmpty = isScheduleEmpty;var /* istanbul ignore next */_jstz = require('jstz'); /* istanbul ignore next */var _jstz2 = _interopRequireDefault(_jstz);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var defaultSchedule = { id: '', start_date: '', due_date: '', monday: false, tuesday: false, wednesday: false, thursday: false, friday: false, saturday: false, sunday: false, allWeek: false, time_from: '', time_to: '' };var defaultTimezone = /* istanbul ignore next */exports.defaultTimezone = 'America/Chicago'; /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * Creates schedule with default values. The schema of schedule is specific to form and it is different then one received from backend;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     * @return {{id: string, start_date: string, due_date: string, monday: boolean, tuesday: boolean, wednesday: boolean, thursday: boolean, friday: boolean, saturday: boolean, sunday: boolean, time_from: string, time_to: string, time_zone: string}}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     */function createDefaultSchedule() {var timezone = /* istanbul ignore next */_jstz2.default.determine();return (/* istanbul ignore next */_extends({}, defaultSchedule, { time_zone: timezone.name() }));} /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @param {{}} schedule of schema specific to backend
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @returns {boolean}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */function isScheduleEmpty(schedule) {if (!schedule) {return true;}var hasDays = Array.isArray(schedule.days) && schedule.days.length > 0;
+    return !hasDays;
+}
