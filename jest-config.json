@@ -9,11 +9,11 @@
     "/node_modules/",
     "/jest/"
   ],
-  "testPathDirs": ["frontend/"],
+  "testPathDirs": ["app/"],
   "testPathIgnorePatterns": ["node_modules/"],
   "coverageDirectory": "coverage/jest",
   "transform": {".*": "<rootDir>/node_modules/babel-jest"},
-  "collectCoverageFrom": ["frontend/src/app/*.*", "frontend/src/app/**/*.*"],
+  "collectCoverageFrom": ["app/*.*", "app/**/*.*"],
   "setupTestFrameworkScriptFile": "node_modules/jest-enzyme/lib/index.js",
   "testRegex": ".test.jsx?$",
   "mocksPattern": "(?:[\\/]|^)__mocks__[\\/]|(\/jest\/mocks\/.*)",
